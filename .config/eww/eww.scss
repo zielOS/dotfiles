@@ -1,0 +1,41 @@
+* {
+  all: unset;
+  transition: 200ms;
+}
+
+$bg: #1E1E2E;
+$bg-alt: #313244;
+$fg: #CDD6F4;
+$fg-alt: #CDD6F4;
+$fg-alt2: #CDD6F4;
+$black: #11111B;
+$gray: #9399B2;
+$red: #F38BA8;
+$green: #A6E3A1;
+$yellow: #F9E2AF;
+$blue: #89B4FA;
+$blue-alt: #B4BEFE;
+$magenta: #EBA0AC;
+$cyan: #9ec3c4;
+$white: $fg;
+
+tooltip {
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: 300;
+  font-size: 0.5rem;
+  color: $fg;
+  background-color: $bg;
+  border: 2px solid $bg;
+  border-radius: .2rem;
+}
+
+@import "scss/bar.scss";
+@import "scss/notifications.scss";
+@import "scss/menu.scss";
+@import "scss/volume.scss";
+@import "scss/player.scss";
+@import "scss/powermenu.scss";
+@import "scss/background.scss";
+@import "scss/launcher.scss";
+@import "scss/dock.scss";
+@import "scss/notifications_popup.scss";
