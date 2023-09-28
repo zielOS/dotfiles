@@ -22,7 +22,7 @@ super + shift + Return
 
 ### Launch menu
 super + d
-   emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
+  emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
 
 ## Launch gui apps
 super + g; {b, f, e}
@@ -167,6 +167,8 @@ super + e; s
     emacsclient -c -a 'emacs' --eval '(eshell)'
 super + e; v
     emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'
+super + e; w
+    emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(eww "distro.tube"))'
 
 #############
 ### E W W ###

@@ -29,7 +29,13 @@ tooltip {
   border-radius: .2rem;
 }
 
+@import "scss/bar.scss";
 @import "scss/notifications.scss";
+@import "scss/menu.scss";
 @import "scss/volume.scss";
+@import "scss/player.scss";
 @import "scss/powermenu.scss";
+@import "scss/background.scss";
+@import "scss/launcher.scss";
+@import "scss/dock.scss";
 @import "scss/notifications_popup.scss";

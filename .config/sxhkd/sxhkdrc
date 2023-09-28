@@ -13,10 +13,10 @@ super + shift + Escape
 
 ### Launch terminal
 super + Return
-  st
+  bspterm
 
 super + shift + Return
-	st -n spterm -g 120x34
+	bspterm --float
 
 ### Launch menu
 super + d
@@ -108,4 +108,4 @@ super + e; v
 ### E W W ###
 #############
 super + x
-	eww open --toggle powermenu
+	powermenu	

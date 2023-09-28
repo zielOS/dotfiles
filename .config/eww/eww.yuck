@@ -12,6 +12,8 @@
 (deflisten  volume          `scripts/volume`)
 (deflisten  details         `scripts/details`)
 (deflisten  network         `scripts/network`)
+(deflisten  hyprland        `scripts/hyprland.py`)
+(deflisten  weather         `scripts/weather.py`)
 (deflisten  mpris_positions `scripts/positions.py`)
 
 (defpoll    date            :interval "1h"   :initial `{"day": 1, "month": 1, "year": 1}` `date +'{"day": "%d", "month": "%m", "year": "%Y"}'`)
