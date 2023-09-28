@@ -24,19 +24,11 @@ dragmfact(const Arg *arg)
 		return;
 	else if (m->lt[m->sellt]->arrange == &centeredmaster && (fixed || n - m->nmaster > 1))
 		center = 1;
-	else if (m->lt[m->sellt]->arrange == &centeredfloatingmaster)
-		center = 1;
-	else if (m->lt[m->sellt]->arrange == &bstack)
-		horizontal = 1;
-	else if (m->lt[m->sellt]->arrange == &bstackhoriz)
-		horizontal = 1;
 
 	/* do not allow mfact to be modified under certain conditions */
 	if (!m->lt[m->sellt]->arrange                            // floating layout
 		|| (!fixed && m->nmaster && n <= m->nmaster) // no master
-		|| m->lt[m->sellt]->arrange == &grid
-		|| m->lt[m->sellt]->arrange == &horizgrid
-		|| m->lt[m->sellt]->arrange == &nrowgrid
+		|| m->lt[m->sellt]->arrange == &monocle
 	)
 		return;
 
@@ -71,7 +63,6 @@ dragmfact(const Arg *arg)
 		None, cursor[horizontal ? CurResizeVertArrow : CurResizeHorzArrow]->cursor, CurrentTime) != GrabSuccess)
 		return;
 
-	ignore_warp = 1;
 
 	XWarpPointer(dpy, None, root, 0, 0, 0, 0, px, py);
 
@@ -119,7 +110,6 @@ dragmfact(const Arg *arg)
 		}
 	} while (ev.type != ButtonRelease);
 
-	ignore_warp = 0;
 
 	XUngrabPointer(dpy, CurrentTime);
 	while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));

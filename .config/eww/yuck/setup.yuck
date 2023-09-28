@@ -22,7 +22,7 @@
 )
 
 (defwindow volume
-  :monitor 1
+  :monitor 0
   :stacking "overlay"
   :geometry (geometry :width "5%" :anchor "top right")
   (volume-popup)
@@ -35,7 +35,7 @@
 )
 
 (defwindow media
-  :monitor 1 
+  :monitor 0 
   :geometry (geometry :x "4%" :width "20%" :anchor "center left")
   (media)
 )
@@ -56,14 +56,14 @@
 )
 
 (defwindow powermenu
-  :monitor 1
+  :monitor 0
   :stacking "fg"
   :geometry (geometry :anchor "right bottom")
   (powermenu)
 )
 
 (defwindow dock
-  :monitor 1
+  :monitor 0
   :stacking "fg"
   :namespace "eww_dock"
   :focusable false

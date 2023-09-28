@@ -5,4 +5,4 @@ Reload,bspc wm -r,/home/ahsan/.config/jgmenu/icons/repeat.svg
 Suspend,systemctl suspend,/home/ahsan/.config/jgmenu/icons/snooze.svg
 Reboot,systemctl reboot,/home/ahsan/.config/jgmenu/icons/repeat.svg
 Poweroff,systemctl poweroff,/home/ahsan/.config/jgmenu/icons/power-off.svg
-Log Out,bspc quit,/home/ahsan/.config/jgmenu/icons/exit.svg
+Log Out,killall dwm,/home/ahsan/.config/jgmenu/icons/exit.svg

@@ -32,7 +32,7 @@ super + g; {b, f}
 
 # screenshot
 Print { _, super +}
-  dripshot { --full, --cro p}
+  dripshot { --full, --crop}
 
 # volume control
 XF86Audio{RaiseVolume,LowerVolume,Mute}
@@ -68,12 +68,6 @@ super + space
 super + l; {0, 1, 2, 3}
 	dwmc setlayout {0, 1, 2, 3}
 
-super + { comma, period }
-	dwmc focusmon { -1, +1 }
-
-super + shift + { comma, period }
-	dwmc tagmon { -1, +1 }
-
 super + ctrl + { comma, period }
 	dwmc cyclelayout { -1, +1 }
 
@@ -105,3 +99,30 @@ super + Tab
 ## switch to last tag
 alt + Tab
 	dwmc view
+
+#################
+### E M A C S ###
+#################
+
+super + e; e
+    emacsclient -c -a 'emacs'
+super + e; a
+    emacsclient -c -a 'emacs' --eval '(emms)' --eval '(emms-play-directory-tree \"~/Music/\")'
+super + e; b
+    emacsclient -c -a 'emacs' --eval '(ibuffer)'
+super + e; d
+    emacsclient -c -a 'emacs' --eval '(dired nil)'
+super + e; i
+    emacsclient -c -a 'emacs' --eval '(erc)'
+super + e; n
+    emacsclient -c -a 'emacs' --eval '(elfeed)'
+super + e; s
+    emacsclient -c -a 'emacs' --eval '(eshell)'
+super + e; v
+    emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'
+
+#############
+### E W W ###
+#############
+super + x
+	eww open --toggle powermenu

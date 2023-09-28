@@ -21,35 +21,13 @@ alias conf='sudo lvim /etc/portage/make.conf'
 alias add-overla='sudo eselect repository enable'
 
 
-# scripts-related aliases
-# alias hyprbar='sudo lvim /usr/local/bin/hyprbar'
-# alias hyprhotkeys='sudo lvim /usr/local/bin/hyprhotkeys'
-# alias hypridle='sudo lvim /usr/local/bin/hypridle'
-# alias hyprkeyring='sudo lvim /usr/local/bin/hyprkeyring'
-# alias hyprland-nvidia='sudo lvim /usr/local/bin/hyprland-nvidia'
-# alias hyprlock='sudo lvim /usr/local/bin/hyprlock'
-# alias hyprlogout='sudo lvim /usr/local/bin/hyprlogout'
-# alias hyprmenu='sudo lvim /usr/local/bin/hyprmenu'
-# alias hyprpolkit='sudo lvim /usr/local/bin/hyprpolkit'
-# alias hyprshot='sudo lvim /usr/local/bin/hyprshot'
-# alias hyprsome='sudo lvim /usr/local/bin/hyprsome'
-# alias hyprstart='sudo lvim /usr/local/bin/hyprstart'
-# alias hyprterm='sudo lvim /usr/local/bin/hyprterm'
-# alias hyprtheme='sudo lvim /usr/local/bin/hyprtheme'
-# alias hyprwall='sudo lvim /usr/local/bin/hyprwall'
-
-
-# makepkg-related aliases
-# alias mkpkg='makepkg -si  --noconfirm'
-# alias mkpkg-conf='makepkg -si --noconfirm --config $HOME/.config/makepkg/makepkg.conf'
-
 # Misc-related aliases
 alias audit='sudo lynis audit system'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias grub-conf='sudo lvim /etc/default/grub'
 alias Rm='sudo rm -rf'
 # alias htkey-load='sudo pkill -HUP swhkd'
-alias emacs_stop='emacsclient -e "(kill-emacs)"'
+alias emacs_reload='systemctl --user stop emacs-29 && systemctl --user start emacs-29'
 alias snapper='sudo lvim /etc/snapper/configs/root'
 alias aa-status='sudo aa-status'
 
