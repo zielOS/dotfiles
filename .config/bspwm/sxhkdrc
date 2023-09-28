@@ -14,7 +14,7 @@ super + shift + Escape
 
 ### Launch terminal
 super + Return
-  st
+  bspterm
 
 # negative -w arg to account for a border width (default: 100%)
 super + shift + Return

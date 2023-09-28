@@ -35,7 +35,6 @@ done
 
 pgrep -x sxhkd > /dev/null || sxhkd -c $HOME/.config/bspwm/sxhkdrc &
 
-
 #  ┬ ┬┌─┐┬─┐┬┌─┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
 #  ││││ │├┬┘├┴┐└─┐├─┘├─┤│  ├┤ └─┐
 #  └┴┘└─┘┴└─┴ ┴└─┘┴  ┴ ┴└─┘└─┘└─┘
@@ -154,7 +153,7 @@ gnome-keyring-daemon -r -d &
 
 THEME='Catppuccin-Mocha-Standard-Lavender-dark'
 ICONS='Papirus-Dark'
-FONT='JetBrainsMono Nerd Font 13'
+FONT='JetBrainsMono Nerd Font 18'
 CURSOR='Catppuccin-Mocha-Lavender-Cursors'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'

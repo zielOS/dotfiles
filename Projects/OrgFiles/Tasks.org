@@ -1,0 +1,2 @@
+* TODO Borrow eww powermenu and volume from juminai
+* TODO Borrow eww bar from ghost
