@@ -1,43 +1,8 @@
-(defwindow wallpaper
-  :monitor 0
-  :stacking "bg"
-  :geometry (geometry :height "100%" :width "100%" :anchor "center")
-  (wallpaper)
-)
-
-(defwindow bar
-  :monitor 1
-  :exclusive true
-  :stacking "fg"
-  :geometry (geometry :height "100%" :anchor "center left")
-  (bar)
-)
-
-(defwindow launcher
-  :monitor 1
-  :focusable true
-  :stacking "overlay"
-  :geometry (geometry :height "60%" :width "30%" :anchor "center")
-  (launcher)
-)
-
 (defwindow volume
   :monitor 0
   :stacking "overlay"
   :geometry (geometry :width "5%" :anchor "top right")
   (volume-popup)
-)
-
-(defwindow menu
-  :monitor 1 
-  :geometry (geometry :x "0%" :width "20%" :anchor "center left")
-  (menu)
-)
-
-(defwindow media
-  :monitor 0 
-  :geometry (geometry :x "4%" :width "20%" :anchor "center left")
-  (media)
 )
 
 (defwindow notifications
@@ -62,11 +27,3 @@
   (powermenu)
 )
 
-(defwindow dock
-  :monitor 0
-  :stacking "fg"
-  :namespace "eww_dock"
-  :focusable false
-  :geometry (geometry :width  "1%" :height "1%" :anchor "bottom center")
-  (dock)
-)

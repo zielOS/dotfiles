@@ -11,7 +11,7 @@
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
-export TERMINAL="st"
+export TERMINAL="alacritty"
 export BROWSER="brave-bin"
 export GDK_SCALE=1.8
 export GDK_DPI_SCALE=1.5
@@ -88,8 +88,7 @@ bspc rule -a Emacs state=tiled
 
 
 ## Always Floating Apps
-declare -a floating=(kitty-float  Onboard Yad 'Firefox:Places' \
-Viewnior feh Nm-connection-editor)
+declare -a floating=(alacritty-float qalculate  Onboard Yad 'Firefox:Places' Viewnior feh Nm-connection-editor 'Emacs:emacs-run-launcher' )
 for i in ${floating[@]}; do
    bspc rule -a $i state=floating follow=on focus=on; done
 
@@ -150,6 +149,8 @@ bspbar &
 
 # Fix eww above fullscreen windows
 fullscreen &
+
+gnome-keyring-daemon -r -d &
 
 THEME='Catppuccin-Mocha-Standard-Lavender-dark'
 ICONS='Papirus-Dark'
