@@ -20,7 +20,7 @@ super + shift + Return
 
 ### Launch menu
 super + d
-  dwmmenu
+  emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
 
 ## Launch gui apps
 super + g; {b, f}
@@ -62,14 +62,8 @@ super + t; { t, r, n, v}
 ####  L A Y O U T S / T A G S  ####
 ###################################
 
-super + space 
-	dwmc togglefloating
-
 super + l; {0, 1, 2, 3}
 	dwmc setlayout {0, 1, 2, 3}
-
-super + ctrl + { comma, period }
-	dwmc cyclelayout { -1, +1 }
 
 super + ctrl + d
 	dwmc distributetags
@@ -88,17 +82,6 @@ super + alt + shift; { Left, Right }
 super + alt + c
   dunstify -i gtk-dialog-info CLASS "$(xprop | grep 'CLASS')"
 
-## toggle bar
-super + b
-	dwmc togglebar
-
-## switch to master
-super + Tab
-	dwmc zoom
-
-## switch to last tag
-alt + Tab
-	dwmc view
 
 #################
 ### E M A C S ###
