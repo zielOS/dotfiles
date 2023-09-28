@@ -22,32 +22,32 @@
 )
 
 (defwindow volume
-  :monitor 0
+  :monitor 1
   :stacking "overlay"
   :geometry (geometry :width "5%" :anchor "top right")
   (volume-popup)
 )
 
 (defwindow menu
-  :monitor 0 
+  :monitor 1 
   :geometry (geometry :x "0%" :width "20%" :anchor "center left")
   (menu)
 )
 
 (defwindow media
-  :monitor 0 
+  :monitor 1 
   :geometry (geometry :x "4%" :width "20%" :anchor "center left")
   (media)
 )
 
 (defwindow notifications
-  :monitor 0
+  :monitor 1
   :geometry (geometry :x "0%" :width "18%" :anchor "center left")
   (notifications)
 )
 
 (defwindow notifications_popup
-  :monitor 0
+  :monitor 1
   :stacking "overlay"
   :namespace "eww_notifications"
   :focusable false
@@ -56,14 +56,14 @@
 )
 
 (defwindow powermenu
-  :monitor 0
+  :monitor 1
   :stacking "fg"
   :geometry (geometry :anchor "right bottom")
   (powermenu)
 )
 
 (defwindow dock
-  :monitor 0
+  :monitor 1
   :stacking "fg"
   :namespace "eww_dock"
   :focusable false

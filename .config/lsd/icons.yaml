@@ -8,7 +8,6 @@ name:
   templates: 󰝰
   public: 󰀎
   doc: 󰈙
-  scripts: 󰆍
   node_modules: 
   .trash: 󰩹
   .github: 󰊤
@@ -53,6 +52,7 @@ extension:
   csv: 󰈮
   lua: 󰢱
   log: 󰆈
+  desktop: 󰐱
 filetype:
   dir: 󰝰
   file: 󰈔

@@ -4,6 +4,7 @@ pkill eww
 pkill python
 
 eww daemon
+eww open bar
 eww open notifications_popup
 sleep 0.5
 python $XDG_CONFIG_HOME/eww/scripts/mpris.py & 
