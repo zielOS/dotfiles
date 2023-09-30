@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ $(xdotool getactivewindow getwindowname) =~ ^emacs(:.*)?@.* ]]; then
+    command="(my/emacs-i3-integration \"$@\")"
+    emacsclient -e "$command"
+else
+    i3-msg $@
+fi
