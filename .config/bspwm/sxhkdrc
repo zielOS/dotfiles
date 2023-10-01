@@ -59,7 +59,7 @@ super + alt + c
   dunstify -i gtk-dialog-info CLASS "$(xprop | grep 'CLASS')"
 
 # quit/restart bspwm
-super + alt + {q,r}
+super + shift + {q,r}
 	bspc {quit,wm -r}
 
 # Lockscreen
