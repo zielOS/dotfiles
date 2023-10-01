@@ -58,7 +58,7 @@
 (defwindow powermenu
   :monitor 0
   :stacking "fg"
-  :geometry (geometry :anchor "right bottom")
+  :geometry (geometry :y "-2.5%":anchor "right bottom")
   (powermenu)
 )
 

@@ -179,3 +179,5 @@ super + e; w
 #############
 super + x
 	eww open --toggle powermenu
+super + m
+	eww open --toggle menu

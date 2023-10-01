@@ -88,7 +88,7 @@ bspc rule -a Emacs state=tiled
 bspc rule -a Zathura state=tiled focus=on
 
 ## Always Floating Apps
-declare -a floating=(alacritty-float qalculate  Onboard Yad 'Firefox:Places' Viewnior feh Nm-connection-editor 'Emacs:emacs-run-launcher' )
+declare -a floating=(alacritty-float qalculate  Onboard Yad 'Firefox:Places' Viewnior feh Nm-connection-editor 'Emacs:emacs-run-launcher' transmission-gtk )
 for i in ${floating[@]}; do
    bspc rule -a $i state=floating follow=on focus=on; done
 
