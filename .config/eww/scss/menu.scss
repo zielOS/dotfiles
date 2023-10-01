@@ -7,15 +7,15 @@ window>.menu {
 .menu {
   font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
   background-color: transparent;
-  padding: .2rem 0.1rem 0.1rem;
-  border-radius: 0.2rem;
+  padding: .7rem 0.5rem 0.5rem;
+  border-radius: 0.5rem;
 
   &.clock {
 
     .time {
       font-family: JetBrainsMono Nerd Font;
       font-weight: bolder;
-      font-size: 1.5rem;
+      font-size: 3rem;
       color: $fg;
     }
 
@@ -42,14 +42,14 @@ window>.menu {
   }
 
   .calendar {
-    font-size: 0.8rem;
-    font-weight: 300;
+    font-size: 1.1rem;
+    font-weight: 500;
     background-color: $bg-alt;
     border-radius: 1rem;
     padding: 1rem 1rem 0 1rem;
 
     calendar {
-      padding: .2rem;
+      padding: .5rem;
 
       &.button {
         color: $fg-alt;
@@ -120,8 +120,8 @@ window>.menu {
   .system {
     .progress {
       background-color: $bg-alt;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
+      padding: 1rem;
+      border-radius: 1rem;
 
       circular-progress {
         background-color: $black;

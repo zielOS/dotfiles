@@ -7,6 +7,7 @@ eww daemon
 eww open notifications_popup
 sleep 0.5
 python $XDG_CONFIG_HOME/eww/scripts/mpris.py & 
+python $XDG_CONFIG_HOME/eww/scripts/apps.py --query &
 python $XDG_CONFIG_HOME/eww/scripts/notifications.py --init &
 sleep 0.5
 python $XDG_CONFIG_HOME/eww/scripts/notifications.py --open &

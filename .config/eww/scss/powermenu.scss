@@ -1,15 +1,15 @@
 window>.powermenu {
   margin: 1rem;
-  box-shadow: 0 0 2px 1px rgba(transparent, 0.8);
+  box-shadow: 0 0 3px 1px rgba(black, 0.5);
   background-color: $bg;
 }
 
 .powermenu {
   font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
-  font-size: 1.4rem;
+  font-size: 2rem;
   background-color: transparent;
-  padding: .14rem;
-  border-radius: 0.3rem;
+  padding: .2rem;
+  border-radius: 0.5rem;
 
   &.shutdown {
     color: $red;
@@ -29,7 +29,7 @@ window>.powermenu {
 
   button {
     background-color: $bg-alt;
-    padding: 0.7rem;
+    padding: 1.4rem;
 
     &:hover {
       background-color: lighten($color: $bg-alt, $amount: 20%);
