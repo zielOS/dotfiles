@@ -19,6 +19,7 @@ alias use='sudo lvim /etc/portage/package.use'
 alias keywords='sudo lvim /etc/portage/package.accept_keywords'
 alias conf='sudo lvim /etc/portage/make.conf'
 alias add-overla='sudo eselect repository enable'
+alias em-list="equery list '*'"
 
 
 # Misc-related aliases
@@ -30,6 +31,8 @@ alias Rm='sudo rm -rf'
 alias emacs_reload='systemctl --user stop emacs-29 && systemctl --user start emacs-29'
 alias snapper='sudo lvim /etc/snapper/configs/root'
 alias aa-status='sudo aa-status'
+alias l='lsd'
+alias la='lsd -a'
 
 if [[ $TERM == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"

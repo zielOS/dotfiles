@@ -154,10 +154,9 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [title="emacs-run-launcher"] floating enable focus
 for_window [class="qalculate-gtk"] floating enable focus
-for_window [window_role = "pop-up"] floating enable
-for_window [window_role = "bubble"] floating enable
-for_window [window_role = "dialog"] floating enable
-for_window [window_type = "dialog"] floating enable
+for_window [window_role = "pop-up"] floating enable focus
+for_window [window_role = "bubble"] floating enable focus
+for_window [window_role = "dialog"] floating enable focus
 for_window [window_role = "task_dialog"] floating enable
 for_window [window_type = "menu"] floating enable
 for_window [app_id = "floating"] floating enable
@@ -182,6 +181,18 @@ for_window [title = "Firefox - Sharing Indicator"] kill
 for_window [title = "Firefox — Sharing Indicator"] kill
 
 ###############
+#### SWAYFX ####
+###############
+
+corner_radius 14
+smart_corner_radius on
+shadows enable
+blur enable
+blur_xray enable
+blur_passes 10
+
+
+###############
 #### THEME ####
 ###############
 
@@ -193,9 +204,7 @@ default_floating_border pixel 1
 gaps inner 6
 gaps outer 3
 
-corner_radius 12
-smart_corner_radius on
-shadows on
+
 
 # Define colors variables:
 set $mauve    #B4BEFE

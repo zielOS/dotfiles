@@ -28,6 +28,10 @@ super + d
 super + g; {b, f, e}
 	{ firefox, thunar, emacsclient -c -a emacs }
 
+## Launch tui apps
+super + t; {r, n}
+	{ alacritty -e ranger, alacritty -e lvim }
+
 #################################
 ### H A R D W A R E   K E Y S ###
 #################################

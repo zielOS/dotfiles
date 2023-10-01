@@ -70,10 +70,10 @@ ctrl + alt + l
 #movement
 
 super + {Left,Down,Up,Right}
-    i3-msg focus {left,down,up,right}
+    emacs-i3-integration focus {left,down,up,right}
 
 super + shift + {Left,Down,Up,Right}
-    i3-msg move {left,down,up,right}
+    emacs-i3-integration {left,down,up,right}
 
 super + {v, h}
     i3-msg split {v,h}
