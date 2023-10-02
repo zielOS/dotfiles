@@ -101,8 +101,8 @@ super + ctrl + {Left,Down,Up,Right}
 
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous window in the current desktop
 super + {_,shift + }c
@@ -143,8 +143,8 @@ super + shift + w
 super + {_,shift + }{1-6}
 	bspc {desktop -f,node -d} 'focused:^{1-6}'
 
-super + minus
-    bspc monitor -f next
+super + {comma,period}
+  bspc monitor -f {prev,next}
 
 # jgmenu
 ~button3
@@ -181,3 +181,11 @@ super + x
 	eww open --toggle powermenu
 super + m
 	eww open --toggle menu
+
+
+#############
+### W M C T R L ###
+#############
+
+super + minux
+	wmctrl -k toggle
