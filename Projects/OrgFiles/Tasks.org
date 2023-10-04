@@ -1,2 +1,2 @@
 * TODO Borrow eww powermenu and volume from juminai
-* TODO Borrow eww bar from ghost
+* TODO Use dirvish in emacs instead of ranger

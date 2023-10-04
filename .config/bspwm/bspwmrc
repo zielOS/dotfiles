@@ -55,7 +55,7 @@ bspc config automatic_scheme         alternate
 bspc config initial_polarity         second_child
 
 bspc config focus_follows_pointer    true
-bspc config pointer_follows_focus    true
+bspc config pointer_follows_focus    false
 bspc config history_aware_focus	     true
 bspc config pointer_motion_interval  5
 bspc config pointer_modifier         mod4 
@@ -110,6 +110,9 @@ hsetroot -cover ~/.config/wallpapers/trigonometry.png &
 # Fix eww above fullscreen windows
 fullscreen &
 
+## Launch notification daemon
+bspdunst &
+
 ## Launch policykit
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 
@@ -137,7 +140,7 @@ thunar --daemon &
 gammastep -l 48.1:11.6 -b 0.9:0.9 -t 5700:5700 &
 
 # Launch eww daemon
-eww daemon &
+bash ~/.config/eww/scripts/init &
 
 # Launch polybar
 bspbar &
