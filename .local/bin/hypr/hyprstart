@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# Kill already running process
+_ps=(waybar swayidle eww polkit-gnome-authentication-agent-1)
+for _prs in "${_ps[@]}"; do
+	if [[ `pidof ${_prs}` ]]; then
+		killall -9 ${_prs}
+	fi
+done
+
+# Idle
+hypridle &
+
+# Notifications
+hyprdunst &
+
+# hotkey daemon
+# hyprkeys &
+
+# wallpaper 
+hyprpaper &
+
+# theme
+hyprtheme &
+
+# eww stuff
+bash ~/.config/eww/scripts/init &
+
+# polkit 
+/usr/libexec/polkit-gnome-authentication-agent-1 &
+
+wl-paste --watch cliphist store --no-newline &
+
+# Start Apps
+ckb-next &
+QT_QPA_PLATFORM=xcb insync start &
+
+thunar --daemon &
+
+sleep 1 && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+systemctl --user start xdg-desktop-portal-hyprland &
