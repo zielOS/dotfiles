@@ -1,0 +1,34 @@
+#!/bin/sh
+
+echo "Installing Dot files"
+sudo rm -R ~/.config/
+cd && mkdir ~/.config  
+ln -s $HOME/.dots/.fonts $HOME/
+ln -s $HOME/.dots/.themes $HOME/
+ln -s $HOME/.dots/ckb-next $HOME/.config/ 
+ln -s $HOME/.dots/eww $HOME/.config/
+ln -s $HOME/.dots/gtk-3.0 $HOME/.config/
+ln -s $HOME/.dots/hypr  $HOME/.config/
+ln -s $HOME/.dots/foot $HOME/.config/
+ln -s $HOME/.dots/lazygit $HOME/.config/
+ln -s $HOME/.dots/Thunar $HOME/.config/
+ln -s $HOME/.dots/zsh $HOME/.config/
+ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
+ln -s $HOME/.dots/.zshrc $HOME/
+ln -s $HOME/.dots/colorscheme.css $HOME/
+ln -s $HOME/.dots/gentoo_setup $HOME/
+ln -s $HOME/.dots/electron-flags.conf $HOME/.config/
+ln -s $HOME/.dots/electron13-flags.conf $HOME/.config/
+
+echo "Setup flatpak"
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.brave.Browser
+flatpak install flathub org.geogebra.GeoGebra
+
+echo "Setting Up Systemd"
+sudo systemctl set-default graphical.target 
+systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
+
+cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global' 
+
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
