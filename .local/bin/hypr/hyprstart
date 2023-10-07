@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Kill already running process
-_ps=(waybar swayidle eww polkit-gnome-authentication-agent-1)
+_ps=(waybar swayidle polkit-gnome-authentication-agent-1)
 for _prs in "${_ps[@]}"; do
 	if [[ `pidof ${_prs}` ]]; then
 		killall -9 ${_prs}
@@ -20,14 +20,16 @@ hyprpaper &
 # theme
 hyprtheme &
 
+# plugins 
+hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
+
 # polkit 
 /usr/bin/lxpolkit &
-
-wl-paste --watch cliphist store --no-newline &
 
 # Start Apps
 ckb-next &
 QT_QPA_PLATFORM=xcb insync start &
-
 thunar --daemon &
 
+# aylur-gtk-shell
+ags -b hypr &

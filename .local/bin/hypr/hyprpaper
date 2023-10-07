@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+WALLPAPER="$HOME/.config/wallpapers/trigonometry.png"
+
+swaybg --output '*' --mode fill --image "$WALLPAPER"
