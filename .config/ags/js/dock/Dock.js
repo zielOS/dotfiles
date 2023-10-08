@@ -5,8 +5,9 @@ import { App, Hyprland, Applications, Utils, Widget } from '../imports.js';
 
 const pinned = [
     'brave-bin',
-    'foot',
+    'alacritty',
     'emacs',
+    'thunar',
     'org.gnome.Nautilus',
     'org.gnome.Calendar',
     'obsidian',
