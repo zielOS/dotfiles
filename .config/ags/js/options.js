@@ -6,7 +6,7 @@ export default {
     workspaces: 7,
 
     //
-    dockItemSize: 56,
+    dockItemSize: 50,
 
     battaryBar: {
         // wether to show percentage by deafult
@@ -24,7 +24,7 @@ export default {
     systemFetchInterval: 5000,
 
     // the slide down animation on quicksettings and dashboard
-    windowAnimationDuration: 250,
+    windowAnimationDuration: 200,
 
     // keyboard id for brightnessctl
     brightnessctlKBD: 'asus::kbd_backlight',

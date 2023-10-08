@@ -4,8 +4,8 @@ import options from '../options.js';
 import { App, Hyprland, Applications, Utils, Widget } from '../imports.js';
 
 const pinned = [
-    'firefox',
-    'org.wezfurlong.wezterm',
+    'brave-bin',
+    'foot',
     'org.gnome.Nautilus',
     'org.gnome.Calendar',
     'obsidian',
@@ -14,8 +14,6 @@ const pinned = [
     'teams-for-linux',
     'discord',
     'spotify',
-    'com.usebottles.bottles',
-    'org.gnome.Software',
 ];
 
 const AppButton = ({ icon, ...rest }) => Widget.Button({

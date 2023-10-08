@@ -27,7 +27,6 @@ export default {
     },
     windows: [
         forMonitors(TopBar),
-        forMonitors(ScreenCorners),
         forMonitors(OSD),
         forMonitors(FloatingDock),
         forMonitors(Notifications),
@@ -38,5 +37,5 @@ export default {
         QuickSettings(),
         PowerMenu(),
         Verification(),
-    ].flat(2),
+    ].flat(0),
 };

@@ -24,6 +24,7 @@ export const distro = Utils.exec('cat /etc/os-release')
 export const distroIcon = (() => {
     switch (distro) {
         case 'fedora': return '';
+        case 'gentoo': return '';
         case 'arch': return '';
         case 'nixos': return '';
         case 'debian': return '';

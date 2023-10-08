@@ -8,13 +8,13 @@ const editScheme = (scheme, edit) => {
 };
 
 const gnome = {
-    red: '#f66151',
-    green: '#57e389',
-    yellow: '#f6d32d',
-    blue: '#62a0ea',
-    magenta: '#c061cb',
-    teal: '#5bc8aF',
-    orange: '#ffa348',
+    red: '#F38BA8',
+    green: '#A6E3A1',
+    yellow: '#F9E2AF',
+    blue: '#B4BEFE',
+    magenta: '#CBA6F7',
+    teal: '#94E2D5',
+    orange: '#FAB387',
 };
 
 const charm = {
@@ -29,10 +29,10 @@ const charm = {
 
 const dark = {
     color_scheme: 'dark',
-    bg_color: '#171717',
-    fg_color: '#eee',
-    hover_fg: '#f1f1f1',
-    ...charm,
+    bg_color: '#1E1E2E',
+    fg_color: '#CDD6F4',
+    hover_fg: '#7F849C',
+    ...gnome,
 };
 
 const light = {
@@ -44,8 +44,8 @@ const light = {
 };
 
 const misc = {
-    wm_gaps: 22,
-    radii: 9,
+    wm_gaps: 18,
+    radii: 14,
     spacing: 9,
     shadow: 'rgba(0, 0, 0, .6)',
     drop_shadow: true,
@@ -54,9 +54,9 @@ const misc = {
     bar_style: 'normal',
     layout: 'topbar',
     desktop_clock: 'center center',
-    font: 'Ubuntu Nerd Font',
+    font: 'JetBrainsMono Nerd Font',
     mono_font: 'Mononoki Nerd Font',
-    font_size: 16,
+    font_size: 19,
 };
 
 const colors = {
