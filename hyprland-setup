@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "Installing Dot files"
+cd 
 sudo rm -R ~/.config/
 cd && mkdir ~/.config  
 ln -s $HOME/.dots/.fonts $HOME/
