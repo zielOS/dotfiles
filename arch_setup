@@ -1,0 +1,35 @@
+#!/bin/sh
+
+cfdisk /dev/nvme1n1 && mkfs.vfat -F 32 /dev/nvme1n1p1 && cryptsetup -c aes-xts-plain64 -s 512 -y luksFormat /dev/nvme1n1p2 && cryptsetup luksOpen /dev/nvme1n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/arch && mount /dev/mapper/cryptroot /mnt/arch && btrfs su cr /mnt/arch/@  && btrfs su cr /mnt/arch/@home && btrfs su cr /mnt/arch/@opt  && btrfs su cr /mnt/arch/@tmp && btrfs su cr /mnt/arch/@var && btrfs su cr /mnt/arch/@log && btrfs su cr /mnt/arch/@snapshots && umount /mnt/arch && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/arch && mkdir /mnt/arch/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/arch/home && mkdir /mnt/arch/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/arch/opt  && mkdir /mnt/arch/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/arch/tmp && mkdir /mnt/arch/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/arch/var && mkdir /mnt/arch/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/arch/var/log && mkdir /mnt/arch/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/arch/.snapshots
+
+pacstrap /mnt/arch linux-zen linux-zen-headers base base-devel git neovim linux-firmware intel-ucode
+
+arch-chroot /mnt/arch
+
+mount /dev/nvme0n1p1 /boot
+genfstab -U / >> /etc/fstab
+
+reflector --verbose --country 'CA' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
+
+pacman -S unzip zip unrar btrfs-progs dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim nvidia-dkms nvidia-utils mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes sxiv ranger celluloid power-profiles-daemon swaybg swayidle wl-clipboard alacritty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr
+
+ln -sf /usr/share/zoneinfo/Canada/Mountain /etc/localtime && hwclock --systohc && nvim /etc/locale.gen && locale-gen && echo "LANG=en_CA.UTF-8" >> /etc/locale.conf
+
+
+nvim /etc/mkinitcpio.conf && mkinitcpio -p linux-zen
+
+MODULES=(btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+
+** GRUB_SETUP
+pacman -S grub efibootmgr
+
+passwd && useradd -m -G users,wheel,audio,video,cron -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
+
+nvim /etc/default/grub
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=34b867a0-3167-412a-a5c4-652123cb9a09:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
+
+grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
+
+** Systemd Setup
+
+systemd-firstboot --prompt --setup-machine-id && systemctl enable NetworkManager fstrim.timer acpid systemd-timesyncd sysstat apparmor auditd

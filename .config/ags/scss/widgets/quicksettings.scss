@@ -1,6 +1,6 @@
 window#quicksettings .quicksettings {
     @include floating_widget;
-    border: 2px solid $accent;
+
     .row {
         margin-top: $spacing;
         &:first-child { margin-top: 0; }
@@ -11,7 +11,7 @@ window#quicksettings .quicksettings {
             @include widget;
             margin-right: $spacing;
             min-width: $spacing*7 + 38px;
-            min-height: $spacing*7 + 38px;
+
             .shader {
                 @include shader;
             }

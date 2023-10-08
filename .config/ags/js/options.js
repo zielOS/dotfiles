@@ -3,10 +3,10 @@ export default {
     preferredMpris: 'spotify',
 
     // number of workspaces shown on panel and overview
-    workspaces: 10,
+    workspaces: 7,
 
     //
-    dockItemSize: 56,
+    dockItemSize: 50,
 
     battaryBar: {
         // wether to show percentage by deafult
@@ -18,13 +18,13 @@ export default {
     },
 
     // path to read temperature from
-    temperature: '/sys/class/thermal/thermal_zone2/temp',
+    temperature: '/sys/class/thermal/thermal_zone0/temp',
 
     // at what intervals should cpu, ram, temperature refresh
-    systemFetchInterval: 1000,
+    systemFetchInterval: 5000,
 
     // the slide down animation on quicksettings and dashboard
-    windowAnimationDuration: 250,
+    windowAnimationDuration: 200,
 
     // keyboard id for brightnessctl
     brightnessctlKBD: 'asus::kbd_backlight',

@@ -11,33 +11,28 @@ const gnome = {
     red: '#F38BA8',
     green: '#A6E3A1',
     yellow: '#F9E2AF',
-    blue: '#89B4FA',
-    magenta: '#EBA0AC',
+    blue: '#B4BEFE',
+    magenta: '#CBA6F7',
     teal: '#94E2D5',
     orange: '#FAB387',
-    border_color: '#B4BEFE',
-
 };
 
 const charm = {
-    red: '#CC241D',
-    green: '#98971A',
-    yellow: '#D79921',
-    blue: '#458588',
-    magenta: '#B16286',
-    teal: '#689D6A',
-    orange: '#D65D0E',
-    border_color: '#476C43',
+    red: '#e55f86',
+    green: '#00D787',
+    yellow: '#EBFF71',
+    blue: '#51a4e7',
+    magenta: '#9077e7',
+    teal: '#51e6e6',
+    orange: '#E79E64',
 };
 
 const dark = {
     color_scheme: 'dark',
-    bg_color: '#11111B',
+    bg_color: '#1E1E2E',
     fg_color: '#CDD6F4',
-    hover_fg: '#B4BEFE',
-    border_color: '#B4BEFE',
-
-    ...charm,
+    hover_fg: '#7F849C',
+    ...gnome,
 };
 
 const light = {
@@ -45,39 +40,37 @@ const light = {
     bg_color: '#fffffa',
     fg_color: '#141414',
     hover_fg: '#0a0a0a',
-    border_color: '#476C43',
-
     ...editScheme(gnome, c => `darken(${c}, 8%)`),
 };
 
 const misc = {
-    wm_gaps: 5,
+    wm_gaps: 14,
     radii: 10,
     spacing: 9,
-    shadow: 'rgba(0, 0, 0, 0)',
-    drop_shadow: false,
+    shadow: 'rgba(0, 0, 0, .0)',
+    drop_shadow: true,
     transition: 200,
-    screen_corners: false,
-    bar_style: 'floating',
+    screen_corners: true,
+    bar_style: 'normal',
     layout: 'topbar',
     desktop_clock: 'center center',
-    font: 'Ubuntu Nerd Font',
+    font: 'JetBrainsMono Nerd Font',
     mono_font: 'Mononoki Nerd Font',
     font_size: 19,
 };
 
 const colors = {
-    wallpaper_fg: '#CDD6F4',
-    hypr_active_border: 'rgba(B4BEFEFF)',
+    wallpaper_fg: 'white',
+    hypr_active_border: 'rgba(B4BEFEDD)',
     hypr_inactive_border: 'rgba(3f3f3fDD)',
     accent: '$blue',
-    accent_fg: '#282828',
+    accent_fg: '#141414',
     widget_bg: '$fg_color',
-    widget_opacity: 100,
+    widget_opacity: 90,
     active_gradient: 'to right, $accent, lighten($accent, 6%)',
-    border_color: '#B4BEFE',
-    border_opacity: 100,
-    border_width: 2,
+    border_color: '$fg_color',
+    border_opacity: 90,
+    border_width: 1,
 };
 
 // themes
@@ -88,8 +81,6 @@ const kitty_dark = {
     ...dark,
     ...misc,
     ...colors,
-    widget_bg: '$accent',
-    widget_opacity: 84,
 };
 
 const kitty_light = {

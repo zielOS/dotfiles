@@ -29,7 +29,7 @@ export default monitor => Widget.Window({
                 }),
                 Widget.Box({
                     className: 'padding',
-                    style: 'padding: 2px;',
+                    style: 'padding: 1px;',
                 }),
             ],
         }),

@@ -29,7 +29,7 @@ const Homogeneous = toggles => Widget.Box({
 
 export default () => PopupWindow({
     name: 'quicksettings',
-    anchor: 'top right',
+    anchor: ['top', 'right'],
     layout: 'top right',
     content: Widget.Box({
         className: 'quicksettings',
@@ -46,7 +46,9 @@ export default () => PopupWindow({
                         [Volume()],
                         [SinkSelector(), AppMixer()],
                     ),
-
+                    Row(
+                        [Brightness()],
+                    ),
                 ],
             })]),
             Row(
@@ -54,8 +56,8 @@ export default () => PopupWindow({
                 [WifiSelection(), BluetoothDevices()],
             ),
             Row(
-                [Homogeneous([ ThemeToggle()])],
-                [ThemeSelector()],
+                [Homogeneous([ProfileToggle(), ThemeToggle()]), MicMute()],
+                [ProfileSelector(), ThemeSelector()],
             ),
             Media(),
         ],
