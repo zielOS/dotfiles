@@ -7,6 +7,7 @@ import FloatingDock from './js/dock/FloatingDock.js';
 import Applauncher from './js/applauncher/Applauncher.js';
 import PowerMenu from './js/powermenu/PowerMenu.js';
 import Verification from './js/powermenu/Verification.js';
+import Desktop from './js/desktop/Desktop.js';
 import Notifications from './js/notifications/Notifications.js';
 import QuickSettings from './js/quicksettings/QuickSettings.js';
 import Lockscreen from './js/lockscreen/Lockscreen.js';
@@ -27,15 +28,13 @@ export default {
     },
     windows: [
         forMonitors(TopBar),
+        forMonitors(ScreenCorners),
         forMonitors(OSD),
-        forMonitors(FloatingDock),
         forMonitors(Notifications),
-        forMonitors(Lockscreen),
         Applauncher(),
         Overview(),
         Dashboard(),
         QuickSettings(),
         PowerMenu(),
-        Verification(),
-    ].flat(0),
+    ].flat(2),
 };

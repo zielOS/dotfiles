@@ -1,0 +1,48 @@
+plugins:
+  - "scratchpads"
+  - "expose"
+  - "float"
+  - "monitors"
+
+options:
+  float:
+    offset: 0.9
+    
+  expose:
+    name: "mySpecial"
+
+  scratchpads:
+    - term:
+        command: "alacritty --class gophrland-alacritty"
+        unfocus: "hide"
+        float: true
+        floatOpts:
+          animation: "fromTop"
+          margin: 60
+
+    - volume:
+        command: "alacritty --class pulsemixer-alacritty -e pulsemixer"
+        unfocus: "hide"
+        float: true
+        floatOpts:
+          animation: "fromRight"
+          margin: 50
+
+    - slack:
+        command: "slack"
+        float: false
+        class: "Slack"
+
+    - whatsdesk:
+        command: "whatsdesk"
+        float: false
+        class: "whatsdesk"
+
+    - cava:
+        command: "alacritty --class cava-alacritty -e cava"
+        float: true
+        floatOpts:
+          animation: "fromBottom"
+          margin: 10
+          width: "100%"
+          height: "10%"

@@ -1,7 +1,7 @@
-@mixin dock($spacing: $spacing * 0.5) {
+@mixin dock($spacing: $spacing * 0.7) {
     separator {
         border-radius: $radii;
-        background-color: transparentize($fg_color, 0.5);
+        background-color: transparentize($fg_color, 0.8);
         margin: 0 $spacing;
     }
 
@@ -50,9 +50,9 @@
 window.floating-dock .dock {
     @include dock;
     @include floating_widget;
-    padding: $spacing / 1;
+    padding: $spacing / 2;
 
     button image {
-        font-size: 20px;
+        font-size: 48px;
     }
 }

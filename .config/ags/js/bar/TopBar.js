@@ -35,11 +35,7 @@ const Start = () => Widget.Box({
         OverviewButton(),
         SeparatorDot(),
         Workspaces(),
-        SeparatorDot(),
-        FocusedClient(),
         Widget.Box({ hexpand: true }),
-        NotificationIndicator(),
-        SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
     ],
 });
 
@@ -53,8 +49,6 @@ const Center = () => Widget.Box({
 const End = () => Widget.Box({
     className: 'end',
     children: [
-        SeparatorDot(Mpris, m => m.players.length > 0),
-        MediaIndicator(),
         Widget.Box({ hexpand: true }),
 
         SubMenu({
@@ -68,8 +62,6 @@ const End = () => Widget.Box({
         ScreenRecord(),
         SeparatorDot(Recorder, r => r.recording),
         SystemIndicators(),
-        SeparatorDot(Battery, b => b.available),
-        BatteryBar(),
         SeparatorDot(),
         PowerMenu(),
     ],
@@ -79,7 +71,7 @@ export default monitor => Widget.Window({
     name: `bar${monitor}`,
     exclusive: true,
     monitor,
-    anchor: ['top', 'left', 'right'],
+    anchor: 'top left right',
     child: Widget.CenterBox({
         className: 'panel',
         startWidget: Start(),

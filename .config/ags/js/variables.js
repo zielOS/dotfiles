@@ -24,7 +24,6 @@ export const distro = Utils.exec('cat /etc/os-release')
 export const distroIcon = (() => {
     switch (distro) {
         case 'fedora': return '';
-        case 'gentoo': return '';
         case 'arch': return '';
         case 'nixos': return '';
         case 'debian': return '';
@@ -38,14 +37,14 @@ export const distroIcon = (() => {
 const divide = ([total, free]) => free / total;
 export const cpu = Variable(0, {
     poll: [options.systemFetchInterval, 'top -b -n 1', out => divide([100, out.split('\n')
-        .find(line => line.includes('Cpu(s)'))
+        .find(line => line.includes('CPU(s)'))
         .split(/\s+/)[1]
         .replace(',', '.')])],
 });
 
 export const ram = Variable(0, {
     poll: [options.systemFetchInterval, 'free', out => divide(out.split('\n')
-        .find(line => line.includes('Mem:'))
+        .find(line => line.includes('Speicher:'))
         .split(/\s+/)
         .splice(1, 2))],
 });
