@@ -1,8 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
-- /home/ahsan/.dotfiles
-- /home/ahsan/nixos-dotfiles
-- /home/ahsan/.emacs.d
+- /home/ahsan/.dots
 startuppopupversion: 5
 customcommandshistory:
 - q
