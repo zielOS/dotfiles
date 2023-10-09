@@ -8,12 +8,7 @@ const pinned = [
     'alacritty',
     'emacs',
     'thunar',
-    'org.gnome.Nautilus',
-    'org.gnome.Calendar',
-    'obsidian',
     'transmission-gtk',
-    'caprine',
-    'teams-for-linux',
     'discord',
     'spotify',
 ];

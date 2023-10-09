@@ -44,7 +44,7 @@ const Popups = () => {
 
 const PopupList = ({ transition = 'slide_down' } = {}) => Widget.Box({
     className: 'notifications-popup-list',
-    style: 'padding: 1px',
+    style: 'padding: 0.5px',
     children: [
         Widget.Revealer({
             transition,

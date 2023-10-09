@@ -45,7 +45,7 @@ $transition: ${t.transition}ms;
 
 $font_size: ${t.font_size}px;
 $font: '${t.font}';
-$mono_font: '${t.mono_font}', monospace;
+$mono_font: '${t.mono_font}', JetBrainsMono Nerd Font;
 $wallpaper_fg: ${t.wallpaper_fg};
 $shader_fg: white;
 

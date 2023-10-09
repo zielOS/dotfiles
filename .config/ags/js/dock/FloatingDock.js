@@ -21,7 +21,7 @@ export default monitor => Widget.Window({
         },
         child: Widget.Box({
             vertical: true,
-            style: 'padding: 1px;',
+            style: 'padding: 0.5px;',
             children: [
                 Widget.Revealer({
                     transition: 'slide_up',
@@ -29,7 +29,7 @@ export default monitor => Widget.Window({
                 }),
                 Widget.Box({
                     className: 'padding',
-                    style: 'padding: 1px;',
+                    style: 'padding: 0.5px;',
                 }),
             ],
         }),

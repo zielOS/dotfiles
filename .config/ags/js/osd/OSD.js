@@ -5,7 +5,7 @@ import Indicator from '../services/onScreenIndicator.js';
 
 export const OnScreenIndicator = ({ height = 300, width = 48 } = {}) => Widget.Box({
     className: 'indicator',
-    style: 'padding: 1px;',
+    style: 'padding: 0.5px;',
     children: [Widget.Revealer({
         transition: 'slide_left',
         connections: [[Indicator, (revealer, value) => {
