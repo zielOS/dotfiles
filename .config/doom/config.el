@@ -158,7 +158,7 @@
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-tokyo-night)
 (map! :leader
       :desc "Load new theme" "h t" #'counsel-load-theme)
 
@@ -366,14 +366,14 @@
   (interactive)
   (dolist
       (face
-       '((org-level-1 1.7 "#51afef" ultra-bold)
-         (org-level-2 1.6 "#c678dd" extra-bold)
-         (org-level-3 1.5 "#98be65" bold)
-         (org-level-4 1.4 "#da8548" semi-bold)
-         (org-level-5 1.3 "#5699af" normal)
-         (org-level-6 1.2 "#a9a1e1" normal)
-         (org-level-7 1.1 "#46d9ff" normal)
-         (org-level-8 1.0 "#ff6c6b" normal)))
+       '((org-level-1 1.3 "#EBA0AC" ultra-bold)
+         (org-level-2 1.2 "#FAB387" extra-bold)
+         (org-level-3 1.17 "#98be65" bold)
+         (org-level-4 1.15 "#F38BA8" semi-bold)
+         (org-level-5 1.13 "#94E2D5" normal)
+         (org-level-6 1.11 "#CBA6F7" normal)
+         (org-level-7 1.05 "#F5E0DC" normal)
+         (org-level-8 1.0 "#EBA0AC" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
     (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 

@@ -55,7 +55,7 @@ const misc = {
     layout: 'topbar',
     desktop_clock: 'center center',
     font: 'JetBrainsMono Nerd Font',
-    mono_font: 'Mononoki Nerd Font',
+    mono_font: 'JetBrainsMono Nerd Font',
     font_size: 19,
 };
 
