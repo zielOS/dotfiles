@@ -51,7 +51,7 @@ const misc = {
     drop_shadow: true,
     transition: 200,
     screen_corners: true,
-    bar_style: 'normal',
+    bar_style: 'floating',
     layout: 'topbar',
     desktop_clock: 'center center',
     font: 'JetBrainsMono Nerd Font',

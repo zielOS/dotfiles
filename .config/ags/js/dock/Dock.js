@@ -7,7 +7,7 @@ const pinned = [
     'brave-bin',
     'alacritty',
     'emacs',
-    'thunar',
+    'Thunar',
     'transmission-gtk',
     'discord',
     'spotify',
