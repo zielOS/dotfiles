@@ -4,7 +4,7 @@ cd  && git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si -r && cd
 
-yay -S hyprland-nvidia-git swhkd-git xdg-desktop-portal-hyprland-git pyprland wayshot anyrun nvidia-vaapi-driver-git waybar-hyprland-git papirus-folders-catppuccin-git ripgrep fd python-pynvim catppuccin-gtk-theme-mocha catppuccin-cursors-mocha nodejs-neovim ckb-next aide insync acct snapd brave-bin aylurs-gtk-shell lsd python-pam swappy pavucontrol sassc swww ttf-jetbrains-mono-nerd ttf-font-awesome greetd-tuigreet 
+yay -S hyprland-nvidia-git swhkd-git pyprland wayshot anyrun nvidia-vaapi-driver-git waybar-hyprland-git papirus-folders-catppuccin-git ripgrep fd python-pynvim catppuccin-gtk-theme-mocha catppuccin-cursors-mocha nodejs-neovim ckb-next aide insync acct snapd brave-bin aylurs-gtk-shell lsd python-pam swappy pavucontrol sassc swww ttf-jetbrains-mono-nerd ttf-font-awesome greetd-tuigreet 
 
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh) 

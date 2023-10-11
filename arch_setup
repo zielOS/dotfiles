@@ -23,10 +23,10 @@ MODULES=(btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm)
 ** GRUB_SETUP
 pacman -S grub efibootmgr
 
-passwd && useradd -m -G users,wheel,audio,video,cron -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
+passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX="cryptdevice=UUID=34b867a0-3167-412a-a5c4-652123cb9a09:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
+GRUB_CMDLINE_LINUX_DEFAULT="cryptdevice=UUID=127ed312-99f2-46bf-b041-aaf2c39dccaf:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
 
 grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
 
