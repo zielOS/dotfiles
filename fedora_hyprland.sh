@@ -9,8 +9,24 @@ sudo dnf copr enable solopasha/hyprland
 sudo dnf update
 
 echo "Installing Several Packages"
-sudo dnf install alacritty xdg-desktop-portal-hyprland hyprland-nvidia-git waybar-git eww-wayland-git emacs aylurs-gtk-shell pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin file-roller  kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland acpi libva-devel akmod-nvidia nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot && sudo plymouth-set-default-theme spinner -R
+sudo dnf install alacritty xdg-desktop-portal-hyprland hyprland-nvidia-git waybar-git eww-wayland-git pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin file-roller  kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland acpi libva-devel akmod-nvidia nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot && sudo plymouth-set-default-theme spinner -R
  
+echo "Installing emacs"
+sudo dnf builddep emacs
+wget https://gnu.mirror.constant.com/emacs/emacs-29.1.tar.xz
+tar -xvf emacs-29.1.tar.xz && cd emacs-29.1 && ./autogen.sh
+./configure --with-pgtk --with-native-compilation --with-modules --with-json --with-mailutils --with-imagemagick --with-tree-sitter --with-xft --with-modules --with-threads --with-harfbuzz --with-sqlite3 --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-webp
+make -j22
+sudo make install && cd
+
+echo "Installing ags"
+sudo dnf install typescript npm meson gjs-devel gtk3-devel gtk-layer-shell gnome-bluetooth upower NetworkManager pulseaudio-libs-devel libdbusmenu-gtk3
+git clone --recursive https://github.com/Aylur/ags.git && cd ags
+npm install
+meson setup build
+sudo meson install -C build && cd
+
+
 echo "Installing Dot files"
 sudo rm -R ~/.config/
 cd && mkdir ~/.config 
