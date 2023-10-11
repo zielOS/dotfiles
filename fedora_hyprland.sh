@@ -6,11 +6,10 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 sudo dnf copr enable atim/lazygit 
 sudo dnf copr enable atim/alacritty
 sudo dnf copr enable solopasha/hyprland
-sudo dnf copr enable deathwish/emacs-pgtk-nativecomp 
 sudo dnf update
 
 echo "Installing Several Packages"
-sudo dnf install alacritty xdg-desktop-portal-hyprland hyprland-nvidia waybar-git eww-wayland-git emacs aylurs-gtk-shell pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin file-roller  kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland acpi libva-devel akmod-nvidia nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot && sudo plymouth-set-default-theme spinner -R
+sudo dnf install alacritty xdg-desktop-portal-hyprland hyprland-nvidia-git waybar-git eww-wayland-git emacs aylurs-gtk-shell pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin file-roller  kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland acpi libva-devel akmod-nvidia nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot && sudo plymouth-set-default-theme spinner -R
  
 echo "Installing Dot files"
 sudo rm -R ~/.config/
