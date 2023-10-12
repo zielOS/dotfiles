@@ -6,7 +6,7 @@
   },
   "scratchpads": {
     "term": {
-      "command": "alacritty --class alacritty-dropterm",
+      "command": "foot --class foot-dropterm",
       "animation": "fromTop",
       "unfocus": "hide"
     }

@@ -4,10 +4,10 @@ import options from '../options.js';
 import { App, Hyprland, Applications, Utils, Widget } from '../imports.js';
 
 const pinned = [
-    'brave-bin',
-    'alacritty',
+    'firefox-bin',
+    'kitty',
     'emacs',
-    'Thunar',
+    'thunar',
     'transmission-gtk',
     'discord',
     'spotify',
