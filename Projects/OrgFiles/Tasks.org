@@ -11,3 +11,4 @@
 * TODO use a calculator with emacs
 * TODO use prettify symbols for org-mode and source code blocks
 ** use symbol for emacs lisp and python
+* TODO setup cleanup_gentoo on a weekly timer

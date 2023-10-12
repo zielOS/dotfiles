@@ -4,27 +4,33 @@ echo "Installing Dot files"
 cd 
 sudo rm -R ~/.config/
 cd && mkdir ~/.config  
-ln -s $HOME/.dots/.fonts $HOME/
-ln -s $HOME/.dots/.themes $HOME/
-ln -s $HOME/.dots/ckb-next $HOME/.config/ 
-ln -s $HOME/.dots/eww $HOME/.config/
-ln -s $HOME/.dots/gtk-3.0 $HOME/.config/
-ln -s $HOME/.dots/hypr  $HOME/.config/
-ln -s $HOME/.dots/foot $HOME/.config/
-ln -s $HOME/.dots/lazygit $HOME/.config/
-ln -s $HOME/.dots/Thunar $HOME/.config/
-ln -s $HOME/.dots/zsh $HOME/.config/
+ln -s $HOME/.dots/.config/alacritty $HOME/.config/
+ln -s $HOME/.dots/.config/ags $HOME/.config/
+ln -s $HOME/.dots/.config/anyrun $HOME/.config/
+ln -s $HOME/.dots/.config/ckb-next $HOME/.config/
+ln -s $HOME/.dots/.config/btop $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
+ln -s $HOME/.dots/.config/hypr  $HOME/.config/
+ln -s $HOME/.dots/.config/Kvantum  $HOME/.config/
+ln -s $HOME/.dots/.config/lazygit $HOME/.config/
+ln -s $HOME/.dots/.config/lsd $HOME/.config/
+ln -s $HOME/.dots/.config/lvim $HOME/.config/
+ln -s $HOME/.dots/.config/qalculate $HOME/.config/
+ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
+ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
+ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
+ln -s $HOME/.dots/.config/waybar $HOME/.config/
+ln -s $HOME/.dots/.config/zathura $HOME/.config/
+ln -s $HOME/.dots/.config/zsh $HOME/.config/
 ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
 ln -s $HOME/.dots/.zshrc $HOME/
+ln -s $HOME/.dots/Projects $HOME/
 ln -s $HOME/.dots/colorscheme.css $HOME/
 ln -s $HOME/.dots/gentoo_setup $HOME/
 ln -s $HOME/.dots/electron-flags.conf $HOME/.config/
 ln -s $HOME/.dots/electron13-flags.conf $HOME/.config/
-
-echo "Setup flatpak"
-flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.brave.Browser
-flatpak install flathub org.geogebra.GeoGebra
+ln -s $HOME/.dots/.themes $HOME/
 
 echo "Setting Up Systemd"
 sudo systemctl set-default graphical.target 
@@ -33,3 +39,8 @@ systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global' 
 
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
+chsh -s $(which zsh)
+
+echo "Setup Emacs"
+git clone https://github.com/zielOS/emacs-config ~/.config/emacs
+emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "$HOME/.config/emacs/Emacs.org")'

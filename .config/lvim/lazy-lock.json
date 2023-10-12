@@ -10,7 +10,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
-  "dressing.nvim": { "branch": "master", "commit": "70fcf2a33c55e76854a9b3d2e3338a6526fd56f5" },
+  "dressing.nvim": { "branch": "master", "commit": "1f2d1206a03bd3add8aedf6251e4534611de577f" },
   "friendly-snippets": { "branch": "main", "commit": "631f79e346b0b3203d2ce3eae619ca8d612e5463" },
   "gitsigns.nvim": { "branch": "main", "commit": "e5edefd9976039f5352e0c900f35206770b33a2d" },
   "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
@@ -53,6 +53,6 @@
   "ultisnips": { "branch": "master", "commit": "f6d1501b630cb783b0af8507c5588328f826d40f" },
   "vim-illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },
   "vim-shellcheck": { "branch": "master", "commit": "4346419ac57ef341a15aa39c827c0848f17c6faf" },
-  "vimtex": { "branch": "master", "commit": "03c83443108a6984bf90100f6d00ec270b84a339" },
+  "vimtex": { "branch": "master", "commit": "cbb20643b7bfe721902dac5760bf0d4889fb5f7e" },
   "which-key.nvim": { "branch": "main", "commit": "4acffc92953a90a790603bfdab7c92319ab167b1" }
 }

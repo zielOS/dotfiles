@@ -1,5 +1,5 @@
 import { Utils } from './imports.js';
-const WP = `/home/${Utils.USER}/Pictures/Wallpapers/`;
+const WP = `/home/${Utils.USER}/.config/wallpapers/`;
 
 const editScheme = (scheme, edit) => {
     const obj = {};
@@ -69,8 +69,8 @@ const colors = {
     widget_opacity: 90,
     active_gradient: 'to right, $accent, lighten($accent, 6%)',
     border_color: '$fg_color',
-    border_opacity: 90,
-    border_width: 1,
+    border_opacity: 100,
+    border_width: 3,
 };
 
 // themes
@@ -156,8 +156,8 @@ const cutefish = {
     icon: '󰈺',
     accent: 'lighten($blue, 20%)',
     active_gradient: 'to right, $accent, lighten(mix($orange, $blue, 70%), 20%)',
-    border_opacity: 94,
-    brorder_width: 2,
+    border_opacity: 100,
+    brorder_width: 4,
     radii: 9,
     desktop_clock: 'end end',
     hypr_active_border: 'rgba(3f3f3fFF)',

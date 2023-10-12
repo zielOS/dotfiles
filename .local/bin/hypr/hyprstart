@@ -28,7 +28,7 @@ hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
 
 # Start Apps
 ckb-next &
-QT_QPA_PLATFORM=xcb insync start &
+distrobox-enter -n aur -- insync start & 
 thunar --daemon &
 
 # aylur-gtk-shell
