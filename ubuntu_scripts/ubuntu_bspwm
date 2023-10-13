@@ -1,11 +1,14 @@
 #!/bin/bash
+cd ubuntu_scripts
 sudo cp -R 01norecommend /etc/apt/apt.conf.d/
+sudo cp -R sources.list /etc/apt/
+sudo cp -R preferences /etc/apt/
 
 sudo apt update && sudo apt install nala zstd
 echo "Installing packages"
 cd
 sudo nala update && sudo nala upgrade
-sudo nala install wget curl ckb-next transmission-gtk bat maim python3-pynvim ripgrep tree-sitter-cli fd-find xsel xclip zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf rofi dunst bspwm sxhkd papirus-icon-theme ranger gammastep x11-xkb-utils x11-xserver-utils hsetroot xournalpp zathura zathura-pdf-poppler pymol pipx python3-yapf black isort python3-matplotlib  python3-scipy python3-sklearn  python3-biopython python3-pandas aide rng-tools haveged lynis auditd sysstat acct nvidia-dkms-535 xserver-xorg-core xinit network-manager qt5-style-kvantum qt6ct qt5ct btop jgmenu polybar qalculate-gtk
+sudo nala install wget curl ckb-next transmission-gtk bat maim python3-pynvim ripgrep tree-sitter-cli fd-find xsel xclip zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf rofi dunst bspwm sxhkd papirus-icon-theme ranger gammastep x11-xkb-utils x11-xserver-utils hsetroot xournalpp zathura zathura-pdf-poppler pymol pipx python3-yapf black isort python3-matplotlib  python3-scipy python3-sklearn  python3-biopython python3-pandas aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core xinit network-manager qt5-style-kvantum qt6ct qt5ct btop jgmenu polybar qalculate-gtk firefox
 
 echo "Installing Docker"
 # Add Docker's official GPG key:
@@ -33,6 +36,7 @@ pacstall -I zoom-deb
 pacstall -I discord
 pacstall -I zotero
 pacstall -I insync-deb
+pacstall -I alacritty
 
 echo "Installing emacs"
 sudo apt-get build-dep emacs
@@ -41,6 +45,13 @@ tar -xvf emacs-29.1.tar.xz && cd emacs-29.1 && ./autogen.sh
 ./configure --with-motif --with-native-compilation --with-modules --with-json --with-mailutils --with-imagemagick --with-tree-sitter --with-xft --with-modules --with-threads --with-harfbuzz --with-sqlite3 --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-webp
 make -j22
 sudo make install && cd
+
+echo "Installing brave"
+sudo apt install curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser
 
 echo "Installing xanmod kernel"
 wget -qO - https://dl.xanmod.org/archive.key | sudo gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg
@@ -59,6 +70,7 @@ ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
 ln -s $HOME/.dots/.xinitrc $HOME/
 ln -s $HOME/.dots/.Xresources $HOME/
 ln -s $HOME/.dots/catppuccin.css $HOME/
+ln -s $HOME/.dots/.config/alacritty $HOME/.config/
 ln -s $HOME/.dots/.config/bspwm $HOME/.config/
 ln -s $HOME/.dots/.config/btop $HOME/.config/
 ln -s $HOME/.dots/.config/ckb-next $HOME/.config/
