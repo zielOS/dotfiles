@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Kill already running process
-_ps=(waybar swayidle polkit-gnome-authentication-agent-1)
+_ps=(waybar swayidle lxpolkit)
 for _prs in "${_ps[@]}"; do
 	if [[ `pidof ${_prs}` ]]; then
 		killall -9 ${_prs}
@@ -40,3 +40,5 @@ xdg-portal-hyprland &
 
 dbus-update-activation-environment --all &
 gnome-keyring-daemon -r -d &
+
+emacs --daemon &

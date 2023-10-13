@@ -1,5 +1,5 @@
 {
-    "include": "~/.config/river/waybar/modules",
+    "include": "~/.config/waybar/modules",
     "name": "main-bar", 			// Waybar name
     "id": "main-bar", 				// Waybar id
     "layer": "top", 				// Waybar at top layer

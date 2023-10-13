@@ -5,7 +5,7 @@ import { App, Hyprland, Applications, Utils, Widget } from '../imports.js';
 
 const pinned = [
     'firefox-bin',
-    'kitty',
+    'foot',
     'emacs',
     'thunar',
     'transmission-gtk',

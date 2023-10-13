@@ -110,7 +110,7 @@
     "custom/menu": {
         "format": "﩯",
         "tooltip": false,
-        "on-click": "emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"",
+        "on-click": "hyprmenu",
     },
 
     "custom/power": {

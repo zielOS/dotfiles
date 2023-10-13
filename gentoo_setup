@@ -206,6 +206,15 @@ genkernel --luks --menuconfig --mountboot --install --makeopts=-j22 --clean all
 ** emacs packages
 emerge app-emacs/use-package app-emacs/auto-package-update app-emacs/no-littering app-emacs/general app-emacs/evil app-emacs/evil-collection app-emacs/evil-nerd-commenter app-emacs/yasnippet-snippets app-emacs/yasnippet app-emacs/evil-surround app-emacs/evil-commentary app-emacs/evil-quickscope app-emacs/evil-lion app-emacs/deadgrep app-emacs/ivy app-emacs/counsel app-emacs/swiper app-emacs/ivy-rich app-emacs/ivy-prescient app-emacs/company app-emacs/company-box app-emacs/vertico app-emacs/marginalia app-emacs/consult app-emacs/orderless app-emacs/embark app-emacs/corfu app-emacs/corfu-terminal app-emacs/cape app-emacs/projectile app-emacs/counsel-projectile app-emacs/command-log-mode app-emacs/doom-themes app-emacs/doom-modeline app-emacs/which-key app-emacs/helpful app-emacs/hydra app-emacs/rainbow-mode app-emacs/dashboard app-emacs/expand-region app-emacs/editorconfig app-emacs/dired-single app-emacs/all-the-icons-dired app-emacs/dired-open app-emacs/neotree app-emacs/dirvish app-emacs/org-mode app-emacs/evil-org app-emacs/org-alert app-emacs/org-noter app-emacs/org-super-agenda app-emacs/org-modern app-emacs/org-roam app-emacs/auctex app-emacs/lsp-latex app-emacs/company-auctex app-emacs/company-math app-emacs/company-reftex app-emacs/cdlatex app-emacs/auctex-latexmk app-emacs/evil-tex app-emacs/latex-preview-pane app-emacs/org-ref app-emacs/ivy-bibtex app-emacs/treemacs app-emacs/treemacs-evil app-emacs/lsp-mode app-emacs/lsp-ui app-emacs/lsp-treemacs app-emacs/flycheck app-emacs/dap-mode app-emacs/highlight-indent-guides app-emacs/format-all app-emacs/magit app-emacs/forge app-emacs/eshell-toggle app-emacs/eshell-syntax-highlighting media-gfx/imagemagick app-emacs/diredfl app-emacs/vscode-icon app-emacs/bind-key app-emacs/apparmor-mode app-emacs/lsp-pyright
 
+# gentoo, melpa-stable and gnu-elpa
+emerge app-emacs/use-package
+app-emacs/company
+app-emacs/auto-package-update app-emacs/no-littering
+app-emacs/evil app-emacs/evil-collection app-emacs/evil-nerd-commenter app-emacs/yasnippet-snippets app-emacs/yasnippet
+app-emacs/evil-surround app-emacs/evil-commentary app-emacs/evil-quickscope
+
+# melpa
+app-emacs/general app-emacs/evil-lion app-emacs/vscode-icon app-emacs/company-box app-emacs/latex-preview-pane app-emacs/command-log-mode app-emacs/dired-open app-emacs/apparmor-mode app-emacs/org-noter app-emacs/company-auctex app-emacs/reftex app-emacs/highlight-indent-guides app-emacs/eshell-toggle
 
 
 #hyprland 

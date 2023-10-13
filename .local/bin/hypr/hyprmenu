@@ -1,0 +1,3 @@
+#!/bin/bash
+
+emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
