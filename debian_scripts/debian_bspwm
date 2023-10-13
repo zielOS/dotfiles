@@ -7,24 +7,7 @@ sudo apt update && sudo apt install nala zstd
 echo "Installing packages"
 cd
 sudo nala update && sudo nala upgrade
-sudo nala install wget curl ckb-next transmission-gtk bat maim python3-pynvim ripgrep tree-sitter-cli fd-find xsel xclip zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf rofi dunst bspwm sxhkd papirus-icon-theme ranger gammastep x11-xkb-utils x11-xserver-utils hsetroot xournalpp zathura zathura-pdf-poppler pymol pipx python3-yapf black isort python3-matplotlib  python3-scipy python3-sklearn  python3-biopython python3-pandas aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core xinit network-manager qt5-style-kvantum qt6ct qt5ct btop jgmenu polybar qalculate-gtk firefox alacritty firmware-linux
-
-echo "Installing Docker"
-# Add Docker's official GPG key:
-sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-# Add the repository to Apt sources:
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo nala install wget curl ckb-next transmission-gtk bat maim python3-pynvim ripgrep tree-sitter-cli fd-find xsel xclip zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf rofi dunst bspwm sxhkd papirus-icon-theme ranger gammastep x11-xkb-utils x11-xserver-utils hsetroot xournalpp zathura zathura-pdf-poppler pymol pipx python3-yapf black isort python3-matplotlib  python3-scipy python3-sklearn  python3-biopython python3-pandas aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core xinit network-manager qt5-style-kvantum qt6ct qt5ct btop jgmenu polybar qalculate-gtk firefox alacritty firmware-linux xorg
 
 
 echo "Installing pacstall & packages"
@@ -51,10 +34,6 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] http
 sudo apt update
 sudo apt install brave-browser
 
-echo "Installing xanmod kernel"
-wget -qO - https://dl.xanmod.org/archive.key | sudo gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg
-echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-release.list
-sudo apt update && sudo apt install linux-xanmod-x64v3
 
 echo "Setting up Dotfiles"
 sudo rm -R ~/.config/

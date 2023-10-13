@@ -2,7 +2,7 @@
 
 cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup -c aes-xts-plain64 -s 512 -y luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs su cr /mnt/gentoo/@  && btrfs su cr /mnt/gentoo/@home && btrfs su cr /mnt/gentoo/@opt  && btrfs su cr /mnt/gentoo/@tmp && btrfs su cr /mnt/gentoo/@var && btrfs su cr /mnt/gentoo/@log  && btrfs su cr /mnt/gentoo/@snapshots && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt  && mkdir /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mkdir /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots 
 
-cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20230924T163139Z/stage3-amd64-hardened-openrc-20230924T163139Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20231008T170201Z/stage3-amd64-hardened-openrc-20231008T170201Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
   
 
 *** make.conf
@@ -14,7 +14,7 @@ rm -R /mnt/gentoo/etc/portage/make.conf && nano -w /mnt/gentoo/etc/portage/make.
 # detailed example.
 #NTHREADS="22"
 #source /etc/portage/make.conf.lto
-COMMON_FLAGS="-march=native -O3 -pipe"
+COMMON_FLAGS="-march=native -O2 -pipe"
 CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 ssse3"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
@@ -30,9 +30,9 @@ VIDEO_CARDS="nvidia intel"
 USE="elogind -systemd -gnome -berkdb -kde -ccache -tpm zstd policykit \
     -clamav -coreaudio -ios -ipod -ieee1394 -motif gtk pulseaudio qt5 qt6 \
     -emboss -3dfx -altivec -smartcard -ibm -wayland -nls -nas pam clang  \
-    -neon -nntp -cups -quicktime nvidia sound-server -vim apparmor \
-    pie gui X upower hardened udev alsa audit dbus tiff jpeg emacs \
-    -accessibility -bluetooth -handbook fontconfig truetype"
+    -neon -nntp -cups -quicktime nvidia sound-server -vim apparmor vulkan \
+    pie gui X upower hardened udev alsa audit dbus tiff jpeg lto pgo \
+    -accessibility -bluetooth -handbook fontconfig truetype udisks"
 #RUBY_TARGETS="ruby24 ruby25"
 # NOTE: This stage was built with the bindist Use flag enabled
 PORTDIR="/var/db/repos/gentoo"
@@ -92,12 +92,11 @@ dev-util/bazel-9999
 rm -r /mnt/gentoo/etc/portage/package.use && nano -w /mnt/gentoo/etc/portage/package.use
 
 */* PYTHON_TARGETS: python3_11
-app-editors/neovim lto
-net-libs/nodejs lto npm 
-net-p2p/transmission -gtk qt5 -qt6
+net-libs/nodejs npm
+net-p2p/transmission gtk -qt5 -qt6
 sys-config/ltoize keep-nocommon clang
 dev-util/cmake -emacs ncurses -qt5
-media-fonts/iosevka X iosevka-aile
+media-fonts/iosevka iosevka-aile
 app-text/xmlto text
 gnome-base/gvfs udisks
 dev-libs/libdbusmenu gtk3
@@ -110,7 +109,7 @@ app-text/poppler cairo
 dev-lang/python lto pgo ensurepip tk hardened
 sys-devel/gcc lto pgo graphite jit default-stack-clash-protection
 sys-apps/firejail apparmor private-home
-app-editors/emacs alsa dynamic-loading gfile gmp -gtk gui gzip-el harfbuzz imagemagick inotify jit jpeg motif png ssl svg threads tiff tree-sitter zlib 
+app-editors/emacs sound dynamic-loading -gtk -gzip-el harfbuzz imagemagick inotify jit motif threads tiff tree-sitter
 app-text/ghostscript-gpl cups
 dev-python/PyQt5 widgets
 media-sound/pulseaudio -daemon
@@ -161,7 +160,7 @@ www-client/firefox X clang dbus geckodriver gmp-autoupdate hardened hwaccel jumb
 
 rm -R /mnt/gentoo/etc/portage/package.mask && nano -w /mnt/gentoo/etc/portage/package.mask
 
->=dev-lang/python-12
+>=dev-lang/python-3.12
 x11-libs/gtk+::mv
 >=sys-devel/gcc-13
 >=sys-kernel/gentoo-sources-6.2
@@ -179,7 +178,7 @@ export PS1="(chroot) ${PS1}"
 ** Openrc
 echo "Canada/Mountain" > /etc/timezone && nano -w /etc/locale.gen && locale-gen && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}"env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
-emerge-webrsync && emerge --sync && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru lto-overlay mv gnu-elpa melpa melpa-stable && emerge --sync && emerge -aq ltoize lto-rebuild --jobs=10 && lto-rebuild -r
+emerge-webrsync && emerge --sync && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru gnu-elpa melpa melpa-stable && emerge --sync
 
 * gcc upgrade
 emerge -aq sys-devel/gcc && eselect gcc list && eselect gcc set 2  && emerge --ask --oneshot --usepkg=n sys-devel/libtool && emerge -ev --usepkg=n @world --jobs=10 --keep-going --exclude gcc rust go nodejs llvm python
