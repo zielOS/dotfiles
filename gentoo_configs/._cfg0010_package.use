@@ -13,7 +13,6 @@ app-text/xmlto text
 gnome-base/gvfs udisks
 dev-libs/libdbusmenu gtk3
 dev-qt/qtbase icu
-app-text/poppler png
 dev-python/PyQt6 qml webchannel
 dev-libs/libxml2 icu
 gui-libs/wlroots tinywl
@@ -36,7 +35,7 @@ dev-cpp/gtkmm X
 media-video/ffmpeg x264
 sys-devel/gcc lto pgo graphite jit default-stack-clash-protection
 sys-apps/firejail apparmor private-home
-app-editors/emacs sound -alsa -acl gmp -tiff -xattr xpm xft dynamic-loading gtk gui harfbuzz imagemagick -X inotify jit threads tree-sitter
+app-editors/emacs sound dynamic-loading gtk gui harfbuzz imagemagick -X inotify jit threads tree-sitter
 app-text/ghostscript-gpl cups
 dev-python/PyQt5 widgets
 media-sound/pulseaudio -daemon
@@ -83,3 +82,7 @@ media-libs/libvpx postproc
 x11-base/xorg-server xvfb
 www-client/firefox -X dbus gmp-autoupdate -system-av1 -system-harfbuzz -system-icu -system-jpeg -system-libevent -system-libvpx -system-webp -telemetry wayland -eme-free hwaccel openh264 screencast
 x11-drivers/nvidia-drivers modules modules-sign
+# required by app-emacs/pdf-tools-1.1.0::gentoo
+# required by app-emacs/org-ref-2.0.0::melpa-stable
+# required by app-emacs/org-ref (argument)
+>=app-text/poppler-23.10.0 png

@@ -13,9 +13,8 @@ app-text/xmlto text
 gnome-base/gvfs udisks
 dev-libs/libdbusmenu gtk3
 dev-qt/qtbase icu
-app-text/poppler png
 dev-python/PyQt6 qml webchannel
-dev-libs/libxml2 icu
+dev-libs/libxml2
 gui-libs/wlroots tinywl
 app-crypt/gcr gtk
 sys-apps/kmod zstd
@@ -36,7 +35,7 @@ dev-cpp/gtkmm X
 media-video/ffmpeg x264
 sys-devel/gcc lto pgo graphite jit default-stack-clash-protection
 sys-apps/firejail apparmor private-home
-app-editors/emacs sound -alsa -acl gmp -tiff -xattr xpm xft dynamic-loading gtk gui harfbuzz imagemagick -X inotify jit threads tree-sitter
+app-editors/emacs sound dynamic-loading gtk gui harfbuzz imagemagick -X inotify jit threads tree-sitter
 app-text/ghostscript-gpl cups
 dev-python/PyQt5 widgets
 media-sound/pulseaudio -daemon
@@ -83,3 +82,8 @@ media-libs/libvpx postproc
 x11-base/xorg-server xvfb
 www-client/firefox -X dbus gmp-autoupdate -system-av1 -system-harfbuzz -system-icu -system-jpeg -system-libevent -system-libvpx -system-webp -telemetry wayland -eme-free hwaccel openh264 screencast
 x11-drivers/nvidia-drivers modules modules-sign
+# required by dev-qt/qtwebengine-6.6.0::gentoo
+# required by dev-python/PyQt6-WebEngine-6.5.0::gentoo
+# required by www-client/qutebrowser-3.0.0::gentoo[qt6,python_single_target_python3_11]
+# required by qutebrowser (argument)
+>=dev-libs/libxml2-2.11.5-r1 icu

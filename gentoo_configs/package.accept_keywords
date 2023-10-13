@@ -1,5 +1,4 @@
-=app-backup/grub-btrfs-9999 ** ~amd64
-=gui-apps/eww-9999 ** ~amd64
-=media-sound/pamixer-9999 ** ~amd64
 =gui-apps/waybar-9999 ** ~amd64
-=gui-apps/wayshot-9999 ** ~amd64
+=app-backup/grub-btrfs-9999 ** ~amd64
+=media-sound/pamixer-9999 ** ~amd64
+=app-editors/emacs-30.0.9999 ** ~amd64

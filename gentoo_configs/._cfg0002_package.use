@@ -5,6 +5,7 @@ net-p2p/transmission gtk -qt5 -qt6
 sys-config/ltoize keep-nocommon clang
 net-firewall/iptables nftables
 dev-util/cmake -emacs ncurses -qt5
+x11-libs/cairo X
 media-libs/libglvnd X
 x11-libs/libxkbcommon X
 media-fonts/iosevka X iosevka-aile
@@ -12,11 +13,6 @@ dev-util/cmake -gui -qt6
 app-text/xmlto text
 gnome-base/gvfs udisks
 dev-libs/libdbusmenu gtk3
-dev-qt/qtbase icu
-app-text/poppler png
-dev-python/PyQt6 qml webchannel
-dev-libs/libxml2 icu
-gui-libs/wlroots tinywl
 app-crypt/gcr gtk
 sys-apps/kmod zstd
 sys-boot/grub:2 device-mapper
@@ -36,7 +32,7 @@ dev-cpp/gtkmm X
 media-video/ffmpeg x264
 sys-devel/gcc lto pgo graphite jit default-stack-clash-protection
 sys-apps/firejail apparmor private-home
-app-editors/emacs sound -alsa -acl gmp -tiff -xattr xpm xft dynamic-loading gtk gui harfbuzz imagemagick -X inotify jit threads tree-sitter
+app-editors/emacs sound dynamic-loading gtk gui harfbuzz imagemagick -X inotify jit threads tree-sitter
 app-text/ghostscript-gpl cups
 dev-python/PyQt5 widgets
 media-sound/pulseaudio -daemon
@@ -78,8 +74,12 @@ dev-libs/libpcre2 pcre32
 dev-qt/qtcore icu
 gui-wm/hyprland X legacy-renderer systemd video_cards_nvidia
 gui-apps/waybar experimental network pipewire experimental upower tray
+x11-libs/cairo -X
 dev-cpp/cairomm X
 media-libs/libvpx postproc
 x11-base/xorg-server xvfb
 www-client/firefox -X dbus gmp-autoupdate -system-av1 -system-harfbuzz -system-icu -system-jpeg -system-libevent -system-libvpx -system-webp -telemetry wayland -eme-free hwaccel openh264 screencast
 x11-drivers/nvidia-drivers modules modules-sign
+# required by www-client/firefox-118.0.1::gentoo[-X,pgo]
+# required by firefox (argument)
+>=gui-libs/wlroots-0.16.2-r2 tinywl
