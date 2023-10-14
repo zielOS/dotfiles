@@ -4,51 +4,51 @@ cd  && git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si -r && cd
 
-yay -S bspwm-git sxhkd-git brave-bin papirus-folders-catppuccin-git ripgrep fd python-pynvim catppuccin-gtk-theme-mocha catppuccin-cursors-mocha nodejs-neovim ckb-next aide insync acct snapd lsd python-pam swappy pavucontrol sassc ttf-jetbrains-mono-nerd ttf-font-awesome
+yay -S bspwm-git sxhkd-git brave-bin papirus-folders-catppuccin-git ripgrep fd python-pynvim nodejs-neovim ckb-next insync acct lsd python-pam sassc fnm picom-arian8j2-git zoom ly zotero krathalans-apparmor-profiles-git emacs-git
 
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
-curl -fsSL https://fnm.vercel.app/install | bash
-curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
-# install aylurs-gtk-shell
-sudo pacman -S typescript npm meson gjs gtk3 gtk-layer-shell gnome-bluetooth-3.0 upower networkmanager gobject-introspection libdbusmenu-gtk3
-
-git clone --recursive https://github.com/Aylur/ags.git && cd ags
-npm install
-meson setup build
-meson install -C build
-
-echo "Installing Dot files"
-cd
+echo "Setting up Dotfiles"
 sudo rm -R ~/.config/
 cd && mkdir ~/.config
-ln -s $HOME/.dots/.config/ags $HOME/.config/
+ln -s $HOME/.dots/.fonts $HOME/
+ln -s $HOME/.dots/.themes $HOME/
+ln -s $HOME/.dots/gentoo_setup $HOME/
+ln -s $HOME/.dots/Projects $HOME/
+ln -s $HOME/.dots/.local/bin/bspwm $HOME/.local/bin
+ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
+ln -s $HOME/.dots/.xinitrc $HOME/
+ln -s $HOME/.dots/.Xresources $HOME/
+ln -s $HOME/.dots/catppuccin.css $HOME/
 ln -s $HOME/.dots/.config/alacritty $HOME/.config/
-ln -s $HOME/.dots/.config/anyrun $HOME/.config/
+ln -s $HOME/.dots/.config/bspwm $HOME/.config/
 ln -s $HOME/.dots/.config/btop $HOME/.config/
 ln -s $HOME/.dots/.config/ckb-next $HOME/.config/
+ln -s $HOME/.dots/.config/dunst $HOME/.config/
+ln -s $HOME/.dots/.config/eww $HOME/.config/
+ln -s $HOME/.dots/.config/gammastep $HOME/.config/
 ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
-ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
-ln -s $HOME/.dots/.config/hypr  $HOME/.config/
-ln -s $HOME/.dots/.config/Kvantum  $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
+ln -s $HOME/.dots/.config/jgmenu $HOME/.config/
+ln -s $HOME/.dots/.config/Kvantum $HOME/.config/
 ln -s $HOME/.dots/.config/lazygit $HOME/.config/
-ln -s $HOME/.dots/.config/lsd  $HOME/.config/
-ln -s $HOME/.dots/.config/Thunar $HOME/.config/
-ln -s $HOME/.dots/.config/qt5ct  $HOME/.config/
-ln -s $HOME/.dots/.config/qt6ct  $HOME/.config/
-ln -s $HOME/.dots/.config/wallpapers  $HOME/.config/
-ln -s $HOME/.dots/.config/waybar $HOME/.config/
-ln -s $HOME/.dots/.config/zathura  $HOME/.config/
+ln -s $HOME/.dots/.config/lsd $HOME/.config/
+ln -s $HOME/.dots/.config/lvim $HOME/.config/
+ln -s $HOME/.dots/.config/picom $HOME/.config/
+ln -s $HOME/.dots/.config/polybar $HOME/.config/
+ln -s $HOME/.dots/.config/qalculate $HOME/.config/
+ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
+ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
+ln -s $HOME/.dots/.config/ranger $HOME/.config/
+ln -s $HOME/.dots/.config/rofi $HOME/.config/
+ln -s $HOME/.dots/.config/suckless $HOME/.config/
+ln -s $HOME/.dots/.config/sxhkd $HOME/.config/
+ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
+ln -s $HOME/.dots/.config/zathura $HOME/.config/
 ln -s $HOME/.dots/.config/zsh $HOME/.config/
-ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
-ln -s $HOME/.dots/.zshrc $HOME/
-ln -s $HOME/.dots/.themes $HOME/
-ln -s $HOME/.dots/Projects $HOME/
-ln -s $HOME/.dots/colorscheme.css $HOME/
-ln -s $HOME/.dots/gentoo_setup $HOME/
 
 #-----------------------------------------
 #---- SETUP SYSTEMD ----------------------

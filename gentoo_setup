@@ -27,7 +27,7 @@ EMERGE_DEFAULT_OPTS="--jobs=10 --keep-going=yes "
 #ACCEPT_KEYWORDS="~amd64"
 ACCEPT_LICENSE="*"
 VIDEO_CARDS="nvidia intel"
-USE="elogind -systemd -gnome -berkdb -kde -ccache -tpm zstd policykit \
+USE="-elogind systemd -gnome -berkdb -kde -ccache -tpm zstd policykit \
     -clamav -coreaudio -ios -ipod -ieee1394 -motif gtk pulseaudio qt5 qt6 \
     -emboss -3dfx -altivec -smartcard -ibm -wayland -nls -nas pam clang  \
     -neon -nntp -cups -quicktime nvidia sound-server -vim apparmor vulkan \
@@ -232,6 +232,7 @@ gui-apps/hyprland-plugins
 upower 
 ags
 
+
 #install from distrobox
 wayshot insync anyrun
 
@@ -242,7 +243,7 @@ emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=73e00af6-0efd-40b2-b80c-318b6dd7a234 root_trim=yes init=/lib/systemd/systemd"
+GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=c4530982-7cbb-415f-ae8e-f09fc6c83a21 root_trim=yes init=/lib/systemd/systemd"
 GRUB_CMDLINE_LINUX_DEFAULT="apparmor=1 security=apparmor" 
 
 grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg

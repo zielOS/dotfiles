@@ -15,7 +15,7 @@ echo "Installing emacs"
 sudo dnf builddep emacs
 wget https://gnu.mirror.constant.com/emacs/emacs-29.1.tar.xz
 tar -xvf emacs-29.1.tar.xz && cd emacs-29.1 && ./autogen.sh
-./configure --with-pgtk --with-native-compilation --with-modules --with-json --with-mailutils --with-imagemagick --with-tree-sitter --with-xft --with-modules --with-threads --with-harfbuzz --with-sqlite3 --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-webp
+./configure --with-motif --with-native-compilation --with-modules --with-json --with-mailutils --with-imagemagick --with-tree-sitter --with-xft --with-modules --with-threads --with-harfbuzz --with-sqlite3 --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-webp
 make -j22
 sudo make install && cd
 
