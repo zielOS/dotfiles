@@ -1,6 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/ahsan/.dots
+- /home/ahsan/.config/doom
 - /home/ahsan/Emacs_Configs/emacs-config
 - /home/ahsan/Emacs_Configs/crafted-emacs-modified
 - /home/ahsan/.config/emacs
