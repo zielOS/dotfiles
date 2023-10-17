@@ -1,3 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+##
+## launch wofi with alt config
+
+CONFIG="$HOME/.config/hypr/wofi/config"
+STYLE="$HOME/.config/hypr/wofi/style.css"
+
+if [[ ! `pidof wofi` ]]; then
+	wofi --show drun --prompt 'Search...' --conf ${CONFIG} --style ${STYLE}
+else
+	pkill wofi
+fi
+

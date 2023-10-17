@@ -1,9 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/ahsan/.dots
-- /home/ahsan/Emacs_Configs/emacs-config
-- /home/ahsan/Emacs_Configs/crafted-emacs-modified
 - /home/ahsan/.config/emacs
+- /home/ahsan/Emacs_Configs/crafted-emacs-modified
 startuppopupversion: 5
 customcommandshistory:
 - q
