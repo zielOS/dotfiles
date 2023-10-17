@@ -4,7 +4,7 @@ cd  && git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si -r && cd
 
-yay -S hyprland-nvidia-git swhkd-git pyprland wayshot anyrun nvidia-vaapi-driver-git waybar-hyprland-git papirus-folders-catppuccin-git ripgrep fd python-pynvim catppuccin-gtk-theme-mocha catppuccin-cursors-mocha nodejs-neovim ckb-next aide insync acct snapd brave-bin lsd python-pam swappy pavucontrol sassc swww ttf-jetbrains-mono-nerd ttf-font-awesome greetd-tuigreet 
+yay -S hyprland-nvidia-git libva-nvidia-driver-git nvidia-dkms xdg-desktop-portal-hyprland xorg-xwayland qt5-wayland qt6-wayland qt5ct qt6ct libva linux-zen-headers pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol wireplumber ripgrep playerctl gradience-git adw-gtk3-git jq eww-tray-wayland-git polkit-gnome swww gtklock pamixer cliphist grimblast-git gnome-control-center thunar thunar-archive-plugin file-roller xdg-user-dirs wf-recorder dbus-python python-gobject python-requests python-jinja python-material-color-utilities zenity socat swhkd-git pyprland anyrun waybar-hyprland-git ripgrep fd python-pynvim nodejs-neovim ckb-next insync acct lsd python-pam swappy pavucontrol sassc swww ttf-jetbrains-mono-nerd ttf-font-awesome greetd-tuigreet
 
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh) 
@@ -13,19 +13,11 @@ curl -fsSL https://fnm.vercel.app/install | bash
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
-# install aylurs-gtk-shell
-sudo pacman -S typescript npm meson gjs gtk3 gtk-layer-shell gnome-bluetooth-3.0 upower networkmanager gobject-introspection libdbusmenu-gtk3
-
-git clone --recursive https://github.com/Aylur/ags.git && cd ags
-npm install
-meson setup build
-meson install -C build
-
 echo "Installing Dot files"
 cd 
 sudo rm -R ~/.config/
 cd && mkdir ~/.config  
-ln -s $HOME/.dots/.config/ags $HOME/.config/
+ln -s $HOME/.dots/.config/eww $HOME/.config/
 ln -s $HOME/.dots/.config/alacritty $HOME/.config/
 ln -s $HOME/.dots/.config/anyrun $HOME/.config/
 ln -s $HOME/.dots/.config/btop $HOME/.config/
