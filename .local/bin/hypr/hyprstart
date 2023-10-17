@@ -24,15 +24,15 @@ hyprtheme &
 hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
 
 # polkit 
-/usr/bin/lxpolkit &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Start Apps
 ckb-next &
-distrobox-enter -n aur -- insync start & 
+insync start & 
 thunar --daemon &
 
 # aylur-gtk-shell
-ags -b hypr &
+# ags -b hypr &
 
 pypr &
 
@@ -41,4 +41,4 @@ xdg-portal-hyprland &
 dbus-update-activation-environment --all &
 gnome-keyring-daemon -r -d &
 
-emacs --daemon &
+# emacs --daemon &
