@@ -1,38 +1,31 @@
-window>.powermenu {
-  margin: 1rem;
-  box-shadow: 0 0 3px 1px rgba(black, 0.5);
-  background-color: $bg;
+.powermenu-box {
+    @include window;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
-.powermenu {
-  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
-  font-size: 2rem;
-  background-color: transparent;
-  padding: .2rem;
-  border-radius: 0.5rem;
+.powermenu-entry {
+    margin: 0 0.5rem;
+}
 
-  &.shutdown {
-    color: $red;
-  }
+.powermenu-button {
+    background-color: $surfaceVariant;
+    border-radius: 1rem;
+    transition: 0.3s;
+    padding: 3.25rem 4rem;
+}
 
-  &.reboot {
-    color: $green;
-  }
+.powermenu-button:hover {
+    background-color: mix($surfaceVariant, $onSurfaceVariant, 70%);
+}
 
-  &.suspend {
-    color: $yellow;
-  }
+.powermenu-icon {
+    font-size: 4rem;
+}
 
-  &.exit {
-    color: $blue;
-  }
-
-  button {
-    background-color: $bg-alt;
-    padding: 1.4rem;
-
-    &:hover {
-      background-color: lighten($color: $bg-alt, $amount: 20%);
-    }
-  }
+.powermenu-text {
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
 }

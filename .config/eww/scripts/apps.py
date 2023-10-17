@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 
 import glob
 import sys
@@ -12,19 +12,8 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from configparser import ConfigParser
 
-XDG_CACHE_HOME = os.path.expandvars("$XDG_CACHE_HOME")
-CACHE_FILE = os.path.join(XDG_CACHE_HOME, "apps.json")
+CACHE_FILE = os.path.expanduser("~/.cache/apps.json")
 DESKTOP_DIR = "/usr/share/applications"
-PREFERRED_APPS = [
-    "spotify",
-    "discord",
-    "foot",
-    "kotatogram desktop",
-    "code - oss",
-    "thunar file manager",
-    "brave web browser (beta)",
-    "transmission"
-]
 
 def get_gtk_icon(icon_name):
     theme = Gtk.IconTheme.get_default()
@@ -55,25 +44,26 @@ def get_desktop_entries():
             "desktop": os.path.basename(file_path),
         }
         entries.append(entry)
-    return entries
 
-def update_cache(all_apps, preferred_apps):
-    data = {"apps": all_apps, "preferred": preferred_apps}
+    
+
+    return {"apps": entries, "pinned": read_cache(), "search": False, "filtered": []}
+
+
+
+def write_cache(entries):
     with open(CACHE_FILE, "w") as file:
-        json.dump(data, file, indent=2)
+        json.dump(entries, file, indent=2)
 
-def get_cached_entries():
-    if os.path.exists(CACHE_FILE):
-        with open(CACHE_FILE, "r") as file:
-            try:
-                return json.load(file)
-            except json.JSONDecodeError:
-                pass
-
-    all_apps = get_desktop_entries()
-    preferred_apps = [entry for entry in all_apps if entry["name"].lower() in PREFERRED_APPS]
-    update_cache(all_apps, preferred_apps)
-    return {"apps": all_apps, "preferred": preferred_apps}
+def read_cache():
+    empty = []
+    try:
+        with open(CACHE_FILE, "r") as cache:
+            return json.load(cache)
+    except FileNotFoundError:
+        with open(CACHE_FILE, "w") as cache:
+            json.dump(empty, cache)
+        return empty
 
 def filter_entries(entries, query):
     filtered_data = [
@@ -86,16 +76,55 @@ def filter_entries(entries, query):
 def update_eww(entries):
     subprocess.run(["eww", "update", "apps={}".format(json.dumps(entries))])
 
+
+def add_pinned_entry(desktop, entries):
+    cache = read_cache()
+    for c in cache:
+        if c['desktop'] == desktop:
+            print("App already pinned!")
+            exit(1)
+    pin = None
+    for entry in entries['apps']:
+        if entry['desktop'] == desktop:
+            pin = entry
+            break
+    if pin is not None:
+        cache.insert(0, pin)
+        write_cache(cache)
+
+        update_eww(get_desktop_entries())
+
+
+def remove_pinned_entry(desktop):
+    cache = read_cache()
+    pins = [entry for entry in cache if entry['desktop'] != desktop]
+    write_cache(pins)
+
+    update_eww(get_desktop_entries())
+    
+
 if __name__ == "__main__":
-    if len(sys.argv) > 2 and sys.argv[1] == "--query":
-        query = sys.argv[2]
-    else:
-        query = None
+    if len(sys.argv) > 2:
+        if sys.argv[1] == "--query":
+            query = sys.argv[2]
+            if query == "":
+                entries = get_desktop_entries()
+                update_eww(entries)
+                exit(0)
+            entries = get_desktop_entries()
+            filtered = filter_entries(entries, query)
+            update_eww({"apps": entries['apps'], "pinned": entries['pinned'], "search": True, "filtered": filtered})
 
-    entries = get_cached_entries()
+        elif sys.argv[1] == "--add-pin":
+            desktop = sys.argv[2]
+            entries = get_desktop_entries()
+            add_pinned_entry(desktop, entries)
 
-    if query is not None:
-        filtered = filter_entries(entries, query)
-        update_eww({"apps": filtered, "preferred": entries["preferred"]})
+        elif sys.argv[1] == "--remove-pin":
+            desktop = sys.argv[2]
+            remove_pinned_entry(desktop)
     else:
+        entries = get_desktop_entries()
         update_eww(entries)
+
+    
