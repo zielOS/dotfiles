@@ -32,7 +32,8 @@ insync start &
 thunar --daemon &
 
 # aylur-gtk-shell
-# ags -b hypr &
+ags -b hypr &
+eww daemon &
 
 pypr &
 
@@ -41,4 +42,6 @@ xdg-portal-hyprland &
 dbus-update-activation-environment --all &
 gnome-keyring-daemon -r -d &
 
-# emacs --daemon &
+emacs --daemon &
+
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.4 &

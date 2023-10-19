@@ -6,7 +6,7 @@
   },
   "scratchpads": {
     "term": {
-      "command": "alacritty --class alacritty-dropterm",
+      "command": "kitty --class kitty-dropterm",
       "animation": "fromTop",
       "unfocus": "hide"
     }

@@ -21,6 +21,7 @@ alias keywords='sudo lvim /etc/portage/package.accept_keywords'
 alias conf='sudo lvim /etc/portage/make.conf'
 alias add-overla='sudo eselect repository enable'
 alias em-list="equery list '*'"
+alias pac-clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 
 
 # Misc-related aliases
