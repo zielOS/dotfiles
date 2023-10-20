@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-WALLPAPER="$HOME/.config/wallpapers/tokyonight.jpg"
+WALLPAPER="$HOME/Pictures/tokyonight.jpg"
 
 swaybg --output '*' --mode fill --image "$WALLPAPER"
