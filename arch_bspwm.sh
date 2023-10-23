@@ -4,12 +4,12 @@ cd  && git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si -r && cd
 
-yay -S bspwm-git sxhkd-git brave-bin papirus-folders-catppuccin-git ripgrep fd python-pynvim nodejs-neovim ckb-next insync acct lsd python-pam sassc fnm picom-arian8j2-git zoom ly zotero krathalans-apparmor-profiles-git emacs-git
+yay -S bspwm-git sxhkd-git brave-bin papirus-folders-catppuccin-git ripgrep fd python-pynvim nodejs-neovim ckb-next insync acct lsd python-pam sassc fnm zoxide zoom ly zotero emacs-nativecomp tdrop-git picom-ftlabs-git xdg-desktop-portal-gtk pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol wireplumber ripgrep playerctl polkit-gnome pamixer xdg-user-dirs wf-recorder dbus-python ttf-jetbrains-mono-nerd ttf-font-awesome mpv sxiv jgmenu xqp xdotool 
 
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+
 
 echo "Setting up Dotfiles"
 sudo rm -R ~/.config/
@@ -44,11 +44,16 @@ ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
 ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
 ln -s $HOME/.dots/.config/ranger $HOME/.config/
 ln -s $HOME/.dots/.config/rofi $HOME/.config/
-ln -s $HOME/.dots/.config/suckless $HOME/.config/
+ln -s $HOME/.dots/.config/st $HOME/.config/
 ln -s $HOME/.dots/.config/sxhkd $HOME/.config/
 ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
 ln -s $HOME/.dots/.config/zathura $HOME/.config/
 ln -s $HOME/.dots/.config/zsh $HOME/.config/
+
+
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+rm -R ~/.zshrc
+ln -s $HOME/.dots/.zshrc $HOME/
 
 #-----------------------------------------
 #---- SETUP SYSTEMD ----------------------
