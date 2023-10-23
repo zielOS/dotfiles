@@ -21,8 +21,10 @@ super + shift + Return
 	bspterm --float
 
 ### Launch menu
+# super + d
+#   emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
 super + d
-	emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
+	bspmenu
 
 ## Launch gui apps
 super + g; {b, f, e}
