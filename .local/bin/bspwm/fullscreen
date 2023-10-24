@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/zsh
 
 set_widget() {
   local widgets=($(eww windows | grep -i '*' | tr -d '*'))

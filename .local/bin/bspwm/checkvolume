@@ -1,7 +1,7 @@
 #!/bin/bash
 
 value="$(eww get volume-percent)"
-sleep_duration=3
+sleep_duration=1
 
 # open eww volume
 [[ -z $(eww windows | grep -i '*' | grep volume) ]] && eww open volume
@@ -11,7 +11,7 @@ while true; do
 
   if [ "$value" != "$new_value" ]; then
     # if volume has changed, then reset sleep
-    sleep_duration=3
+    sleep_duration=1
     value="$new_value"
   else
     # if volume hasnt changed, then sleep till volume changes again
