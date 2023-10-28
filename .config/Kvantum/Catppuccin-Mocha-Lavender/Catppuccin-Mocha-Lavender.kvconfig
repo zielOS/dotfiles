@@ -69,6 +69,8 @@ reduce_window_opacity=10
 saturation=1.00
 shadowless_popup=false
 transient_groove=false
+menu_blur_radius=0
+tooltip_blur_radius=0
 
 [GeneralColors]
 window.color=#1E1E2E
@@ -446,7 +448,7 @@ single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_sidepane=true
 transparent_pcmanfm_view=false
-blur_translucent=true
+blur_translucent=false
 centered_forms=false
 kinetic_scrolling=false
 middle_click_scroll=false

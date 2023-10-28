@@ -37,9 +37,11 @@ eww daemon &
 
 pypr &
 
-xdg-portal-hyprland &
+#xdg-portal-hyprland &
 
 dbus-update-activation-environment --all &
 gnome-keyring-daemon -r -d &
 
 emacs --daemon &
+
+gsettings set org.gnome.desktop.interface menus-have-icons true &

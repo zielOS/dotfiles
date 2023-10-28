@@ -1,0 +1,14 @@
+* TODO Use dirvish in emacs instead of ranger
+* TODO Notification Center and widgets using ags
+* TODO Bar using waybar
+* TODO Power Menu using ags
+* TODO Overview using ags
+* TODO use anyrun (krunner alternative)
+* TODO install wayshot
+* TODO install hy3 plugin
+* TODO install pyprland plugin
+* TODO install split-monitor-workspaces plugin
+* TODO use a calculator with emacs
+* TODO use prettify symbols for org-mode and source code blocks
+** use symbol for emacs lisp and python
+* TODO setup cleanup_gentoo on a weekly timer
