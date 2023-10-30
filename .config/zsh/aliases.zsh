@@ -30,7 +30,7 @@ alias update-grub='sudo grub-install --target=x86_64-efi --efi-directory=/boot &
 alias grub-conf='sudo lvim /etc/default/grub'
 alias Rm='sudo rm -rf'
 # alias htkey-load='sudo pkill -HUP swhkd'
-alias reload_emacs='systemctl --user stop emacs && systemctl --user start emacs'
+alias reload_emacs='systemctl --user restart emacs'
 alias snapper='sudo lvim /etc/snapper/configs/root'
 alias aa-status='sudo aa-status'
 alias l='lsd'

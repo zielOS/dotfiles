@@ -1,303 +1,171 @@
-// Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
-//
-// Waybar modules configuration
 {
-	// waybar-backlight
-    "backlight": {
-		"interval": 2,
-        //"device": "amdgpu_bl0",
-        "format": "{icon}",
-        "format-icons": ["", "", "", "", "", "", ""],
-        "on-scroll-up": "light -A 5%",
-        "on-scroll-down": "light -U 5%",
-        "smooth-scrolling-threshold": 1,
-    },
-    "backlight#2": {
-		"interval": 2,
-        //"device": "amdgpu_bl0",
-        "format": "{percent}%",
-        "on-scroll-up": "light -A 5%",
-        "on-scroll-down": "light -U 5%",
-        "smooth-scrolling-threshold": 1,
-    },
+	"hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "all-outputs": false,
+    "disable-scroll": false,
+    "persistent_workspaces": {
+      "1": ["DP-1"],
+      "2": ["DP-1"],  
+      "3": ["DP-1"],
+      "4": ["DP-1"],
+      "5": ["DP-1"],
+      "6": ["DP-1"],
+      "11": ["DP-2"],
+      "12": ["DP-2"],  
+      "13": ["DP-2"],
+      "14": ["DP-2"],
+      "15": ["DP-2"],
+      "16": ["DP-2"],
+      "21": ["DP-3"],
+      "22": ["DP-3"],  
+      "23": ["DP-3"],
+      "24": ["DP-3"],
+      "25": ["DP-3"],
+      "26": ["DP-3"],
 
-	// waybar-battery
-    "battery": {
-		"interval": 60,
-		//"bat": "BAT1",
-		//"adapter": "ACAD",
-		"full-at": 100,
-		"design-capacity": false,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon}",
-        "format-charging": "",
-        "format-plugged": "ﮣ",
-        "format-full": "",
-        "format-icons": ["", "", "", "", "", "", "", "", ""],
-        "format-time": "{H}h {M}min",
-        "tooltip": true,
     },
-    "battery#2": {
-		"interval": 60,
-		//"bat": "BAT1",
-		//"adapter": "ACAD",
-		"full-at": 100,
-		"design-capacity": false,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}%",
-        "format-charging": "{capacity}%",
-        "format-plugged": "{capacity}%",
-        "format-full": "Full",
-        "format-alt": "{time}",
-        "format-time": "{H}h",
-        "tooltip": false,
-    },
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "漣",
+      "11": "",
+      "12": "",
+      "13": "",
+      "14": "",
+      "15": "",
+      "16": "漣",
+      "21": "",
+      "22": "",
+      "23": "",
+      "24": "",
+      "25": "",
+      "26": "漣",
+    }
+  },
+  
+  // custom/swallow
+  "custom/swallow": {
+    "format": "󰊰",
+    "tooltip": false,
+    "on-click": "hyprswallow",
+  },
+  
+  //custom/power
+  "custom/power": {
+    "tooltip": false,
+    "on-click": "hyprpower",
+    "format": "󰤆",
+  },
 
-	// waybar-bluetooth
-    "bluetooth": {
-        //"controller": "controller1",
-        //"format-device-preference": "",
-        "format": "",
-        "format-on": "",
-        "format-off": "",
-        "format-disabled": "",
-        "format-connected": "",
-        "format-connected-battery": "",
-        "tooltip": true,
-        "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "~/.config/river/scripts/rofi_bluetooth",
-        "on-click-right": "blueman-manager",
-    },
+	// waybar-custom
+  "custom/menu": {
+    "format": "﩯",
+    "tooltip": false,
+    "on-click": "hyprmenu",
+  },
+
+  //waybar-tray
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10,
+  },
+
+  //waybar-clock
+  "clock": {
+    "tooltip": false,
+    "format": "󱑎 {:%H:%M}",
+  },
+
+  "clock#date": {
+    "format": "󰃶 {:%a %d %b}",
+    "tooltip-format": "
+      <big>{:%Y %B}</big>
+      <tt><small>{calendar}</small></tt>",
+  },
+  
+  //waybar-backlight
+  "backlight": {
+    "tooltip": false,
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈"],
+    "on-scroll-up": "brightnessctl s 1%-",
+    "on-scroll-down": "brightnessctl s +1%",
+  },
 
 
-	// waybar-clock
-    "clock": {
-		"interval": 60,
-        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%I}",
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15,
     },
-    "clock#2": {
-		"interval": 60,
-        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%M}",
-    },
-    "clock#3": {
-		"interval": 60,
-        "format": "{:%p}",
-    },
+    "format": "{icon} {capacity}%",
+    "tooltip-format": "{timeTo}, {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+  },
+
+
+  // waybar-bluetooth
+  "bluetooth": {
+    "format": "",
+    "format-on": "",
+    "format-off": "",
+    "format-disabled": "",
+    "format-connected": "",
+    "format-connected-battery": "",
+    "tooltip": true,
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "~/.config/river/scripts/rofi_bluetooth",
+    "on-click-right": "blueman-manager",
+  },
 
 	// waybar-cpu
 
-	// waybar-custom
-    "custom/themes": {
-        "format": "",
-        "tooltip": false,
-        "on-click": "$HOME/.config/river/theme/theme.sh --pywal",
-        "on-click-right": "$HOME/.config/river/theme/theme.sh --default",
-    },
+  // waybar-network
+  "network": {
+    "format-wifi": "󰖩 {essid}",
+    "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+    "format-alt": "󱛇",
+    "format-disconnected": "󰖪",
+    "tooltip-format": "
+      󰅃 {bandwidthUpBytes} 󰅀 {bandwidthDownBytes}
+      {ipaddr}/{ifname} via {gwaddr} ({signalStrength}%)",
+  },
 
-	// waybar-custom
-    "custom/menu": {
-        "format": "﩯",
-        "tooltip": false,
-        "on-click": "hyprmenu",
-    },
+  "pulseaudio": {
+    "tooltip": false,
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁",
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "tooltip-format": "{desc}, {volume}%",
+    "on-click": "${pamixer} -t",
+    "on-scroll-up": "${pamixer} -d 1",
+    "on-scroll-down": "${pamixer} -i 1",
+  },
 
-    "custom/power": {
-         "format": "襤",
-         "tooltip": false,
-         "on-click": "powermenu",
-    },
+  "pulseaudio#microphone": {
+    "tooltip": false,
+    "format": "{format_source}",
+    "format-source": "󰍬 {volume}%",
+    "format-source-muted": "󰍭",
+    "on-click": "${pamixer} --default-source -t",
+    "on-scroll-up": "${pamixer} --default-source -d 1",
+    "on-scroll-down": "${pamixer} --default-source -i 1",
+  },
 
-	// waybar-disk
-	// waybar-idle-inhibitor
-	// waybar-inhibitor
-	// waybar-keyboard-state
-	// waybar-memory
 
-	// waybar-spotify
-    "custom/spotify": {
-        "exec": "$HOME/.config/river/waybar/spotify",
-        "interval": 1,
-        "rotate": 90,
-        "format": "{}",
-        "tooltip": true,
-        "max-length": 20,
-        "on-click": "playerctl play-pause",
-        "on-click-middle": "playerctl previous",
-        "on-click-right": "playerctl next",
-        "on-scroll-up": "playerctl position 05+",
-        "on-scroll-down": "playerctl position 05-",
-        "smooth-scrolling-threshold": 1,
-    },
 
-	// waybar-mpd
-    "mpd": {
-        "interval": 1,
-        "unknown-tag": "N/A",
-        "format": "{stateIcon}",
-        "format-disconnected": "",
-        "format-paused": "{stateIcon}",
-        "format-stopped": "",
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "{artist} - {title} | 祥 {elapsedTime:%M:%S}",
-        "tooltip-format-disconnected": "MPD (disconnected)",
-		// Commands to execute on events
-        "on-click": "mpc toggle",
-        "on-scroll-up": "mpc seek +00:00:01",
-        "on-scroll-down": "mpc seek -00:00:01",
-        "smooth-scrolling-threshold": 1,
-    },
-    "mpd#2": {
-        "interval": 1,
-        "format": "玲",
-        "format-disconnected": "玲",
-        "format-paused": "玲",
-        "format-stopped": "玲",
-        "tooltip-format": "{artist} - {title} | 祥 {elapsedTime:%M:%S}",
-        "tooltip-format-disconnected": "MPD (disconnected)",
-		// Commands to execute on events
-        "on-click": "mpc prev",
-        "on-scroll-up": "mpc seek +00:00:01",
-        "on-scroll-down": "mpc seek -00:00:01",
-        "smooth-scrolling-threshold": 1,
-    },
-    "mpd#3": {
-        "interval": 1,
-        "format": "怜",
-        "format-disconnected": "怜",
-        "format-paused": "怜",
-        "format-stopped": "怜",
-        "tooltip-format": "{artist} - {title} | 祥 {elapsedTime:%M:%S}",
-        "tooltip-format-disconnected": "MPD (disconnected)",
-		// Commands to execute on events
-        "on-click": "mpc next",
-        "on-scroll-up": "mpc seek +00:00:01",
-        "on-scroll-down": "mpc seek -00:00:01",
-        "smooth-scrolling-threshold": 1,
-    },
-
-	// waybar-network
-    "network": {
-		"interval": 5,
-        //"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
-        "format-wifi": "直",
-        "format-ethernet": "",
-        "format-linked": "",
-        "format-disconnected": "睊",
-        "format-disabled": "睊",
-        "tooltip-format": "{essid} :  {bandwidthUpBits} |  {bandwidthDownBits}",
-        //"on-click": "[[ ! `pidof nm-connection-editor` ]] && nm-connection-editor || pkill nm-connection-e",
-        "on-click": "~/.config/river/scripts/rofi_network",
-    },
-
-	// waybar-pulseaudio
-    "pulseaudio": {
-        "format": "{icon}",
-        "format-muted": "婢",
-        "format-bluetooth": "",
-        "format-bluetooth-muted": "",
-        "format-source": "",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "ﳌ",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["奄", "奔", "墳"]
-        },
-        "scroll-step": 5.0,
-        "on-click": "pulsemixer --toggle-mute",
-        "on-click-right": "pulsemixer --toggle-mute",
-        "smooth-scrolling-threshold": 1,
-    },
-    "pulseaudio#2": {
-        "format": "{volume}%",
-        "format-muted": "Mute",
-        "format-bluetooth": "{volume}%",
-        "format-bluetooth-muted": "Mute",
-        "format-source": "{volume}%",
-        "scroll-step": 5.0,
-        "on-click": "pulsemixer --toggle-mute",
-        "on-click-right": "pulsemixer --toggle-mute",
-        "smooth-scrolling-threshold": 1,
-    },
-
-	// waybar-river-tags
-    "river/tags": {
-        "num-tags": 9,
-        "tag-labels": ["", "", "", "", "", "漣", "", "", ""],
-        "disable-click": false,
-    },
-           
-	// waybar-river-window
-    "river/window": {
-        "format": "{}",
-		"align": 0,
-		"rotate": 0,
-		"max-length": 0,
-		"min-length": 0,
-    },
-           
-	// waybar-sndio
-	// waybar-states
-	// waybar-sway-language
-
-	// waybar-sway-mode
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-
-	// waybar-sway-window
-    "sway/window": {
-        "format": "{}",
-        "max-length": 50,
-        "icon": false,
-    },
-
-	// waybar-sway-workspaces
-    "sway/workspaces": {
-         "disable-scroll": false,
-         "disable-click": false,
-         "all-outputs": true,
-         "format": "{icon}",
-         "format-icons": {
-             "1": "",
-             "2": "",
-             "3": "",
-             "4": "",
-             "5": "",
-             "6": "漣",
-         },
-        "smooth-scrolling-threshold": 1,
-        "disable-scroll-wraparound": false,
-        "enable-bar-scroll": false,
-        "disable-markup": false,
-        "current-only": false,
-    },
 
 	// waybar-temperature
 
-	// waybar-tray
-    "tray": {
-        "icon-size": 16,
-        "spacing": 8,
-    },
 
 	// waybar-wlr-taskbar
     "wlr/taskbar": {
@@ -318,24 +186,5 @@
          "on-click-right": "maximize",
          "on-update": "",
     },
-    
-	// waybar-wlr-workspaces
-    "wlr/workspaces": {
-         "format": "{icon}",
-         "format-icons": {
-             "1": "",
-             "2": "",
-             "3": "",
-             "4": "",
-             "5": "",
-             "6": "漣",
-             "7": "",
-             "8": "",
-             "9": "",
-             "10": "ﳴ",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
-    }
+   
 }

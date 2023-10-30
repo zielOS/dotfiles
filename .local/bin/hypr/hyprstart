@@ -21,7 +21,7 @@ hyprpaper &
 hyprtheme &
 
 # plugins 
-hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
+#hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
 
 # polkit 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -31,9 +31,8 @@ ckb-next &
 insync start & 
 thunar --daemon &
 
-# aylur-gtk-shell
-ags -b hypr &
-eww daemon &
+# eww
+$HOME/.config/eww/scripts/init &
 
 pypr &
 
