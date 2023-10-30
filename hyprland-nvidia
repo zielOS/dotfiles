@@ -53,7 +53,7 @@ export DBUS_SESSION_BUS_ADDRESS
 export DBUS_SESSION_BUS_PID
 
 ## Nvidia Specific env variables
-export GBM_BACKEND=nvidia-drm
+export GBM_BACKEND=nvidia
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export LIBVA_DRIVER_NAME=nvidia
 export WLR_NO_HARDWARE_CURSORS=1

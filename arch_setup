@@ -30,7 +30,7 @@ pacman -S grub efibootmgr
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 cryptdevice=UUID=5a91b1b1-7a25-4631-b270-1df30befabcd:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 cryptdevice=UUID=c5598fbe-528d-43ab-a5ea-7b0feb11a16b:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
 GRUB_CMDLINE_LINUX=""
 
 grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
