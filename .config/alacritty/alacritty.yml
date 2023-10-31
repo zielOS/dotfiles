@@ -21,8 +21,8 @@ window:
     lines: 23
 
   padding:
-    x: 12
-    y: 6
+    x: 10
+    y: 10
   decorations: full
   startup_mode: Windowed
   dynamic_title: true

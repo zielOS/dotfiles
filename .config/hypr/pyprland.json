@@ -8,10 +8,15 @@
   },
   "scratchpads": {
     "term": {
-      "command": "kitty --class kitty-dropterm",
+      "command": "alacritty --class alacritty-dropterm",
       "animation": "fromTop",
       "unfocus": "hide"
     },
+        "ranger": {
+            "command": "kitty --class explorer -e ranger",
+            "animation": "fromBottom",
+            "unfocus": "hide"
+        },
     "volume": {
       "command": "pavucontrol",
       "unfocus": "hide",
