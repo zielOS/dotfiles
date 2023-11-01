@@ -14,7 +14,7 @@ rm -R /mnt/gentoo/etc/portage/make.conf && nano -w /mnt/gentoo/etc/portage/make.
 # detailed example.
 #NTHREADS="22"
 #source /etc/portage/make.conf.lto
-COMMON_FLAGS="-march=native -O2 -pipe"
+COMMON_FLAGS="-O2 -pipe -march=native -flto"
 CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 ssse3"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
@@ -32,7 +32,7 @@ USE="-elogind systemd -gnome -berkdb -kde -ccache -tpm zstd policykit \
     -emboss -3dfx -altivec -smartcard -ibm -wayland -nls -nas pam clang  \
     -neon -nntp -cups -quicktime nvidia sound-server -vim apparmor vulkan \
     pie gui X upower hardened udev alsa audit dbus tiff jpeg lto pgo keyring \
-    -accessibility -bluetooth -handbook fontconfig truetype udisks"
+    -accessibility -bluetooth -handbook fontconfig truetype udisks jit"
 #RUBY_TARGETS="ruby24 ruby25"
 # NOTE: This stage was built with the bindist Use flag enabled
 PORTDIR="/var/db/repos/gentoo"
@@ -91,7 +91,7 @@ dev-util/bazel-9999
 
 rm -r /mnt/gentoo/etc/portage/package.use && nano -w /mnt/gentoo/etc/portage/package.use
 
-*/* PYTHON_TARGETS: python3_11
+*/* PYTHON_TARGETS: pypy3
 net-libs/nodejs npm
 net-p2p/transmission gtk -qt5 -qt6
 sys-config/ltoize keep-nocommon clang
@@ -107,9 +107,9 @@ app-admin/sysstat lto lm-sensors
 sys-libs/zlib minizip
 app-text/poppler cairo
 dev-lang/python lto pgo ensurepip tk hardened
-sys-devel/gcc lto pgo graphite jit default-stack-clash-protection
+sys-devel/gcc lto pgo default-stack-clash-protection
 sys-apps/firejail apparmor private-home
-app-editors/emacs sound dynamic-loading -gtk -gzip-el harfbuzz imagemagick inotify jit motif threads tiff tree-sitter
+app-editors/emacs sound dynamic-loading gtk -X json harfbuzz imagemagick inotify jit threads tree-sitter
 app-text/ghostscript-gpl cups
 dev-python/PyQt5 widgets
 media-sound/pulseaudio -daemon
@@ -152,19 +152,12 @@ dev-qt/qtcore icu
 media-libs/libvpx postproc
 x11-base/xorg-server xvfb
 x11-drivers/nvidia-drivers modules modules-sign
-kde-plasma/plasma-meta browser-integration -colord -crash-handler crypt desktop-portal -discover -display-manager -firewall -grub gtk -kwallet -legacy-systray -plymouth -sddm -sdk -smart thunderbolt -wallpapers
-kde-apps/okular djvu epub markdown pdf tiff
-#lxqt-base/lxqt-meta about -admin archiver desktop-portal -display-manager -filemanager -lximage minimal -nls policykit powermanagement -processviewer -screenshot -sddm -ssh-askpass -sudo -terminal -trash
-www-client/firefox X clang dbus geckodriver gmp-autoupdate hardened hwaccel jumbo-build lto openh264 pgo pulseaudio -telemetry -wayland -debug -eme-free jack -libproxy screencast 
 
 
 rm -R /mnt/gentoo/etc/portage/package.mask && nano -w /mnt/gentoo/etc/portage/package.mask
 
 >=dev-lang/python-3.12
 x11-libs/gtk+::mv
->=sys-devel/gcc-13
->=sys-kernel/gentoo-sources-6.2
->=sys-kernel/linux-headers-6.2
 
 * setup fstab and chroot
 

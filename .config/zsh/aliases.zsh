@@ -24,6 +24,10 @@ alias em-list="equery list '*'"
 alias pac-clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 
 
+alias apt-in="sudo nala install"
+alias apt-rem="sudo nala purge --autoremove"
+alias fetch="neowofetch"
+
 # Misc-related aliases
 alias audit='sudo lynis audit system'
 alias update-grub='sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install --target=x86_64-efi --efi-directory=/boot --removable && sudo grub-mkconfig -o /boot/grub/grub.cfg'

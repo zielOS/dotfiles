@@ -1,1 +1,0 @@
-/home/ahsan/.local/pipx/venvs/notify-send-py/bin/notify-send.py

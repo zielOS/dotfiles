@@ -18,3 +18,23 @@ deb http://ca.archive.ubuntu.com/ubuntu mantic-security universe
 deb-src http://ca.archive.ubuntu.com/ubuntu mantic-security universe
 deb http://ca.archive.ubuntu.com/ubuntu mantic-security multiverse
 deb-src http://ca.archive.ubuntu.com/ubuntu mantic-security multiverse
+deb http://ca.archive.ubuntu.com/ubuntu jammy main restricted
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy main restricted
+deb http://ca.archive.ubuntu.com/ubuntu jammy-updates main restricted
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy-updates main restricted
+deb http://ca.archive.ubuntu.com/ubuntu jammy universe
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy universe
+deb http://ca.archive.ubuntu.com/ubuntu jammy-updates universe
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy-updates universe
+deb http://ca.archive.ubuntu.com/ubuntu jammy multiverse
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy multiverse
+deb http://ca.archive.ubuntu.com/ubuntu jammy-updates multiverse
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy-updates multiverse
+deb http://ca.archive.ubuntu.com/ubuntu jammy-backports main restricted universe multiverse
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy-backports main restricted universe multiverse
+deb http://ca.archive.ubuntu.com/ubuntu jammy-security main restricted
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy-security main restricted
+deb http://ca.archive.ubuntu.com/ubuntu jammy-security universe
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy-security universe
+deb http://ca.archive.ubuntu.com/ubuntu jammy-security multiverse
+deb-src http://ca.archive.ubuntu.com/ubuntu jammy-security multiverse
