@@ -21,8 +21,10 @@ alias keywords='sudo lvim /etc/portage/package.accept_keywords'
 alias conf='sudo lvim /etc/portage/make.conf'
 alias add-overla='sudo eselect repository enable'
 alias em-list="equery list '*'"
-alias pac-clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 
+alias pac-clean="sudo pacman -Qtdq | sudo pacman -Rns -"
+alias pac-in="yay -S --noconfirm"
+alias pac-rem="yay -R --noconfirm"
 
 alias apt-in="sudo nala install"
 alias apt-rem="sudo nala purge --autoremove"
