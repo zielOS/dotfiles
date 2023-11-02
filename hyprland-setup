@@ -7,6 +7,7 @@ echo "Installing Dot files"
 cd
 ln -s $HOME/.dots/.config/eww $HOME/.config/
 ln -s $HOME/.dots/.config/arg $HOME/.config/
+ln -s $HOME/.dots/.config/alacritty $HOME/.config/
 ln -s $HOME/.dots/.config/kitty $HOME/.config/
 ln -s $HOME/.dots/.config/anyrun $HOME/.config/
 ln -s $HOME/.dots/.config/btop $HOME/.config/

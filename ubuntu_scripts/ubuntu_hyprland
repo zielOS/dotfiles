@@ -7,7 +7,7 @@ sudo apt update && sudo apt install nala zstd
 echo "Installing packages"
 cd
 sudo nala update && sudo nala upgrade
-sudo nala install wget curl ckb-next transmission-gtk bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf dunst papirus-icon-theme ranger  x11-xkb-utils x11-xserver-utils swaybg swayidle xournalpp zathura zathura-pdf-poppler pymol pipx python3-yapf black isort python3-matplotlib  python3-scipy python3-sklearn  python3-biopython python3-pandas aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core network-manager qt5-style-kvantum qt6ct qt5ct qalculate-gtk
+sudo nala install wget curl ckb-next transmission-gtk bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf dunst papirus-icon-theme ranger  x11-xkb-utils x11-xserver-utils swaybg swayidle xournalpp zathura zathura-pdf-poppler pymol pipx python3-yapf black isort python3-matplotlib  python3-scipy python3-sklearn  python3-biopython python3-pandas aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core network-manager qt5-style-kvantum qt6ct qt5ct emacs-pgtk qalculate-gtk
 
 echo "Installing pacstall & packages"
 sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
@@ -17,15 +17,6 @@ pacstall -I zoom-deb
 pacstall -I discord
 pacstall -I zotero
 pacstall -I insync-deb
-pacstall -I alacritty
-
-echo "Installing emacs"
-sudo apt-get build-dep emacs
-wget https://gnu.mirror.constant.com/emacs/emacs-29.1.tar.xz
-tar -xvf emacs-29.1.tar.xz && cd emacs-29.1 && ./autogen.sh
-./configure --with-motif --with-native-compilation --with-modules --with-json --with-mailutils --with-imagemagick --with-tree-sitter --with-xft --with-modules --with-threads --with-harfbuzz --with-sqlite3 --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-webp
-make -j22
-sudo make install && cd
 
 echo "Installing brave"
 sudo apt install curl
@@ -81,34 +72,24 @@ ln -s $HOME/.dots/.fonts $HOME/
 ln -s $HOME/.dots/.themes $HOME/
 ln -s $HOME/.dots/gentoo_setup $HOME/
 ln -s $HOME/.dots/Projects $HOME/
-ln -s $HOME/.dots/.local/bin/bspwm $HOME/.local/bin
+ln -s $HOME/.dots/.local/bin/hypr $HOME/.local/bin
 ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
 ln -s $HOME/.dots/.xinitrc $HOME/
 ln -s $HOME/.dots/.Xresources $HOME/
 ln -s $HOME/.dots/catppuccin.css $HOME/
 ln -s $HOME/.dots/.config/alacritty $HOME/.config/
-ln -s $HOME/.dots/.config/bspwm $HOME/.config/
 ln -s $HOME/.dots/.config/btop $HOME/.config/
 ln -s $HOME/.dots/.config/ckb-next $HOME/.config/
-ln -s $HOME/.dots/.config/dunst $HOME/.config/
-ln -s $HOME/.dots/.config/eww $HOME/.config/
-ln -s $HOME/.dots/.config/gammastep $HOME/.config/
 ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
-ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
-ln -s $HOME/.dots/.config/jgmenu $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
 ln -s $HOME/.dots/.config/Kvantum $HOME/.config/
 ln -s $HOME/.dots/.config/lazygit $HOME/.config/
 ln -s $HOME/.dots/.config/lsd $HOME/.config/
 ln -s $HOME/.dots/.config/lvim $HOME/.config/
-ln -s $HOME/.dots/.config/picom $HOME/.config/
-ln -s $HOME/.dots/.config/polybar $HOME/.config/
 ln -s $HOME/.dots/.config/qalculate $HOME/.config/
 ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
 ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
 ln -s $HOME/.dots/.config/ranger $HOME/.config/
-ln -s $HOME/.dots/.config/rofi $HOME/.config/
-ln -s $HOME/.dots/.config/suckless $HOME/.config/
-ln -s $HOME/.dots/.config/sxhkd $HOME/.config/
 ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
 ln -s $HOME/.dots/.config/zathura $HOME/.config/
 ln -s $HOME/.dots/.config/zsh $HOME/.config/

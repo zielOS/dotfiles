@@ -28,4 +28,4 @@ cd ..
 sudo install -Dm755 -t "/usr/bin" build/Hyprland
 sudo install -Dm755 -t "/usr/bin" hyprctl/hyprctl
 sudo install -Dm644 -t "/usr/include/hyprland/protocols" protocols/*-protocol.h
-sudo install -Dm755 -t "/usr/lib" "/home/ahsan/Hyprland/tmpwlr/lib/x86_64-linux-gnu/libwlroots.so.12032"
+sudo install -Dm755 -t "/usr/lib" "/home/ahsan/Hyprland/tmpwlr/lib64/libwlroots.so.12032"
