@@ -18,6 +18,7 @@ table.insert(lvim.plugins, {
 })
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
+vim.opt.wrap = true -- wrap lines
 
 -- some settings can only passed as commandline flags, see `clangd --help`
 local clangd_flags = {

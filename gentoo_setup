@@ -2,7 +2,7 @@
 
 cfdisk /dev/nvme1n1 && mkfs.vfat -F 32 /dev/nvme1n1p1 && cryptsetup -c aes-xts-plain64 -s 512 -y luksFormat /dev/nvme1n1p2 && cryptsetup luksOpen /dev/nvme1n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs su cr /mnt/gentoo/@  && btrfs su cr /mnt/gentoo/@home && btrfs su cr /mnt/gentoo/@opt  && btrfs su cr /mnt/gentoo/@tmp && btrfs su cr /mnt/gentoo/@var && btrfs su cr /mnt/gentoo/@log  && btrfs su cr /mnt/gentoo/@snapshots && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt  && mkdir /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mkdir /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots
 
-cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20231022T164658Z/stage3-amd64-systemd-20231022T164658Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20231029T164701Z/stage3-amd64-desktop-systemd-20231029T164701Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
   
 
 *** make.conf
@@ -26,7 +26,7 @@ NOCOMMON_OVERRIDE_LIBTOOL="yes"
 EMERGE_DEFAULT_OPTS="--jobs=10 --keep-going=y --ask"
 ACCEPT_KEYWORDS="~amd64"
 ACCEPT_LICENSE="*"
-VIDEO_CARDS="nvidia"
+VIDEO_CARDS="nvidia intel"
 USE="-elogind systemd -gnome -berkdb -kde -ccache -tpm zstd policykit opengl \
     -clamav -coreaudio -ios -ipod -ieee1394 -motif gtk pulseaudio qt5 qt6 \
     -emboss -3dfx -altivec -smartcard -ibm wayland -nls -nas pam clang  \
@@ -58,7 +58,6 @@ nano -w /mnt/gentoo/etc/portage/profile/use.mask
 
 mkdir -p /mnt/gentoo/etc/portage/profile/ && nano -w /mnt/gentoo/etc/portage/profile/package.provided
 
-sys-kernel/gentoo-sources-6.5
 app-text/texlive-9999
 app-text/texlive-core-9999
 dev-tex/latexdiff-9999
@@ -150,7 +149,6 @@ x11-drivers/nvidia-drivers modules modules-sign
 rm -R /mnt/gentoo/etc/portage/package.mask && nano -w /mnt/gentoo/etc/portage/package.mask
 
 >=dev-lang/python-3.12
-x11-libs/gtk+::mv
 
 * setup fstab and chroot
 
@@ -161,8 +159,6 @@ chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 
-** Openrc
-echo "Canada/Mountain" > /etc/timezone && nano -w /etc/locale.gen && locale-gen && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}"env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
 emerge-webrsync && emerge --sync && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru gentoobr && emerge --sync
 
@@ -182,7 +178,7 @@ ln -sf ../usr/share/zoneinfo/Canada/Mountain /etc/localtime && nano -w /etc/loca
 emerge --sync && emerge -auvDN @world
 
 * kernel setup
-emerge sys-kernel/clear-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-kernel/genkernel sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode --jobs=10 && eselect kernel set 1 && ls -l /usr/src/linux 
+emerge sys-kernel/gentoo-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-kernel/genkernel sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode --jobs=10 && eselect kernel set 1 && ls -l /usr/src/linux 
 
 
 genkernel --luks --menuconfig --mountboot --install --makeopts=-j22 --clean all
