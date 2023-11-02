@@ -25,8 +25,6 @@ export PATH=$PATH:$HOME/.npm-global/bin
 export PATH=$PATH:/usr/local/texlive/2023/bin/x86_64-linux
 export MANPATH=$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man
 export INFOPATH=$INFOPATH/usr/local/texlive/2023/texmf-dist/doc/infoexport
-export PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/comm_libs/mpi/bin:$PATH
-export MANPATH=$MANPATH:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/comm_libs/mpi/man
 
 NVARCH=`uname -s`_`uname -m`; export NVARCH
 NVCOMPILERS=/opt/nvidia/hpc_sdk; export NVCOMPILERS
@@ -34,6 +32,9 @@ MANPATH=$MANPATH:$NVCOMPILERS/$NVARCH/23.9/compilers/man; export MANPATH
 PATH=$NVCOMPILERS/$NVARCH/23.9/compilers/bin:$PATH; export PATH 
 export PATH=$NVCOMPILERS/$NVARCH/23.9/comm_libs/mpi/bin:$PATH
 export MANPATH=$MANPATH:$NVCOMPILERS/$NVARCH/23.9/comm_libs/mpi/man
+
+export CUDACXX=nvcc
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/cuda/include
 
 unset ROOTPATH
 
