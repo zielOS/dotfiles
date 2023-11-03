@@ -27,7 +27,6 @@ hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
 ckb-next &
 QT_QPA_PLATFORM=xcb insync start & 
 thunar --daemon &
-foot --server &
 
 #xdg-portal-hyprland &
 
