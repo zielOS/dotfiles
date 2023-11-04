@@ -9,7 +9,6 @@ app-text/xmlto text
 gnome-base/gvfs udisks
 dev-libs/libdbusmenu gtk3
 app-crypt/gcr gtk
-net-analyzer/ossec-hids hybrid mysql sqlite
 sys-apps/kmod zstd
 sys-boot/grub:2 device-mapper
 app-admin/sysstat lto lm-sensors
@@ -18,12 +17,7 @@ app-text/poppler cairo
 dev-lang/python lto pgo ensurepip tk hardened
 sys-devel/gcc lto pgo default-stack-clash-protection
 sys-apps/firejail apparmor private-home
-sci-mathematics/pari X -doc
-dev-util/nvidia-cuda-toolkit nsight profiler sanitizer vis-profiler
-media-gfx/tachyon png
-virtual/imagemagick-tools tiff
-kde-frameworks/kwindowsystem -X
-app-editors/emacs sqlite -gif -gmp -gpm sound -alsa dynamic-loading xft gtk -X json harfbuzz imagemagick inotify jit threads tree-sitter
+app-editors/emacs sound dynamic-loading xft gtk -X json harfbuzz imagemagick inotify jit threads tree-sitter
 app-text/ghostscript-gpl cups
 dev-python/PyQt5 widgets
 media-sound/pulseaudio -daemon
@@ -39,11 +33,7 @@ dev-qt/qtwidgets dbus
 dev-qt/qtbase egl 
 dev-qt/qtdeclarative opengl
 dev-libs/boost context
-net-libs/nodejs lto
 dev-libs/boehm-gc cxx
-sci-mathematics/octave gnuplot imagemagick java json
-dev-python/numpy lapack
-x11-libs/wxGTK gstreamer
 media-libs/libsndfile minimal
 media-sound/mpg123 -sdl
 media-libs/libsdl2 -pulseaudio
@@ -55,6 +45,7 @@ gui-libs/gtk-layer-shell introspection
 net-wireless/wpa_supplicant dbus
 net-libs/libssh server
 sys-apps/flatpak policykit seccomp
+app-admin/keepassxc browser autotype keeshare network yubikey
 x11-terms/alacritty -X
 x11-terms/kitty -X
 gui-apps/swaybg gdk-pixbuf
@@ -63,6 +54,7 @@ dev-python/pillow webp
 dev-python/QtPy svg printsupport
 dev-python/PyQt5 network svg sql printsupport
 app-crypt/gnupg nls
+app-office/libreoffice branding googledrive gtk gstreamer
 dev-libs/boost nls
 dev-libs/xmlsec nss
 sys-auth/polkit gtk daemon
@@ -74,3 +66,8 @@ dev-qt/qtcore icu
 media-libs/libvpx postproc
 x11-base/xorg-server xvfb
 x11-drivers/nvidia-drivers modules modules-sign
+# required by dev-python/wxpython-4.2.1::gentoo
+# required by dev-python/matplotlib-3.8.1::gentoo[python_targets_python3_11,wxwidgets,-python_targets_python3_10,-test]
+# required by sci-biology/biopython-1.81-r1::gentoo
+# required by sci-biology/biopython (argument)
+>=x11-libs/wxGTK-3.2.2.1-r3 gstreamer

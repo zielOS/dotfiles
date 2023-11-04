@@ -1,5 +1,1 @@
-x11-libs/gtk+::mv
 >=dev-lang/python-3.12
->=dev-lang/rust-1.73
->=virtual/rust-1.73
-#>=sys-devel/llvm-17

@@ -1,4 +1,4 @@
-sys-kernel/gentoo-sources-6.4.7
+sys-kernel/gentoo-sources-6.5
 app-text/texlive-9999
 app-text/texlive-core-9999
 dev-tex/latexdiff-9999
@@ -18,5 +18,4 @@ dev-texlive/texlive-xetex-9999
 dev-tex/tex4ht-999999999999
 virtual/latex-base-1.0
 virtual/tex-base-9999
-net-libs/google-cloud-cpp-9999
-dev-util/bazel-9999
+

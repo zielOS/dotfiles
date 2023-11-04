@@ -1,0 +1,37 @@
+# created by eselect-repo
+
+[gentoo]
+location = /var/db/repos/gentoo
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/gentoo.git
+
+[guru]
+location = /var/db/repos/guru
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/guru.git
+
+
+[CachyOS-kernels]
+location = /var/db/repos/CachyOS-kernels
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/CachyOS-kernels.git
+
+[brave-overlay]
+location = /var/db/repos/brave-overlay
+sync-type = git
+sync-uri = https://gitlab.com/jason.oliveira/brave-overlay.git
+
+[sage-on-gentoo]
+location = /var/db/repos/sage-on-gentoo
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/sage-on-gentoo.git
+
+[science]
+location = /var/db/repos/science
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/science.git
+
+[ppfeufer-gentoo-overlay]
+location = /var/db/repos/ppfeufer-gentoo-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/ppfeufer-gentoo-overlay.git
