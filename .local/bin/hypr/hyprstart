@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Kill already running process
-_ps=(waybar swayidle lxpolkit)
+_ps=(waybar swayidle polkit-gnome-authentication-agent-1)
 for _prs in "${_ps[@]}"; do
 	if [[ `pidof ${_prs}` ]]; then
 		killall -9 ${_prs}
@@ -28,8 +28,6 @@ ckb-next &
 QT_QPA_PLATFORM=xcb insync start & 
 thunar --daemon &
 
-xdg-portal-hyprland &
-
 dbus-update-activation-environment --all &
 gnome-keyring-daemon -r -d &
 
@@ -38,4 +36,4 @@ pypr &
 emacs --daemon &
 
 hyprshade on ~/.config/hypr/shaders/blue-light-filter.glsl &
-gsettings set org.gnome.desktop.interface scaling-factor 1.5 &
+xdg-portal-hyprland &

@@ -1,9 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/ahsan/.dots
-- /home/ahsan/nix-dots
-- /home/ahsan/.config/doom
 - /home/ahsan/.config/emacs
+- /home/ahsan/.config/doom
 startuppopupversion: 5
 customcommandshistory:
 - q
