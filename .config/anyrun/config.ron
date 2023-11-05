@@ -7,7 +7,7 @@ Config(
   x: Fraction(0.5),
 
   // The vertical position, works the same as `x`
-  y: Absolute(0),
+  y: Absolute(15),
 
   // The width of the runner
   width: Absolute(500),
@@ -25,7 +25,7 @@ Config(
   layer: Overlay, 
   
   // Hide the plugin info panel
-  hide_plugin_info: false, 
+  hide_plugin_info: true, 
 
   // Close window when a click outside the main box is received
   close_on_click: true,
@@ -40,6 +40,9 @@ Config(
   // `<anyrun config dir>/plugins` directory or with an absolute path to just load the file the path points to.
   plugins: [
     "libapplications.so",
+    "librink.so",
+    "libsymbols.so",
+    "libstdin.so",
     "libdictionary.so",
     "libkidex.so",
     "libshell.so",
