@@ -2,7 +2,7 @@
 
 THEME='Catppuccin-Mocha-Standard-Lavender-Dark'
 ICONS='Papirus-Dark'
-FONT='Ubuntu Nerd Font 13'
+FONT='JetBrainsMono Nerd Font 13'
 CURSOR='Catppuccin-Mocha-Lavender-Cursors'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
