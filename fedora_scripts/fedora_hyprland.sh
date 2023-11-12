@@ -3,39 +3,21 @@
 echo "Setting up Repos"
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm 
 
-sudo dnf copr enable atim/lazygit 
+sudo dnf copr enable alebastr/sway-extras 
+sudo dnf copr enable atim/lazygit
+sudo dnf copr enable atim/alacritty
 sudo dnf copr enable solopasha/hyprland
+sudo dnf copr enable deathwish/emacs-pgtk-nativecomp 
 sudo dnf update
 
 echo "Installing Several Packages"
-sudo dnf install kitty xdg-desktop-portal-hyprland hyprland-nvidia-git waybar-git eww-wayland-git pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin file-roller  kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland acpi libva-devel akmod-nvidia nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot && sudo plymouth-set-default-theme spinner -R
+sudo dnf install firefox kitty alacritty zoxide emacs xdg-desktop-portal-hyprland hyprland-nvidia-git pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler file-roller kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland qt6-qtwayland power-profiles-daemon libva-devel akmod-nvidia xorg-x11-drv-nvidia-power vulkan nvidia-vaapi-driver libva-utils vdpauinfo nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot swww && sudo plymouth-set-default-theme spinner -R
  
-echo "Installing emacs"
-# sudo dnf builddep emacs
-# wget https://gnu.mirror.constant.com/emacs/emacs-29.1.tar.xz
-# tar -xvf emacs-29.1.tar.xz && cd emacs-29.1 && ./autogen.sh
-# ./configure --with-motif --with-native-compilation --with-modules --with-json --with-mailutils --with-imagemagick --with-tree-sitter --with-xft --with-threads --with-harfbuzz --with-sqlite3 --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-webp
-# make -j22
-# sudo make install && cd
-
-echo "Installing ags"
-# sudo dnf install typescript npm meson gjs-devel gtk3-devel gtk-layer-shell gnome-bluetooth upower NetworkManager pulseaudio-libs-devel libdbusmenu-gtk3
-# git clone --recursive https://github.com/Aylur/ags.git && cd ags
-# npm install
-# meson setup build
-# sudo meson install -C build && cd
-
-echo "Installing Brave"
-sudo dnf install dnf-plugins-core
-sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-sudo dnf install brave-browser
 
 echo "Installing Dot files"
 sudo rm -R ~/.config/
 cd && mkdir ~/.config 
-ln -s $HOME/.dots/.config/eww $HOME/.config/
-ln -s $HOME/.dots/.config/arg $HOME/.config/
+ln -s $HOME/.dots/.config/alacritty $HOME/.config/
 ln -s $HOME/.dots/.config/kitty $HOME/.config/
 ln -s $HOME/.dots/.config/anyrun $HOME/.config/
 ln -s $HOME/.dots/.config/btop $HOME/.config/
@@ -56,7 +38,7 @@ ln -s $HOME/.dots/.config/zathura  $HOME/.config/
 ln -s $HOME/.dots/.config/zsh $HOME/.config/
 ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
 ln -s $HOME/.dots/.themes $HOME/
-ln -s $HOME/.dots/Projects $HOME/
+ln -s $HOME/.dots/org $HOME/
 ln -s $HOME/.dots/colorscheme.css $HOME/
 ln -s $HOME/.dots/gentoo_setup $HOME/
 
@@ -67,7 +49,6 @@ systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global' 
 
 curl -fsSL https://fnm.vercel.app/install | sh
-curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
 rm -R .zshrc
 ln -s $HOME/.dots/.zshrc ~/
