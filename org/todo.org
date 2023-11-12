@@ -1,0 +1,5 @@
+* Inbox
+** [ ]
+* [ ] Org Setup
+    Python Setup
+    Latex Setup

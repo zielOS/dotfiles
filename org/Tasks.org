@@ -1,0 +1,18 @@
+* [ ] Org Setup
+** [ ] Org-modern
+** [ ] org-tempo
+** [ ] org-superagenda
+** [ ] jupyter
+* [ ] Python Setup
+* [ ] LaTex Setup
+* [ ] PDF Setup
+* [ ] Dired Setup
+* [ ] Treemacs Setup
+* [ ] Tabs Setup
+* [ ] Eshell Setup
+** [ ] eshell-toggle
+** [ ] initial setup
+* [ ] Setup config for packages listed in packages.el
+* [ ] Completion Setup
+** [ ] company
+** [ ] vertico
