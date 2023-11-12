@@ -1,20 +1,15 @@
 #!/bin/bash
 
-# requieres dunst hyprpicker imagemagick wl-clipboard
+# requires hyprpicker imagemagick wl-clipboard
 
 TEMP_DIR=/tmp/colorpicker
 
 [ ! -d $TEMP_DIR ] && mkdir -p $TEMP_DIR
 
-abort() {
-  notify-send -a "Color Picker info" -i dialog-error "Color Picker" "aborted"
-  exit 1
-}
-
 pick() {
   HEX_COLOR=$(hyprpicker)
 
-  [[ -z $HEX_COLOR ]] && abort
+  [[ -z $HEX_COLOR ]] && exit 1
 
   HEX="${HEX_COLOR#\#}"
   FNAME="$TEMP_DIR/$HEX.png"

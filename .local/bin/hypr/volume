@@ -1,10 +1,17 @@
 #!/bin/bash
 
-[[ -z $(pgrep checkvolume) ]] && checkvolume &
+# requires pamixer
 
-# requieres pamixer
+if [[ -z $(pgrep checkvolume) ]]; then
+  pkill checkvolume
+  checkvolume &
+fi
 
 case $1 in
+--set)
+  pamixer -u >/dev/null
+  pamixer --set-volume $2
+  ;;
 --up)
   pamixer -u >/dev/null
   pamixer -i 2 >/dev/null

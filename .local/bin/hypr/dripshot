@@ -22,12 +22,20 @@ abort() {
 case "$1" in
 --full)
   full || abort
-  wl-copy < "$PIC"
-  notify-send -u low -a Screenshot -i "$PIC" "Copied to clipboard" "$PIC"
+  wl-copy <"$PIC"
+  if [[ $(notify-send -A open=Open -A delete=Delete -a Screenshot -i "$PIC" "Copied to clipboard" "$PIC") == "open" ]]; then
+    viewnior $PIC
+  else
+    rm -rf $PIC
+  fi
   ;;
 --crop)
   crop || abort
-  wl-copy < "$PIC"
-  notify-send -u low -a Screenshot -i "$PIC" "Copied to clipboard" "$PIC"
+  wl-copy <"$PIC"
+  if [[ $(notify-send -A open=Open -A delete=Delete -a Screenshot -i "$PIC" "Copied to clipboard" "$PIC") == "open" ]]; then
+    viewnior $PIC
+  else
+    rm -rf $PIC
+  fi
   ;;
 esac
