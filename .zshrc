@@ -70,3 +70,4 @@ if [ -f "/home/ahsan/miniconda3/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
+eval "$(starship init zsh)"
