@@ -64,10 +64,6 @@ else
     fi
 fi
 unset __conda_setup
-
-if [ -f "/home/ahsan/miniconda3/etc/profile.d/mamba.sh" ]; then
-    . "/home/ahsan/miniconda3/etc/profile.d/mamba.sh"
-fi
 # <<< conda initialize <<<
 
 eval "$(starship init zsh)"
