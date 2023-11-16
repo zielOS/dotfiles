@@ -12,15 +12,15 @@
       "animation": "fromTop",
       "unfocus": "hide"
     },
-        "ranger": {
-            "command": "kitty --class explorer -e ranger",
-            "animation": "fromBottom",
-            "unfocus": "hide"
-        },
-    "volume": {
-      "command": "pavucontrol",
+    "ranger": {
+        "command": "kitty --class explorer -e ranger",
+        "animation": "fromBottom",
+        "unfocus": "hide"
+    },
+    "file-manager": {
+      "command": "thunar",
       "unfocus": "hide",
-      "animation": "fromRight"
+      "animation": "fromBottom"
     }
   },
   "monitors": {

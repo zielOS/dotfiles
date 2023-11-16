@@ -1,5 +1,9 @@
 * Inbox
+** [ ] clean apartment
+** [ ] cook
 ** [ ]
 * [ ] Org Setup
     Python Setup
     Latex Setup
+* Book exams
+DEADLINE: <2023-11-16 Thu>

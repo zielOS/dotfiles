@@ -26,8 +26,10 @@ alias pac-clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 alias pac-in="yay -S --noconfirm"
 alias pac-rem="yay -R --noconfirm"
 
-alias apt-in="sudo nala install"
-alias apt-rem="sudo nala purge --autoremove"
+alias dnf-up="sudo dnf5 update"
+alias dnf-in="sudo dnf5 install"
+alias dnf-rem="sudo dnf5 remove"
+alias dnf-clean="sudo dnf5 clean all"
 alias fetch="neowofetch"
 
 # Misc-related aliases
