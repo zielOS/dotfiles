@@ -51,6 +51,7 @@ rm -r /mnt/gentoo/etc/portage/package.accept_keywords && nano -w /mnt/gentoo/etc
 
 =app-backup/grub-btrfs-9999 ** ~amd64
 =gui-apps/waybar-9999 ** ~amd64
+=gui-w
 
 nano -w /mnt/gentoo/etc/portage/profile/use.mask
 -lto
@@ -149,6 +150,8 @@ x11-drivers/nvidia-drivers modules modules-sign
 rm -R /mnt/gentoo/etc/portage/package.mask && nano -w /mnt/gentoo/etc/portage/package.mask
 
 >=dev-lang/python-3.12
+>=sys-kernel/xanmod-sources-6.2
+>=sys-kernel/linux-headers-6.2
 
 * setup fstab and chroot
 
@@ -160,7 +163,7 @@ source /etc/profile
 export PS1="(chroot) ${PS1}"
 
 
-emerge-webrsync && emerge --sync && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru gentoobr && emerge --sync
+emerge-webrsync && emerge --sync && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru src_prepare-overlay xira && emerge --sync
 
 * gcc upgrade
 emerge -aq sys-devel/gcc && eselect gcc list && eselect gcc set 2  && emerge --ask --oneshot --usepkg=n sys-devel/libtool && emerge -ev --usepkg=n @world --jobs=10 --keep-going --exclude gcc rust go nodejs llvm python
