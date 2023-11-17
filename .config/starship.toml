@@ -9,8 +9,8 @@ command_timeout = 5000
 disabled = true
 
 [character]
-success_symbol = "[ ](bold blue)"
-error_symbol = "[ ](bold red)"
+success_symbol = "[ ](bold blue)"
+error_symbol = "[ ](bold red)"
 vicmd_symbol = "[](bold yellow)"
 
 

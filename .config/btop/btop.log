@@ -12,3 +12,108 @@ Use --utf-force argument to force start if you're sure your terminal can handle 
 2023/11/11 (14:53:43) | ===> btop++ v.1.2.13
 2023/11/11 (14:53:43) | ERROR: No UTF-8 locale detected!
 Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2023/11/16 (05:50:52) | ===> btop++ v.1.2.13
+2023/11/16 (05:50:52) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (05:59:32) | ===> btop++ v.1.2.13
+2023/11/16 (05:59:32) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (06:04:51) | ===> btop++ v.1.2.13
+2023/11/16 (06:04:51) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (06:37:18) | ===> btop++ v.1.2.13
+2023/11/16 (06:37:18) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (06:51:42) | ===> btop++ v.1.2.13
+2023/11/16 (06:51:42) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (07:02:22) | ===> btop++ v.1.2.13
+2023/11/16 (07:02:22) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (07:05:03) | ===> btop++ v.1.2.13
+2023/11/16 (07:05:03) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (07:30:05) | ===> btop++ v.1.2.13
+2023/11/16 (07:30:05) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (07:41:39) | ===> btop++ v.1.2.13
+2023/11/16 (07:41:39) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (15:29:09) | ===> btop++ v.1.2.13
+2023/11/16 (15:29:09) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (15:40:50) | ===> btop++ v.1.2.13
+2023/11/16 (15:40:50) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (16:11:12) | ===> btop++ v.1.2.13
+2023/11/16 (16:11:12) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (16:30:35) | ===> btop++ v.1.2.13
+2023/11/16 (16:30:35) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (16:38:45) | ===> btop++ v.1.2.13
+2023/11/16 (16:38:45) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (16:40:59) | ===> btop++ v.1.2.13
+2023/11/16 (16:40:59) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (16:46:47) | ===> btop++ v.1.2.13
+2023/11/16 (16:46:47) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (17:12:20) | ===> btop++ v.1.2.13
+2023/11/16 (17:12:20) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (17:29:33) | ===> btop++ v.1.2.13
+2023/11/16 (17:29:33) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (17:39:47) | ===> btop++ v.1.2.13
+2023/11/16 (17:39:47) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (17:42:40) | ===> btop++ v.1.2.13
+2023/11/16 (17:42:40) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (17:53:44) | ===> btop++ v.1.2.13
+2023/11/16 (17:53:44) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (17:55:43) | ===> btop++ v.1.2.13
+2023/11/16 (17:55:43) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:03:55) | ===> btop++ v.1.2.13
+2023/11/16 (18:03:55) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:07:11) | ===> btop++ v.1.2.13
+2023/11/16 (18:07:11) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:19:56) | ===> btop++ v.1.2.13
+2023/11/16 (18:19:56) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:20:17) | ===> btop++ v.1.2.13
+2023/11/16 (18:20:17) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:20:50) | ===> btop++ v.1.2.13
+2023/11/16 (18:20:50) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:26:25) | ===> btop++ v.1.2.13
+2023/11/16 (18:26:25) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:33:15) | ===> btop++ v.1.2.13
+2023/11/16 (18:33:15) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:51:32) | ===> btop++ v.1.2.13
+2023/11/16 (18:51:32) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (18:57:06) | ===> btop++ v.1.2.13
+2023/11/16 (18:57:06) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (19:05:40) | ===> btop++ v.1.2.13
+2023/11/16 (19:05:40) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (19:34:49) | ===> btop++ v.1.2.13
+2023/11/16 (19:34:49) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (19:39:45) | ===> btop++ v.1.2.13
+2023/11/16 (19:39:45) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (20:59:34) | ===> btop++ v.1.2.13
+2023/11/16 (20:59:34) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab

@@ -12,7 +12,7 @@ done
 hypridle &
 
 # wallpaper 
-hyprwall &
+#hyprwall &
 
 # theme
 hyprtheme &
@@ -36,4 +36,3 @@ pypr &
 emacs --daemon &
 
 hyprshade on ~/.config/hypr/shaders/blue-light-filter.glsl &
-xdg-portal-hyprland &
