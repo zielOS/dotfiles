@@ -34,7 +34,7 @@ alias fetch="neowofetch"
 
 # Misc-related aliases
 alias audit='sudo lynis audit system'
-alias update-grub='sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install --target=x86_64-efi --efi-directory=/boot --removable && sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias grub-conf='sudo lvim /etc/default/grub'
 alias Rm='sudo rm -rf'
 # alias htkey-load='sudo pkill -HUP swhkd'

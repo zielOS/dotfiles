@@ -117,3 +117,70 @@ Use --utf-force argument to force start if you're sure your terminal can handle 
 
 2023/11/16 (20:59:34) | ===> btop++ v.1.2.13
 2023/11/16 (20:59:34) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (00:09:08) | ===> btop++ v.1.2.13
+2023/11/17 (00:09:08) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (02:23:25) | ===> btop++ v.1.2.13
+2023/11/17 (02:23:25) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/16 (22:34:28) | ===> btop++ v.1.2.13
+2023/11/16 (22:34:28) | WARNING: Failed to set locale en_CA.utf8 continuing anyway.
+2023/11/16 (22:34:28) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (04:03:57) | ===> btop++ v.1.2.13
+2023/11/17 (04:03:57) | WARNING: Failed to set locale en_CA.utf8 continuing anyway.
+2023/11/17 (04:03:57) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (05:35:40) | ===> btop++ v.1.2.13
+2023/11/17 (05:35:40) | ERROR: No UTF-8 locale detected!
+Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2023/11/17 (05:36:02) | ===> btop++ v.1.2.13
+2023/11/17 (05:36:02) | ERROR: No UTF-8 locale detected!
+Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2023/11/17 (05:36:27) | ===> btop++ v.1.2.13
+2023/11/17 (05:36:27) | ERROR: No UTF-8 locale detected!
+Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2023/11/17 (05:36:31) | ===> btop++ v.1.2.13
+2023/11/17 (05:36:31) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2023/11/17 (05:36:31) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (05:37:48) | ===> btop++ v.1.2.13
+2023/11/17 (05:37:48) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2023/11/17 (05:37:48) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (05:37:53) | ===> btop++ v.1.2.13
+2023/11/17 (05:37:53) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2023/11/17 (05:37:53) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (06:12:07) | ===> btop++ v.1.2.13
+2023/11/17 (06:12:07) | ERROR: No UTF-8 locale detected!
+Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2023/11/17 (06:22:35) | ===> btop++ v.1.2.13
+2023/11/17 (06:22:35) | ERROR: No UTF-8 locale detected!
+Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2023/11/17 (06:22:43) | ===> btop++ v.1.2.13
+2023/11/17 (06:22:43) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2023/11/17 (06:22:43) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (06:29:01) | ===> btop++ v.1.2.13
+2023/11/17 (06:29:01) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2023/11/17 (06:29:01) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (06:40:25) | ===> btop++ v.1.2.13
+2023/11/17 (06:40:25) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2023/11/17 (06:40:25) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (23:16:48) | ===> btop++ v.1.2.13
+2023/11/17 (23:16:48) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/17 (23:16:51) | ===> btop++ v.1.2.13
+2023/11/17 (23:16:51) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/11/18 (00:38:15) | ===> btop++ v.1.2.13
+2023/11/18 (00:38:15) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
