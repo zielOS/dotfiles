@@ -30,7 +30,7 @@ alias dnf-up="sudo dnf5 update"
 alias dnf-in="sudo dnf5 install"
 alias dnf-rem="sudo dnf5 remove"
 alias dnf-clean="sudo dnf5 clean all"
-alias fetch="neowofetch"
+alias fetch="fastfetch"
 
 # Misc-related aliases
 alias audit='sudo lynis audit system'

@@ -43,13 +43,7 @@ eval "$(zoxide init zsh)"
 
 source ~/.config/zsh/syntax_highlighting/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# fnm
-export PATH="/home/ahsan/.local/share/fnm:$PATH"
-eval "`fnm env`"
+eval "$(starship init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -70,4 +64,3 @@ if [ -f "/home/ahsan/miniconda3/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
-eval "$(starship init zsh)"

@@ -1,4 +1,3 @@
-
 lvim.colorscheme = "catppuccin-mocha"
 -- automatically install python syntax highlighting
 lvim.builtin.treesitter.highlight.enable = true

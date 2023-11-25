@@ -8,11 +8,16 @@
 * [ ] PDF Setup
 * [ ] Dired Setup
 * [ ] Treemacs Setup
-* [ ] Tabs Setup
-* [ ] Eshell Setup
+* [X] Tabs Setup
+* [X] Eshell Setup
 ** [ ] eshell-toggle
 ** [ ] initial setup
 * [ ] Setup config for packages listed in packages.el
 * [ ] Completion Setup
 ** [ ] company
 ** [ ] vertico
+* [ ] Finish Thesis Stuff
+DEADLINE: <2023-11-24 Fri>
+* [ ] First Half of Quiz 3
+DEADLINE: <2023-11-25 Sat>
+*
