@@ -237,17 +237,17 @@ StWidget.focused .app-well-app-running-dot {
 
 .shell-link {
   border-radius: 6px;
-  color: #7287fd;
+  color: #5bd3f8;
 }
 
 .shell-link:hover {
-  color: #7287fd;
-  background-color: rgba(114, 135, 253, 0.15);
+  color: #5bd3f8;
+  background-color: rgba(91, 211, 248, 0.15);
 }
 
 .shell-link:active {
-  color: #7287fd;
-  background-color: rgba(114, 135, 253, 0.25);
+  color: #5bd3f8;
+  background-color: rgba(91, 211, 248, 0.25);
 }
 
 .lowres-icon {
@@ -470,6 +470,7 @@ StWidget.focused .app-well-app-running-dot {
   padding: 0;
   margin: 0;
   text-shadow: none;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .calendar .calendar-month-label {
@@ -483,7 +484,7 @@ StWidget.focused .app-well-app-running-dot {
 
 .calendar .calendar-change-month-back,
 .calendar .calendar-change-month-forward {
-  padding: 0 0 !important;
+  padding: 0 !important;
   margin: 3px 0 !important;
 }
 
@@ -513,10 +514,10 @@ StWidget.focused .app-well-app-running-dot {
 .calendar .calendar-day-base {
   font-size: 10pt;
   text-align: center;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  margin: 2px;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  margin: 2px !important;
   border-radius: 9999px;
   color: rgba(255, 255, 255, 0.7);
   border: none;
@@ -547,8 +548,8 @@ StWidget.focused .app-well-app-running-dot {
   font-size: 10pt;
 }
 
-.calendar.calendar-weekend {
-  color: rgba(255, 255, 255, 0.5);
+.calendar .calendar-day.calendar-weekend {
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .calendar .calendar-day {
@@ -564,7 +565,7 @@ StWidget.focused .app-well-app-running-dot {
 }
 
 .calendar .calendar-nonwork-day {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5) !important;
   font-weight: normal;
 }
 
@@ -596,13 +597,13 @@ StWidget.focused .app-well-app-running-dot {
 }
 
 .calendar .calendar-day-with-events {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.5) !important;
   background-image: url("assets/calendar-today.svg");
   background-size: contain;
 }
 
 .calendar .calendar-day-with-events.calendar-work-day {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.5) !important;
   font-weight: bold;
 }
 
@@ -1674,15 +1675,15 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
 }
 
 .lg-dialog .shell-link {
-  color: #7287fd;
+  color: #5bd3f8;
 }
 
 .lg-dialog .shell-link:hover {
-  color: #a4b2fe;
+  color: #8ce0fa;
 }
 
 .lg-dialog .shell-link:active {
-  color: #405cfc;
+  color: #2ac6f6;
 }
 
 .lg-dialog .actor-link {
@@ -1911,7 +1912,7 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
 }
 
 .url-highlighter {
-  link-color: #7287fd;
+  link-color: #5bd3f8;
 }
 
 .message-media-control {
@@ -1942,7 +1943,7 @@ StEntry StLabel.hint-text, .popup-menu .search-entry StLabel.hint-text {
 }
 
 .media-message-cover-icon {
-  icon-size: 48px;
+  icon-size: 32px !important;
   border-radius: 6px;
 }
 
@@ -3207,16 +3208,16 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 }
 
 .message-media-control {
-  margin: 27px 6px;
+  margin: 21px 6px;
   padding: 12px;
 }
 
 .media-message-cover-icon {
-  padding: 12px;
+  padding: 0;
 }
 
 .media-message-cover-icon.fallback {
-  padding: 12px;
+  padding: 6px;
 }
 
 .controls-manager, .secondary-monitor-workspaces {
@@ -3268,11 +3269,11 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .popup-menu .popup-menu-item:ltr {
   padding-right: 9px !important;
-  padding-left: 0 !important;
+  padding-left: 12px !important;
 }
 
 .popup-menu .popup-menu-item:rtl {
-  padding-right: 0 !important;
+  padding-right: 12px !important;
   padding-left: 9px !important;
 }
 
@@ -3485,7 +3486,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .quick-slider .icon-button, .quick-slider .background-app-item .close-button, .background-app-item .quick-slider .close-button {
   background-color: transparent;
   color: #FFFFFF !important;
-  padding: 6px;
+  padding: 9px;
 }
 
 .quick-slider .icon-button:hover, .quick-slider .background-app-item .close-button:hover, .background-app-item .quick-slider .close-button:hover {

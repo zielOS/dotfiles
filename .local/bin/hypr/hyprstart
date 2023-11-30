@@ -17,8 +17,9 @@ hypridle &
 # theme
 hyprtheme &
 
-# plugins 
+# plugins
 hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
+hyprctl plugin load $HOME/.config/hypr/libhycov.so &
 
 # polkit 
 /usr/libexec/polkit-gnome-authentication-agent-1 &

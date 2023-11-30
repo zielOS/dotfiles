@@ -1,7 +1,7 @@
 set window-title-basename "true"
 set selection-clipboard "clipboard"
 set adjust-open "best-fit"
-set font "JetBrainsMono Nerd Font 12" 
+set font "JetBrainsMono NF 12" 
 
 # Dracula color theme for Zathura
 # Swaps Foreground for Background to get a light version if the user prefers
