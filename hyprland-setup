@@ -41,8 +41,3 @@ ln -s $HOME/.dots/.zshrc $HOME/
 #-----------------------------------------
 
 systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
-
-rustup-init-gentoo
-rustup default stable
-pipx install hyprshade
-pipx install pyprland

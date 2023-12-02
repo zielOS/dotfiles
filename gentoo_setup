@@ -1,8 +1,8 @@
 #!/bin/sh
 
-cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup -c aes-xts-plain64 -s 512 -y luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs su cr /mnt/gentoo/@  && btrfs su cr /mnt/gentoo/@home && btrfs su cr /mnt/gentoo/@opt  && btrfs su cr /mnt/gentoo/@tmp && btrfs su cr /mnt/gentoo/@var && btrfs su cr /mnt/gentoo/@log  && btrfs su cr /mnt/gentoo/@snapshots && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt  && mkdir /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mkdir /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots
+cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup -c aes-xts-plain64 -s 512 -y luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs su cr /mnt/gentoo/@  && btrfs su cr /mnt/gentoo/@home && btrfs su cr /mnt/gentoo/@opt  && btrfs su cr /mnt/gentoo/@tmp && btrfs su cr /mnt/gentoo/@var && btrfs su cr /mnt/gentoo/@log && btrfs su cr /mnt/gentoo/@audit  && btrfs su cr /mnt/gentoo/@snapshots && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt  && mkdir /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mkdir /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mkdir /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots
 
-cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20231029T164701Z/stage3-amd64-desktop-systemd-20231029T164701Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20231126T163200Z/stage3-amd64-desktop-systemd-mergedusr-20231126T163200Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
   
 
 *** make.conf
@@ -27,12 +27,12 @@ EMERGE_DEFAULT_OPTS="--jobs=10 --keep-going=y --ask"
 ACCEPT_KEYWORDS="~amd64"
 ACCEPT_LICENSE="*"
 VIDEO_CARDS="nvidia"
-USE="-elogind systemd -gnome -berkdb -kde -ccache -tpm zstd policykit opengl \
-    -clamav -coreaudio -ios -ipod -ieee1394 -motif gtk pulseaudio qt5 qt6 \
-    -emboss -3dfx -altivec -smartcard -ibm wayland -nls -nas pam clang  \
-    -neon -nntp cups -quicktime nvidia sound-server -vim apparmor \
-    pie gui X upower hardened udev alsa audit dbus jpeg lto pgo keyring \
-    -accessibility -bluetooth -handbook fontconfig truetype udisks jit"
+USE="-elogind systemd -gnome -kde -ccache -tpm zstd truetype \
+    clamav -motif gtk pulseaudio qt5 qt6 sound-server apparmor \
+    -smartcard wayland  pam clang policykit opengl \
+    cups -quicktime nvidia udev alsa audit udisks \
+    pie gui X upower hardened dbus jpeg lto pgo  jit \
+    -accessibility bluetooth -handbook fontconfig udisks "
 #RUBY_TARGETS="ruby24 ruby25"
 # NOTE: This stage was built with the bindist Use flag enabled
 PORTDIR="/var/db/repos/gentoo"
@@ -228,7 +228,7 @@ emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=09f9cf2a-7758-422e-ad04-38698d49713c root_trim=yes init=/lib/systemd/systemd"
+GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=3401504c-1c6f-4a1d-ad4b-ded2d7aa3747 root_trim=yes init=/lib/systemd/systemd"
 GRUB_CMDLINE_LINUX_DEFAULT="apparmor=1 security=apparmor" 
 
 grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
