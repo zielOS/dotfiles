@@ -1,0 +1,24 @@
+#!/bin/sh
+# After installing opensuse
+sudo zypper ref 
+sudo zypper update
+sudo zypper ar -cfp 90 https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
+sudo zypper dup --from packman --allow-vendor-change
+sudo zypper install opi
+sudo zypper install flatpak
+opi install codecs
+
+# Installing Nvidia drivers
+sudo zypper install openSUSE-repos-NVIDIA
+sudo zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA
+sudo zypper in x11-video-nvidiaG06
+sudo zypper in nvidia-glG06
+
+# Basic opensuse packages
+sudo zypper in thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler neovim grep unzip zip unrar btrfsprogs dosfstools wget curl ckb-next sudo transmission-gtk bat maim neovim ripgrep fd zsh zoxide fzf papirus-icon-theme lazygit zathura zathura-plugin-pdf-poppler python311-pipx lynis audit apparmor apparmor-profiles firefox  gstreamer gstreamer-plugins-bad gstreamer-plugins-bad-codecs gstreamer-plugins-base gstreamer-plugins-ugly gstreamer-plugins-ugly-codecs 
+
+# Install Hyprland packages
+sudo zypper in wl-clipboard grim slurp swww brightnessctl
+
+# Install Hyprland dependencies
+sudo zypper in gcc-c++ git meson cmake "pkgconfig(cairo)" "pkgconfig(egl)" "pkgconfig(gbm)" "pkgconfig(gl)" "pkgconfig(glesv2)" "pkgconfig(libdrm)" "pkgconfig(libinput)" "pkgconfig(libseat)" "pkgconfig(libudev)" "pkgconfig(pango)" "pkgconfig(pangocairo)" "pkgconfig(pixman-1)" "pkgconfig(vulkan)" "pkgconfig(wayland-client)" "pkgconfig(wayland-protocols)" "pkgconfig(wayland-scanner)" "pkgconfig(wayland-server)" "pkgconfig(xcb)" "pkgconfig(xcb-icccm)" "pkgconfig(xcb-renderutil)" "pkgconfig(xkbcommon)" "pkgconfig(xwayland)" glslang-devel Mesa-libGLESv3-devel "pkgconfig(xcb-errors)"

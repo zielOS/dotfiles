@@ -368,3 +368,6 @@ Use --utf-force argument to force start if you're sure your terminal can handle 
 
 2023/11/29 (16:15:46) | ===> btop++ v.1.2.13
 2023/11/29 (16:15:46) | WARNING: Error in Mem::collect() : Failed to read /etc/fstab
+
+2023/12/03 (02:22:29) | ===> btop++ v.1.2.13
+2023/12/03 (02:22:29) | WARNING: Failed to set locale en_US.UTF-8 continuing anyway.

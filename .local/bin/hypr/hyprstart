@@ -34,6 +34,6 @@ gnome-keyring-daemon -r -d &
 
 ags -b hypr &
 pypr &
-emacs --daemon &
+#emacs --daemon &
 
 hyprshade on ~/.config/hypr/shaders/blue-light-filter.glsl &
