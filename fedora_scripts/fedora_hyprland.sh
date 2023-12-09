@@ -7,12 +7,15 @@ sudo dnf copr enable alebastr/sway-extras
 sudo dnf copr enable atim/lazygit
 sudo dnf copr enable atim/alacritty
 sudo dnf copr enable solopasha/hyprland
-sudo dnf copr enable deathwish/emacs-pgtk-nativecomp 
 sudo dnf update
 
 echo "Installing Several Packages"
-sudo dnf install firefox kitty alacritty zoxide emacs xdg-desktop-portal-hyprland hyprland-nvidia-git pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler file-roller kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland qt6-qtwayland power-profiles-daemon libva-devel akmod-nvidia xorg-x11-drv-nvidia-power vulkan nvidia-vaapi-driver libva-utils vdpauinfo nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot swww && sudo plymouth-set-default-theme spinner -R
- 
+sudo dnf install firefox kitty alacritty zoxide xdg-desktop-portal-hyprland hyprland-git pixman polkit-devel xisxwayland xorg-x11-server-Xwayland xorg-x11-server-Xwayland-devel swaybg swayidle swaylock grim slurp wf-recorder wl-clipboard polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-utils wireplumber alsa-utils thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler file-roller kvantum qt5ct neofetch zsh util-linux-user sysstat psacct rng-tools cronie wget aide lynis mpv transmission-gtk copr-selinux zathura zathura-zsh-completion zathura-pdf-poppler qt5-qtwayland qt6-qtwayland power-profiles-daemon libva-devel akmod-nvidia xorg-x11-drv-nvidia-power vulkan nvidia-vaapi-driver libva-utils vdpauinfo nodejs npm papirus-icon-theme python3-devel gnome-keyring lazygit plymouth-theme-spinner ninja-build cmake meson gcc-c++ libxcb gtkmm3.0-devel alsa-utils yad ckb-next sassc boom-boot swww pavucontrol pamixer pipx && sudo plymouth-set-default-theme spinner -R
+
+sudo dnf install dnf-plugins-core
+sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+sudo dnf install brave-browser
 
 echo "Installing Dot files"
 sudo rm -R ~/.config/
