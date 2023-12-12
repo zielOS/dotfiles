@@ -36,3 +36,6 @@ modified = "!${count}"
 staged = "+${count}"
 renamed = "*${count}"
 deleted = "-${count}"
+
+[conda]
+symbol = ' '

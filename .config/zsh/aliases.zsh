@@ -28,8 +28,9 @@ alias pac-rem="yay -R --noconfirm"
 
 alias dnf-up="sudo dnf5 update"
 alias dnf-in="sudo dnf5 install"
-alias dnf-rem="sudo dnf5 remove"
-alias dnf-clean="sudo dnf5 clean all"
+alias dnf-rm="sudo dnf5 remove"
+alias dnf-cl="sudo dnf5 clean all"
+alias dnf-se="dnf search"
 alias fetch="fastfetch"
 
 # Misc-related aliases

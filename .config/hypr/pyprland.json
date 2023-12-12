@@ -1,9 +1,7 @@
 {
   "pyprland": {
     "plugins": [
-      "scratchpads",
-      "monitors",
-      "workspaces_follow_focus"
+      "scratchpads"
     ]
   },
   "scratchpads": {
@@ -22,13 +20,5 @@
       "unfocus": "hide",
       "animation": "fromBottom"
     }
-  },
-  "monitors": {
-    "placement": {
-      "BenQ PJ": {
-        "topOf": "eDP-1"
-      }
-    },
-    "unknown": "wlrlui"
   }
 }
