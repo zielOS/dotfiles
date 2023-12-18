@@ -1,0 +1,5 @@
+[user]
+	name = zielOS
+	email = ahsanur041@gmail.com
+[credential]
+	helper = libsecret
