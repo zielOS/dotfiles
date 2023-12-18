@@ -28,7 +28,7 @@ ACCEPT_KEYWORDS="~amd64"
 ACCEPT_LICENSE="*"
 VIDEO_CARDS="nvidia intel"
 USE="-elogind systemd -gnome -kde -ccache -tpm zstd truetype harfbuzz \
-    clamav -motif gtk pulseaudio qt5 qt6 sound-server apparmor \
+    clamav -motif gtk pulseaudio qt5 qt6 sound-server apparmor abi_x86_32 \
     -smartcard wayland  pam clang policykit opengl keyring sqlite \
     cups -quicktime nvidia udev alsa audit udisks emacs nvenc \
     pie gui X upower hardened dbus jpeg lto pgo jit firmware python \
