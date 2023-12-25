@@ -1,7 +1,0 @@
-#include "fuzzyhighlight.c"
-#include "fuzzymatch.c"
-#include "fzfexpect.c"
-#include "highpriority.c"
-#include "dynamicoptions.c"
-#include "mousesupport.c"
-#include "navhistory.c"

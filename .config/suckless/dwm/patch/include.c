@@ -3,7 +3,6 @@
 #include "bar_tagicons.c"
 #include "bar.c"
 
-#include "bar_alpha.c"
 #include "bar_ltsymbol.c"
 #include "bar_status.c"
 #include "bar_status2d.c"
@@ -34,6 +33,7 @@
 #ifdef XINERAMA
 #include "sortscreens.c"
 #endif // XINERAMA
+#include "swallow.c"
 #include "togglefullscreen.c"
 #include "vanitygaps.c"
 #include "dragmfact.c"
