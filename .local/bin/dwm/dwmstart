@@ -47,9 +47,7 @@ setxkbmap -option ctrl:nocaps &
 xsetroot -cursor_name left_ptr &
 
 # compositor
-while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
-picom --config $HOME/.config/picom/picom.conf &
-
+picom -b &
 # wallpaper
 hsetroot -cover ~/.config/wallpapers/trigonometry.png &
 

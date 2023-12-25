@@ -13,14 +13,14 @@ super + shift + Escape
 
 ### Launch terminal
 super + Return
-  bspterm
+  st
 
 super + shift + Return
 	bspterm --float
 
 ### Launch menu
 super + d
-  emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
+  dwmmenu
 
 ## Launch gui apps
 super + g; {b, f}
