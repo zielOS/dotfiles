@@ -29,7 +29,7 @@ ACCEPT_LICENSE="*"
 VIDEO_CARDS="nvidia intel"
 USE="-elogind systemd -gnome -kde -ccache -tpm zstd truetype harfbuzz \
     clamav -motif gtk pulseaudio qt5 qt6 sound-server apparmor abi_x86_32 \
-    -smartcard wayland  pam clang policykit opengl keyring sqlite \
+    -smartcard -wayland  pam clang policykit opengl keyring sqlite \
     cups -quicktime nvidia udev alsa audit udisks emacs nvenc \
     pie gui X upower hardened dbus jpeg lto pgo jit firmware python \
     -accessibility bluetooth -handbook fontconfig udisks gstreamer "
@@ -132,8 +132,6 @@ net-wireless/wpa_supplicant dbus
 net-libs/libssh server
 sys-apps/flatpak policykit seccomp
 app-admin/keepassxc browser autotype keeshare network yubikey
-x11-terms/alacritty -X
-x11-terms/kitty -X
 gui-apps/swaybg gdk-pixbuf
 dev-python/PyQt5 opengl
 dev-python/pillow webp
