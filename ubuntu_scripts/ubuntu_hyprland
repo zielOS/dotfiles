@@ -17,6 +17,8 @@ pacstall -I zoom-deb
 pacstall -I discord
 pacstall -I zotero
 pacstall -I insync-deb
+pacstall -I hyprland
+pacstall -I xdg-desktop-portal-hyprland
 
 echo "Installing brave"
 sudo apt install curl
@@ -25,44 +27,6 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] http
 sudo apt update
 sudo apt install brave-browser
 
-sudo apt-get install -y meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev xdg-desktop-portal-wlr
-
-cd
-git clone --recursive https://github.com/hyprwm/Hyprland && cd Hyprland
-sed -E -i -e 's/(soversion = 12)([^032]|$$)/soversion = 12032/g' ./subprojects/wlroots/meson.build
-rm -rf ./subprojects/wlroots/build
-sed -i -e '/^release:/{n;s/-D/-DCMAKE_SKIP_RPATH=ON -D/}' Makefile
-cd subprojects/wlroots
-patch -Np1 < "../../nix/patches/wlroots-nvidia.patch"
-meson build/ --prefix="/home/ahsan/Hyprland/tmpwlr" --buildtype=release
-ninja -C build/
-mkdir -p "/home/ahsan/Hyprland/tmpwlr"
-ninja -C build/ install
-cd .. && cd udis86
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G Ninja
-cmake --build build --config Release --target all
-cd && cd /home/ahsan/Hyprland
-make all
-make -C hyprctl all
-find src -name '*.hpp' -exec install -Dm644 {} "/usr/include/hyprland/{}" \;
-sed -i -e "/ICONDIR/ s,/home/ahsan/Hyprland/tmpwlr,/usr," "subprojects/wlroots/build/include/config.h"
-cd subprojects/wlroots/include
-find . -name '*.h' -exec install -Dm644 {} "$pkgdir/usr/include/hyprland/wlroots/{}" \;
-cd .. && cd build/include
-find . -name '*.h' -exec install -Dm644 {} "/usr/include/hyprland/wlroots/{}" \;
-cd && cd /home/ahsan/Hyprland/build
-cmake -DCMAKE_INSTALL_PREFIX=/usr ..
-cd ..
-install -Dm755 -t "/usr/bin" build/Hyprland
-install -Dm755 -t "/usr/bin" hyprctl/hyprctl
-install -Dm644 -t "/usr/include/hyprland/protocols" protocols/*-protocol.h
-install -Dm755 -t "/usr/lib" "/home/ahsan/Hyprland/tmpwlr/lib64/libwlroots.so.12032"
-
-cd 
-git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland
-cd xdg-desktop-portal-hyprland/
-make all
-sudo make install
 
 
 echo "Setting up Dotfiles"
