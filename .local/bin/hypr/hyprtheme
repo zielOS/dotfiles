@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEME='Catppuccin-Mocha-Standard-Lavender-Dark'
+THEME='Catppuccin-Macchiato-Standard-Lavender-Dark'
 ICONS='Papirus-Dark'
 FONT='JetBrainsMono NF 13'
 CURSOR='Catppuccin-Mocha-Lavender-Cursors'

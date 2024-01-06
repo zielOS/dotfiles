@@ -2,4 +2,4 @@
 	name = zielOS
 	email = ahsanur041@gmail.com
 [credential]
-	helper = libsecret
+	helper = /usr/lib/git-core/git-credential-libsecret

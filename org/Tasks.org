@@ -1,23 +1,4 @@
-* [ ] Org Setup
-** [ ] Org-modern
-** [ ] org-tempo
-** [ ] org-superagenda
-** [ ] jupyter
-* [ ] Python Setup
-* [ ] LaTex Setup
-* [ ] PDF Setup
-* [ ] Dired Setup
-* [ ] Treemacs Setup
-* [X] Tabs Setup
-* [X] Eshell Setup
-** [ ] eshell-toggle
-** [ ] initial setup
-* [ ] Setup config for packages listed in packages.el
-* [ ] Completion Setup
-** [ ] company
-** [ ] vertico
-* [ ] Finish Thesis Stuff
-DEADLINE: <2023-11-24 Fri>
-* [ ] First Half of Quiz 3
-DEADLINE: <2023-11-25 Sat>
-*
+* Email science advisor before going to school
+DEADLINE: <2024-01-04 Th>
+* Pay elecricity bill
+DEADLINE: <2024-01-06 Sat>

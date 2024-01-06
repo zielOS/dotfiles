@@ -24,7 +24,8 @@ alias em-list="equery list '*'"
 
 alias pac-clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 alias pac-in="yay -S --noconfirm"
-alias pac-rem="yay -R --noconfirm"
+alias pac-rm="yay -R --noconfirm"
+alias pac-up="yay -Syyuu --noconfirm"
 
 alias dnf-up="sudo dnf5 update"
 alias dnf-in="sudo dnf5 install"
@@ -35,7 +36,7 @@ alias fetch="fastfetch"
 
 # Misc-related aliases
 alias audit='sudo lynis audit system'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias update-grub='sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install --target=x86_64-efi --efi-directory=/boot --removable && sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias grub-conf='sudo lvim /etc/default/grub'
 alias Rm='sudo rm -rf'
 # alias htkey-load='sudo pkill -HUP swhkd'
