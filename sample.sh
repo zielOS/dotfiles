@@ -1,15 +1,9 @@
 #!/usr/bin/bash
-grep 'python-/' /var/lib/portage/world | xargs --open-tty emerge --ask --deselect; emerge --ask --depclean
-
-for pkg in $(pacman -Q -q | grep 'python-')
+for pkg in $(pacman -Q -q | grep 'python-\')
 do 
-  git clone https://gitlab.archlinux.org/archlinux/packaging/packages/$pkg
+  pbget $pkg
+  cd $pkg
+  makepkg -si --skipchecksums
+  cd ..
 done
 
-
-echo "enter the pkg name"
-read pkg
-mkdir $pkg
-cd $pkg
-git clone https://gitlab.archlinux.org/archlinux/packaging/packages/$pkg
-ls -al
