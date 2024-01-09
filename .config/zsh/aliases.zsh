@@ -11,7 +11,7 @@ alias f='zi'
 # Pacman-related alias
 alias em-up='sudo emerge -auqDN @world'
 alias em-sync='sudo emerge --sync --quiet'
-alias em-install='sudo emerge'
+alias em-in='sudo emerge'
 alias em-remove='sudo emerge -pv --depclean'
 alias em-search='emerge -Ss'
 alias em-rebuild='sudo emerge @preserved-rebuild'
