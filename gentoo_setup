@@ -2,7 +2,7 @@
 
 cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup -c aes-xts-plain64 -s 512 -y luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs su cr /mnt/gentoo/@  && btrfs su cr /mnt/gentoo/@home && btrfs su cr /mnt/gentoo/@opt  && btrfs su cr /mnt/gentoo/@tmp && btrfs su cr /mnt/gentoo/@var && btrfs su cr /mnt/gentoo/@log && btrfs su cr /mnt/gentoo/@audit  && btrfs su cr /mnt/gentoo/@snapshots && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt  && mkdir /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mkdir /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mkdir /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots
 
-cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20231126T163200Z/stage3-amd64-desktop-systemd-mergedusr-20231126T163200Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20231231T163203Z/stage3-amd64-desktop-systemd-mergedusr-20231231T163203Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
   
 
 *** make.conf
@@ -200,19 +200,15 @@ emerge app-emacs/use-package
 app-emacs/company
 app-emacs/auto-package-update app-emacs/no-littering
 app-emacs/evil app-emacs/evil-collection app-emacs/evil-nerd-commenter app-emacs/yasnippet-snippets app-emacs/yasnippet
-app-emacs/evil-surround app-emacs/evil-commentary app-emacs/evil-quickscope
+app-emacs/evil-surround app-emacs/evil-commentary app-emacs/evil-quickscopeexport PS1="(chroot) ${PS1}"
+
 
 # melpa
 app-emacs/general app-emacs/evil-lion app-emacs/vscode-icon app-emacs/company-box app-emacs/latex-preview-pane app-emacs/command-log-mode app-emacs/dired-open app-emacs/apparmor-mode app-emacs/org-noter app-emacs/company-auctex app-emacs/reftex app-emacs/highlight-indent-guides app-emacs/eshell-toggle
 
 
 #hyprland 
-emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep sys-fs/genfstab app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb app-admin/sudo net-p2p/transmission sys-apps/bat media-gfx/maim dev-python/pynvim app-editors/neovim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-themes/papirus-icon-theme net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort app-containers/docker dev-lang/go net-libs/nodejs dev-python/matplotlib dev-python/scipy sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/rng-tools sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct sys-apps/apparmor sys-apps/apparmor-utils sys-libs/libapparmor sec-policy/apparmor-profiles x11-drivers/nvidia-drivers net-misc/networkmanager x11-themes/kvantum
-
-
-gui-apps/qt6ct x11-misc/qt5ct gui-wm/hyprland
-
-emerge gui-apps/swaybg gui-apps/swayidle gui-apps/swaylock-effects gui-apps/wl-clipboard x11-terms/alacritty  gui-apps/grim gui-apps/slurp gui-apps/wf-recorder x11-base/xwayland gui-libs/xdg-desktop-portal-hyprland dev-libs/gjs dev-lang/sassc app-misc/brightnessctl media-sound/pavucontrol gui-apps/tuigreet  dev-python/python-pam gui-apps/swappy gui-apps/swww
+emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep sys-fs/genfstab app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb app-admin/sudo net-p2p/transmission sys-apps/bat media-gfx/maim dev-python/pynvim app-editors/neovim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-themes/papirus-icon-theme net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort app-containers/docker dev-lang/go net-libs/nodejs dev-python/matplotlib dev-python/scipy sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/rng-tools sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct sys-apps/apparmor sys-apps/apparmor-utils sys-libs/libapparmor sec-policy/apparmor-profiles x11-drivers/nvidia-drivers net-misc/networkmanager x11-themes/kvantum typescript gnome-bluetooth gui-apps/qt6ct x11-misc/qt5ct gui-wm/hyprland gui-apps/swayidle gui-apps/swaylock-effects gui-apps/wl-clipboard x11-terms/alacritty  gui-apps/grim gui-apps/slurp gui-apps/wf-recorder x11-base/xwayland gui-libs/xdg-desktop-portal-hyprland dev-libs/gjs dev-lang/sassc app-misc/brightnessctl media-sound/pavucontrol gui-apps/tuigreet  dev-python/python-pam gui-apps/swappy gui-apps/swww upower gvfs thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler insync wayshot texlive brave-bin steam-meta lutris wine gcc:12 nerd-fonts rustup
 
 ud
 *custom-ebuilds or install
@@ -227,13 +223,13 @@ ags
 wayshot insync anyrun
 
 # Xorg
-emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep sys-fs/genfstab app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb app-admin/sudo net-p2p/transmission sys-apps/bat media-gfx/maim dev-python/pynvim app-editors/neovim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd x11-misc/xsel x11-misc/xclip app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-misc/rofi x11-misc/dunst x11-wm/bspwm x11-misc/sxhkd x11-themes/papirus-icon-theme app-misc/ranger x11-misc/gammastep x11-apps/setxkbmap x11-apps/xrdb x11-apps/xsetroot x11-misc/hsetroot net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort  app-emacs/org-mode app-containers/docker dev-python/matplotlib dev-python/scipy sci-libs/scikit-learn sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/rng-tools sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct sys-apps/apparmor sys-apps/apparmor-utils sys-libs/libapparmor sec-policy/apparmor-profiles x11-drivers/nvidia-drivers x11-base/xorg-drivers x11-base/xorg-server app-misc/tmux net-misc/insync net-misc/networkmanager x11-themes/kvantum gui-apps/qt6ct x11-misc/qt5ct
+emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep sys-fs/genfstab app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb app-admin/sudo net-p2p/transmission sys-apps/bat media-gfx/maim dev-python/pynvim app-editors/neovim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd x11-misc/xsel x11-misc/xclip app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-misc/rofi x11-misc/dunst x11-wm/bspwm x11-misc/sxhkd x11-themes/papirus-icon-theme app-misc/ranger x11-misc/gammastep x11-apps/setxkbmap x11-apps/xrdb x11-apps/xsetroot x11-misc/hsetroot net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort  app-emacs/org-mode app-containers/docker dev-python/matplotlib dev-python/scipy sci-libs/scikit-learn sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/rng-tools sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct sys-apps/apparmor sys-apps/apparmor-utils sys-libs/libapparmor sec-policy/apparmor-profiles x11-drivers/nvidia-drivers x11-base/xorg-drivers x11-base/xorg-server app-misc/tmux net-misc/insync net-misc/networkmanager x11-themes/kvantum gui-apps/qt6ct x11-misc/qt5ct texlive brave-bin
 
 
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=3401504c-1c6f-4a1d-ad4b-ded2d7aa3747 root_trim=yes init=/lib/systemd/systemd"
+GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=70ad96c3-83de-404b-895f-5d2101c6a45f root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1"
 GRUB_CMDLINE_LINUX_DEFAULT="apparmor=1 security=apparmor" 
 
 grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
@@ -243,7 +239,7 @@ echo gentoo > /etc/hostname && emerge -q net-misc/dhcpcd && rc-update add dhcpcd
 
 
 # Setup systemd
-systemd-firstboot --prompt --setup-machine-id && systemctl enable NetworkManager fstrim.timer sysstat apparmor auditd  nvidia-suspend.service nvidia-resume.service 
+systemd-firstboot --prompt --setup-machine-id && systemctl enable NetworkManager fstrim.timer sysstat apparmor auditd  nvidia-suspend.service nvidia-resume.service
 
 # Post-install chroot
 cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && gentoo-chroot /mnt/gentoo
@@ -325,6 +321,7 @@ fs.protected_symlinks=1
 fs.protected_hardlinks=1
 fs.protected_fifos=2
 fs.protected_regular=2
+kernel.sched_bore=1
 
 -- WARNING -- This system is for the use of authorized users only. Individuals 
 using this computer system without authority or in excess of their authority 
@@ -353,6 +350,8 @@ CONFIG_NF_CT_NETLINK_HELPER
 # Post-install chroot
 cryptsetup luksOpen /dev/nvme0n1p2 cryptroot  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt   && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var  && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
 
+
+git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
 
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
