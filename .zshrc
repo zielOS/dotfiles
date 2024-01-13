@@ -64,3 +64,7 @@ unset __conda_setup
 # fnm
 export PATH="/home/ahsan/.local/share/fnm:$PATH"
 eval "`fnm env`"
+
+# fnm
+export PATH="/home/ahsan/.local/share/fnm:$PATH"
+eval "`fnm env`"

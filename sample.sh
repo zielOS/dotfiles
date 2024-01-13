@@ -1,13 +1,14 @@
 #!/usr/bin/bash
-for pkg in $(pacman -Q -q | grep 'python-')
+for pkg in $(dnf list --installed | awk -F'.' '{print $1}')
 do 
-  pkgctl repo clone --protocol=https $pkg
-  cd $pkg
-  makepkg -si --skipchecksums --noconfirm
-  cd ..
-done
+  dnf download --source $pkg | rpm -Uvh 
+  rpmbuild -rcfile=~/.rpmc -bs ~/rpmbuild/SPECS/$pkg.spec
+  rpmbuild -rcfile=~/.rpmc -bb ~/rpmbuild/SPECS/$pkg.spec
+pone
 
 # displays package count
 
-pacman -Q | wc -l
+dnf list --installed | awk '{print $1}' | wc -l
+
+dnf list --installed | wc -l
 
