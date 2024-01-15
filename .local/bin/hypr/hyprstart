@@ -22,7 +22,7 @@ hyprctl plugin load $HOME/.config/hypr/split-monitor-workspaces.so &
 hyprctl plugin load $HOME/.config/hypr/libhycov.so &
 
 # polkit 
-/usr/libexec/polkit-gnome-authentication-agent-1 &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Start Apps
 ckb-next &

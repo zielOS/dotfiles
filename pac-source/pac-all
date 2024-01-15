@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+for pkg in $(pacman -Q -q | grep -v -e 'gcc' -e 'linux')
+do 
+  pkgctl repo clone --protocol=htpps $pkg
+  cd $pkg
+  makepkg -si --skipchecksums --skippgpcheck --nocheck
+  cd ..
+done
+
+# displays package count
+
+# dnf list --installed | awk '{print $1}' | wc -l
+
+# dnf list --installed | wc -l
+
