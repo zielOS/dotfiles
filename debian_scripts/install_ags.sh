@@ -1,6 +1,0 @@
-sudo apt install node-typescript npm meson libgjs-dev gjs libgtk-layer-shell-dev libgtk-3-dev libpulse-dev network-manager-dev libgnome-bluetooth-3.0-dev libdbusmenu-gtk3-dev libsoup-3.0-dev
-git clone --recursive https://github.com/Aylur/ags.git
-cd ags
-npm install
-meson setup build
-sudo meson install -C build

@@ -1,10 +1,11 @@
 #!/usr/bin/bash
-for pkg in $(pacman -Q -q | grep -v -e 'gcc' -e 'linux')
+for pkg in $(<pac-tensorflow)
 do 
-  pkgctl repo clone --protocol=htpps $pkg
+  pkgctl repo clone --protocol=https $pkg
   cd $pkg
   makepkg -si --skipchecksums --skippgpcheck --nocheck
   cd ..
+  sudo rm -rf $pkg
 done
 
 # displays package count
