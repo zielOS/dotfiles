@@ -27,7 +27,6 @@ alias pac-in="yay -S --noconfirm"
 alias pac-rm="yay -R --noconfirm"
 alias pac-up="yay -Syyuu --noconfirm"
 alias pac-cl="pkgctl repo clone --protocol=https"
-alias egrep='$aliases[grep -E]'
 
 
 alias dnf-up="sudo dnf5 update"
@@ -38,7 +37,7 @@ alias dnf-se="dnf search"
 alias fetch="fastfetch"
 
 # Misc-related aliases
-alias audit='sudo lynis audit system'
+alias audit='cd ~/.dots/lynis && sudo ./lynis audit system && cd'
 alias update-grub='sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install --target=x86_64-efi --efi-directory=/boot --removable && sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias grub-conf='sudo lvim /etc/default/grub'
 alias Rm='sudo rm -rf'
