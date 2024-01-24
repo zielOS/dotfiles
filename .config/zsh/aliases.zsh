@@ -27,7 +27,8 @@ alias pac-in="yay -S --noconfirm"
 alias pac-rm="yay -R --noconfirm"
 alias pac-up="yay -Syyuu --noconfirm"
 alias pac-cl="pkgctl repo clone --protocol=https"
-alias egrep="grep -E"
+alias egrep='$aliases[grep -E]'
+
 
 alias dnf-up="sudo dnf5 update"
 alias dnf-in="sudo dnf5 install"
