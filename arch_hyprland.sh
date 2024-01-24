@@ -1,9 +1,5 @@
 #!/bin/bash
 
-cd  && git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si -r && cd
-
 yay -S hyprland-git fnm zoxide libva-nvidia-driver-git nvidia-dkms xdg-desktop-portal-hyprland-git xorg-xwayland qt5-wayland qt6-wayland qt5ct qt6ct libva pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol wireplumber ripgrep jq polkit-gnome swww thunar thunar-archive-plugin file-roller xdg-user-dirs wf-recorder dbus-python python-gobjec pyprland anyrun-git ripgrep fd python-pynvim nodejs-neovim ckb-next insync acct lsd python-pam swappy pavucontrol sassc swww ttf-jetbrains-mono-nerd ttf-font-awesome greetd-tuigreet mpv kvantum refind-btrfs --noconfirm
 
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
