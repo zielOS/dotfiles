@@ -34,7 +34,6 @@ alias dnf-in="sudo dnf5 install"
 alias dnf-rm="sudo dnf5 remove"
 alias dnf-cl="sudo dnf5 clean all"
 alias dnf-se="dnf search"
-alias fetch="fastfetch"
 
 # Misc-related aliases
 alias audit='cd ~/.dots/lynis && sudo ./lynis audit system && cd'
@@ -47,6 +46,8 @@ alias snapper='sudo lvim /etc/snapper/configs/root'
 alias aa-status='sudo aa-status'
 alias l='lsd'
 alias la='lsd -a'
+alias fetch="fastfetch"
+alias egrep="grep -E"
 
 if [[ $TERM == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"

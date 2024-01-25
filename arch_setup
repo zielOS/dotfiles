@@ -45,8 +45,6 @@ sudo refind-install --usedefault /dev/nvme0n1p1 --alldrivers
 
 ** Systemd Setup
 
-speak key purchase beyond north sunset height farm three viable bone mean margin century submit garage rent blanket hire card switch advice success very exact
-
 pacman -S --noconfirm linux-zen linux-zen-headers base base-devel git neovim linux-firmware intel-ucode arch-install-scripts reflector
 
 reflector --verbose --country 'CA,US' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
