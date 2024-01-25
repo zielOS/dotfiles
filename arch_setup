@@ -45,10 +45,12 @@ sudo refind-install --usedefault /dev/nvme0n1p1 --alldrivers
 
 ** Systemd Setup
 
+speak key purchase beyond north sunset height farm three viable bone mean margin century submit garage rent blanket hire card switch advice success very exact
+
 pacman -S --noconfirm linux-zen linux-zen-headers base base-devel git neovim linux-firmware intel-ucode arch-install-scripts reflector
 
 reflector --verbose --country 'CA,US' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
 
-pacman -S --noconfirm unzip zip unrar btrfs-progs dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim nvidia-dkms nvidia-utils mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac
+pacman -S --noconfirm unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim nvidia-dkms nvidia-utils mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac
 
-systemd-firstboot --prompt --setup-machine-id && systemctl enable NetworkManager fstrim.timer acpid systemd-timesyncd sysstat apparmor auditd
+systemctl enable NetworkManager fstrim.timer acpid sysstat apparmor auditd chronyd
