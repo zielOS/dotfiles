@@ -2,12 +2,9 @@
 
 rustup default stable
 
-yay -S fnm hyprland-git zoxide libva-nvidia-driver-git nvidia-dkms xdg-desktop-portal-hyprland xorg-xwayland qt5-wayland qt6-wayland qt5ct qt6ct libva pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol wireplumber ripgrep jq polkit-gnome swww thunar thunar-archive-plugin file-roller xdg-user-dirs wf-recorder dbus-python python-gobjec pyprland anyrun-git ripgrep fd python-pynvim rkhunter chkrootkit nodejs-neovim tree-sitter-cli spotify-launcher transmission-qt stacer-bin bleachbit ckb-next insync alacritty kitty acct lsd python-pam swappy pavucontrol steam lutris devtools xournalpp mailspring logrotate ranger sassc swww ttf-jetbrains-mono-nerd ttf-font-awesome greetd-tuigreet mpv kvantum brave-bin kvantum jitterentropy-rngd hyprshade fluidsynth wine-staging fwupd aylurs-gtk-shell-git alhp-keyring alhp-mirrorlist fastfetch gnome-keyring libgnome-keyring org.freedesktop.secrets cups
+yay -S fnm hyprland-git zoxide libva-nvidia-driver-git nvidia-dkms xdg-desktop-portal-hyprland xorg-xwayland qt5-wayland qt6-wayland qt5ct qt6ct libva pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol wireplumber ripgrep jq polkit-gnome swww thunar thunar-archive-plugin file-roller xdg-user-dirs wf-recorder dbus-python python-gobjec pyprland anyrun-git ripgrep fd python-pynvim rkhunter chkrootkit nodejs-neovim tree-sitter-cli spotify-launcher transmission-qt stacer-bin bleachbit ckb-next insync alacritty kitty acct lsd python-pam swappy pavucontrol steam lutris devtools xournalpp mailspring logrotate ranger sassc swww ttf-jetbrains-mono-nerd ttf-font-awesome greetd-tuigreet mpv kvantum brave-bin kvantum jitterentropy-rngd hyprshade fluidsynth wine-staging fwupd aylurs-gtk-shell-git alhp-keyring alhp-mirrorlist fastfetch gnome-keyring libgnome-keyring org.freedesktop.secrets cups arch-audit
 
 git clone https://github.com/donovanglover/hyprnome -b 0.2.0 && cd hyprnome && makepkg -si && cd
-
-cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
-LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh) 
 
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
@@ -39,6 +36,15 @@ ln -s $HOME/.dots/.themes $HOME/
 ln -s $HOME/.dots/org $HOME/
 ln -s $HOME/.dots/colorscheme.css $HOME/
 ln -s $HOME/.dots/gentoo_setup $HOME/
+
+cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
+LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh) 
+
+sudo rm -rf ~/.config/lvim && cd
+ln -s $HOME/.dots/.config/lvim ~/.config
+
+cd ~/.local/bin 
+sudo install -Dm755 lvim "/usr/local/bin/lvim" && sudo rm -rf lvim && cd
 
 #-----------------------------------------
 #---- SETUP SYSTEMD ----------------------
