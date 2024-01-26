@@ -2,36 +2,49 @@
 
 cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup -c aes-xts-plain64 -s 512 -y luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/arch && mount /dev/mapper/cryptroot /mnt/arch && btrfs su cr /mnt/arch/@  && btrfs su cr /mnt/arch/@home && btrfs su cr /mnt/arch/@opt  && btrfs su cr /mnt/arch/@tmp && btrfs su cr /mnt/arch/@var && btrfs su cr /mnt/arch/@log && btrfs su cr /mnt/arch/@audit && btrfs su cr /mnt/arch/@snapshots && umount /mnt/arch && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/arch && mkdir /mnt/arch/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/arch/home && mkdir /mnt/arch/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/arch/opt  && mkdir /mnt/arch/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/arch/tmp && mkdir /mnt/arch/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/arch/var && mkdir /mnt/arch/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/arch/var/log && mkdir /mnt/arch/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/arch/var/log/audit && mkdir /mnt/arch/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/arch/.snapshots
 
-mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/luks-8cd2e22b-b324-46c6-89e6-8e89cf8e45fe /opt
+# systemd-boot, dracut, luks, btrfs
+cfdisk /dev/nvme1n1 && mkfs.vfat -F32 /dev/nvme1n1p1 && cryptsetup -y -v luksFormat /dev/nvme1n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme1n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/arch && mount /dev/mapper/cryptroot /mnt/arch && btrfs su cr /mnt/arch/@  && btrfs su cr /mnt/arch/@home && btrfs su cr /mnt/arch/@opt  && btrfs su cr /mnt/arch/@tmp && btrfs su cr /mnt/arch/@var && btrfs su cr /mnt/arch/@log && btrfs su cr /mnt/arch/@audit && btrfs su cr /mnt/arch/@snapshots && umount /mnt/arch && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/arch && mkdir /mnt/arch/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/arch/home && mkdir /mnt/arch/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/arch/opt  && mkdir /mnt/arch/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/arch/tmp && mkdir /mnt/arch/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/arch/var && mkdir /mnt/arch/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/arch/var/log && mkdir /mnt/arch/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/arch/var/log/audit && mkdir /mnt/arch/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/arch/.snapshots
 
 #chroot into endeavoros
 
 cryptsetup luksOpen /dev/nvme0n1p2 luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@cache /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/var/cache && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/luks-01fb64b3-fe25-4504-acde-8d92b358f9d2 /mnt/arch/.snapshots
 
-pacstrap /mnt/arch linux-zen linux-zen-headers base base-devel git neovim linux-firmware intel-ucode arch-install-scripts reflector
+pacstrap /mnt/arch linux-zen linux-zen-headers base base-devel git neovim linux-firmware intel-ucode arch-install-scripts reflector dracut sbsigntools iwd efibootmgr
+
+genfstab -U /mnt/arch >> /mnt/arch/etc/fstab
 
 arch-chroot /mnt/arch
 
-mount /dev/nvme0n1p1 /boot
-genfstab -U / >> /etc/fstab
+mount /dev/nvme0n1p1 /efi
+
 
 reflector --verbose --country 'CA,US' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
 
-pacman -S unzip zip unrar btrfs-progs dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim nvidia-dkms nvidia-utils mesa rng-tools haveged upower lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger power-profiles-daemon hsetroot xsel xclip alacritty vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome gammastep linux-zen linux-zen-headers emacs-wayland 
-
 ln -sf /usr/share/zoneinfo/Canada/Mountain /etc/localtime && hwclock --systohc && nvim /etc/locale.gen && locale-gen && echo "LANG=en_CA.UTF-8" >> /etc/locale.conf
 
-
-nvim /etc/mkinitcpio.conf && mkinitcpio -p linux-zen
-
-MODULES=(btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm)
-
-** GRUB_SETUP
-pacman -S refind efibootmgr
-
-mkrlconf
+pacman -S --noconfirm unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim nvidia-dkms nvidia-utils mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac
 
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
+
+pacman -S dracut-hook-uefi
+
+# systemd-boot
+/etc/pacman.d/hooks/998-systemd-boot.hook
+
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Updating systemd-boot
+When = PostTransaction
+Exec = /usr/bin/bootctl update
+
+blkid -s UUID -o value /dev/nvme0n1p2 
+a8f08f22-5b7e-4019-8130-050a7fa846c2
+
 
 GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 cryptdevice=UUID=bec7bf34-ac4f-4ddb-92c7-b00f04858db5:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 audit=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf  intel_iommu=igfx_off no_timer_check noreplace-smp page_alloc.shuffle=1 rcupdate.rcu_expedited=1 rootfstype=btrfs tsc=reliable rw"
 GRUB_CMDLINE_LINUX=""
@@ -46,11 +59,5 @@ sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install
 sudo refind-install --usedefault /dev/nvme0n1p1 --alldrivers
 
 ** Systemd Setup
-
-pacman -S --noconfirm linux-zen linux-zen-headers base base-devel git neovim linux-firmware intel-ucode arch-install-scripts reflector
-
-reflector --verbose --country 'CA,US' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
-
-pacman -S --noconfirm unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim nvidia-dkms nvidia-utils mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac
-
 systemctl enable NetworkManager fstrim.timer acpid sysstat apparmor auditd chronyd
+
