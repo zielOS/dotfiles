@@ -83,6 +83,11 @@ uefi="yes"
 nvim /etc/dracut.conf.d/force-modules.conf
 force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
 
+nvim /etc/dracut.conf.d/encryption.conf 
+install_items+=" /etc/crypttab "
+
+
+
 pacman -S kernel-install-for-dracut 
 
 reinstall-kernels
