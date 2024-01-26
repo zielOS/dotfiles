@@ -3,15 +3,15 @@
 cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 root && mkfs.btrfs /dev/archlvm/root && mount /dev/archlvm/root /mnt && btrfs su cr /mnt/@  && btrfs su cr /mnt/@home && btrfs su cr /mnt/@opt  && btrfs su cr /mnt/@tmp && btrfs su cr /mnt/@var && btrfs su cr /mnt/@log && btrfs su cr /mnt/@audit && btrfs su cr /mnt/@snapshots && umount /mnt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt && mkdir /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mkdir /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mkdir /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mkdir /mnt/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mkdir /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mkdir /mnt/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mkdir /mnt/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
 
 # systemd-boot, dracut, luks, llvm, btrfs
-cfdisk /dev/nvme0n1 && mkfs.vfat -F32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptlvm && pvcreate /dev/mapper/cryptlvm && vgcreate archlvm /dev/mapper/cryptlvm && lvcreate -L 16G archlvm -n swap && lvcreate -l 100%FREE archlvm -n root && mkfs.btrfs -f /dev/archlvm/root && mkswap /dev/archlvm/swap && mount /dev/archlvm/root /mnt && btrfs su cr /mnt/@  && btrfs su cr /mnt/@home && btrfs su cr /mnt/@opt  && btrfs su cr /mnt/@tmp && btrfs su cr /mnt/@var && btrfs su cr /mnt/@log && btrfs su cr /mnt/@audit && btrfs su cr /mnt/@snapshots && umount /mnt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt/ && mkdir /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mkdir /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mkdir /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mkdir /mnt//var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mkdir /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mkdir /mnt/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mkdir /mnt/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
+cfdisk /dev/nvme0n1 && mkfs.vfat -F32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptlvm && pvcreate /dev/mapper/cryptlvm && vgcreate archlvm /dev/mapper/cryptlvm && lvcreate -L 16G archlvm -n swap && lvcreate -l 100%FREE archlvm -n root && mkfs.btrfs -f /dev/archlvm/root && mkswap /dev/archlvm/swap && mount /dev/archlvm/root /mnt && btrfs su cr /mnt/@  && btrfs su cr /mnt/@home && btrfs su cr /mnt/@opt  && btrfs su cr /mnt/@tmp && btrfs su cr /mnt/@var && btrfs su cr /mnt/@log && btrfs su cr /mnt/@audit && btrfs su cr /mnt/@snapshots && umount /mnt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt && mkdir /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mkdir /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mkdir /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mkdir /mnt/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mkdir /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mkdir /mnt/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mkdir /mnt/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
 
 #chroot into endeavoros
+cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptlvm && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt/ && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
 
-cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme1n1p2 luks-ada46785-d1ee-4ae5-a61b-a937979c10aa && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt/ && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@cache /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//var/cache && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/luks-ada46785-d1ee-4ae5-a61b-a937979c10aa /mnt//.snapshots
 
 mkdir /mnt/efi && mount /dev/nvme0n1p1 /mnt/efi
 
-pacstrap /mnt linux linux-headers intel-ucode linux-firmware base base-devel git neovim arch-install-scripts reflector dracut  iwd efibootmgr yay lvm2 
+pacstrap /mnt base base-devel git neovim arch-install-scripts reflector dracut efibootmgr yay lvm2 
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -28,25 +28,31 @@ Include = /etc/pacman.d/chaotic-mirrorlist
 
 ln -sf /usr/share/zoneinfo/Canada/Mountain /etc/localtime && hwclock --systohc && nvim /etc/locale.gen && locale-gen && echo "LANG=en_CA.UTF-8" >> /etc/locale.conf
 
-pacman -S unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim nvidia-dkms nvidia-utils mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac lutris
+pacman -S unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim  mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac 
 
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 # systemd-boot
 bootctl install
 
-# loader.conf
+# /efi/loader/loader.conf
+default b6904dd6eeec4fa18283f652d67f6859*
 timeout 5
-default arch.conf
+console-mode auto
+reboot-for-bitlocker 1
 
-# entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /intel-ucode.img
-initrd /initramfs-linux.img
+# entries/arch.conf (autogenerated)
+# Boot Loader Specification type#1 entry
+# File created by /etc/kernel/install.d/90-loaderentry.install (systemd 254.1-1-arch)
+title      EndeavourOS
+version    6.7.1-arch1-1
+machine-id b6904dd6eeec4fa18283f652d67f6859
+sort-key   endeavouros-6.7.1-arch1-1
+options    nvme_load=YES nowatchdog rw rootflags=subvol=/@ rd.luks.uuid=a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 root=/dev/mapper/luks-a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 nvidia-drm.modeset=1 systemd.machine_id=b6904dd6eeec4fa18283f652d67f6859
+linux      /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/linux
+initrd     /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/initrd
 
-
-pacman -S dracut-hook-uefi
+pacman -S linux-clear linux-clear-headers intel-ucode linux-firmware dracut-hook-uefi kernel-install-for-dracut  nvidia-dkms nvidia-utils
 
 
 nvim /etc/pacman.d/hooks/998-systemd-boot.hook
@@ -67,7 +73,7 @@ c17227a9-5346-4b51-b9ae-7957beba2fc0
 
 # dracut setup
 nvim /etc/dracut.conf.d/cmdline.conf
-kernel_cmdline="rd.luks.uuid=luks-7774650e-88b7-4aa1-a56d-7f8c99ff8802 rd.lvm.lv=cryptlvm/root rd.lvm.lv=cryptlvm/swap resume=/dev/mapper/cryptlvm-swap  root=/dev/mapper/cryptlvm-root rootfstype=btrfs rootflags=rw"
+kernel_cmdline="rd.luks.uuid=luks-6b82f823-0d49-4248-8488-109b873ed6f8 rd.lvm.lv=cryptlvm/root rd.lvm.lv=cryptlvm/swap resume=/dev/mapper/cryptlvm-swap  root=/dev/mapper/cryptlvm-root rootfstype=btrfs rootflags=rw"
 
 nvim /etc/dracut.conf.d/flags.conf
 compress="zstd"
