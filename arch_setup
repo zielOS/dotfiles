@@ -5,9 +5,6 @@ cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes
 # systemd-boot, dracut, luks, llvm, btrfs
 cfdisk /dev/nvme0n1 && mkfs.vfat -F32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptlvm && pvcreate /dev/mapper/cryptlvm && vgcreate archlvm /dev/mapper/cryptlvm && lvcreate -L 16G archlvm -n swap && lvcreate -l 100%FREE archlvm -n root && mkfs.btrfs -f /dev/archlvm/root && mkswap /dev/archlvm/swap && mount /dev/archlvm/root /mnt && btrfs su cr /mnt/@  && btrfs su cr /mnt/@home && btrfs su cr /mnt/@opt  && btrfs su cr /mnt/@tmp && btrfs su cr /mnt/@var && btrfs su cr /mnt/@log && btrfs su cr /mnt/@audit && btrfs su cr /mnt/@snapshots && umount /mnt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt && mkdir /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mkdir /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mkdir /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mkdir /mnt/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mkdir /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mkdir /mnt/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mkdir /mnt/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
 
-#chroot into endeavoros
-cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptlvm && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt/ && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
-
 
 mkdir /mnt/efi && mount /dev/nvme0n1p1 /mnt/efi
 
@@ -123,3 +120,15 @@ sbctl enroll-keys
 sbctl status
 
 luks-e8847c22-104f-488b-abac-14bac0f1296d
+
+
+-- WARNING -- This system is for the use of authorized users only. Individuals 
+using this computer system without authority or in excess of their authority 
+are subject to having all their activities on this system monitored and 
+recorded by system personnel. Anyone using this system expressly consents to 
+such monitoring and is advised that if such monitoring reveals possible 
+evidence of criminal activity system personal may provide the evidence of such 
+monitoring to law enforcement officials.
+
+#chroot into endeavoros
+cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptlvm && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt/ && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
