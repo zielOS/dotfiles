@@ -121,3 +121,5 @@ uefi_secureboot_key="/usr/share/secureboot/keys/db/db.key"
 sbctl enroll-keys
 
 sbctl status
+
+luks-e8847c22-104f-488b-abac-14bac0f1296d
