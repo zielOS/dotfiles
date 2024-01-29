@@ -88,12 +88,22 @@ virtual/tex-base-9999
 
 rm -r /mnt/gentoo/etc/portage/package.use && nano -w /mnt/gentoo/etc/portage/package.use
 
+virtual/secret-service libsecret
+sys-apps/fwupd nvme logitech
+sys-firmware/intel-microcode hostonly initramfs
+sys-kernel/linux-firmware compress-zstd initramfs
+sys-kernel/installkernel systemd
+sys-boot/refind btrfs
+media-video/ffmpeg -xvid
+media-libs/freetype -harfbuzz
+media-libs/freetype harfbuzz
 app-antivirus/clamav milter
 gnome-extra/gnome-software flatpak
 net-firewall/firewalld -iptables
 net-firewall/nftables json xtables
 media-libs/libsdl2 -wayland
 sys-libs/ncurses -gpm
+dev-vcs/git keyring
 net-libs/nodejs npm lto
 net-p2p/transmission gtk -qt5 -qt6
 sys-config/ltoize keep-nocommon clang
@@ -118,7 +128,7 @@ media-sound/pulseaudio -daemon
 media-video/pipewire sound-server
 sys-apps/kmod tools
 sys-apps/xdg-desktop-portal -screencast -geolocation
-sys-apps/systemd policykit 
+sys-apps/systemd policykit boot cryptsetup zstd  
 media-sound/mpg123 -pulseaudio
 media-libs/libpng apng
 dev-qt/qtgui eglfs egl dbus
@@ -156,7 +166,6 @@ dev-qt/qtcore icu
 media-libs/libvpx postproc
 x11-base/xorg-server xvfb
 x11-drivers/nvidia-drivers modules modules-sign
-
 
 rm -R /mnt/gentoo/etc/portage/package.mask && nano -w /mnt/gentoo/etc/portage/package.mask
 
@@ -353,7 +362,7 @@ CONFIG_NF_CT_NETLINK_HELPER
 cryptsetup luksOpen /dev/nvme1n1p2 cryptroot  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt   && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var  && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
 
 
-git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
+git config --global credential.helper /usr/bin/git-credential-libsecret
 
 chroot /mnt/gentoo /bin/bash
 source /etc/profile

@@ -21,7 +21,3 @@ MANPATH=$MANPATH:$NVCOMPILERS/$NVARCH/23.9/compilers/man; export MANPATH
 PATH=$NVCOMPILERS/$NVARCH/23.9/compilers/bin:$PATH; export PATH 
 export PATH=$NVCOMPILERS/$NVARCH/23.9/comm_libs/mpi/bin:$PATH
 export MANPATH=$MANPATH:$NVCOMPILERS/$NVARCH/23.9/comm_libs/mpi/man
-
-export CUDACXX=nvcc
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/cuda/include
-
