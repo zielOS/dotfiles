@@ -32,10 +32,10 @@ NOCOMMON_OVERRIDE_LIBTOOL="yes"
 EMERGE_DEFAULT_OPTS="--jobs=10 --keep-going=y --ask"
 ACCEPT_KEYWORDS="~amd64"
 ACCEPT_LICENSE="*"
-VIDEO_CARDS="nvidia intel"
+VIDEO_CARDS="nvidia"
 USE="-elogind systemd -gnome -kde -ccache -tpm zstd truetype harfbuzz \
     clamav -motif gtk pulseaudio qt5 qt6 sound-server apparmor abi_x86_32 \
-    -smartcard -wayland  pam clang policykit opengl keyring sqlite \
+    -smartcard wayland  pam clang policykit opengl keyring sqlite \
     cups -quicktime nvidia udev alsa audit udisks emacs nvenc \
     pie gui X upower hardened dbus jpeg lto pgo jit firmware python \
     -accessibility bluetooth -handbook fontconfig udisks gstreamer "
@@ -92,7 +92,7 @@ virtual/secret-service libsecret
 sys-apps/fwupd nvme logitech
 sys-firmware/intel-microcode hostonly initramfs
 sys-kernel/linux-firmware compress-zstd initramfs
-sys-kernel/installkernel systemd
+sys-kernel/installkernel systemd dracut grub
 sys-boot/refind btrfs
 media-video/ffmpeg -xvid
 media-libs/freetype -harfbuzz
@@ -182,16 +182,10 @@ chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 
+mount /dev/nvme0n1p1 /boot
+genfstab -U / >> /etc/fstab
 
 emerge-webrsync && emerge --sync && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru src_prepare-overlay xira && emerge --sync
-
-* gcc upgrade
-emerge -aq sys-devel/gcc && eselect gcc list && eselect gcc set 2  && emerge --ask --oneshot --usepkg=n sys-devel/libtool && emerge -ev --usepkg=n @world --jobs=10 --keep-going --exclude gcc rust go nodejs llvm python
-
-emerge -av dev-lang/python --jobs=10
-
-* gcc downgrade
-revdep-rebuild --library 'libstdc++.so.6' -- --exclude gcc && emerge --ask --oneshot --usepkg=n --verbose sys-devel/libtool
 
 
 ** Systemd
@@ -224,6 +218,26 @@ genkernel --luks --menuconfig --install  --microcode-initramfs --makeopts=-j22 -
 #hyprland 
 emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep sys-fs/genfstab app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb app-admin/sudo net-p2p/transmission sys-apps/bat media-gfx/maim dev-python/pynvim app-editors/neovim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-themes/papirus-icon-theme net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort app-containers/docker dev-lang/go net-libs/nodejs dev-python/matplotlib dev-python/scipy sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/rng-tools sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct sys-apps/apparmor sys-apps/apparmor-utils sys-libs/libapparmor sec-policy/apparmor-profiles x11-drivers/nvidia-drivers net-misc/networkmanager x11-themes/kvantum typescript gnome-bluetooth gui-apps/qt6ct x11-misc/qt5ct gui-wm/hyprland gui-apps/swayidle gui-apps/swaylock-effects gui-apps/wl-clipboard x11-terms/alacritty  gui-apps/grim gui-apps/slurp gui-apps/wf-recorder x11-base/xwayland gui-libs/xdg-desktop-portal-hyprland dev-libs/gjs dev-lang/sassc app-misc/brightnessctl media-sound/pavucontrol gui-apps/tuigreet  dev-python/python-pam gui-apps/swappy gui-apps/swww upower gvfs thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler insync wayshot texlive brave-bin steam-meta lutris wine gcc:12 nerd-fonts rustup
 
+# dracut setup
+nvim /etc/dracut.conf.d/cmdline.conf
+kernel_cmdline="quiet loglevel=3 cryptdevice=UUID=884adcc4-40c0-4836-afd9-ccb8b3b88c4c:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw"
+
+nvim /etc/dracut.conf.d/flags.conf
+compress="zstd"
+hostonly="yes"
+uefi="yes"
+
+nvim /etc/dracut.conf.d/force-modules.conf
+force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+
+nvim /etc/dracut.conf.d/encryption.conf 
+install_items+=" /etc/crypttab "
+
+nvim /etc/dracut.conf.d/omit.conf
+omit_dracutmodules+=" network cifs nfs nbd brltty "
+
+nvim /etc/crypttab
+498c9752-3642-4121-b37f-b9a9b8204988
 
 nvim /etc/dracut.conf
 hostonly="yes"
@@ -372,5 +386,13 @@ mount /dev/nvme1n1p1 /boot
 
 sudo chage --mindays 40 \
 --maxdays 120 --warndays 30 ahsan
+
+* gcc upgrade
+emerge -aq sys-devel/gcc && eselect gcc list && eselect gcc set 2  && emerge --ask --oneshot --usepkg=n sys-devel/libtool && emerge -ev --usepkg=n @world --jobs=10 --keep-going --exclude gcc rust go nodejs llvm python
+
+emerge -av dev-lang/python --jobs=10
+
+* gcc downgrade
+revdep-rebuild --library 'libstdc++.so.6' -- --exclude gcc && emerge --ask --oneshot --usepkg=n --verbose sys-devel/libtool
 
 grep 'app-emacs/' /var/lib/portage/world | xargs --open-tty emerge --ask --deselect; emerge --ask --depcleaneselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
