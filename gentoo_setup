@@ -2,12 +2,6 @@
 
 cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs su cr /mnt/gentoo/@  && btrfs su cr /mnt/gentoo/@home && btrfs su cr /mnt/gentoo/@opt  && btrfs su cr /mnt/gentoo/@tmp && btrfs su cr /mnt/gentoo/@var && btrfs su cr /mnt/gentoo/@log && btrfs su cr /mnt/gentoo/@audit  && btrfs su cr /mnt/gentoo/@snapshots && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt  && mkdir /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mkdir /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mkdir /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots
 
-cfdisk /dev/nvme1n1 && mkfs.vfat -F32 /dev/nvme1n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme1n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme1n1p2 cryptlvm && 
-
-pvcreate /dev/mapper/cryptlvm && vgcreate lvm /dev/mapper/cryptlvm && lvcreate -L 16G lvm -n swap && lvcreate -l 100%FREE lvm -n root && mkfs.btrfs -f /dev/lvm/root && mkswap /dev/lvm/swap && mkdir /mnt/gentoo && mount /dev/lvm/root /mnt/gentoo && btrfs su cr /mnt/gentoo/@  && btrfs su cr /mnt/gentoo/@home && btrfs su cr /mnt/gentoo/@opt  && btrfs su cr /mnt/gentoo/@tmp && btrfs su cr /mnt/gentoo/@var && btrfs su cr /mnt/gentoo/@log && btrfs su cr /mnt/gentoo/@audit && btrfs su cr /mnt/gentoo/@snapshots && umount /mnt/gentoo &&
-
-mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/lvm/root /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/lvm/root /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/lvm/root /mnt/gentoo/opt  && mkdir /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/lvm/root /mnt/gentoo/tmp && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/lvm/root /mnt/gentoo/var && mkdir /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/lvm/root /mnt/gentoo/var/log && mkdir /mnt/gentoo/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/lvm/root /mnt/gentoo/var/log/audit && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/lvm/root /mnt/gentoo/.snapshots
-
 cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240121T170320Z/stage3-amd64-desktop-systemd-mergedusr-20240121T170320Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
   
 
@@ -65,6 +59,7 @@ nano -w /mnt/gentoo/etc/portage/profile/use.mask
 
 mkdir -p /mnt/gentoo/etc/portage/profile/ && nano -w /mnt/gentoo/etc/portage/profile/package.provided
 
+sys-kernel/gentoo-sources-6.4
 app-text/texlive-9999
 app-text/texlive-core-9999
 dev-tex/latexdiff-9999
@@ -185,17 +180,16 @@ export PS1="(chroot) ${PS1}"
 mount /dev/nvme0n1p1 /boot
 genfstab -U / >> /etc/fstab
 
-emerge-webrsync && emerge --sync && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru src_prepare-overlay xira && emerge --sync
+emerge-webrsync && emerge --sync && ln -sf ../usr/share/zoneinfo/Canada/Mountain /etc/localtime && nano -w /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge -aq app-eselect/eselect-repository dev-vcs/git --jobs=10 && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru src_prepare-overlay xira && emerge --sync
 
-
-** Systemd
-ln -sf ../usr/share/zoneinfo/Canada/Mountain /etc/localtime && nano -w /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && systemd-firstboot --prompt --setup-machine-id 
+emerge genfstab
+emerge gcc
 
 * initial-packages
 emerge --sync && emerge -auvDN @world
 
 * kernel setup
-emerge sys-kernel/gentoo-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-kernel/genkernel sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode --jobs=10 && eselect kernel set 1 && ls -l /usr/src/linux
+emerge sys-kernel/xanmod-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode sys-kernel/modprobed-db btrfs-progs dracut grub sys-kernel/installkernel && eselect kernel set 1 && ls -l /usr/src/linux 
 
 ** gentoo config examples
 1. main handbook
@@ -210,59 +204,38 @@ emerge sys-kernel/gentoo-sources sys-kernel/linux-firmware sys-kernel/linux-head
 10. intel microcode
 11. input devices
 
-genkernel --luks --menuconfig --install  --microcode-initramfs --makeopts=-j22 --kernel-config=/usr/src/linux/sample-config --clean all
-
-
-
-
-#hyprland 
-emerge sys-boot/grub sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep sys-fs/genfstab app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb app-admin/sudo net-p2p/transmission sys-apps/bat media-gfx/maim dev-python/pynvim app-editors/neovim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-themes/papirus-icon-theme net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort app-containers/docker dev-lang/go net-libs/nodejs dev-python/matplotlib dev-python/scipy sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/rng-tools sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct sys-apps/apparmor sys-apps/apparmor-utils sys-libs/libapparmor sec-policy/apparmor-profiles x11-drivers/nvidia-drivers net-misc/networkmanager x11-themes/kvantum typescript gnome-bluetooth gui-apps/qt6ct x11-misc/qt5ct gui-wm/hyprland gui-apps/swayidle gui-apps/swaylock-effects gui-apps/wl-clipboard x11-terms/alacritty  gui-apps/grim gui-apps/slurp gui-apps/wf-recorder x11-base/xwayland gui-libs/xdg-desktop-portal-hyprland dev-libs/gjs dev-lang/sassc app-misc/brightnessctl media-sound/pavucontrol gui-apps/tuigreet  dev-python/python-pam gui-apps/swappy gui-apps/swww upower gvfs thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler insync wayshot texlive brave-bin steam-meta lutris wine gcc:12 nerd-fonts rustup
 
 # dracut setup
-nvim /etc/dracut.conf.d/cmdline.conf
-kernel_cmdline="quiet loglevel=3 cryptdevice=UUID=884adcc4-40c0-4836-afd9-ccb8b3b88c4c:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw"
-
-nvim /etc/dracut.conf.d/flags.conf
+nvim /etc/dracut.conf
 compress="zstd"
 hostonly="yes"
-uefi="yes"
-
-nvim /etc/dracut.conf.d/force-modules.conf
-force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-
-nvim /etc/dracut.conf.d/encryption.conf 
-install_items+=" /etc/crypttab "
-
-nvim /etc/dracut.conf.d/omit.conf
+dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
+add_dracutmodules+=" crypt dm rootfs-block "
 omit_dracutmodules+=" network cifs nfs nbd brltty "
+force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+kernel_cmdline="loglevel=3 quiet crypt_root=UUID=be20ee3c-5493-4c19-a804-4eaa62e4a43d root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw apparmor=1 security=apparmor"
+install_items+=" /etc/crypttab "
 
 nvim /etc/crypttab
 498c9752-3642-4121-b37f-b9a9b8204988
 
-nvim /etc/dracut.conf
-hostonly="yes"
-dracutmodules+=" dash kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
-add_dracutmodules+=" crypt dm rootfs-block "
-compress="zstd"
-kernel_cmdline="rd.luks.uuid=luks-c02ae604-eb9c-426b-9000-7fa2f0954150 rd.lvm.lv=cryptlvm/root rd.lvm.lv=cryptlvm/swap resume=/dev/mapper/cryptlvm-swap  root=/dev/mapper/cryptlvm-root rootfstype=btrfs rootflags=rw"
-force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-
-dracut -a lvm
-
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=8270f7cf-0388-450a-838c-3b001066dde8 root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1"
+GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=be20ee3c-5493-4c19-a804-4eaa62e4a43d root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1"
 GRUB_CMDLINE_LINUX_DEFAULT="apparmor=1 security=apparmor" 
+
+
+make menuconfig && make -j22 && emerge nvidia-drivers && make modules_install && make install
 
 grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
 
-** Openrc
-echo gentoo > /etc/hostname && emerge -q net-misc/dhcpcd && rc-update add dhcpcd default && echo config_enp4s0="dhcp" > /etc/conf.d/net && cd /etc/init.d && ln -s net.lo net.enp4s0 && rc-update add net.enp4s0 default && cd && echo  127.0.0.1     gentoo.homenetwork gentoo localhost > /etc/hosts && emerge -q app-admin/sysklogd && rc-update add sysklogd default && emerge -q sys-process/cronie && rc-update add cronie default && emerge -q net-misc/chrony && rc-update add chronyd default && rc-update add power-profiles-daemon default && rc-update add ckb-next-daemon default && rc-update add sysstat default && rc-update add apparmor boot && rc-update add auditd default
 
+#hyprland 
+emerge sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep sys-fs/genfstab app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb app-admin/sudo net-p2p/transmission sys-apps/bat media-gfx/maim dev-python/pynvim app-editors/neovim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-themes/papirus-icon-theme net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort app-containers/docker dev-lang/go net-libs/nodejs dev-python/matplotlib dev-python/scipy sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/rng-tools sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct sys-apps/apparmor sys-apps/apparmor-utils sys-libs/libapparmor sec-policy/apparmor-profiles x11-drivers/nvidia-drivers net-misc/networkmanager x11-themes/kvantum typescript gnome-bluetooth gui-apps/qt6ct x11-misc/qt5ct gui-wm/hyprland gui-apps/swayidle gui-apps/swaylock-effects gui-apps/wl-clipboard x11-terms/alacritty  gui-apps/grim gui-apps/slurp gui-apps/wf-recorder x11-base/xwayland gui-libs/xdg-desktop-portal-hyprland dev-libs/gjs dev-lang/sassc app-misc/brightnessctl media-sound/pavucontrol gui-apps/tuigreet  dev-python/python-pam gui-apps/swappy gui-apps/swww upower gvfs thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin tumbler insync wayshot texlive brave-bin steam-meta lutris wine gcc:12 nerd-fonts rustup
 
 # Setup systemd
-systemd-firstboot --prompt --setup-machine-id && systemctl enable NetworkManager fstrim.timer sysstat apparmor auditd  nvidia-suspend.service nvidia-resume.service
+systemctl enable NetworkManager fstrim.timer sysstat apparmor auditd  nvidia-suspend.service nvidia-resume.service
 
 # Post-install chroot
 cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && gentoo-chroot /mnt/gentoo
@@ -275,9 +248,6 @@ options nvidia NVreg_UsePageAttributeTable=1
 
 nvim /etc/modprobe.d/nvidia-power-management.conf
 options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/tmp
-
-CONFIG_INPUT_MOUSEDEV:     is not set (required to expose mice for GPM)      
-
 
 #scaling apps
 --force-device-scale-factor=1.75 %U
@@ -373,7 +343,7 @@ rustup-init-gentoo
 CONFIG_NF_CT_NETLINK_HELPER
 
 # Post-install chroot
-cryptsetup luksOpen /dev/nvme1n1p2 cryptroot  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt   && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var  && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
+cryptsetup luksOpen /dev/nvme0n1p2 cryptroot  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt   && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp &&  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var  && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
 
 
 git config --global credential.helper /usr/bin/git-credential-libsecret

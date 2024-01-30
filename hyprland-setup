@@ -17,7 +17,8 @@ ln -s $HOME/.dots/.config/hypr  $HOME/.config/
 ln -s $HOME/.dots/.config/Kvantum  $HOME/.config/
 ln -s $HOME/.dots/.config/lazygit $HOME/.config/
 ln -s $HOME/.dots/.config/lsd  $HOME/.config/
-ln -s $HOME/.dots/Thunar $HOME/
+ln -s $HOME/.dots/.config/starship.toml $HOME/.config
+ln -s $HOME/.dots/.config/kitty  $HOME/.config/
 ln -s $HOME/.dots/.config/qt5ct  $HOME/.config/
 ln -s $HOME/.dots/.config/qt6ct  $HOME/.config/
 ln -s $HOME/.dots/.config/wallpapers  $HOME/.config/
@@ -25,11 +26,13 @@ ln -s $HOME/.dots/.local/bin/hypr $HOME/.local/bin
 ln -s $HOME/.dots/.config/zathura  $HOME/.config/
 ln -s $HOME/.dots/.config/zsh $HOME/.config/
 ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
-ln -s $HOME/.dots/.zshrc $HOME/
 ln -s $HOME/.dots/.themes $HOME/
 ln -s $HOME/.dots/org $HOME/
 ln -s $HOME/.dots/colorscheme.css $HOME/
 ln -s $HOME/.dots/gentoo_setup $HOME/
+
+rm -rf $HOME/.zshrc
+ln -s $HOME/.dots/.zshrc $HOME/
 
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh) 
@@ -52,5 +55,6 @@ echo "Setup Git"
 cd 
 git config --global user.name "zielOS"
 git config --global user.email "ahsanur041@gmail.com"
+git config --global credential.helper /usr/bin/git-credential-libsecret
 
 cd && sudo cp -R ~/.dots/variables.sh /etc/profile.d/
