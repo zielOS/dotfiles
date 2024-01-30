@@ -37,7 +37,7 @@ alias dnf-cl="sudo dnf5 clean all"
 alias dnf-se="dnf search"
 
 # Misc-related aliases
-alias audit='cd ~/.dots/lynis && sudo ./lynis audit system && cd'
+alias audit="sudo lynis audit system"
 alias update-grub='sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install --target=x86_64-efi --efi-directory=/boot --removable && sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias grub-conf='sudo lvim /etc/default/grub'
 alias Rm='sudo rm -rf'
