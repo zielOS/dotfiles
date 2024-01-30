@@ -59,3 +59,4 @@ git config --global credential.helper /usr/bin/git-credential-libsecret
 cd && sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 
 rustup-init-gentoo -s
+pipx install hyprshade pyprland
