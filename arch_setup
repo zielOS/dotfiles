@@ -1,12 +1,12 @@
 #!/bin/sh
 
-cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 root && mkfs.btrfs /dev/archlvm/root && mount /dev/archlvm/root /mnt && btrfs su cr /mnt/@  && btrfs su cr /mnt/@home && btrfs su cr /mnt/@opt  && btrfs su cr /mnt/@tmp && btrfs su cr /mnt/@var && btrfs su cr /mnt/@log && btrfs su cr /mnt/@audit && btrfs su cr /mnt/@snapshots && umount /mnt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt && mkdir /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mkdir /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mkdir /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mkdir /mnt/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mkdir /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mkdir /mnt/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mkdir /mnt/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
+cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup luksOpen /dev/nvme0n1p2 cryptroot && mkfs.btrfs -f /dev/mapper/cryptroot && mount /dev/mapper/cryptroot /mnt && btrfs su cr /mnt/@  && btrfs su cr /mnt/@home && btrfs su cr /mnt/@opt  && btrfs su cr /mnt/@tmp && btrfs su cr /mnt/@var && btrfs su cr /mnt/@log && btrfs su cr /mnt/@audit && btrfs su cr /mnt/@snapshots && umount /mnt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt && mkdir /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home && mkdir /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/opt  && mkdir /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/tmp && mkdir /mnt/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/var && mkdir /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log && mkdir /mnt/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/var/log/audit && mkdir /mnt/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
 
 # systemd-boot, dracut, luks, llvm, btrfs
 cfdisk /dev/nvme0n1 && mkfs.vfat -F32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptlvm && pvcreate /dev/mapper/cryptlvm && vgcreate archlvm /dev/mapper/cryptlvm && lvcreate -L 16G archlvm -n swap && lvcreate -l 100%FREE archlvm -n root && mkfs.btrfs -f /dev/archlvm/root && mkswap /dev/archlvm/swap && mount /dev/archlvm/root /mnt && btrfs su cr /mnt/@  && btrfs su cr /mnt/@home && btrfs su cr /mnt/@opt  && btrfs su cr /mnt/@tmp && btrfs su cr /mnt/@var && btrfs su cr /mnt/@log && btrfs su cr /mnt/@audit && btrfs su cr /mnt/@snapshots && umount /mnt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/archlvm/root /mnt && mkdir /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/archlvm/root /mnt/home && mkdir /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/archlvm/root /mnt/opt  && mkdir /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/archlvm/root /mnt/tmp && mkdir /mnt/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/archlvm/root /mnt/var && mkdir /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/archlvm/root /mnt/var/log && mkdir /mnt/var/log/audit && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/archlvm/root /mnt/var/log/audit && mkdir /mnt/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/archlvm/root /mnt/.snapshots
 
 
-mkdir /mnt/efi && mount /dev/nvme0n1p1 /mnt/efi
+mkdir /mnt/boot && mount /dev/nvme0n1p1 /mnt/boot
 
 pacstrap /mnt base base-devel git neovim arch-install-scripts reflector dracut efibootmgr yay lvm2 
 
@@ -70,7 +70,7 @@ c17227a9-5346-4b51-b9ae-7957beba2fc0
 
 # dracut setup
 nvim /etc/dracut.conf.d/cmdline.conf
-kernel_cmdline="rd.luks.uuid=luks-6b82f823-0d49-4248-8488-109b873ed6f8 rd.lvm.lv=cryptlvm/root rd.lvm.lv=cryptlvm/swap resume=/dev/mapper/cryptlvm-swap  root=/dev/mapper/cryptlvm-root rootfstype=btrfs rootflags=rw"
+kernel_cmdline="quiet loglevel=3 cryptdevice=UUID=c5598fbe-528d-43ab-a5ea-7b0feb11a16b:root root=/dev/archlvm/root nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw"
 
 nvim /etc/dracut.conf.d/flags.conf
 compress="zstd"
@@ -89,12 +89,6 @@ pacman -S kernel-install-for-dracut
 
 reinstall-kernels
 
-GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 cryptdevice=UUID=bec7bf34-ac4f-4ddb-92c7-b00f04858db5:root root=/dev/archlvm/root nvidia-drm.modeset=1 audit=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf  intel_iommu=igfx_off no_timer_check noreplace-smp page_alloc.shuffle=1 rcupdate.rcu_expedited=1 rootfstype=btrfs tsc=reliable rw"
-GRUB_CMDLINE_LINUX=""
-
-nvim /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 cryptdevice=UUID=c5598fbe-528d-43ab-a5ea-7b0feb11a16b:root root=/dev/archlvm/root nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
-GRUB_CMDLINE_LINUX=""
 
 sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install --target=x86_64-efi --efi-directory=/boot --removable && sudo grub-mkconfig -o /boot/grub/grub.cfg
 
