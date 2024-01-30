@@ -213,16 +213,17 @@ dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shu
 add_dracutmodules+=" crypt dm rootfs-block "
 omit_dracutmodules+=" network cifs nfs nbd brltty "
 force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline="loglevel=3 quiet crypt_root=UUID=be20ee3c-5493-4c19-a804-4eaa62e4a43d root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw apparmor=1 security=apparmor"
+kernel_cmdline="loglevel=3 quiet crypt_root=UUID=4229ea28-c6c6-45f8-86e2-fe9a4ef1992a root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw apparmor=1 security=apparmor"
 install_items+=" /etc/crypttab "
 
 nvim /etc/crypttab
-498c9752-3642-4121-b37f-b9a9b8204988
+cryptroot UUID=4229ea28-c6c6-45f8-86e2-fe9a4ef1992a     /crypto_keyfile.bin luks,initramfs
+
 
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=be20ee3c-5493-4c19-a804-4eaa62e4a43d root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1"
+GRUB_CMDLINE_LINUX="quiet crypt_root=UUID=4229ea28-c6c6-45f8-86e2-fe9a4ef1992a root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1"
 GRUB_CMDLINE_LINUX_DEFAULT="apparmor=1 security=apparmor" 
 
 
