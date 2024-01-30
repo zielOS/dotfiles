@@ -11,9 +11,6 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.local/bin/hypr
 export PATH=$PATH:$HOME/.config/emacs/bin
 export PATH=$PATH:$HOME/.npm-global/bin
-export PATH=$PATH:/usr/local/texlive/2023/bin/x86_64-linux
-export MANPATH=$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man
-export INFOPATH=$INFOPATH/usr/local/texlive/2023/texmf-dist/doc/infoexport
 
 NVARCH=`uname -s`_`uname -m`; export NVARCH
 NVCOMPILERS=/opt/nvidia/hpc_sdk; export NVCOMPILERS
