@@ -60,3 +60,9 @@ cd && sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 
 rustup-init-gentoo -s
 pipx install hyprshade pyprland
+
+hyprpm add https://github.com/DreamMaoMao/hycov.git
+hyprpm add https://github.com/Duckonaut/split-monitor-workspaces.git
+
+hyprpm enable hycov
+hyprpm enable split-monitor-workspaces
