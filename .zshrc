@@ -45,6 +45,8 @@ source ~/.config/zsh/syntax_highlighting/catppuccin_mocha-zsh-syntax-highlightin
 
 eval "$(starship init zsh)"
 
+
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/ahsan/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -60,11 +62,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
-# fnm
-export PATH="/home/ahsan/.local/share/fnm:$PATH"
-eval "`fnm env`"
-
-# fnm
-export PATH="/home/ahsan/.local/share/fnm:$PATH"
-eval "`fnm env`"
