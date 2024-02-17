@@ -20,7 +20,7 @@ This function should only modify configuration layer settings."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-enable-lazy-installation 'nil
 
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
@@ -252,7 +252,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(catppuccin
+                         spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -574,6 +575,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (add-hook 'emacs-startup-hook (lambda ()
+                                  (when (get-buffer-window "*scratch*")
+                                    (bury-buffer "*scratch*"))))
 )
 
 
@@ -598,22 +602,41 @@ before packages are loaded."
 
     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-    (add-to-list 'org-structure-template-alist '("py" . "src python")))
+    (add-to-list 'org-structure-template-alist '("py" . "src jupyter-python")))
 
   (with-eval-after-load 'org
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((emacs-lisp . t)
        (python . t)
+       (jupyter . t)
        (shell . t)
        (org . t)
        (latex . t)
        (sqlite . t)))
-
     (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
-  ;;jupyter setup
+  (setq org-confirm-babel-evaluate nil)
 
+  ;;jupyter
+  (setq org-babel-default-header-args:jupyter-python
+        '((:results . "both")
+	        ;; This seems to lead to buffer specific sessions!
+	        (:session . (lambda () (buffer-file-name)))
+	        (:kernel . "python3")
+	        (:pandoc . "t")
+	        (:exports . "both")
+	        (:cache .   "no")
+	        (:noweb . "no")
+	        (:hlines . "no")
+	        (:tangle . "no")
+	        (:eval . "never-export")))
+
+  (org-babel-jupyter-override-src-block "python")
+
+  (setq ob-async-no-async-languages-alist '("jupyter-python"))
+
+  (defalias 'org-babel-execute:ipython 'org-babel-execute:jupyter-python)
 
 )
 
