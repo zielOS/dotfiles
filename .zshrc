@@ -62,3 +62,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+if [ -e /home/ahsan/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ahsan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
