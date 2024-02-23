@@ -20,7 +20,7 @@ This function should only modify configuration layer settings."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'nil
+   dotspacemacs-enable-lazy-installation 'unused
 
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
@@ -40,35 +40,40 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      auto-completion
      better-defaults
+     colors
+     compleseus
+     dap
      emacs-lisp
      git
-     ivy
-     latex
+     helpful
+     ;;ivy
      lsp
      ;; markdown
      multiple-cursors
      org
+     ;;spacemacs-completion
+     spacemacs-defaults
+     spacemacs-editing
+     spacemacs-editing-visual
+     spacemacs-evil
+     spacemacs-navigation
+     spacemacs-org
+     spacemacs-visual
+     themes-megapack
+     pdf
+     prettier
      python
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      ;; spell-checking
-     sql
-     syntax-checking
-     (tabs :variables
-            tabs-selected-tab-bar 'left
-            tabs-auto-hide t
-            tabs-auto-hide-delay 3.0
-            tabs-icons t)
+     ;; syntax-checking
      ;; version-control
      (treemacs :variables
                treemacs-use-follow-mode 'tag
                treemacs-use-filewatch-mode t
                treemacs-use-all-the-icons-theme t
-               treemacs-use-scope-type 'Perspectives)
-
-
-     )
+               treemacs-use-scope-type 'Perspectives))
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -79,7 +84,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(jupyter catppuccin-theme ob-async)
+   dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -193,7 +198,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'random
 
    ;; Scale factor controls the scaling (size) of the startup banner. Default
    ;; value is `auto' for scaling the logo automatically to fit all buffer
@@ -252,7 +257,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(catppuccin
+   dotspacemacs-themes '(doom-tokyo-night
                          spacemacs-dark
                          spacemacs-light)
 
@@ -333,7 +338,7 @@ It should only modify the values of Spacemacs settings."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'original
+   dotspacemacs-auto-save-file-location 'cache
 
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
@@ -350,6 +355,10 @@ It should only modify the values of Spacemacs settings."
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
+   ;; It is also possible to use a posframe with the following cons cell
+   ;; `(posframe . position)' where position can be one of `center',
+   ;; `top-center', `bottom-center', `top-left-corner', `top-right-corner',
+   ;; `top-right-corner', `bottom-left-corner' or `bottom-right-corner'
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
 
@@ -436,15 +445,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers '(:relative nil
-                                         :disabled-for-modes dired-mode
-                                         doc-view-mode
-                                         markdown-mode
-                                         org-mode
-                                         pdf-view-mode
-                                         text-mode
-                                         :size-limit-kb 1000)
-
+   dotspacemacs-line-numbers nil
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -575,9 +576,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (add-hook 'emacs-startup-hook (lambda ()
-                                  (when (get-buffer-window "*scratch*")
-                                    (bury-buffer "*scratch*"))))
 )
 
 
@@ -595,49 +593,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;;org setup
-  (with-eval-after-load 'org
-    ;; This is needed as of Org 9.2
-    (require 'org-tempo)
-
-    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-    (add-to-list 'org-structure-template-alist '("py" . "src jupyter-python")))
-
-  (with-eval-after-load 'org
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((emacs-lisp . t)
-       (python . t)
-       (jupyter . t)
-       (shell . t)
-       (org . t)
-       (latex . t)
-       (sqlite . t)))
-    (push '("conf-unix" . conf-unix) org-src-lang-modes))
-
-  (setq org-confirm-babel-evaluate nil)
-
-  ;;jupyter
-  (setq org-babel-default-header-args:jupyter-python
-        '((:results . "both")
-	        ;; This seems to lead to buffer specific sessions!
-	        (:session . (lambda () (buffer-file-name)))
-	        (:kernel . "python3")
-	        (:pandoc . "t")
-	        (:exports . "both")
-	        (:cache .   "no")
-	        (:noweb . "no")
-	        (:hlines . "no")
-	        (:tangle . "no")
-	        (:eval . "never-export")))
-
-  (org-babel-jupyter-override-src-block "python")
-
-  (setq ob-async-no-async-languages-alist '("jupyter-python"))
-
-  (defalias 'org-babel-execute:ipython 'org-babel-execute:jupyter-python)
-
 )
 
 
