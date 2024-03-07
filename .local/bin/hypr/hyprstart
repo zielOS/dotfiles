@@ -12,7 +12,7 @@ done
 hypridle &
 
 # wallpaper 
-#hyprwall &
+hyprwall &
 
 # theme
 hyprtheme &

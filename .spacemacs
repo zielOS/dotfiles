@@ -52,13 +52,6 @@ This function should only modify configuration layer settings."
      multiple-cursors
      org
      ;;spacemacs-completion
-     spacemacs-defaults
-     spacemacs-editing
-     spacemacs-editing-visual
-     spacemacs-evil
-     spacemacs-navigation
-     spacemacs-org
-     spacemacs-visual
      themes-megapack
      pdf
      prettier
@@ -84,7 +77,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(jupyter ob-async)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -593,6 +586,34 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (with-eval-after-load 'org
+    ;; This is needed as of Org 9.2
+    (require 'org-tempo)
+
+    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+    (add-to-list 'org-structure-template-alist '("py" . "src python")))
+
+  (with-eval-after-load 'jupyter
+    (setq ob-async-no-async-languages-alist '("jupyter-python" "jupyter-julia"))
+    (setq org-babel-default-header-args:jupyter-python
+          '((:results . "both")
+	          ;; This seems to lead to buffer specific sessions!
+	          (:session . (lambda () (buffer-file-name)))
+	          (:kernel . "python3")
+	          (:pandoc . "t")
+	          (:exports . "both")
+	          (:cache .   "no")
+	          (:noweb . "no")
+	          (:hlines . "no")
+	          (:tangle . "no")
+	          (:eval . "never-export")))
+    (org-babel-jupyter-override-src-block "python")
+    (defalias 'org-babel-execute:ipython 'org-babel-execute:jupyter-python)
+    (setq org-babel-default-header-args:ipython org-babel-default-header-args:jupyter-python))
+
+
+ 
 )
 
 
