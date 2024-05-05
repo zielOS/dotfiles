@@ -1,0 +1,8 @@
+#!/bin/sh 
+sudo emerge no-littering all-the-icons all-the-icons-dired consult dap-mode dashboard diminish dired-open peep-dired dired-sidebar drag-stuff embark embark-consult evil evil-collection magit hl-todo app-emacs/jupyter app-emacs/ob-async lsp-ui lsp-treemacs markdown-mode marginalia doom-modeline orderless org-appear org-bullets pdf-tools perspective projectile elpy app-emacs/jedi company-jedi python-docstring rainbow-delimiters rainbow-mode simple-httpd sudo-edit vterm vterm-toggle catppuccin-theme app-emacs/tldr vertico app-emacs/websocket wgrep which-key app-emacs/zmq flycheck general lsp-mode git-timemachine use-package flycheck general lsp-mode git-timemachine
+
+#packages for custom repo
+# flycheck
+# general
+# lsp-mode
+# git-timemachine

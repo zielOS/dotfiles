@@ -1,0 +1,132 @@
+################################
+### G E N E R A L    H E L P ###
+################################
+super + Escape
+	pkill -USR1 -x sxhkd && dunstify -u low -i input-keyboard 'SXHKD' reloaded
+
+super + shift + Escape
+	bat $XDG_CONFIG_HOME/sxhkd/sxhkdrc | yad --text-info
+
+
+################################
+### A P P L I C A T I O N S ####
+################################
+
+### Launch terminal
+super + Return
+  st
+
+# negative -w arg to account for a border width (default: 100%)
+super + shift + Return
+	i3term --float
+
+### Launch menu
+super + d
+  emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
+
+## Launch gui apps
+super + g; {b, f, e}
+	{ firefox, thunar, emacsclient -c -a emacs }
+
+#################################
+### H A R D W A R E   K E Y S ###
+#################################
+
+# Screenshots
+Print
+	flameshot full -p ~/Pictures/screenshots
+
+Print + shift
+	flameshot gui
+
+Print + super
+	flameshot screen -p ~/Pictures/screenshots
+
+# volume control
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+  volume { --up, --down, --toggle }
+
+###############
+### M I S C ###
+###############
+
+## get window class name
+super + alt + c
+  dunstify -i gtk-dialog-info CLASS "$(xprop | grep 'CLASS')"
+
+# quit/restart i3
+super + shift + {q, r}
+	i3-msg {exit, reload}
+
+
+# Lockscreen
+ctrl + alt + l
+  betterlockscreen -l
+
+
+
+#i3 Specific Keybindings
+
+#movement
+
+super + {Left,Down,Up,Right}
+    emacs-i3-integration focus {left,down,up,right}
+
+super + shift + {Left,Down,Up,Right}
+    emacs-i3-integration {left,down,up,right}
+
+super + {v, h}
+    i3-msg split {v,h}
+
+super + f
+    i3-msg fullscreen toggle
+
+super + space
+    i3-msg floating toggle
+
+
+super + a
+    i3-msg focus parent
+
+
+#workspaces
+
+super + shift + b
+    i3-msg move workspace to output next
+
+super + q
+    i3-msg kill
+
+
+super + ctrl + {h,j,k,l}
+    i3-msg resize {grow width 1 px or 1 ppt, shrink height 1 px or 1 ppt, grow height 1 px or 1 ppt, shrink width 1 px or 1 ppt}
+
+
+#################
+### E M A C S ###
+#################
+
+super + e; e
+    emacsclient -c -a 'emacs'
+super + e; a
+    emacsclient -c -a 'emacs' --eval '(emms)' --eval '(emms-play-directory-tree \"~/Music/\")'
+super + e; b
+    emacsclient -c -a 'emacs' --eval '(ibuffer)'
+super + e; d
+    emacsclient -c -a 'emacs' --eval '(dired nil)'
+super + e; i
+    emacsclient -c -a 'emacs' --eval '(erc)'
+super + e; n
+    emacsclient -c -a 'emacs' --eval '(elfeed)'
+super + e; s
+    emacsclient -c -a 'emacs' --eval '(eshell)'
+super + e; v
+    emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'
+super + e; w
+    emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(eww "distro.tube"))'
+
+#############
+### E W W ###
+#############
+super + x
+	eww open --toggle powermenu

@@ -1,0 +1,45 @@
+#+TITLE: DT's Doom Emacs Config
+#+AUTHOR: Derek Taylor (DT)
+#+DESCRIPTION: DT's personal Doom Emacs config.
+#+STARTUP: overview
+
+* DOOM THEME
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-theme 'doom-tokyo-night)
+(map! :leader
+      :desc "Load new theme" "h t" #'counsel-load-theme)
+#+END_SRC
+
+* FONTS
+Settings related to fonts within Doom Emacs:
++ 'doom-font' -- standard monospace font that is used for most things in Emacs.
++ 'doom-variable-pitch-font' -- variable font which is useful in some Emacs plugins.
++ 'doom-big-font' -- used in doom-big-font-mode; useful for presentations.
++ 'font-lock-comment-face' -- for comments.
++ 'font-lock-keyword-face' -- for keywords with special significance like 'setq' in elisp.
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 24)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 24)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 30))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+#+END_SRC
+
+* MODELINE
+The modeline is the bottom status bar that appears in Emacs windows.  For more information on what is available to configure in the Doom modeline, check out:
+https://github.com/seagle0128/doom-modeline
+
+#+begin_src emacs-lisp
+(set-face-attribute 'mode-line nil :font "JetBrainsMono Nerd Font-13")
+(setq doom-modeline-height 30     ;; sets modeline height
+      doom-modeline-bar-width 5   ;; sets right bar width
+      doom-modeline-persp-name t  ;; adds perspective name to modeline
+      doom-modeline-persp-icon t) ;; adds folder icon next to persp name
+#+end_src
+

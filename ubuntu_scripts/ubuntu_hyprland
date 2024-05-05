@@ -1,0 +1,78 @@
+#!/bin/bash
+sudo apt update && sudo apt install nala zstd
+echo "Installing packages"
+cd
+sudo nala update && sudo nala upgrade
+sudo nala install cargo rustc curl git deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger  x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct lsd kitty ncurses-term libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev libspa-0.2-dev libwayland-client++1 pipewire xdg-desktop-portal grim slurp libdrm-dev pkg-config ninja-build scdoc libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-bin libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev wayland-utils wayland-protocols libsdbus-c++-dev libegl1-mesa-dev libpam0g-dev libpugixml-dev wget build-essential libegl-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libxcb-util-dev meson cmake-extras cmake gettext gettext-base libfontconfig-dev libffi-dev libxml2-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev xdg-desktop-portal-wlr fontconfig libliftoff-dev libdisplay-info-dev libsystemd-dev hwdata xwayland libwayland-dev cpio vulkan-utility-libraries-dev libsecret-1-0 libsecret-1-dev gnome-keyring
+
+sudo snap remove firefox thunderbird
+
+echo "Installing pacstall & packages"
+#sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
+#pacstall -I insync-deb
+#pacstall -I ticktick-deb
+#pacstall -I ferdium-deb
+#pacstall -I bitwarden-deb
+#pacstall -I lazygit
+
+echo "Installing Brave"
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+sudo nala update
+
+sudo nala install brave-browser
+
+sudo nala update && sudo nala full-upgrade 
+
+echo "Setting up Dotfiles"
+sudo rm -R ~/.config/
+cd && mkdir ~/.config
+ln -s $HOME/.dots/.fonts $HOME/
+ln -s $HOME/.dots/.themes $HOME/
+ln -s $HOME/.dots/gentoo_setup $HOME/
+ln -s $HOME/.dots/org $HOME/
+ln -s $HOME/.dots/Thunar $HOME/
+ln -s $HOME/.dots/.local/bin/hypr $HOME/.local/bin
+ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
+ln -s $HOME/.dots/.xinitrc $HOME/
+ln -s $HOME/.dots/.Xresources $HOME/
+ln -s $HOME/.dots/catppuccin.css $HOME/
+ln -s $HOME/.dots/.config/starship.toml $HOME/.config
+ln -s $HOME/.dots/.config/alacritty $HOME/.config/
+ln -s $HOME/.dots/.config/btop $HOME/.config/
+ln -s $HOME/.dots/.config/ckb-next $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
+ln -s $HOME/.dots/.config/Kvantum $HOME/.config/
+ln -s $HOME/.dots/.config/lazygit $HOME/.config/
+ln -s $HOME/.dots/.config/lsd $HOME/.config/
+ln -s $HOME/.dots/.config/qalculate $HOME/.config/
+ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
+ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
+ln -s $HOME/.dots/.config/ranger $HOME/.config/
+ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
+ln -s $HOME/.dots/.config/zathura $HOME/.config/
+ln -s $HOME/.dots/.config/zsh $HOME/.config/
+
+cargo install --git https://github.com/donovanglover/hyprnome
+cargo install --git https://github.com/donovanglover/hyprdim
+
+echo "Setting Up Systemd"
+sudo systemctl set-default graphical.target
+systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
+
+cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
+
+curl -fsSL https://fnm.vercel.app/install | sh
+rm -R $HOME/.zshrc
+ln -s $HOME/.dots/.zshrc $HOME/
+
+pipx install pyprland
+pipx install hyprshade
+
+# git setup
+git config --global user.name "zielOS"
+git config --global user.email "ahsanur041@gmail.com"
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret

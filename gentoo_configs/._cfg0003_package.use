@@ -1,0 +1,92 @@
+*/* PYTHON_TARGETS: pypy3
+net-libs/nodejs npm lto
+net-p2p/transmission gtk -qt5 -qt6
+sys-config/ltoize keep-nocommon clang
+dev-util/cmake -emacs ncurses -qt5
+dev-qt/qtbase -X
+media-fonts/iosevka iosevka-aile
+app-text/xmlto text
+gnome-base/gvfs udisks
+dev-libs/libdbusmenu gtk3
+app-crypt/gcr gtk
+sys-apps/kmod zstd
+sys-boot/grub:2 device-mapper
+app-admin/sysstat lto lm-sensors
+sys-libs/zlib minizip
+app-text/poppler cairo
+dev-lang/python lto pgo ensurepip tk hardened
+sys-devel/gcc lto pgo default-stack-clash-protection
+sys-apps/firejail apparmor private-home
+kde-frameworks/kwindowsystem -X
+app-editors/emacs sqlite -gif -gmp -gpm sound -alsa dynamic-loading xft gtk -X json harfbuzz imagemagick inotify jit threads tree-sitter
+app-text/ghostscript-gpl cups
+dev-python/PyQt5 widgets
+media-sound/pulseaudio -daemon
+media-video/pipewire sound-server
+sys-apps/kmod tools
+sys-apps/xdg-desktop-portal -screencast -geolocation
+sys-apps/systemd policykit
+media-sound/mpg123 -pulseaudio
+media-libs/libpng apng
+dev-qt/qtgui eglfs egl dbus
+sys-libs/gdbm berkdb
+dev-qt/qtwidgets dbus
+dev-qt/qtbase egl 
+dev-qt/qtdeclarative opengl
+dev-libs/boost context
+net-libs/nodejs lto
+dev-libs/boehm-gc cxx
+sci-mathematics/octave gnuplot imagemagick java json
+dev-python/numpy lapack
+x11-libs/wxGTK gstreamer
+dev-python/ipython notebook
+dev-python/pplpy doc
+sci-mathematics/eclib flint
+sci-mathematics/flint ntl
+sci-mathematics/glpk gmp
+sci-mathematics/gmp-ecm -openmp
+sci-libs/cddlib tools
+sci-mathematics/maxima ecl
+sci-mathematics/pari threads gmp doc
+sci-mathematics/sage jmol 
+media-libs/libsndfile minimal
+media-sound/mpg123 -sdl
+media-libs/libsdl2 -pulseaudio
+media-libs/libsdl2 gles2
+virtual/libcrypt static-libs
+sys-libs/libxcrypt static-libs
+media-fonts/nerd-fonts jetbrainsmono firacode ubuntu
+gui-libs/gtk-layer-shell introspection
+net-wireless/wpa_supplicant dbus
+net-libs/libssh server
+sys-apps/flatpak policykit seccomp
+app-admin/keepassxc browser autotype keeshare network yubikey
+x11-terms/alacritty -X
+x11-terms/kitty -X
+gui-apps/swaybg gdk-pixbuf
+dev-python/PyQt5 opengl
+dev-python/pillow webp
+dev-python/QtPy svg printsupport
+dev-python/PyQt5 network svg sql printsupport
+app-crypt/gnupg nls
+app-office/libreoffice branding googledrive gtk gstreamer
+dev-libs/boost nls
+dev-libs/xmlsec nss
+sys-auth/polkit gtk daemon
+net-analyzer/snort threads
+app-portage/eix optimization strong-security tools
+app-misc/fdupes ncurses
+dev-libs/libpcre2 pcre32
+dev-qt/qtcore icu
+media-libs/libvpx postproc
+x11-base/xorg-server xvfb
+x11-drivers/nvidia-drivers modules modules-sign
+# required by sci-mathematics/sage-10.1-r2::sage-on-gentoo
+# required by sci-mathematics/sage_docbuild-10.1::sage-on-gentoo
+# required by sci-mathematics/sage-doc-10.1::sage-on-gentoo
+>=media-gfx/tachyon-0.99_beta6-r2 png
+# required by dev-python/matplotlib-3.8.1::gentoo[-test]
+# required by sci-mathematics/sage-10.1-r2::sage-on-gentoo
+# required by sci-mathematics/sage_docbuild-10.1::sage-on-gentoo
+# required by sci-mathematics/sage-doc-10.1::sage-on-gentoo
+>=virtual/imagemagick-tools-0-r1 tiff

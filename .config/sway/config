@@ -1,0 +1,226 @@
+# Set Variables
+set $lm DP-1
+set $cm DP-2
+set $rm DP-3
+
+set $mod Mod4
+set $alt Mod1
+
+font pango:JetBrainsMono Nerd Font 12
+
+####################
+####### RULES ######
+####################
+
+# -- Terminal --
+bindsym $mod+Return  exec swayterm
+bindsym $mod+Shift+Return  exec swayterm -f
+
+# -- Launcher --
+bindsym $mod+d  exec emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
+
+# -- Volume --
+bindsym XF86AudioRaiseVolume 	exec volume --up 
+bindsym XF86AudioLowerVolume 	exec volume --down
+bindsym XF86AudioMute 			exec volume --toggle 
+
+
+# kill focused window
+bindsym $mod+q kill
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# quit sway session
+bindsym $mod+Shift+q exit
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+g layout tabbed
+bindsym $mod+e layout toggle split
+
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# open new empty workspace
+# bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
+
+
+##########################################
+# configuration for workspace behaviour: #
+##########################################
+# default i3 tiling mode:
+workspace_layout default
+
+# Change focus between workspaces
+unbindcode $mod+1
+unbindcode $mod+2
+unbindcode $mod+3
+unbindcode $mod+4
+unbindcode $mod+5
+unbindcode $mod+6
+
+bindcode $mod+1 exec "swaysome focus 1"
+bindcode $mod+2 exec "swaysome focus 2"
+bindcode $mod+3 exec "swaysome focus 3"
+bindcode $mod+4 exec "swaysome focus 4"
+bindcode $mod+5 exec "swaysome focus 5"
+bindcode $mod+6 exec "swaysome focus 6"
+
+# Move containers between workspaces
+unbindcode $mod+Shift+1
+unbindcode $mod+Shift+2
+unbindcode $mod+Shift+3
+unbindcode $mod+Shift+4
+unbindcode $mod+Shift+5
+unbindcode $mod+Shift+6
+
+bindcode $mod+Shift+1 exec "swaysome move 1"
+bindcode $mod+Shift+2 exec "swaysome move 2"
+bindcode $mod+Shift+3 exec "swaysome move 3"
+bindcode $mod+Shift+4 exec "swaysome move 4"
+bindcode $mod+Shift+5 exec "swaysome move 5"
+bindcode $mod+Shift+6 exec "swaysome move 6"
+
+
+# Focus workspace groups
+unbindcode $mod+Ctrl+1
+unbindcode $mod+Ctrl+2
+unbindcode $mod+Ctrl+3
+unbindcode $mod+Ctrl+4
+unbindcode $mod+Ctrl+5
+unbindcode $mod+Ctrl+6
+
+bindcode $mod+Ctrl+1 exec "swaysome focus-group 1"
+bindcode $mod+Ctrl+2 exec "swaysome focus-group 2"
+bindcode $mod+Ctrl+3 exec "swaysome focus-group 3"
+bindcode $mod+Ctrl+4 exec "swaysome focus-group 4"
+bindcode $mod+Ctrl+5 exec "swaysome focus-group 5"
+bindcode $mod+Ctrl+6 exec "swaysome focus-group 6"
+
+
+# Move containers to other workspace groups
+unbindcode $mod+Ctrl+Shift+1
+unbindcode $mod+Ctrl+Shift+2
+unbindcode $mod+Ctrl+Shift+3
+unbindcode $mod+Ctrl+Shift+4
+unbindcode $mod+Ctrl+Shift+5
+unbindcode $mod+Ctrl+Shift+6
+
+bindcode $mod+Ctrl+Shift+1 exec "swaysome move-to-group 1"
+bindcode $mod+Ctrl+Shift+2 exec "swaysome move-to-group 2"
+bindcode $mod+Ctrl+Shift+3 exec "swaysome move-to-group 3"
+bindcode $mod+Ctrl+Shift+4 exec "swaysome move-to-group 4"
+bindcode $mod+Ctrl+Shift+5 exec "swaysome move-to-group 5"
+bindcode $mod+Ctrl+Shift+6 exec "swaysome move-to-group 6"
+
+
+# Move focused container to next output
+bindcode $mod+o exec "swaysome next-output"
+
+# Move focused container to previous output
+bindcode $mod+Shift+o exec "swaysome prev-output"
+
+# Init workspaces for every screen
+exec "swaysome init 1"
+
+
+# automatic set focus new window if it opens on another workspace than the current:
+for_window [class=st] focus
+for_window [class=(?i)firefox] focus
+for_window [class=Thunar] focus
+for_window [class=Thunderbird] focus
+for_window [class=TelegramDesktop] focus
+
+
+##################
+# floating rules #
+##################
+
+# set floating (nontiling) for apps needing it
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [title="emacs-run-launcher"] floating enable focus
+for_window [class="qalculate-gtk"] floating enable focus
+for_window [window_role = "pop-up"] floating enable focus
+for_window [window_role = "bubble"] floating enable focus
+for_window [window_role = "dialog"] floating enable focus
+for_window [window_role = "task_dialog"] floating enable
+for_window [window_type = "menu"] floating enable
+for_window [app_id = "floating"] floating enable
+for_window [app_id = "floating_update"] floating enable, resize set width 1000px height 600px
+for_window [class = "(?i)pinentry"] floating enable
+for_window [title = "Administrator privileges required"] floating enable
+
+# set floating (nontiling) for special apps
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [window_role="About"] floating enable
+
+for_window [title = "About Mozilla Firefox"] floating enable
+for_window [window_role = "About"] floating enable
+for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
+
+
+for_window [title = "Firefox - Sharing Indicator"] kill
+for_window [title = "Firefox — Sharing Indicator"] kill
+
+###############
+#### SWAYFX ####
+###############
+
+corner_radius 14
+smart_corner_radius on
+shadows enable
+blur enable
+blur_xray enable
+blur_passes 10
+
+
+###############
+#### THEME ####
+###############
+
+#border indicator on windows:
+new_window pixel 2
+default_floating_border pixel 1
+
+# Set inner/outer gaps
+gaps inner 6
+gaps outer 3
+
+
+
+# Define colors variables:
+set $mauve    #B4BEFE
+set $white    #CDD6F4
+set $darkblue #282a36
+set $grey     #45475A
+
+#class		        	    border		  bground		  text		indicator	child_border
+client.focused		    	$mauve	    $mauve  	  $white	$mauve  	$mauve
+client.unfocused	    	$darkblue	  $darkblue	  $grey		$darkblue	$darkblue
+client.focused_inactive $darkblue	  $darkblue	  $grey		$darkblue	$darkblue	
+client.urgent		    	  $mauve	    $mauve  	  $white	$mauve  	$mauve 
+
+
+#####################
+##### AUTOSTART #####
+#####################
+exec_always --no-startup-id swaystart
+

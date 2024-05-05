@@ -1,0 +1,63 @@
+#!/bin/bash
+sudo apt update && sudo apt install nala zstd
+echo "Installing packages"
+cd
+sudo nala update && sudo nala upgrade
+sudo nala install --no-install-recommends wget curl git deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger  x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core network-manager qt5-style-kvantum qt6ct qt5ct emacs-pgtk qalculate-gtk alacritty neovim lsd firefox zoxide
+
+echo "Installing pacstall & packages"
+sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
+pacstall -I zoom-deb
+pacstall -I zotero
+pacstall -I insync-deb
+
+
+echo "Building Hyprland git"
+sudo nala install -y --no-install-recommends meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev xdg-desktop-portal-wlr libtomlplusplus3
+
+i
+
+
+echo "Setting up Dotfiles"
+sudo rm -R ~/.config/
+cd && mkdir ~/.config
+ln -s $HOME/.dots/.fonts $HOME/
+ln -s $HOME/.dots/.themes $HOME/
+ln -s $HOME/.dots/gentoo_setup $HOME/
+ln -s $HOME/.dots/Projects $HOME/
+ln -s $HOME/.dots/.local/bin/hypr $HOME/.local/bin
+ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
+ln -s $HOME/.dots/.xinitrc $HOME/
+ln -s $HOME/.dots/.Xresources $HOME/
+ln -s $HOME/.dots/catppuccin.css $HOME/
+ln -s $HOME/.dots/.config/alacritty $HOME/.config/
+ln -s $HOME/.dots/.config/btop $HOME/.config/
+ln -s $HOME/.dots/.config/ckb-next $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
+ln -s $HOME/.dots/.config/Kvantum $HOME/.config/
+ln -s $HOME/.dots/.config/lazygit $HOME/.config/
+ln -s $HOME/.dots/.config/lsd $HOME/.config/
+ln -s $HOME/.dots/.config/lvim $HOME/.config/
+ln -s $HOME/.dots/.config/qalculate $HOME/.config/
+ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
+ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
+ln -s $HOME/.dots/.config/ranger $HOME/.config/
+ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
+ln -s $HOME/.dots/.config/zathura $HOME/.config/
+ln -s $HOME/.dots/.config/zsh $HOME/.config/
+
+
+echo "Setting Up Systemd"
+sudo systemctl set-default graphical.target
+systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
+
+cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
+
+curl -fsSL https://fnm.vercel.app/install | sh
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
+rm -R $HOME/.zshrc
+ln -s $HOME/.dots/.zshrc $HOME/
+
+git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+

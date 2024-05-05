@@ -1,0 +1,191 @@
+################################
+### G E N E R A L    H E L P ###
+################################
+super + Escape
+	pkill -USR1 -x sxhkd && dunstify -u low -i input-keyboard 'SXHKD' reloaded
+
+super + shift + Escape
+	bat $XDG_CONFIG_HOME/sxhkd/sxhkdrc | yad --text-info
+
+
+################################
+### A P P L I C A T I O N S ####
+################################
+
+### Launch terminal
+super + Return
+  st
+
+# negative -w arg to account for a border width (default: 100%)
+super + shift + Return
+	bspterm --float
+
+### Launch menu
+super + d
+	emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
+
+## Launch gui apps
+super + g; {b, f, e}
+	{ brave-bin, thunar, emacsclient -c -a emacs }
+
+## Launch tui apps
+super + t; {r, n}
+	{ st -e ranger, st -e lvim }
+
+#################################
+### H A R D W A R E   K E Y S ###
+#################################
+
+# Screenshots
+Print
+	flameshot full -p ~/Pictures/screenshots
+
+Print + shift
+	flameshot gui
+
+Print + super
+	flameshot screen -p ~/Pictures/screenshots
+
+# volume control
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+  volume { --up, --down, --toggle }
+
+###############
+### M I S C ###
+###############
+
+## get window class name
+super + alt + c
+  dunstify -i gtk-dialog-info CLASS "$(xprop | grep 'CLASS')"
+
+# quit/restart bspwm
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+# Lockscreen
+ctrl + alt + l
+  betterlockscreen -l
+
+
+###################################
+### M A N A G E   W I N D O W S ###
+###################################
+
+# close and kill
+super + q
+	bspc node -c
+
+# focus the node in the given direction
+super + {Left,Down,Up,Right}
+	bspc node -f {west,south,north,east}
+
+super + shift + {Left,Down,Up,Right}
+	dir={west,south,north,east}; \
+	bspc node -s "$dir.local" --follow \
+	    || bspc node -m "$dir" --follow
+
+# Split horizontal, vertical or cancel
+super + {h,v,c}
+	bspc node -p {east,south,cancel}
+
+# Smart resize, will grow or shrink depending on location.
+# Will always grow for floating nodes.
+super + ctrl + {Left,Down,Up,Right}
+  n=35; \
+  { d1=left;   d2=right;  dx=-$n; dy=0;   \
+  , d1=bottom; d2=top;    dx=0;   dy=$n;  \
+  , d1=top;    d2=bottom; dx=0;   dy=-$n; \
+  , d1=right;  d2=left;   dx=$n;  dy=0;   \
+  } \
+  bspc node --resize $d1 $dx $dy || bspc node --resize $d2 $dx $dy
+
+
+# focus the node for the given path jump
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# toggle between tiled & fullscreen
+super + f
+	bspc node -t "~"{tiled,fullscreen}
+
+# toggle between floating & tiled
+super + space
+  bspc node -t "~"{floating,tiled}
+
+# hide window
+super + w
+	bspc node -g hidden
+
+# unhide window
+super + shift + w
+	bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+
+
+# focus or send to the given desktop
+super + {_,shift + }{1-6}
+	bspc {desktop -f,node -d} 'focused:^{1-6}'
+
+super + {comma,period}
+  bspc monitor -f {prev,next}
+
+# jgmenu
+~button3
+  xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
+
+
+#################
+### E M A C S ###
+#################
+
+super + e; e
+    emacsclient -c -a 'emacs'
+super + e; a
+    emacsclient -c -a 'emacs' --eval '(emms)' --eval '(emms-play-directory-tree \"~/Music/\")'
+super + e; b
+    emacsclient -c -a 'emacs' --eval '(ibuffer)'
+super + e; d
+    emacsclient -c -a 'emacs' --eval '(dired nil)'
+super + e; i
+    emacsclient -c -a 'emacs' --eval '(erc)'
+super + e; n
+    emacsclient -c -a 'emacs' --eval '(elfeed)'
+super + e; s
+    emacsclient -c -a 'emacs' --eval '(eshell)'
+super + e; v
+    emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'
+super + e; w
+    emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(eww "distro.tube"))'
+
+#############
+### E W W ###
+#############
+super + x
+	eww open --toggle powermenu
+super + m
+	eww open --toggle menu
+
+
+#############
+### W M C T R L ###
+#############
+
+super + minux
+	wmctrl -k toggle

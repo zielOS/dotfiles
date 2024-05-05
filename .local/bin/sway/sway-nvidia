@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+## Setting environment variables for wayland session
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=sway
+export XDG_CURRENT_DESKTOP=sway
+export XDG_CURRENT_SESSION=sway
+
+## GTK environment
+export TDESKTOP_DISABLE_GTK_INTEGRATION=1
+export CLUTTER_BACKEND=wayland
+export BEMENU_BACKEND=wayland
+
+## Firefox
+export MOZ_ENABLE_WAYLAND=1
+export MOZ_USE_XINPUT2=1
+
+## Qt environment
+export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_QPA_PLATFORM=xcb 
+export QT_WAYLAND_FORCE_DPI=physical
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+## Elementary environment
+export ELM_DISPLAY=wl
+export ECORE_EVAS_ENGINE=wayland_egl
+export ELM_ENGINE=wayland_egl
+export ELM_ACCEL=opengl
+export ELM_SCALE=1
+
+## SDL environment
+export SDL_VIDEODRIVER=wayland
+
+## Java environment
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+## Clutter
+export CLUTTER_BACKEND="wayland"
+
+## GDK
+export GDK_BACKEND=wayland
+
+export NO_AT_BRIDGE=1
+export WINIT_UNIX_BACKEND=wayland
+export DBUS_SESSION_BUS_ADDRESS
+export DBUS_SESSION_BUS_PID
+
+# Nvidia
+export GBM_BACKEND=nvidia-drm
+export __GL_GSYNC_ALLOWED=0
+export __GL_VRR_ALLOWED=0
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export LIBVA_DRIVER_NAME=nvidia
+export WLR_NO_HARDWARE_CURSORS=1
+export WLR_RENDERER=vulkan
+
+# Xwayland compatibility
+export XWAYLAND_NO_GLAMOR=1
+
+# Variables
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export TERMINAL="st"
+export BROWSER="brave-bin"
+# export GDK_SCALE=1.8
+# export GDK_DPI_SCALE=1.5
+# export ELM_SCALE=1.5
+export QT_QPA_PLATFORMTHEME=qt5ct
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin/sway
+export PATH=$PATH:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/.npm-global/bin
+export PATH=$PATH:/usr/local/texlive/2023/bin/x86_64-linux
+export MANPATH=$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man
+export INFOPATH=$INFOPATH/usr/local/texlive/2023/texmf-dist/doc/info
+
+## Start Sway
+exec sway --unsupported-gpu -D noscanout "$@"

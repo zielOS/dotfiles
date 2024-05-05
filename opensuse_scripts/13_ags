@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo zypper install typescript npm meson gjs-devel gtk3-devel gtk-layer-shell-devel gnome-bluetooth upower NetworkManager pulseaudio-libs-devel libdbusmenu-gtk3 libsoup3

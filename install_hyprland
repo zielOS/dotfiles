@@ -1,0 +1,31 @@
+#!/bin/bash
+
+git clone --recursive https://github.com/hyprwm/Hyprland && cd Hyprland
+sed -E -i -e 's/(soversion = 12)([^032]|$$)/soversion = 12032/g' ./subprojects/wlroots/meson.build
+rm -rf ./subprojects/wlroots/build
+sed -i -e '/^release:/{n;s/-D/-DCMAKE_SKIP_RPATH=ON -D/}' Makefile
+cd subprojects/wlroots
+meson build/ --prefix="/home/ahsan/Hyprland/tmpwlr" --buildtype=release
+ninja -C build/
+mkdir -p "/home/ahsan/Hyprland/tmpwlr"
+ninja -C build/ install
+cd .. && cd udis86
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -G Ninja
+cmake --build build --config Release --target all
+cd && cd /home/ahsan/Hyprland
+make all
+make -C hyprctl all
+sudo find src -name '*.hpp' -exec install -Dm644 {} "/usr/include/hyprland/{}" \;
+sed -i -e "/ICONDIR/ s,/home/ahsan/Hyprland/tmpwlr,/usr," "subprojects/wlroots/build/include/config.h"
+cd subprojects/wlroots/include
+sudo find . -name '*.h' -exec install -Dm644 {} "$pkgdir/usr/include/hyprland/wlroots/{}" \;
+cd .. && cd build/include
+sudo find . -name '*.h' -exec install -Dm644 {} "/usr/include/hyprland/wlroots/{}" \;
+cd && cd /home/ahsan/Hyprland/build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+cd ..
+sudo install -Dm755 -t "/usr/bin" build/Hyprland
+sudo install -Dm755 -t "/usr/bin" hyprctl/hyprctl
+sudo install -Dm644 -t "/usr/include/hyprland/protocols" protocols/*-protocol.h
+sudo install -Dm755 -t "/usr/lib" "/home/ahsan/Hyprland/tmpwlr/lib64/libwlroots.so"
+sudo install -Dm755 -t "/usr/lib" "/home/ahsan/Hyprland/tmpwlr/lib64/libwlroots.so"

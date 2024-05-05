@@ -1,0 +1,33 @@
+{
+  "include": "~/.config/waybar/modules",
+  "name": "main-bar", 			
+  "id": "main-bar", 				
+  "layer": "top", 				
+  "position": "bottom",
+  "mode": "dock", 				
+  "exclusive": true, 				
+  "passthrough": false, 			
+  "fixed-center": true,
+  "gtk-layer-shell": true,
+  "height": "34", 					 		
+  "ipc": true,
+
+  "modules-left": [
+    "custom/logo",
+    "hyprland/workspaces",
+    "custom/swallow",
+    "custom/weather" ],
+
+  "modules-center": [],
+
+  "modules-right": [
+    "battery",
+    "backlight",
+    "pulseaudio#microphone",
+    "pulseaudio",
+    "network",
+    "tray",
+    "clock#date",
+    "clock",
+    "custom/power" ],
+}
