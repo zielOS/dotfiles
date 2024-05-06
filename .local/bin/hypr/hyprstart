@@ -1,0 +1,11 @@
+#!/bin/bash
+
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+
+# reload hyprland plugins
+hyprpm reload -n &
+
+nm-applet --indicator &
+thunar --daemon &
+ags
