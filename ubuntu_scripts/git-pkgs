@@ -10,8 +10,8 @@ wayland-protocols
 hyprland
 hyprland-contrib
 cliphist
-swww
-neovim
 lazygit
-alacritty
 emacs
+fnm
+starship
+zap-zsh

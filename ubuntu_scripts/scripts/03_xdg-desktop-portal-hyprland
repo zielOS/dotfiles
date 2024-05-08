@@ -6,4 +6,4 @@ cd xdg-desktop-portal-hyprland/
 cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
 cmake --build build
 sudo cmake --install build
-cd && sudo rm -rf 03_xdg-desktop-portal-hyprland
+cd && sudo rm -rf xdg-desktop-portal-hyprland

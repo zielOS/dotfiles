@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
+sudo cp -R ~/.dots/ubuntu_scripts/scripts/insync.list  /etc/apt/sources.list.d
+sudo nala update && sudo nala install insync
