@@ -4,4 +4,4 @@ cd && wget https://gnu.mirror.constant.com/emacs/emacs-29.3.tar.xz
 tar -xvf emacs-29.3.tar.xz && cd emacs-29.3 && ./autogen.sh
 ./configure --with-pgtk --without-x --with-native-compilation --with-json --with-mailutils --with-imagemagick --with-tree-sitter --with-xft --with-modules --with-threads --with-harfbuzz --with-sqlite3 
 make -j22
-sudo make install && cd
+sudo make install && cd && sudo rm -rf emacs-*
