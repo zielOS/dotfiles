@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo nala install libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev cmake meson ninja-build wayland-utils wayland-protocols libwayland-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev
+sudo apt -y install libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev cmake meson ninja-build wayland-utils wayland-protocols libwayland-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev
 
 cd && git clone https://github.com/hyprwm/hyprpaper.git
 cd hyprpaper

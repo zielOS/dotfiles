@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo nala install libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev
+sudo apt install libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev
 cd
 git clone https://github.com/hyprwm/hyprcursor.git
 cd hyprcursor

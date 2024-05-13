@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo nala install libpugixml-dev
+sudo apt install libpugixml-dev
 cd && git clone https://github.com/hyprwm/hyprwayland-scanner.git && cd hyprwayland-scanner
 cmake -B build
 cmake --build build -j$(nproc)

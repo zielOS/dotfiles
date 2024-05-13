@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo nala install libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev
+sudo apt -y install libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev
 
 cd && git clone https://github.com/hyprwm/hyprlock.git && cd hyprlock
 

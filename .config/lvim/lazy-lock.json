@@ -4,7 +4,7 @@
   "alpha-nvim": { "branch": "main", "commit": "87c204040e3f5d4c1c95067b35905d8f8a2f2545" },
   "bigfile.nvim": { "branch": "main", "commit": "c1bad34ce742b4f360b67ca23c873fef998240fc" },
   "bufferline.nvim": { "branch": "main", "commit": "a4bd44523316928a7c4a5c09a3407d02c30b6027" },
-  "catppuccin": { "branch": "main", "commit": "6af91673ceccbd6e073b66c439e7fce239f72d24" },
+  "catppuccin": { "branch": "main", "commit": "d97387aea8264f484bb5d5e74f2182a06c83e0d8" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-latex-symbols": { "branch": "main", "commit": "165fb66afdbd016eaa1570e41672c4c557b57124" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
@@ -13,6 +13,7 @@
   "dressing.nvim": { "branch": "master", "commit": "5162edb1442a729a885c45455a07e9a89058be2f" },
   "friendly-snippets": { "branch": "main", "commit": "631f79e346b0b3203d2ce3eae619ca8d612e5463" },
   "gitsigns.nvim": { "branch": "main", "commit": "e5edefd9976039f5352e0c900f35206770b33a2d" },
+  "hyprland-vim-syntax": { "branch": "main", "commit": "71760fe0cad972070657b0528f48456f7e0027b2" },
   "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
   "lazy.nvim": { "branch": "main", "commit": "d6a782c7002682f4a01b79fc3918c4584ad6e8fb" },
   "lir.nvim": { "branch": "master", "commit": "1aa871f20637eccc4e1e26b0fbcf9aafc9b6caf7" },
@@ -53,6 +54,6 @@
   "ultisnips": { "branch": "master", "commit": "49dc8cb2086db19d385791c8e1635723b0fd95c7" },
   "vim-illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },
   "vim-shellcheck": { "branch": "master", "commit": "4346419ac57ef341a15aa39c827c0848f17c6faf" },
-  "vimtex": { "branch": "master", "commit": "5732cd898cc7027e58191fe4be64da8dbc158995" },
+  "vimtex": { "branch": "master", "commit": "8ca74380935beb4ed5d213bb55b2380cc1a83bd6" },
   "which-key.nvim": { "branch": "main", "commit": "4acffc92953a90a790603bfdab7c92319ab167b1" }
 }

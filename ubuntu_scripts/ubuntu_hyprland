@@ -29,6 +29,7 @@ pacstall -I -P bitwarden-deb
 pacstall -I -P neovim
 pacstall -I -P alacritty
 pacstall -I -P ticktick-deb
+pacstall -I -P zotero
 
 
 # flatpak setup & pkgs

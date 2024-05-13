@@ -256,6 +256,7 @@ lvim.plugins = {
   "KeitaNakamura/tex-conceal.vim",
   "kovetskiy/sxhkd-vim",
   "SirVer/ultisnips",
+  "theRealCarneiro/hyprland-vim-syntax",
   "waycrate/swhkd-vim",
   {
     "NvChad/nvim-colorizer.lua",
