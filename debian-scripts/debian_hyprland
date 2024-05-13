@@ -1,63 +1,118 @@
 #!/bin/bash
-sudo apt update && sudo apt install nala zstd
+sudo apt update && sudo apt install nala
 echo "Installing packages"
 cd
-sudo nala update && sudo nala upgrade
-sudo nala install --no-install-recommends wget curl git deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger  x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core network-manager qt5-style-kvantum qt6ct qt5ct emacs-pgtk qalculate-gtk alacritty neovim lsd firefox zoxide
+sudo apt -u update && sudo apt -y upgrade
+sudo apt -y install wget curl git deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger  x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core network-manager qt5-style-kvantum qt6ct qt5ct emacs-pgtk qalculate-gtk alacritty neovim lsd firefox zoxide meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev rustup libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev xdg-desktop-portal-wlr libtomlplusplus3 cliphist
+
+rustup stable default
+
+echo "Installs Brave"
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt -y update
+sudo apt -y install brave-browser
 
 echo "Installing pacstall & packages"
 sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
-pacstall -I zoom-deb
-pacstall -I zotero
-pacstall -I insync-deb
+pacstall -I -P zoom-deb
+pacstall -I -P zotero
+pacstall -I -P ferdium-deb
+pacstall -I -P bitwarden-deb
+
+echo "pipx pkgs"
+pipx install pyprland
+pipx install hyprshade
 
 
-echo "Building Hyprland git"
-sudo nala install -y --no-install-recommends meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev xdg-desktop-portal-wlr libtomlplusplus3
+# Installs cargo pkgs
+cargo install --git https://github.com/donovanglover/hyprnome
+cargo install --git https://github.com/donovanglover/hyprdim
 
-i
+#install from scripts
+cd && cd ~/.dots/debian-scripts/scripts/
+./01_hyprlang
+./02_hyprcursor
+./03_xdg-desktop-portal-hyprland
+./04_hyprpaper
+./05_hyprpicker
+./06_hypridle
+./07_hyprlock
+./08_hyprshot
+./09_hyprwayland-scanner
+./10_wayland-protocols
+./11_hyprland
+./12_hyprland-contrib
+./14_swww
+./15_emacs
+./16_lazygit
+./19_ags
+./20_eww
+./23_insync
 
+echo "Setup Flatpak"
+# flatpak setup & pkgs
+sudo nala install flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+#flatpak install flathub org.ferdium.Ferdium # installs ferdium
+#flatpak install flathub com.ticktick.TickTick # installs ticktick
+#flatpak install flathub com.bitwarden.desktop #installs bitwarden
 
 echo "Setting up Dotfiles"
 sudo rm -R ~/.config/
 cd && mkdir ~/.config
-ln -s $HOME/.dots/.fonts $HOME/
-ln -s $HOME/.dots/.themes $HOME/
-ln -s $HOME/.dots/gentoo_setup $HOME/
-ln -s $HOME/.dots/Projects $HOME/
-ln -s $HOME/.dots/.local/bin/hypr $HOME/.local/bin
-ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
-ln -s $HOME/.dots/.xinitrc $HOME/
-ln -s $HOME/.dots/.Xresources $HOME/
-ln -s $HOME/.dots/catppuccin.css $HOME/
-ln -s $HOME/.dots/.config/alacritty $HOME/.config/
-ln -s $HOME/.dots/.config/btop $HOME/.config/
-ln -s $HOME/.dots/.config/ckb-next $HOME/.config/
-ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
-ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
-ln -s $HOME/.dots/.config/Kvantum $HOME/.config/
-ln -s $HOME/.dots/.config/lazygit $HOME/.config/
-ln -s $HOME/.dots/.config/lsd $HOME/.config/
-ln -s $HOME/.dots/.config/lvim $HOME/.config/
-ln -s $HOME/.dots/.config/qalculate $HOME/.config/
-ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
-ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
-ln -s $HOME/.dots/.config/ranger $HOME/.config/
-ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
-ln -s $HOME/.dots/.config/zathura $HOME/.config/
-ln -s $HOME/.dots/.config/zsh $HOME/.config/
+ln -s ~/.dots/.fonts ~/
+ln -s ~/.dots/.themes ~/
+ln -s ~/.dots/gentoo_setup ~/
+ln -s ~/.dots/Projects ~/
+ln -s ~/.dots/.local/bin/hypr ~/.local/bin
+ln -s ~/.dots/.gtkrc-2.0 ~/
+ln -s ~/.dots/catppuccin.css ~/
+ln -s ~/.dots/.config/alacritty ~/.config/
+ln -s ~/.dots/.config/btop ~/.config/
+ln -s ~/.dots/.config/ckb-next ~/.config/
+ln -s ~/.dots/.config/gtk-3.0 ~/.config/
+ln -s ~/.dots/.config/gtk-4.0 ~/.config/
+ln -s ~/.dots/.config/Kvantum ~/.config/
+ln -s ~/.dots/.config/lazygit ~/.config/
+ln -s ~/.dots/.config/lsd ~/.config/
+ln -s ~/.dots/.config/lvim ~/.config/
+ln -s ~/.dots/.config/qalculate ~/.config/
+ln -s ~/.dots/.config/qt5ct ~/.config/
+ln -s ~/.dots/.config/qt6ct ~/.config/
+ln -s ~/.dots/.config/ranger ~/.config/
+ln -s ~/.dots/.config/wallpapers ~/.config/
+ln -s ~/.dots/.config/zathura ~/.config/
+ln -s ~/.dots/.config/zsh ~/.config/
 
 
 echo "Setting Up Systemd"
 sudo systemctl set-default graphical.target
 systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
 
-cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
 
+echo "lunarvim setup"
+cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH
+LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+cd && sudo install -Dm755 $HOME/.local/bin/lvim "/usr/local/bin/lvim"
+sudo rm -rf $HOME/.local/bin/lvim
+sudo rm -rf $HOME/.config/lvim
+ln -s $HOME/.dots/.config/lvim $HOME/.config
+
+
+echo "zsh setup"
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+curl -sS https://starship.rs/install.sh | sh
 curl -fsSL https://fnm.vercel.app/install | sh
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
 rm -R $HOME/.zshrc
 ln -s $HOME/.dots/.zshrc $HOME/
+chsh -s $(which zsh)
 
-git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+echo "git setup"
+sudo nala install make gcc git libsecret-1-0 libsecret-1-dev libglib2.0-dev
+sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+git config --global user.name "zielOS"
+git config --global user.email "ahsanur041@gmail.com"
 
