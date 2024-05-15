@@ -1,5 +1,5 @@
 (defwidget volume_osd []
-    (revealer :transition "slideup" :reveal {open_osd == true ? true : false} :duration "500ms"
+    (revealer :transition "slideup" :reveal {open_osd} :duration {ANIM_DURATION}
         (box :orientation "h" :class "volume-osd" :space-evenly false
             (volume_scale)
         )
@@ -16,6 +16,7 @@
 (defwidget volume_control_center []
     (box :orientation "h" :class "volume-control-center" :space-evenly false
         (volume_scale)
+        (button :class "volume-mute ${volume == 'muted' ? 'active' : ''}" :onclick "pamixer -t" "󰝟")
         (button :class "volume-arrow" :onclick "scripts/toggle_control_center.sh close && pavucontrol &" "󰅂")
     )
 )

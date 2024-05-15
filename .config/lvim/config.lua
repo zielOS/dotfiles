@@ -12,9 +12,6 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 -- Additional Plugins
-table.insert(lvim.plugins, {
-  "p00f/clangd_extensions.nvim",
-})
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 vim.opt.wrap = true -- wrap lines

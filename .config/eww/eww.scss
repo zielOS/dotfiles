@@ -1,31 +1,32 @@
-@import "/home/klyn/.cache/eww/colors/colors.scss";
-@import "scss/variables.scss";
+* {
+    all: unset;
+    font-family: JetBrainsMono;
+    font-weight: bold;
+}
+@import "scripts/colors/colors.scss";
+@import "scss/lib.scss";
 
-@import "scss/common/button.scss";
-@import "scss/common/floating-widget.scss";
-@import "scss/common/icon-image.scss";
-@import "scss/common/scrollbar.scss";
-@import "scss/common/slider.scss";
-@import "scss/common/tooltip.scss";
-@import "scss/common/unset.scss";
-@import "scss/common/widget.scss";
+@import "scss/bar.scss";
+@import "scss/powermenu.scss";
+@import "scss/launcher.scss";
 
-@import "scss/widgets/application.scss";
-@import "scss/widgets/calendar.scss";
-@import "scss/widgets/date.scss";
-@import "scss/widgets/media.scss";
-@import "scss/widgets/notification.scss";
-@import "scss/widgets/notification-center.scss";
-@import "scss/widgets/separator.scss";
+@import "scss/control_center.scss";
+@import "scss/notifications_popup.scss";
 
-@import "scss/windows/powermenu.scss";
-@import "scss/windows/bar.scss";
-@import "scss/windows/corners.scss";
-@import "scss/windows/desktop.scss";
-@import "scss/windows/dock.scss";
-@import "scss/windows/info-center.scss";
-@import "scss/windows/launcher.scss";
-@import "scss/windows/menu.scss";
-@import "scss/windows/notifications.scss";
-@import "scss/windows/overview.scss";
-@import "scss/windows/volume.scss";
+
+
+@import "scss/language.scss";
+@import "scss/taskbar.scss";
+@import "scss/clock.scss";
+@import "scss/logo.scss";
+@import "scss/quick_settings.scss";
+@import "scss/user.scss";
+@import "scss/volume.scss";
+@import "scss/workspaces.scss";
+@import "scss/tray.scss";
+@import "scss/weather.scss";
+@import "scss/music.scss";
+@import "scss/indicator.scss";
+@import "scss/notifications.scss";
+@import "scss/recorder_menu.scss";
+@import "scss/picker.scss";

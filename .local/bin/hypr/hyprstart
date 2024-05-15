@@ -21,4 +21,4 @@ systemctl --user start xdg-desktop-portal-hyprland &
 exec-once = wl-paste --type text --watch cliphist store --no-newline
 exec-once = wl-paste --type image --watch cliphist store
 
-init &
+~/.config/eww/scripts/start.sh &

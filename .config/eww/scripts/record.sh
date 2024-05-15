@@ -2,9 +2,19 @@
 
 notify-send "Recording started"
 
-datetime=$(date | sed 's/ /_/g')
+file="$(xdg-user-dir VIDEOS)/$(date '+%F_%T_%:::z.mp4')"
 
-video_folder_dir=$(xdg-user-dir VIDEOS)
 
-file="$video_folder_dir/$datetime.mp4"
-wf-recorder -f $file -c libx264rgb
+case $1 in
+    no_audio)
+        wf-recorder -f $file -x yuv420p;;
+    audio)
+        wf-recorder -f $file -x yuv420p --audio;;
+    region)
+        case $2 in
+            no_audio)
+                wf-recorder -f $file -x yuv420p -g "$(slurp)";;
+            audio)
+                wf-recorder -f $file -x yuv420p --audio -g "$(slurp)";;
+        esac
+esac
