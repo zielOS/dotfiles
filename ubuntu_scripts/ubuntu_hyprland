@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd && apt list --installed | cut -d/ -f1 > pre-cleaned.txt
+
 # Necessary files
 sudo cp -R ~/.dots/ubuntu_scripts/apt.conf /etc/apt/apt.conf.d/
 sudo cp -R ~/.dots/ubuntu_scripts/ubuntu.sources /etc/apt/sources.list.d/
