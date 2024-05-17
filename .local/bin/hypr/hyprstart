@@ -4,7 +4,7 @@
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 # reload hyprland plugins
-hyprpm reload -n &
+#hyprpm reload -n &
 
 # services
 nm-applet --indicator &
@@ -12,6 +12,9 @@ thunar --daemon &
 
 # theme
 hyprtheme &
+
+# wallpaper &
+hyprpaper &
 
 # idle daemon
 hypridle &
@@ -29,3 +32,8 @@ wl-paste --type image --watch cliphist store &
 
 # eww
 ~/.config/eww/scripts/start.sh &
+
+# git
+dbus-update-activation-environment --all &
+gnome-keyring-daemon -r -d &
+

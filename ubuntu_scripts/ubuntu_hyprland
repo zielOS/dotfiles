@@ -13,7 +13,7 @@ cd && sudo apt -y update && sudo apt -y install zstd curl nala
 
 sudo nala update && sudo nala full-upgrade
 
-sudo nala install curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git alacritty neovim deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard golang-go zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger policykit-1-gnome x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx aide rng-tools haveged lynis lxappearance auditd sysstat acct xserver-xorg-core network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct lsd kitty ncurses-term libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev libspa-0.2-dev libwayland-client++1 pipewire pipewire-alsa pipewire-pulse wireplumber xdg-desktop-portal grim slurp libdrm-dev pkg-config ninja-build scdoc libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-bin libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev wayland-utils wayland-protocols libsdbus-c++-dev libegl1-mesa-dev libpam0g-dev libpugixml-dev clang wget build-essential libegl-dev glslang-tools libinput-bin libinput-dev greetd libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libxcb-util-dev meson cmake-extras cmake gettext gettext-base libfontconfig-dev libffi-dev libxml2-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev xdg-desktop-portal-wlr fontconfig libliftoff-dev libdisplay-info-dev libsystemd-dev hwdata xwayland libwayland-dev cpio vulkan-utility-libraries-dev libsecret-1-0 libsecret-1-dev gnome-keyring fwupd firejail firejail-profiles firetools bubblewrap distrobox ubuntu-dev-tools make maim systemd-zram-generator xserver-xorg-video-amdgpu xserver-xorg-video-nvidia-535 nvidia-driver-535 wireplumber libglib2.0-dev gcc flatpak libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev    
+sudo nala install curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git alacritty neovim deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard golang-go zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger policykit-1-gnome x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx aide rng-tools haveged lynis lxappearance auditd sysstat acct xserver-xorg-core network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct lsd kitty ncurses-term libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev libspa-0.2-dev libwayland-client++1 pipewire pipewire-alsa pipewire-pulse wireplumber xdg-desktop-portal grim slurp libdrm-dev pkg-config ninja-build scdoc libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-bin libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev wayland-utils wayland-protocols libsdbus-c++-dev libegl1-mesa-dev libpam0g-dev libpugixml-dev clang wget build-essential libegl-dev glslang-tools libinput-bin libinput-dev greetd libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libxcb-util-dev meson cmake-extras cmake gettext gettext-base libfontconfig-dev libffi-dev libxml2-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev xdg-desktop-portal-wlr fontconfig libliftoff-dev libdisplay-info-dev libsystemd-dev hwdata xwayland libwayland-dev cpio vulkan-utility-libraries-dev libsecret-1-0 libsecret-1-dev gnome-keyring firejail firejail-profiles firetools bubblewrap distrobox ubuntu-dev-tools make maim systemd-zram-generator xserver-xorg-video-amdgpu xserver-xorg-video-nvidia-535 nvidia-driver-535 wireplumber libglib2.0-dev gcc flatpak libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev libsecret-tools alsa-utils amd64-microcode apparmor apparmor-easyprof apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils bash bash-completion binutils bluez bluez-alsa-utils ca-certificates cron chrony debianutils dracut-install efibootmgr fuse libfuse2 fwupd gvfs logrotate plymouth plymouth-theme-spinner power-profiles-daemon psmisc ubuntu-minimal ubuntu-keyring xz-utils
 
 # rustup setup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -21,7 +21,7 @@ rustup default stable
 
 # node setup
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo nala install nodejs
 
 # spotify
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
@@ -69,12 +69,6 @@ sudo nala install brave-browser
 pipx install pyprland
 pipx install hyprshade
 
-
-# Installs cargo pkgs
-cargo install --git https://github.com/donovanglover/hyprnome
-cargo install --git https://github.com/donovanglover/hyprdim
-
-
 echo "Setting up Dotfiles"
 sudo rm -R ~/.config/
 cd && mkdir ~/.config
@@ -87,6 +81,7 @@ ln -s ~/.dots/catppuccin.css ~/
 ln -s ~/.dots/.config/hypr ~/.config/
 ln -s ~/.dots/.config/eww ~/.config/
 ln -s ~/.dots/.config/starship.toml ~/.config
+ln -s ~/.dots/.config/Thunar ~/.config/
 ln -s ~/.dots/.config/alacritty ~/.config/
 ln -s ~/.dots/.config/btop ~/.config/
 ln -s ~/.dots/.config/gtk-3.0 ~/.config/
@@ -107,6 +102,7 @@ ln -s ~/.dots/.local/bin/hypr ~/.local/bin/
 # Set Up Systemd
 sudo systemctl set-default graphical.target
 systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
+sudo systemctl enable --now chronyd acct
 
 # Setup zsh
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
@@ -114,7 +110,6 @@ curl -sS https://starship.rs/install.sh | sh
 curl -fsSL https://fnm.vercel.app/install | sh
 rm -R ~/.zshrc
 ln -s ~/.dots/.zshrc /
-
 
 # git setup 
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
@@ -132,23 +127,4 @@ sudo rm -rf $HOME/.local/bin/lvim
 sudo rm -rf $HOME/.config/lvim
 ln -s $HOME/.dots/.config/lvim $HOME/.config
 
-# copy all essent. scripts
-#cd && cd ~/.dots/.local/bin/hypr && sudo cp -R * $HOME/.local/bin/
-
-# hyprland plugins
-#hyprpm add https://github.com/VortexCoyote/hyprfocus 
-#hyprpm enable /hyprfocus
-
-#hyprpm add https://github.com/outfoxxed/hy3
-#hyprpm enable hy3
-
-#hyprpm add https://github.com/KZDKM/Hyprspace
-#hyprpm enable Hyprspace
-
-#hyprpm add https://github.com/zakk4223/hyprland-easymotion
-#hyprpm enable hyprEasymotion
-
-
-#install from a txt file
-#apt list --installed | cut -d/ -f1 > pre-cleaned.txt
-#xargs sudo apt-get -y install < pre-cleaned.txt
+echo "End of Hyprland Setup"
