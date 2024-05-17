@@ -13,12 +13,19 @@ thunar --daemon &
 # theme
 hyprtheme &
 
+# idle daemon
+hypridle &
+
+# lock
+hyprlock &
+
 # xdg
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 systemctl --user start xdg-desktop-portal-hyprland &
 
 # cliphist
-exec-once = wl-paste --type text --watch cliphist store --no-newline
-exec-once = wl-paste --type image --watch cliphist store
+wl-paste --type text --watch cliphist store --no-newline &
+wl-paste --type image --watch cliphist store &
 
+# eww
 ~/.config/eww/scripts/start.sh &

@@ -256,6 +256,12 @@ lvim.plugins = {
   "theRealCarneiro/hyprland-vim-syntax",
   "waycrate/swhkd-vim",
   {
+    "anuvyklack/pretty-fold.nvim",
+    config = function()
+      require('pretty-fold').setup()
+    end
+  },
+  {
     "NvChad/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup {

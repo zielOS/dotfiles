@@ -1,3 +1,2 @@
 #!/bin/sh
-sudo apt install golang-go wl-clipboard
 go install go.senan.xyz/cliphist@latest
