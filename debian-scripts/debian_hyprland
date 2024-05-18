@@ -1,36 +1,45 @@
 #!/bin/bash
-sudo apt update && sudo apt install nala
-echo "Installing packages"
-cd
-sudo apt -u update && sudo apt -y upgrade
-sudo apt -y install wget curl git deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger  x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx aide rng-tools haveged lynis auditd sysstat acct xserver-xorg-core network-manager qt5-style-kvantum qt6ct qt5ct emacs-pgtk qalculate-gtk alacritty neovim lsd firefox zoxide meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev rustup libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev xdg-desktop-portal-wlr libtomlplusplus3 cliphist
 
-rustup stable default
+cd && apt list --installed | cut -d/ -f1 > pre-cleaned.txt
 
-echo "Installs Brave"
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt -y update
-sudo apt -y install brave-browser
+# Necessary files
+sudo cp -R ~/.dots/debian_scripts/01norecommend /etc/apt/apt.conf.d/
+sudo cp -R ~/.dots/debian_scripts/sources.list /etc/apt
+sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 
-echo "Installing pacstall & packages"
+
+# Installing packages
+cd && sudo apt -y update && sudo apt -y install zstd curl nala
+
+sudo nala update && sudo nala full-upgrade
+
+sudo nala install curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git alacritty neovim deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard golang-go zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger policykit-1-gnome x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx rng-tools haveged lynis lxappearance auditd sysstat acct xserver-xorg-core network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct lsd kitty ncurses-term libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev libspa-0.2-dev libwayland-client++1 pipewire pipewire-alsa pipewire-pulse wireplumber xdg-desktop-portal grim slurp libdrm-dev pkg-config ninja-build scdoc libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-bin libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev wayland-utils wayland-protocols libsdbus-c++-dev libegl1-mesa-dev libpam0g-dev libpugixml-dev clang wget build-essential libegl-dev glslang-tools libinput-bin libinput-dev greetd libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libxcb-util-dev meson cmake-extras cmake gettext gettext-base libfontconfig-dev libffi-dev libxml2-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev xdg-desktop-portal-wlr fontconfig libliftoff-dev libdisplay-info-dev libsystemd-dev hwdata xwayland libwayland-dev cpio vulkan-utility-libraries-dev libsecret-1-0 libsecret-1-dev gnome-keyring firejail firejail-profiles firetools bubblewrap distrobox ubuntu-dev-tools make maim systemd-zram-generator xserver-xorg-video-amdgpu nvidia-driver firmware-misc-nonfree wireplumber libglib2.0-dev gcc flatpak libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev libsecret-tools alsa-utils amd64-microcode apparmor apparmor-easyprof apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils bash bash-completion binutils bluez bluez-alsa-utils ca-certificates cron chrony debianutils dracut-install efibootmgr fwupd gvfs logrotate plymouth plymouth-themes power-profiles-daemon psmisc xz-utils firmware-linux-free firmware-linux-nonfree firmware-amd-graphics firefox cliphist
+
+# rustup setup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup default stable
+
+# node setup
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - &&\
+sudo nala install nodejs
+
+# spotify
+curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update && sudo apt-get install spotify-client
+
+# Installs pacstall & pkgs"
 sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
-pacstall -I -P zoom-deb
-pacstall -I -P zotero
-pacstall -I -P ferdium-deb
-pacstall -I -P bitwarden-deb
 
-echo "pipx pkgs"
-pipx install pyprland
-pipx install hyprshade
+# flatpak setup & pkgs
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub org.ferdium.Ferdium 
+flatpak install flathub com.ticktick.TickTick
+flatpak install flathub com.bitwarden.desktop
+flatpak install flathub-beta org.zotero.Zotero
 
-
-# Installs cargo pkgs
-cargo install --git https://github.com/donovanglover/hyprnome
-cargo install --git https://github.com/donovanglover/hyprdim
-
-#install from scripts
-cd && cd ~/.dots/debian-scripts/scripts/
+# Install from scripts
+cd && cd $HOME/.dots/ubuntu_scripts/scripts
 ./01_hyprlang
 ./02_hyprcursor
 ./03_xdg-desktop-portal-hyprland
@@ -43,20 +52,19 @@ cd && cd ~/.dots/debian-scripts/scripts/
 ./10_wayland-protocols
 ./11_hyprland
 ./12_hyprland-contrib
-./14_swww
 ./15_emacs
-./16_lazygit
-./19_ags
-./20_eww
 ./23_insync
+cd
 
-echo "Setup Flatpak"
-# flatpak setup & pkgs
-sudo nala install flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-#flatpak install flathub org.ferdium.Ferdium # installs ferdium
-#flatpak install flathub com.ticktick.TickTick # installs ticktick
-#flatpak install flathub com.bitwarden.desktop #installs bitwarden
+# Installs Brave"
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo nala update
+sudo nala install brave-browser
+
+# pipx pkgs 
+pipx install pyprland
+pipx install hyprshade
 
 echo "Setting up Dotfiles"
 sudo rm -R ~/.config/
@@ -64,19 +72,20 @@ cd && mkdir ~/.config
 ln -s ~/.dots/.fonts ~/
 ln -s ~/.dots/.themes ~/
 ln -s ~/.dots/gentoo_setup ~/
-ln -s ~/.dots/Projects ~/
-ln -s ~/.dots/.local/bin/hypr ~/.local/bin
+ln -s ~/.dots/org ~/
 ln -s ~/.dots/.gtkrc-2.0 ~/
 ln -s ~/.dots/catppuccin.css ~/
+ln -s ~/.dots/.config/hypr ~/.config/
+ln -s ~/.dots/.config/eww ~/.config/
+ln -s ~/.dots/.config/starship.toml ~/.config
+ln -s ~/.dots/.config/Thunar ~/.config/
 ln -s ~/.dots/.config/alacritty ~/.config/
 ln -s ~/.dots/.config/btop ~/.config/
-ln -s ~/.dots/.config/ckb-next ~/.config/
 ln -s ~/.dots/.config/gtk-3.0 ~/.config/
 ln -s ~/.dots/.config/gtk-4.0 ~/.config/
 ln -s ~/.dots/.config/Kvantum ~/.config/
 ln -s ~/.dots/.config/lazygit ~/.config/
 ln -s ~/.dots/.config/lsd ~/.config/
-ln -s ~/.dots/.config/lvim ~/.config/
 ln -s ~/.dots/.config/qalculate ~/.config/
 ln -s ~/.dots/.config/qt5ct ~/.config/
 ln -s ~/.dots/.config/qt6ct ~/.config/
@@ -84,15 +93,30 @@ ln -s ~/.dots/.config/ranger ~/.config/
 ln -s ~/.dots/.config/wallpapers ~/.config/
 ln -s ~/.dots/.config/zathura ~/.config/
 ln -s ~/.dots/.config/zsh ~/.config/
+ln -s ~/.dots/.local/bin/hypr ~/.local/bin/
 
 
-echo "Setting Up Systemd"
+# Set Up Systemd
 sudo systemctl set-default graphical.target
 systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
+sudo systemctl enable --now chronyd acct
 
+# Setup zsh
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+curl -sS https://starship.rs/install.sh | sh
+curl -fsSL https://fnm.vercel.app/install | sh
+rm -R ~/.zshrc
+ln -s ~/.dots/.zshrc /
 
-echo "lunarvim setup"
-cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
+# git setup 
+sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+git config --global user.name "zielOS"
+git config --global user.email "ahsanur041@gmail.com"
+
+# lunarvim setup
+mkdir ~/.npm-global 
+npm config set prefix '~/.npm-global'
 export PATH=~/.npm-global/bin:$PATH
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 cd && sudo install -Dm755 $HOME/.local/bin/lvim "/usr/local/bin/lvim"
@@ -100,19 +124,4 @@ sudo rm -rf $HOME/.local/bin/lvim
 sudo rm -rf $HOME/.config/lvim
 ln -s $HOME/.dots/.config/lvim $HOME/.config
 
-
-echo "zsh setup"
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
-curl -sS https://starship.rs/install.sh | sh
-curl -fsSL https://fnm.vercel.app/install | sh
-rm -R $HOME/.zshrc
-ln -s $HOME/.dots/.zshrc $HOME/
-chsh -s $(which zsh)
-
-echo "git setup"
-sudo nala install make gcc git libsecret-1-0 libsecret-1-dev libglib2.0-dev
-sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
-git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
-git config --global user.name "zielOS"
-git config --global user.email "ahsanur041@gmail.com"
-
+echo "End of Hyprland Setup"
