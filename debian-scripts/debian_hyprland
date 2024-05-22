@@ -3,25 +3,22 @@
 cd && apt list --installed | cut -d/ -f1 > pre-cleaned.txt
 
 # Necessary files
-sudo cp -R ~/.dots/debian_scripts/01norecommend /etc/apt/apt.conf.d/
-sudo cp -R ~/.dots/debian_scripts/sources.list /etc/apt
 sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 
-
 # Installing packages
-cd && sudo apt -y update && sudo apt -y install zstd curl nala
+cd && sudo apt -y update && sudo apt -y install zstd curl apt nala
 
-sudo nala update && sudo nala full-upgrade
+sudo apt update && sudo apt full-upgrade
 
-sudo nala install curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git alacritty neovim deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard golang-go zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger policykit-1-gnome x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx rng-tools haveged lynis lxappearance auditd sysstat acct xserver-xorg-core network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct lsd kitty ncurses-term libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev libspa-0.2-dev libwayland-client++1 pipewire pipewire-alsa pipewire-pulse wireplumber xdg-desktop-portal grim slurp libdrm-dev pkg-config ninja-build scdoc libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-bin libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev wayland-utils wayland-protocols libsdbus-c++-dev libegl1-mesa-dev libpam0g-dev libpugixml-dev clang wget build-essential libegl-dev glslang-tools libinput-bin libinput-dev greetd libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libxcb-util-dev meson cmake-extras cmake gettext gettext-base libfontconfig-dev libffi-dev libxml2-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev xdg-desktop-portal-wlr fontconfig libliftoff-dev libdisplay-info-dev libsystemd-dev hwdata xwayland libwayland-dev cpio vulkan-utility-libraries-dev libsecret-1-0 libsecret-1-dev gnome-keyring firejail firejail-profiles firetools bubblewrap distrobox ubuntu-dev-tools make maim systemd-zram-generator xserver-xorg-video-amdgpu nvidia-driver firmware-misc-nonfree wireplumber libglib2.0-dev gcc flatpak libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev libsecret-tools alsa-utils amd64-microcode apparmor apparmor-easyprof apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils bash bash-completion binutils bluez bluez-alsa-utils ca-certificates cron chrony debianutils dracut-install efibootmgr fwupd gvfs logrotate plymouth plymouth-themes power-profiles-daemon psmisc xz-utils firmware-linux-free firmware-linux-nonfree firmware-amd-graphics firefox cliphist
+sudo apt install curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git alacritty neovim deluge bat maim python3-pynvim ripgrep tree-sitter-cli fd-find wl-clipboard golang-go zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fzf papirus-icon-theme ranger policykit-1-gnome x11-xkb-utils x11-xserver-utils xournalpp zathura zathura-pdf-poppler pymol pipx rng-tools haveged lynis lxappearance auditd sysstat acct xserver-xorg-core network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct lsd kitty ncurses-term libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev libspa-0.2-dev libwayland-client++1 pipewire pipewire-alsa pipewire-pulse wireplumber xdg-desktop-portal grim slurp libdrm-dev pkg-config ninja-build scdoc libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-bin libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev wayland-utils wayland-protocols libsdbus-c++-dev libegl1-mesa-dev libpam0g-dev libpugixml-dev clang wget build-essential libegl-dev glslang-tools libinput-bin libinput-dev greetd libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libxcb-util-dev meson cmake-extras cmake gettext gettext-base libfontconfig-dev libffi-dev libxml2-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev xdg-desktop-portal-wlr fontconfig libliftoff-dev libdisplay-info-dev libsystemd-dev hwdata xwayland libwayland-dev cpio vulkan-utility-libraries-dev libsecret-1-0 libsecret-1-dev gnome-keyring firejail firejail-profiles firetools bubblewrap distrobox ubuntu-dev-tools make maim systemd-zram-generator xserver-xorg-video-amdgpu nvidia-driver firmware-misc-nonfree wireplumber libglib2.0-dev gcc flatpak libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev libsecret-tools alsa-utils amd64-microcode apparmor apparmor-easyprof apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils bash bash-completion binutils bluez bluez-alsa-utils ca-certificates cron chrony debianutils fwupd gvfs logrotate plymouth plymouth-themes power-profiles-daemon psmisc xz-utils firmware-linux-free firmware-linux-nonfree firmware-amd-graphics cliphist
 
 # rustup setup
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sudo apt install rustup
 rustup default stable
 
 # node setup
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - &&\
-sudo nala install nodejs
+sudo apt install nodejs
 
 # spotify
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
@@ -32,7 +29,7 @@ sudo apt-get update && sudo apt-get install spotify-client
 sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
 
 # flatpak setup & pkgs
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub org.ferdium.Ferdium 
 flatpak install flathub com.ticktick.TickTick
 flatpak install flathub com.bitwarden.desktop
@@ -47,20 +44,20 @@ cd && cd $HOME/.dots/ubuntu_scripts/scripts
 ./05_hyprpicker
 ./06_hypridle
 ./07_hyprlock
-./08_hyprshot
 ./09_hyprwayland-scanner
 ./10_wayland-protocols
 ./11_hyprland
 ./12_hyprland-contrib
 ./15_emacs
-./23_insync
+./16_lazygit
+./20_eww
 cd
 
 # Installs Brave"
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo nala update
-sudo nala install brave-browser
+sudo apt update
+sudo apt install brave-browser
 
 # pipx pkgs 
 pipx install pyprland
@@ -99,7 +96,6 @@ ln -s ~/.dots/.local/bin/hypr ~/.local/bin/
 # Set Up Systemd
 sudo systemctl set-default graphical.target
 systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
-sudo systemctl enable --now chronyd acct
 
 # Setup zsh
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
@@ -107,6 +103,7 @@ curl -sS https://starship.rs/install.sh | sh
 curl -fsSL https://fnm.vercel.app/install | sh
 rm -R ~/.zshrc
 ln -s ~/.dots/.zshrc /
+chsh -s $(which zsh)
 
 # git setup 
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
