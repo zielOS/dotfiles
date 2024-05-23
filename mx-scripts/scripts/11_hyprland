@@ -1,0 +1,8 @@
+#!/bin/sh
+sudo nala install wget build-essential libdrm-dev  libegl-dev  libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libxcb-util-dev meson ninja-build cmake-extras cmake gettext gettext-base libfontconfig-dev libffi-dev libxml2-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev xdg-desktop-portal-wlr fontconfig libliftoff-dev libdisplay-info-dev libpango1.0-dev libsystemd-dev libgbm-dev hwdata xwayland wayland-protocols libwayland-dev cpio libtomlplusplus-dev vulkan-utility-libraries-dev 
+
+cd && git clone --recursive https://github.com/hyprwm/Hyprland
+cd Hyprland
+make all
+sudo make install
+cd && sudo rm -rf Hyprland

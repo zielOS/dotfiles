@@ -1,0 +1,9 @@
+#!/bin/sh
+sudo apt install libspa-0.2-dev libwayland-client++1 pipewire xdg-desktop-portal grim slurp libdrm-dev cmake pkg-config meson ninja-build scdoc wayland-utils wayland-protocols libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-dev libsdbus-c++-bin
+
+cd && git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland
+cd xdg-desktop-portal-hyprland/
+cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
+cmake --build build
+sudo cmake --install build
+cd && sudo rm -rf xdg-desktop-portal-hyprland
