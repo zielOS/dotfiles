@@ -4,11 +4,14 @@
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 # reload hyprland plugins
-#hyprpm reload -n &
+hyprpm reload -n &
 
 # services
-nm-applet --indicator &
+nm-applet &
 thunar --daemon &
+ags &
+pypr &
+
 
 # theme
 hyprtheme &

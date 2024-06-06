@@ -1,8 +1,8 @@
 #!/bin/bash
 
-THEME='Catppuccin-Mocha'
-ICONS='Luv-Folders-Dark'
-FONT='Noto Sans 9'
+THEME='Catppuccin-Mocha-Standard-Lavender-Dark'
+ICONS='Papirus'
+FONT='JetBrainsMono Nerd Font 13'
 CURSOR='Sweet'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
