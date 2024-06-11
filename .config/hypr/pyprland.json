@@ -14,11 +14,6 @@
         "command": "kitty --class explorer -e ranger",
         "animation": "fromBottom",
         "unfocus": "hide"
-    },
-    "file-manager": {
-      "command": "thunar",
-      "unfocus": "hide",
-      "animation": "fromBottom"
     }
   }
 }

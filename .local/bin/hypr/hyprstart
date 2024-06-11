@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # polkit
-/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # reload hyprland plugins
 hyprpm reload -n &
@@ -11,7 +11,7 @@ nm-applet &
 thunar --daemon &
 ags &
 pypr &
-
+emacs --daemon &
 
 # theme
 hyprtheme &
@@ -23,7 +23,6 @@ hyprpaper &
 hypridle &
 
 # lock
-hyprlock &
 
 # xdg
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
@@ -36,4 +35,6 @@ wl-paste --type image --watch cliphist store &
 # git
 dbus-update-activation-environment --all &
 gnome-keyring-daemon -r -d &
+
+hyprshade on ~/.config/hypr/shaders/blue-light-filter.glsl &
 

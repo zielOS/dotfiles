@@ -1,18 +1,15 @@
 #!/bin/bash
 # hyprland plugins
-hyprpm add https://github.com/VortexCoyote/hyprfocus 
+hyprpm add https://github.com/VortexCoyote/hyprfocus -v 
 hyprpm enable hyprfocus
 
-hyprpm add https://github.com/outfoxxed/hy3
+hyprpm add https://github.com/outfoxxed/hy3 -v
 hyprpm enable hy3
 
-hyprpm add https://github.com/KZDKM/Hyprspace
+hyprpm add https://github.com/KZDKM/Hyprspace -v
 hyprpm enable Hyprspace
 
-hyprpm add https://github.com/zakk4223/hyprland-easymotion
+hyprpm add https://github.com/zakk4223/hyprland-easymotion -v
 hyprpm enable hyprEasymotion
 
-# Installs cargo pkgs
-cargo install --git https://github.com/donovanglover/hyprnome
-cargo install --git https://github.com/donovanglover/hyprdim
 
