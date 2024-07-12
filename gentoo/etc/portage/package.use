@@ -2,6 +2,9 @@ virtual/secret-service libsecret
 media-video/ffmpeg x264
 sys-apps/util-linux build
 sys-apps/fwupd nvme logitech
+#remove libudev util-linux  later
+sys-apps/util-linux -cryptsetup
+#virtual/libudev -systemd
 dev-build/cmake -gui qt6
 sys-firmware/intel-microcode hostonly initramfs
 sys-kernel/linux-firmware compress-zstd initramfs
@@ -40,7 +43,8 @@ media-sound/pulseaudio -daemon
 media-video/pipewire sound-server
 sys-apps/kmod tools
 sys-apps/xdg-desktop-portal -screencast -geolocation
-sys-apps/systemd policykit cryptsetup zstd  
+# set +cryptsetup later
+sys-apps/systemd policykit -cryptsetup zstdi audit seccomp resolvconf kernel-install iptables
 media-sound/mpg123 -pulseaudio
 media-libs/libpng apng
 dev-qt/qtgui eglfs egl dbus
@@ -62,7 +66,8 @@ sys-apps/flatpak policykit seccomp
 app-admin/keepassxc browser autotype keeshare network yubikey
 gui-apps/swaybg gdk-pixbuf
 dev-python/PyQt5 opengl
-dev-python/pillow webp
+#change to + later
+dev-python/pillow -webp
 dev-python/QtPy svg printsupport
 virtual/wine staging
 media-libs/harfbuzz icu
