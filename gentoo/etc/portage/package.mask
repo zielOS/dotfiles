@@ -1,0 +1,5 @@
+>=dev-lang/python-3.13
+>=sys-devel/llvm-18
+>=sys-devel/clang-18
+>=sys-devel/llvmgold-18
+>=sys-devel/llvm-common-18
