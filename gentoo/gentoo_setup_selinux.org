@@ -1,36 +1,66 @@
-#!/bin/sh
 
-##.1
+
+* Setup Disk
+
+#+begin_src bash
 cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && rm -R /mnt/gentoo && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs subvolume create /mnt/gentoo/@ && btrfs subvolume create /mnt/gentoo/@/home && btrfs subvolume create /mnt/gentoo/@/opt && btrfs subvolume create /mnt/gentoo/@/var && btrfs subvolume create /mnt/gentoo/@/var/tmp && btrfs subvolume create /mnt/gentoo/@/var/log && btrfs subvolume create /mnt/gentoo/@/var/log/audit && btrfs subvolume create /mnt/gentoo/@/.snapshots && chattr +C /mnt/gentoo/@/var && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/cryptroot /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/cryptroot /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/cryptroot /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/cryptroot /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/cryptroot /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240707T170407Z/stage3-amd64-hardened-selinux-openrc-20240707T170407Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner && rm -R /mnt/gentoo/etc/portage/make.conf && cp -R /home/ahsan/.dots/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.accept_keywords && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.accept_keywords /mnt/gentoo/etc/portage/ && cp -R /home/ahsan/.dots/gentoo/etc/portage/profile/use.mask /mnt/gentoo/etc/portage/profile/ && cp -R /home/ahsan/.dots/gentoo/etc/portage/profile/package.provided /mnt/gentoo/etc/portage/profile/ && rm -R /mnt/gentoo/etc/portage/package.use && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.use /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.mask && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.mask /mnt/gentoo/etc/portage/ && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
+#+end_src
 
-##.5
+* Chroot into
+
+#+begin_src bash
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
+#+end_src
 
-##.6
+* Sync Setup
+
+#+begin_src bash
 emerge-webrsync && emerge --sync
 eselect profile set 44
+#+end_src
 
-##.7
+* GCC Setup
+
+#+begin_src bash
 emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge --ask --oneshot --usepkg=n dev-build/libtool && emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper virtual/perl-Exporter virtual/perl-Test-Harness virtual/perl-ExtUtils-CBuilder virtual/perl-JSON-PP virtual/perl-ExtUtils-ParseXS perl-core/File-Temp virtual/perl-Getopt-Long && emerge -euv --usepkg=n @world --jobs=10 --keep-going --exclude gcc
- 
-##.8
-ln -sf ../usr/share/zoneinfo/Asia/Dhaka /etc/localtime && nano -w /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" 
+#+end_src
 
+* Local Profile
+
+#+begin_src bash
+ln -sf ../usr/share/zoneinfo/Asia/Dhaka /etc/localtime && nano -w /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+#+end_src
+
+* Repo Setup
+
+#+begin_src bash
 emerge -aq app-eselect/eselect-repository dev-vcs/git && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru gentoo-zh xira steam-overlay ppfeufer-gentoo-overlay CachyOS-kernels && emerge --sync
+#+end_src
 
-##.9
-* kernel setup
-emerge sys-kernel/cachyos-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode sys-kernel/modprobed-db sys-fs/btrfs-progs sys-boot/grub sys-apps/rng-tools && eselect kernel set 1 && ls -l /usr/src/linux
+* fstab setup
 
-##.10
+#+begin_src bash
+emerge genfstab
 mount /dev/nvme0n1p1 /boot
 genfstab -U / >> /etc/fstab
+#+end_src
 
+* MANUAL KERNEL SETUP
 
-** gentoo config examples
-1. main handbook (done) 
+** Kernel Setup
+
+*** Packages
+
+#+begin_src bash
+emerge sys-kernel/cachyos-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode sys-kernel/dracut sys-kernel/installkernel sys-kernel/modprobed-db sys-fs/btrfs-progs sys-boot/grub sys-apps/rng-tools && eselect kernel set 1 && ls -l /usr/src/linux
+#+end_src
+
+*** Gentoo Config Examples
+
+#+begin_src bash
+1. main handbook (done)
 2. dracut (done)
 3. systemd (done)
 4. zram (done)
@@ -46,76 +76,99 @@ genfstab -U / >> /etc/fstab
 14. nvidia
 15. sound
 16. openrgb
+#+end_src
 
+*** Configure Kernel
+
+#+begin_src bash
+make nconfig
+#+end_src
+
+*** Install Kernel
+
+#+begin_src bash
+make -j22 && make modules_install && emerge nvidia-drivers && make install
+#+end_src
+
+
+** Dracut Setup
+
+*** UUID
+
+#+begin_src bash
 lsblk -o name,uuid
-nvme0n1                                       
+nvme0n1
 |-nvme0n1p1                                   85A2-DFFE
 `-nvme0n1p2                                   38de55c7-1bac-4606-b417-1514e2b39b26
   `-cryptroot                                 b557ae73-0095-40d4-bc47-bfec5f079772
+#+end_src
 
+*** dracut config
 
-
-### Manual Method
-dracut setup
-
+#+begin_src bash
 nvim /etc/dracut.conf
+
 compress="zstd"
 hostonly="yes"
 dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
-add_dracutmodules+=" crypt dm rootfs-block "
+add_dracutmodules+=" crypt dm rootfs-block rngd "
 omit_dracutmodules+=" network cifs nfs nbd brltty rngd "
 force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline+=" loglevel=3 quiet rd.luks.uuid=38de55c7-1bac-4606-b417-1514e2b39b26 root=UUID=b557ae73-0095-40d4-bc47-bfec5f079772 root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw apparmor=1 security=apparmor "
+kernel_cmdline+=" rd.luks.uuid=38de55c7-1bac-4606-b417-1514e2b39b26 root=UUID=b557ae73-0095-40d4-bc47-bfec5f079772 root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw loglevel=3 quiet  apparmor=1 security=apparmor "
 install_items+=" /etc/crypttab "
+#+end_src
 
-kernel_cmdline+=" rd.luks.uuid=38de55c7-1bac-4606-b417-1514e2b39b26 root=UUID=b557ae73-0095-40d4-bc47-bfec5f079772 "
+*** crypttab setup
 
-
-# systemd-boot
-bootctl install
-
-# machine-id
-50b58c553cb0b8eecdd454456691d176
-
-# /efi/loader/loader.conf
-default b6904dd6eeec4fa18283f652d67f6859*
-timeout 5
-console-mode auto
-reboot-for-bitlocker 1
-
-# entries/*.conf (autogenerated)
-# Boot Loader Specification type#1 entry
-# File created by /etc/kernel/install.d/90-loaderentry.install (systemd 254.1-1-arch)
-title      EndeavourOS
-version    6.7.1-arch1-1
-machine-id b6904dd6eeec4fa18283f652d67f6859
-sort-key   endeavouros-6.7.1-arch1-1
-options    nvme_load=YES nowatchdog rw rootflags=subvol=/@ rd.luks.uuid=a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 root=/dev/mapper/luks-a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 nvidia-drm.modeset=1 systemd.machine_id=b6904dd6eeec4fa18283f652d67f6859
-linux      /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/linux
-initrd     /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/initrd
-
-pacman -S linux-clear linux-clear-headers intel-ucode linux-firmware dracut-hook-uefi kernel-install-for-dracut  nvidia-dkms nvidia-utils
-
-# dracut setup
-nvim /etc/dracut.conf
-compress="zstd"
-hostonly="yes"
-dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
-add_dracutmodules+=" crypt dm rootfs-block "
-omit_dracutmodules+=" network cifs nfs nbd brltty "
-force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline="quiet loglevel=3 cryptdevice=UUID=295c526c-65a0-44c1-9c1e-48c3ac6f7a5f:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw root_trim=yes"
-install_items+=" /etc/crypttab "
-
+#+begin_src
 nvim /etc/crypttab
-cryptroot UUID=38de55c7-1bac-4606-b417-1514e2b39b26     /crypto_keyfile.bin luks,initramfs
 
-make menuconfig && make -j22 && emerge nvidia-drivers && make modules_install && make install
-
-
+cryptroot UUID=38de55c7-1bac-4606-b417-1514e2b39b26     none luks
+#+end_src
 
 
-### Genkernel method
+** Boot Setup
+*** install systemd-boot
+
+#+begin_src
+bootctl install
+#+end_src
+
+*** machine-id
+
+#+begin_src
+50b58c553cb0b8eecdd454456691d176
+#+end_src
+
+*** esp/loader/loader.conf
+
+#+begin_src bash
+default 50b58c553cb0b8eecdd454456691d176*
+timeout 4
+console-mode keep
+editor no
+reboot-for-bitlocker 1
+#+end_src
+
+*** esp/loader/entries/*.conf
+
+#+begin_src bash
+# Boot Loader Specification type#1 entry
+# File created by /usr/lib/kernel/install.d/90-loaderentry.install (systemd 256)
+title      Gentoo Linux
+version    6.9.9-cachyos-6.9.9
+machine-id 50b58c553cb0b8eecdd454456691d176
+sort-key   gentoo
+options    rd.luks.uuid=38de55c7-1bac-4606-b417-1514e2b39b26 root=UUID=b557ae73-0095-40d4-bc47-bfec5f079772 rw rootflags=subvol=/@ rootfstype=btrfs root_trim=yes loglevel=3 quiet init=/lib/systemd/systemd nvidia-drm.modeset=1 apparmor=1 security=apparmor systemd.machine_id=50b58c553cb0b8eecdd454456691d176
+linux      /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/linux
+initrd     /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/microcode-amd
+initrd     /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/microcode-intel
+initrd     /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/initrd
+
+#+end_src
+
+
+* Genkernel method
 ##.11
 # copy kernel config and genkernel.conf
 genkernel --luks --microcode=intel --install all --kernel-config=/usr/src/linux/kernel.config 
@@ -249,15 +302,24 @@ rustup-init-gentoo
 
 CONFIG_NF_CT_NETLINK_HELPER
 
-# Post-install chroot
+* POST-INSTALL CHROOT IN RECOVERY
+
+** Mount Drives
+
+#+begin_src bash
 cryptsetup luksOpen /dev/nvme0n1p2 cryptroot  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/cryptroot /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/cryptroot /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/cryptroot /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/cryptroot /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/cryptroot /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
 
+#+end_src
 
+** Chroot Environment & Boot Drive
+
+#+begin_src bash
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 
 mount /dev/nvme0n1p1 /boot
+#+end_src
 
 
  *   CONFIG_NF_CT_NETLINK_HELPER:	 is not set when it should be.
