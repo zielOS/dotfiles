@@ -213,6 +213,8 @@ emerge sys-kernel/xanmod-sources sys-kernel/linux-firmware sys-kernel/linux-head
 
 lsblk -o name,uuid
 
+### Manua
+
 # dracut setup
 nvim /etc/dracut.conf
 compress="zstd"

@@ -13,14 +13,21 @@ emerge-webrsync && emerge --sync
 eselect profile set 44
 
 ##.7
-emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge --ask --oneshot --usepkg=n dev-build/libtool && emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper && emerge -euv --usepkg=n @world --jobs=10 --keep-going --exclude gcc
+emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge --ask --oneshot --usepkg=n dev-build/libtool && emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper virtual/perl-Exporter virtual/perl-Test-Harness virtual/perl-ExtUtils-CBuilder virtual/perl-JSON-PP virtual/perl-ExtUtils-ParseXS perl-core/File-Temp virtual/perl-Getopt-Long && emerge -euv --usepkg=n @world --jobs=10 --keep-going --exclude gcc
  
 ##.8
 ln -sf ../usr/share/zoneinfo/Asia/Dhaka /etc/localtime && nano -w /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" 
 
+emerge -aq app-eselect/eselect-repository dev-vcs/git && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru gentoo-zh xira steam-overlay ppfeufer-gentoo-overlay CachyOS-kernels && emerge --sync
+
 ##.9
 * kernel setup
-emerge sys-kernel/xanmod-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode sys-kernel/modprobed-db sys-fs/btrfs-progs sys-boot/grub sys-apps/rng-tools && eselect kernel set 1 && ls -l /usr/src/linux
+emerge sys-kernel/cachyos-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode sys-kernel/modprobed-db sys-fs/btrfs-progs sys-boot/grub sys-apps/rng-tools && eselect kernel set 1 && ls -l /usr/src/linux
+
+##.10
+mount /dev/nvme0n1p1 /boot
+genfstab -U / >> /etc/fstab
+
 
 ** gentoo config examples
 1. main handbook (done) 
@@ -38,28 +45,32 @@ emerge sys-kernel/xanmod-sources sys-kernel/linux-firmware sys-kernel/linux-head
 13. droidcam (done)
 14. nvidia
 15. sound
+16. openrgb
 
 lsblk -o name,uuid
+### Manual Method
+dracut setup
 
-# dracut setup
-# nvim /etc/dracut.conf
-# compress="zstd"
-# hostonly="yes"
-# dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
-# add_dracutmodules+=" crypt dm rootfs-block "
-# omit_dracutmodules+=" network cifs nfs nbd brltty rngd "
-# force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-# kernel_cmdline+=" loglevel=3 quiet  cryptroot=UUID=72d75132-3818-4421-b86a-8929817d4de2 root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw apparmor=1 security=apparmor"
-
-# nvim /etc/crypttab
-# cryptroot UUID=72d75132-3818-4421-b86a-8929817d4de2     /crypto_keyfile.bin luks,initramfs
-# make menuconfig && make -j22 && emerge nvidia-drivers && make modules_install && make install
+nvim /etc/dracut.conf
+compress="zstd"
+hostonly="yes"
+dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
+add_dracutmodules+=" crypt dm rootfs-block "
+omit_dracutmodules+=" network cifs nfs nbd brltty rngd "
+force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+kernel_cmdline+=" loglevel=3 quiet  cryptroot=UUID=38de55c7-1bac-4606-b417-1514e2b39b26 root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw apparmor=1 security=apparmor"
+install_items+=" /etc/crypttab "
 
 
-##.10
-mount /dev/nvme0n1p1 /boot
-genfstab -U / >> /etc/fstab
+nvim /etc/crypttab
+cryptroot UUID=38de55c7-1bac-4606-b417-1514e2b39b26     /crypto_keyfile.bin luks,initramfs
 
+make menuconfig && make -j22 && emerge nvidia-drivers && make modules_install && make install
+
+
+
+
+### Genkernel method
 ##.11
 # copy kernel config and genkernel.conf
 genkernel --luks --microcode=intel --install all --kernel-config=/usr/src/linux/kernel.config 
@@ -77,7 +88,7 @@ systemd-machine-id-setup && hostnamectl set-hostname workstation && emerge app-a
 
 
 ##.14
-emerge -aq app-eselect/eselect-repository dev-vcs/git && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru gentoo-zh xira steam-overlay ppfeufer-gentoo-overlay && emerge --sync
+
 
 
 ##.15
@@ -232,3 +243,4 @@ grep 'app-emacs/' /var/lib/portage/world | xargs --open-tty emerge --ask --desel
 mount /dev/nvme0n1p1 /boot && cd /boot && rm -rf * && cd && cd /lib/modules && rm -rf * && cd && emerge --unmerge xanmod-sources && rm -rf /usr/src/linux-* && emerge xanmod-sources && eselect kernel set 1 && ls -l /usr/src/linux
 
 make -j22 && make modules_install -j22 && emerge nvidia-drivers && make install && genkernel --luks --microcode --install initramfs && grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
+
