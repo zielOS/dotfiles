@@ -76,3 +76,10 @@ eval "`fnm env`"
 # fnm
 export PATH="/home/ahsan/.local/share/fnm:$PATH"
 eval "`fnm env`"
+
+# fnm
+FNM_PATH="/home/ahsan/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/ahsan/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
