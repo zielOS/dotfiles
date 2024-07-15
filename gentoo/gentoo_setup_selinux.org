@@ -104,10 +104,12 @@ make -j22 && make modules_install && emerge nvidia-drivers && make install
 *** UUID
 
 #+begin_src bash
+lsblk -o name,uuid
+
 nvme1n1
-├─nvme1n1p1 4842-77F4
-└─nvme1n1p2 4f6138c9-e69f-4f11-8563-8fbe47f6ce02
-  └─root    8070d9e5-4c7d-4261-bbd3-05ea3e8f7765
+├─nvme1n1p1 6775-926C
+└─nvme1n1p2 b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0
+  └─root    226ad46f-a372-4a21-b72b-a07a19bbe634
 #+end_src
 
 *** dracut config
@@ -120,9 +122,9 @@ hostonly="yes"
 dracut_rescue_image="yes"
 dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
 add_dracutmodules+=" crypt dm rootfs-block rngd "
-omit_dracutmodules+=" network cifs nfs nbd brltty rngd "
+omit_dracutmodules+=" network cifs nfs nbd brltty "
 force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline+=" rd.luks.uuid=4f6138c9-e69f-4f11-8563-8fbe47f6ce02 root=UUID=8070d9e5-4c7d-4261-bbd3-05ea3e8f7765 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet "
+kernel_cmdline+=" rd.luks.uuid=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 root=UUID=226ad46f-a372-4a21-b72b-a07a19bbe634 rd.luks.allow-discards= b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet "
 #install_items+=" /etc/crypttab "
 #+end_src
 
@@ -145,13 +147,13 @@ bootctl install
 *** machine-id
 
 #+begin_src
-50b58c553cb0b8eecdd454456691d176
+e299e8fff8bb6a5c1404cd4966953e20
 #+end_src
 
 *** esp/loader/loader.conf
 
-#+begin_src bash
-default 50b58c553cb0b8eecdd454456691d176*
+#+begin_src bashde
+default e299e8fff8bb6a5c1404cd4966953e20*
 timeout 4
 console-mode keep
 editor no
@@ -161,17 +163,22 @@ reboot-for-bitlocker 1
 *** esp/loader/entries/*.conf
 
 #+begin_src bash
+e299e8fff8bb6a5c1404cd4966953e20
+50b58c553cb0b8eecdd454456691d176
+#+end_src
+
+#+begin_src bash
 # Boot Loader Specification type#1 entry
 # File created by /usr/lib/kernel/install.d/90-loaderentry.install (systemd 256)
 title      Gentoo Linux
 version    6.9.9-cachyos-6.9.9
-machine-id 50b58c553cb0b8eecdd454456691d176
+machine-id e299e8fff8bb6a5c1404cd4966953e20
 sort-key   gentoo
-options    rd.luks.uuid=38de55c7-1bac-4606-b417-1514e2b39b26 root=UUID=b557ae73-0095-40d4-bc47-bfec5f079772 rw rootflags=subvol=/@ rootfstype=btrfs root_trim=yes loglevel=3 quiet init=/lib/systemd/systemd nvidia-drm.modeset=1 apparmor=1 security=apparmor systemd.machine_id=50b58c553cb0b8eecdd454456691d176
-linux      /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/linux
-initrd     /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/microcode-amd
-initrd     /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/microcode-intel
-initrd     /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/initrd
+options    rd.luks.uuid=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 root=UUID=226ad46f-a372-4a21-b72b-a07a19bbe634 rd.luks.allow-discards= b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 rw rootflags=subvol=/@ rootfstype=btrfs root_trim=yes loglevel=3 quiet init=/lib/systemd/systemd nvidia-drm.modeset=1 apparmor=1 security=apparmor systemd.machine_id=e299e8fff8bb6a5c1404cd4966953e20
+linux      /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/linux
+initrd     /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/microcode-amd
+initrd     /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/microcode-intel
+initrd     /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/initrd
 
 #+end_src
 
@@ -179,24 +186,30 @@ initrd     /50b58c553cb0b8eecdd454456691d176/6.9.9-cachyos-6.9.9/initrd
 
 
 * Genkernel method
-##.11
-# copy kernel config and genkernel.conf
-genkernel --luks --microcode=intel --install all --kernel-config=/usr/src/linux/kernel.config 
 
-##.12
+#+begin_src bash
+# copy kernel config and genkernel.conf
+genkernel --luks --microcode=intel --install all --kernel-config=/usr/src/linux/kernel.config
+
+#+end_src
+
+* GRUB
+
+#+begin_src bash
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX="loglevel=3 quiet crypt_root=UUID=72d75132-3818-4421-b86a-8929817d4de2 root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw"
-GRUB_CMDLINE_LINUX_DEFAULT="apparmor=1 security=apparmor" 
+GRUB_CMDLINE_LINUX="rd.luks.uuid=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 root=UUID=226ad46f-a372-4a21-b72b-a07a19bbe634 rd.luks.allow-discards= b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 rw rootflags=subvol=/@ rootfstype=btrfs root_trim=yes loglevel=3 quiet init=/lib/systemd/systemd nvidia-drm.modeset=1"
+GRUB_CMDLINE_LINUX_DEFAULT=""
 
 grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
 
+#+end_src
 
-##.13
-systemd-machine-id-setup && hostnamectl set-hostname workstation && emerge app-admin/sudo app-editors/neovim && passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo && nvim /etc/hosts 
+* User
 
+#+begin_src bash
+systemd-machine-id-setup && hostnamectl set-hostname workstation && emerge app-admin/sudo app-editors/neovim && passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
-##.14
-
+#+end_src
 
 
 * Install Desktop Environment Packages
@@ -207,8 +220,12 @@ emerge sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sy
 #+end_src
 
 
-##.15
+* SYSTEMD
+
+#+begin_src bash
 systemctl preset-all && systemctl enable NetworkManager sysstat apparmor auditd rngd nvidia-suspend.service nvidia-resume.service
+
+#+end_src
 
 
 ## A
@@ -326,7 +343,7 @@ CONFIG_NF_CT_NETLINK_HELPER
 ** Mount Drives
 
 #+begin_src bash
-cryptsetup luksOpen /dev/nvme1n1p2 root  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/root /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/root /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/root /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/root /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/root /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/root /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/root /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/root /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
+cryptsetup luksOpen /dev/nvme0n1p2 root  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/root /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/root /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/root /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/root /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/root /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/root /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/root /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/root /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
 
 #+end_src
 
