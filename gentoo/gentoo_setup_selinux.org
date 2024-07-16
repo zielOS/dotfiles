@@ -188,6 +188,131 @@ initrd     /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/initrd
 * Genkernel method
 
 #+begin_src bash
+# =========COMMON COMMAND LINE OPTION DEFAULTS=========
+
+#INSTALL="yes"
+#OLDCONFIG="yes"
+#MENUCONFIG="no"
+#GCONFIG="no"
+NCONFIG="yes"
+#XCONFIG="no"
+#MRPROPER="yes"
+#CLEAN="yes"
+#MOUNTBOOT="yes"
+#SYMLINK="no"
+#SAVE_CONFIG="yes"
+NOCOLOR="true"
+#CLEAR_CACHEDIR="no"
+#POSTCLEAR="no"
+#CHECK_FREE_DISK_SPACE_BOOTDIR=0
+#CHECK_FREE_DISK_SPACE_KERNELOUTPUTDIR=0
+#NICE=10
+#BCACHE="no"
+#LVM="no"
+LUKS="yes"
+#GPG="no"
+#KEYCTL="no"
+MICROCODE="intel"
+#MICROCODE_INITRAMFS="no"
+#NFS="no"
+#DMRAID="no"
+#SSH="no"
+#B2SUM="no"
+#BUSYBOX="yes"
+#MDADM="no"
+#MDADM_CONFIG="/etc/mdadm.conf"
+#MULTIPATH="no"
+#ISCSI="no"
+#E2FSPROGS="no"
+#UNIONFS="no"
+#ZFS="no"
+BTRFS="yes"
+#XFSPROGS="no"
+#FIRMWARE_INSTALL="no"
+#ALLFIRMWARE="no"
+#FIRMWARE="no"
+#FIRMWARE_DIR="/lib/firmware"
+#FIRMWARE_FILES=""
+#BOOTLOADER="no"
+SANDBOX="yes"
+#BOOTFONT="none"
+#SPLASH="no"
+#SPLASH_THEME="gentoo"
+#PLYMOUTH="no"
+#PLYMOUTH_THEME="text"
+MODULEREBUILD="yes"
+
+#CMD_CALLBACK=""
+
+
+# =========Keymap Settings=========
+# Force keymap selection at boot
+# Enables keymap selection support
+#DOKEYMAPAUTO="no"
+#KEYMAP="yes"
+
+
+# =========Low Level Compile Settings=========
+# Additional make options
+MAKEOPTS="LLVM=1 LLVM_IAS=1 ${MAKEOPTS}"
+
+# Assembler to use for the kernel. See also the --kernel-as command line option.
+# Archiver to use for the kernel. See also the --kernel-ar command line option.
+# Compiler to use for the kernel (e.g. distcc). See also the --kernel-cc command line option.
+# Linker to use for the kernel. See also the --kernel-ld command line option.
+# NM utility to use for the kernel. See also the --kernel-nm command line option.
+# GNU Make to use for kernel. See also the --kernel-make command line option.
+# not exposed in default config
+KERNEL_AS="clang -c"
+KERNEL_AR="llvm-ar"
+KERNEL_CC="clang"
+KERNEL_LD="ld.lld"
+KERNEL_NM="llvm-nm"
+#KERNEL_MAKE="make"
+KERNEL_OBJCOPY="llvm-objcopy"
+KERNEL_OBJDUMP="llvm-objdump"
+KERNEL_READELF="llvm-readelf"
+KERNEL_STRIP="llvm-strip"
+KERNEL_RANLIB="llvm-ranlib"
+
+# Assembler to use for the utilities. See also the --utils-as command line option.
+# Archiver to use for the utilities. See also the --utils-ar command line option.
+# C Compiler to use for the utilities (e.g. distcc). See also the --utils-cc command line option.
+# C++ Compiler to use for the utilities (e.g. distcc). See also the --utils-cxx command line option.
+# Linker to use for the utilities. See also the --utils-ld command line option.
+# NM utility to use for the utilities. See also the --utils-nm command line option.
+# GNU Make to use for the utilities. See also the --utils-make command line option.
+# not exposed in default config
+UTILS_AS="clang -c"
+UTILS_AR="llvm-ar"
+UTILS_CC="clang"
+UTILS_CXX="clang++"
+UTILS_LD="ld.lld"
+UTILS_NM="llvm-nm"
+#UTILS_MAKE="make"
+UTILS_OBJCOPY="llvm-objcopy"
+UTILS_OBJDUMP="llvm-objdump"
+UTILS_READELF="llvm-readelf"
+UTILS_STRIP="llvm-strip"
+UTILS_RANLIB="llvm-ranlib"
+
+# Target triple (i.e. aarch64-linux-gnu) to build for. If you do not
+# cross-compile, leave blank for auto detection.
+#CROSS_COMPILE=""
+
+# Override default make target (bzImage). See also the --kernel-target
+# command line option. Useful to build a uImage on arm.
+#KERNEL_MAKE_DIRECTIVE_OVERRIDE="fooImage"
+
+# Override default kernel binary path. See also the --kernel-binary
+# command line option. Useful to install a uImage on arm.
+#KERNEL_BINARY_OVERRIDE="arch/foo/boot/b
+
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash
 # copy kernel config and genkernel.conf
 genkernel --luks --microcode=intel --install all --kernel-config=/usr/src/linux/kernel.config
 
@@ -227,14 +352,15 @@ systemctl preset-all && systemctl enable NetworkManager sysstat apparmor auditd 
 
 #+end_src
 
+* A. POST-INSTALL NVIDIA-SETUP
 
-## A
-cryptsetup luksOpen /dev/nvme1n1p2 root && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && gentoo-chroot /mnt/gentoo
-
-
+#+begin_src bash
 nvim /etc/modprobe.d/nvidia.conf
-options nvidia-drm modeset=1 
+
+options nvidia-drm modeset=1
 options nvidia NVreg_UsePageAttributeTable=1
+
+#+end_src
 
 
 nvim /etc/modprobe.d/nvidia-power-management.conf
@@ -266,7 +392,11 @@ sudo chmod 4755 chrome-sandbox
 sudo lvim /usr/share/gvfs/mounts/network.mount
 AutoMount=false
 
+* SYSCTL KERNEL HARDENING
+
+#+begin_src bash
 sudo nvim /etc/sysctl.d/harden.conf
+
 kernel.kptr_restrict=2
 kernel.dmesg_restrict=1
 kernel.printk=3 3 3 3
@@ -308,7 +438,9 @@ fs.protected_hardlinks=1
 fs.protected_fifos=2
 fs.protected_regular=2
 
-* Issue
+#+end_src
+
+* Issue && Issue.net
 
 #+begin_src bash
 -- WARNING -- This system is for the use of authorized users only. Individuals
@@ -318,7 +450,6 @@ recorded by system personnel. Anyone using this system expressly consents to
 such monitoring and is advised that if such monitoring reveals possible
 evidence of criminal activity system personal may provide the evidence of such
 monitoring to law enforcement officials.
-
 
 #+end_src
 
@@ -343,7 +474,7 @@ CONFIG_NF_CT_NETLINK_HELPER
 ** Mount Drives
 
 #+begin_src bash
-cryptsetup luksOpen /dev/nvme0n1p2 root  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/root /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/root /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/root /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/root /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/root /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/root /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/root /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/root /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
+cryptsetup luksOpen /dev/nvme1n1p2 root  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/root /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/root /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/root /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/root /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/root /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/root /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/root /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/root /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
 
 #+end_src
 
@@ -357,7 +488,7 @@ export PS1="(chroot) ${PS1}"
 mount /dev/nvme1n1p1 /boot
 #+end_src
 
-
+ There is apparre
  *   CONFIG_NF_CT_NETLINK_HELPER:	 is not set when it should be.
  *   CONFIG_NFT_OBJREF:	 is not set when it should be.
 

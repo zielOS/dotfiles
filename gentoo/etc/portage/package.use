@@ -2,13 +2,10 @@ virtual/secret-service libsecret
 media-video/ffmpeg x264
 sys-apps/util-linux build
 sys-apps/fwupd nvme logitech
-#remove libudev util-linux  later
-sys-apps/util-linux -cryptsetup
-#virtual/libudev -systemd
 dev-build/cmake -gui qt6
 sys-firmware/intel-microcode hostonly initramfs
 sys-kernel/linux-firmware compress-zstd initramfs
-sys-kernel/installkernel systemd grub
+sys-kernel/installkernel systemd grub dracut
 sys-boot/refind btrfs
 media-video/ffmpeg -xvid
 media-libs/freetype -harfbuzz
@@ -29,7 +26,7 @@ gnome-base/gvfs udisks
 dev-libs/libdbusmenu gtk3
 app-crypt/gcr gtk
 sys-apps/kmod zstd
-sys-boot/grub:2 device-mapper mount font themes
+sys-boot/grub:2 device-mapper mount
 app-admin/sysstat lto lm-sensors
 sys-libs/zlib minizip
 app-text/poppler cairo
@@ -43,8 +40,7 @@ media-sound/pulseaudio -daemon
 media-video/pipewire sound-server
 sys-apps/kmod tools
 sys-apps/xdg-desktop-portal -screencast -geolocation
-# set +cryptsetup later
-sys-apps/systemd policykit -cryptsetup zstdi audit seccomp resolvconf kernel-install iptables
+sys-apps/systemd policykit cryptsetup zstd audit seccomp resolvconf kernel-install iptables
 media-sound/mpg123 -pulseaudio
 media-libs/libpng apng
 dev-qt/qtgui eglfs egl dbus
@@ -66,8 +62,7 @@ sys-apps/flatpak policykit seccomp
 app-admin/keepassxc browser autotype keeshare network yubikey
 gui-apps/swaybg gdk-pixbuf
 dev-python/PyQt5 opengl
-#change to + later
-dev-python/pillow -webp
+dev-python/pillow webp
 dev-python/QtPy svg printsupport
 virtual/wine staging
 media-libs/harfbuzz icu
