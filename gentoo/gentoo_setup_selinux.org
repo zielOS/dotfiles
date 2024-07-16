@@ -113,6 +113,7 @@ nvme1n1
 #+end_src
 
 *** dracut config
+**** systemd-boot
 
 #+begin_src bash
 nvim /etc/dracut.conf
@@ -124,7 +125,7 @@ dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shu
 add_dracutmodules+=" crypt dm rootfs-block rngd "
 omit_dracutmodules+=" network cifs nfs nbd brltty "
 force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline+=" rd.luks.uuid=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 root=UUID=226ad46f-a372-4a21-b72b-a07a19bbe634 rd.luks.allow-discards= b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet "
+kernel_cmdline+=" rd.luks.uuid=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 root=UUID=226ad46f-a372-4a21-b72b-a07a19bbe634 rd.luks.allow-discards=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet "
 #install_items+=" /etc/crypttab "
 #+end_src
 
@@ -136,6 +137,28 @@ nvim /etc/crypttab
 #root UUID=38de55c7-1bac-4606-b417-1514e2b39b26     none luks
 #+end_src
 
+**** grub
+#+begin_src bash
+nvim /etc/dracut.conf
+
+compress="zstd"
+hostonly="yes"
+dracut_rescue_image="yes"
+dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
+add_dracutmodules+=" crypt dm rootfs-block rngd "
+omit_dracutmodules+=" network cifs nfs nbd brltty "
+force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+kernel_cmdline+=" crypt_root=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet "
+#install_items+=" /etc/crypttab "
+#+end_src
+
+*** crypttab setup
+
+#+begin_src bash
+nvim /etc/crypttab
+
+#root UUID=38de55c7-1bac-4606-b417-1514e2b39b26     none luks
+#+end_src
 
 ** Boot Setup
 *** install systemd-boot
