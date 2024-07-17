@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##.1
-cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && rm -R /mnt/gentoo && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs subvolume create /mnt/gentoo/@ && btrfs subvolume create /mnt/gentoo/@/home && btrfs subvolume create /mnt/gentoo/@/opt && btrfs subvolume create /mnt/gentoo/@/var && btrfs subvolume create /mnt/gentoo/@/var/tmp && btrfs subvolume create /mnt/gentoo/@/var/log && btrfs subvolume create /mnt/gentoo/@/var/log/audit && btrfs subvolume create /mnt/gentoo/@/.snapshots && chattr +C /mnt/gentoo/@/var && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/cryptroot /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/cryptroot /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/cryptroot /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/cryptroot /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/cryptroot /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240707T170407Z/stage3-amd64-hardened-selinux-openrc-20240707T170407Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner && rm -R /mnt/gentoo/etc/portage/make.conf && cp -R /home/ahsan/.dots/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.accept_keywords && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.accept_keywords /mnt/gentoo/etc/portage/ && cp -R /home/ahsan/.dots/gentoo/etc/portage/profile/use.mask /mnt/gentoo/etc/portage/profile/ && cp -R /home/ahsan/.dots/gentoo/etc/portage/profile/package.provided /mnt/gentoo/etc/portage/profile/ && rm -R /mnt/gentoo/etc/portage/package.use && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.use /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.mask && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.mask /mnt/gentoo/etc/portage/ && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
+cfdisk /dev/nvme1n1 && mkfs.vfat -F 32 /dev/nvme1n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme1n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme1n1p2 cryptroot && mkfs.btrfs /dev/mapper/cryptroot && rm -R /mnt/gentoo && mkdir /mnt/gentoo && mount /dev/mapper/cryptroot /mnt/gentoo && btrfs subvolume create /mnt/gentoo/@ && btrfs subvolume create /mnt/gentoo/@home && btrfs subvolume create /mnt/gentoo/@opt && btrfs subvolume create /mnt/gentoo/@var && btrfs subvolume create /mnt/gentoo/@tmp && btrfs subvolume create /mnt/gentoo/@log && btrfs subvolume create /mnt/gentoo/@audit && btrfs subvolume create /mnt/gentoo/@snapshots && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mkdir /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mkdir /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt && mkdir /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mkdir /mnt/gentoo/var/tmp  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/var/tmp && mkdir /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mkdir /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mkdir /mnt/gentoo/.snapshots && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240714T170402Z/stage3-amd64-desktop-systemd-20240714T170402Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner && rm -R /mnt/gentoo/etc/portage/make.conf && cp -R /home/ahsanurr/.dots/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.accept_keywords && cp -R /home/ahsanurr/.dots/gentoo/etc/portage/package.accept_keywords /mnt/gentoo/etc/portage/ && cp -R /home/ahsanurr/.dots/gentoo/etc/portage/profile/use.mask /mnt/gentoo/etc/portage/profile/ && cp -R /home/ahsanurr/.dots/gentoo/etc/portage/profile/package.provided /mnt/gentoo/etc/portage/profile/ && rm -R /mnt/gentoo/etc/portage/package.use && cp -R /home/ahsanurr/.dots/gentoo/etc/portage/package.use /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.mask && cp -R /home/ahsanurr/.dots/gentoo/etc/portage/package.mask /mnt/gentoo/etc/portage/ && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
 
 ##.5
 chroot /mnt/gentoo /bin/bash
@@ -13,8 +13,8 @@ emerge-webrsync && emerge --sync
 eselect profile set 44
 
 ##.7
-emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge --ask --oneshot --usepkg=n dev-build/libtool && emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper virtual/perl-Exporter virtual/perl-Test-Harness virtual/perl-ExtUtils-CBuilder virtual/perl-JSON-PP virtual/perl-ExtUtils-ParseXS perl-core/File-Temp virtual/perl-Getopt-Long && emerge -euv --usepkg=n @world --jobs=10 --keep-going --exclude gcc
- 
+emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export ps1="(chroot) ${ps1}" && emerge --ask --oneshot --usepkg=n dev-build/libtool && emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper virtual/perl-Exporter virtual/perl-Test-Harness virtual/perl-emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper virtual/perl-Exporter virtual/perl-Test-Harness virtual/perl-ExtUtils-CBuilder virtual/perl-JSON-PP virtual/perl-ExtUtils-ParseXS perl-core/File-Temp virtual/perl-GetoExtUtils-CBuilder virtual/perl-JSON-PP virtual/perl-ExtUtils-ParseXS perl-core/File-Temp virtual/perl-Getopt-Long virtual/perl-File-Temp virtual/perl-Math-BigInt perl-core/Math-BigInt virtual/perl-CPAN virtual/perl-Encode
+
 ##.8
 ln -sf ../usr/share/zoneinfo/Asia/Dhaka /etc/localtime && nano -w /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" 
 
@@ -47,54 +47,14 @@ genfstab -U / >> /etc/fstab
 15. sound
 16. openrgb
 
+
 lsblk -o name,uuid
-nvme0n1                                       
-|-nvme0n1p1                                   85A2-DFFE
-`-nvme0n1p2                                   38de55c7-1bac-4606-b417-1514e2b39b26
-  `-cryptroot                                 b557ae73-0095-40d4-bc47-bfec5f079772
 
+nvme1n1
+├─nvme1n1p1                                   AC72-1E64
+└─nvme1n1p2                                   d7b31b84-531e-46bb-b4e2-b721bee16fe6
+  └─root                                      d3b51654-562e-4036-86ea-4d9107d1df6d
 
-
-### Manual Method
-dracut setup
-
-nvim /etc/dracut.conf
-compress="zstd"
-hostonly="yes"
-dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
-add_dracutmodules+=" crypt dm rootfs-block "
-omit_dracutmodules+=" network cifs nfs nbd brltty rngd "
-force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline+=" loglevel=3 quiet rd.luks.uuid=38de55c7-1bac-4606-b417-1514e2b39b26 root=UUID=b557ae73-0095-40d4-bc47-bfec5f079772 root_trim=yes init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw apparmor=1 security=apparmor "
-install_items+=" /etc/crypttab "
-
-kernel_cmdline+=" rd.luks.uuid=38de55c7-1bac-4606-b417-1514e2b39b26 root=UUID=b557ae73-0095-40d4-bc47-bfec5f079772 "
-
-
-# systemd-boot
-bootctl install
-
-# machine-id
-50b58c553cb0b8eecdd454456691d176
-
-# /efi/loader/loader.conf
-default b6904dd6eeec4fa18283f652d67f6859*
-timeout 5
-console-mode auto
-reboot-for-bitlocker 1
-
-# entries/*.conf (autogenerated)
-# Boot Loader Specification type#1 entry
-# File created by /etc/kernel/install.d/90-loaderentry.install (systemd 254.1-1-arch)
-title      EndeavourOS
-version    6.7.1-arch1-1
-machine-id b6904dd6eeec4fa18283f652d67f6859
-sort-key   endeavouros-6.7.1-arch1-1
-options    nvme_load=YES nowatchdog rw rootflags=subvol=/@ rd.luks.uuid=a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 root=/dev/mapper/luks-a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 nvidia-drm.modeset=1 systemd.machine_id=b6904dd6eeec4fa18283f652d67f6859
-linux      /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/linux
-initrd     /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/initrd
-
-pacman -S linux-clear linux-clear-headers intel-ucode linux-firmware dracut-hook-uefi kernel-install-for-dracut  nvidia-dkms nvidia-utils
 
 # dracut setup
 nvim /etc/dracut.conf
@@ -104,16 +64,11 @@ dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shu
 add_dracutmodules+=" crypt dm rootfs-block "
 omit_dracutmodules+=" network cifs nfs nbd brltty "
 force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline="quiet loglevel=3 cryptdevice=UUID=295c526c-65a0-44c1-9c1e-48c3ac6f7a5f:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw root_trim=yes"
+kernel_cmdline="quiet loglevel=3 crypt_root=UUID=295c526c-65a0-44c1-9c1e-48c3ac6f7a5f nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes"
 install_items+=" /etc/crypttab "
 
 nvim /etc/crypttab
-cryptroot UUID=38de55c7-1bac-4606-b417-1514e2b39b26     /crypto_keyfile.bin luks,initramfs
-
-make menuconfig && make -j22 && emerge nvidia-drivers && make modules_install && make install
-
-
-
+cryptroot UUID=38de55c7-1bac-4606-b417-1514e2b39b26    none   luks,initramfs
 
 ### Genkernel method
 ##.11
@@ -130,10 +85,6 @@ grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=
 
 ##.13
 systemd-machine-id-setup && hostnamectl set-hostname workstation && emerge app-admin/sudo app-editors/neovim && passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo && nvim /etc/hosts 
-
-
-##.14
-
 
 
 ##.15
