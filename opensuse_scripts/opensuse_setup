@@ -4,33 +4,58 @@
 sudo zypper ref && sudo zypper dup && sudo zypper install flatpak opi 
 opi codecs
 
-
 # Installing Nvidia drivers
 sudo zypper install dkms libvdpau1 libva-vdpau-driver libva-utils libglvnd libglvnd-devel Mesa-libva xf86-video-nv && sudo zypper install nvidia-video-G06 nvidia-driver-G06-kmp-default nvidia-gl-G06 nvidia-utils-G06
 
 # Basic opensuse packages
-sudo zypper in cmake patterns-devel-C-C++-devel_C_C++ patterns-devel-base-devel_basis go cargo thunar thunar-volman thunar-plugin-media-tags thunar-plugin-archive tumbler file-roller gvfs gvfs-backends udisks2 xdg-user-dirs xdg-user-dirs-gtk xdg-utils libxdg-basedir python312-pyxdg xdg-dbus-proxy xdg-desktop-portal xdg-desktop-portal-gtk neovim wl-clipboard ripgrep fd grep unzip zip unrar wget curl btrfsprogs dosfstools deluge git lazygit bat maim zsh zoxide fzf starship lsd papirus-icon-theme zathura zathura-plugin-pdf-poppler python312-pip python312-pipx python312-requests python312-python-pam python312-pillow lynis audit bluez blueman gtk2-engine-murrine gnome-themes-extras sassc gtk3-devel kvantum-qt6 kvantum-themes kvantum-manager qt5ct qt6ct gtk3 gtk4 fastfetch btop greetd tuigreet grim slurp swappy kitty alacritty openssl polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-jack wireplumber pavucontrol xorg-x11-fonts-core typescript npm meson gjs-devel gtk3-devel gtk-layer-shell-devel gnome-bluetooth upower NetworkManager NetworkManager-applet libpulse-devel libdbusmenu-gtk3-devel libsoup-devel pam-devel firefox clipit ImageMagick man-pages fwupd fontconfig cpio gtksourceviewmm cairomm gtkmm3 hyprland hyprcursor hypridle hyprlang hyprpaper hyprpicker hyprlock hyprutils hyprwayland-scanner xdg-desktop-portal-hyprland swww libadwaita nwg-look brightnessctl gum python312-pywayland libdrm
-
+sudo zypper install cmake patterns-devel-C-C++-devel_C_C++ patterns-devel-base-devel_basis go npm cargo thunar thunar-volman thunar-plugin-media-tags thunar-plugin-archive tumbler file-roller gvfs gvfs-backends udisks2 xdg-user-dirs xdg-user-dirs-gtk xdg-utils libxdg-basedir python312-pyxdg xdg-dbus-proxy xdg-desktop-portal xdg-desktop-portal-gtk neovim wl-clipboard ripgrep fd grep unzip zip unrar wget curl btrfsprogs dosfstools deluge git lazygit bat maim zsh zoxide fzf starship lsd papirus-icon-theme zathura zathura-plugin-pdf-poppler python312-pip python312-pipx python312-requests python312-python-pam python312-pillow lynis audit bluez blueman gtk2-engine-murrine gnome-themes-extras sassc gtk3-devel kvantum-qt6 kvantum-themes kvantum-manager qt5ct qt6ct gtk3 gtk4 fastfetch btop greetd tuigreet grim slurp swappy kitty alacritty openssl polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-jack wireplumber pavucontrol xorg-x11-fonts-core  NetworkManager NetworkManager-applet libpulse-devel libdbusmenu-gtk3-devel libsoup-devel pam-devel firefox clipit ImageMagick man-pages fwupd fontconfig cpio swww libadwaita nwg-look brightnessctl upower
 
 # Install ROG stuff
 sudo zypper ar --priority 50 --refresh https://download.opensuse.org/repositories/home:/luke_nukem:/asus/openSUSE_Tumbleweed/ asus-linux && sudo zypper rm tlp && sudo zypper in asusctl power-profiles-daemon && sudo systemctl enable --now power-profiles-daemon.service && sudo zypper in supergfxctl && sudo systemctl enable --now supergfxd && sudo zypper in asusctl-rog-gui
 
-# fonts to download
-##ttf-meslo-nerd ttf-google-sans ttf-font-awesome ttf-opensans ttf-roboto lshw ttf-material-symbols-variable-git ttf-meslo-nerd-font-powerlevel10k
+echo "Installing Google Chrome"
+sudo zypper addrepo https://dl.google.com/linux/chrome/rpm/stable/x86_64 google-chrome
+sudo zypper repos
+sudo zypper modifyrepo --refresh 1
+wget https://dl.google.com/linux/linux_signing_key.pub
+sudo rpm --import linux_signing_key.pub
+sudo zypper install google-chrome-stable
 
-echo "Installing packages using opi"
-opi codecs && \
-  opi bashtop && \
-  opi adw-gtk3 && \
-  opi wl-gammarelay-rs && \
-  opi gnome-system-monitor && \
-  opi gtkmm3 && \
-  opi gtksourceviewmm && \
-  opi cairomm && \
-  opi libxdg-basedir
+
+# Install Brave 
+sudo zypper install curl 
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc 
+sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo 
+sudo zypper install brave-browser
+
+
+
+# Install from source
+bash ./source_builds/01_hyprlang
+bash ./source_builds/02_hyprcursor
+bash ./source_builds/03_hyprutils
+bash ./source_builds/04_xdg-desktop-portal-hyprland
+bash ./source_builds/05_hyprpaper
+bash ./source_builds/06_hyprpicker
+bash ./source_builds/07_hypridle
+bash ./source_builds/08_hyprlock
+bash ./source_builds/09_hyprshot
+bash ./source_builds/10_hyprwayland-scanner
+bash ./source_builds/11_aquamarine
+bash ./source_builds/12_wayland-protocols
+bash ./source_builds/13_ags
+bash ./source_builds/14_hyprland
+
+
+echo "Successfully Installed Source Packages"
+
+# fonts to download
+##ttf-meslo-nerd ttf-google-sans ttf-font-awesome ttf-opensans ttf-roboto lshw ttf-material-symbols-variable-git ttf-meslo-nerd-fontpowerlevel10k
+
+#echo "Installing packages using opi"
+#opi codecs 
 
 cargo install --git https://github.com/donovanglover/hyprnome
-cargo install --git https://github.com/donovanglover/hyprdim
 npm install -g bun
 npm install -g sass
 
@@ -41,8 +66,13 @@ cd
 sudo rm -R ~/.config/
 cd && mkdir ~/.config  
 ln -s $HOME/.dots/.config/alacritty $HOME/.config/
-ln -s $HOME/.dots/.config/anyrun $HOME/.config/
-ln -s $HOME/.dots/.config/btop $HOME/.config/
+ln -s $HOME/.dots/.configsudo zypper install curl
+
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
+sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+
+sudo zypper install brave-browser/btop $HOME/.config/
 ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
 ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
 ln -s $HOME/.dots/.config/hypr  $HOME/.config/
@@ -71,10 +101,10 @@ ln -s $HOME/.dots/.zshrc $HOME/
 chsh -s $(which zsh)
 curl -fsSL https://fnm.vercel.app/install | bash
 
-pip3 install materialyoucolor --upgrade
 pipx install hyprshade pyprland
 
 cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
+git clone https://github.com/NvChad/starter ~/.config/nvim 
 
 #-----------------------------------------
 #---- SETUP SYSTEMD ----------------------
@@ -92,12 +122,4 @@ git config --global credential.helper /usr/bin/git-credential-libsecret
 
 cd && sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 
-echo "Installing hyprland-contrib"
-cd && git clone https://github.com/hyprwm/contrib.git ~/hyprland-contrib && cd hyprland-contrib 
-cd grimblast && make && sudo make install && cd ../
-cd hdrop && make && sudo make install && cd ../
-cd hyprprop && make && sudo make install && cd ../
-cd scratchpad && sudo make && sudo make install && cd ../
-cd shellevents && sudo make && sudo make install && cd ../
-cd try_swap_workspace && sudo make && sudo make install && cd ../
-cd && sudo rm -rf hyprland-contrib
+
