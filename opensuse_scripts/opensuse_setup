@@ -1,17 +1,13 @@
 #!/bin/sh
 
 # After installing opensuse
-sudo zypper ref && sudo zypper dup && shttps://search.opensuse.org/udo zypper ar -cfp 90 https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman && sudo zypper dup --from packman --allow-vendor-change && sudo zypperoni install flatpak opi
+sudo zypper ref && sudo zypper dup && sudo zypper dup --from packman --allow-vendor-change && sudo zypperoni install flatpak opi
 
 # Installing Nvidia drivers
 sudo zypper install openSUSE-repos-NVIDIA dkms libvdpau1 libva-vdpau-driver libva-utils libglvnd libglvnd-devel Mesa-libva xf86-video-nv && sudo zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA && sudo zypper install nvidia-video-G06 nvidia-driver-G06-kmp-default nvidia-gl-G06 nvidia-utils-G06
 
 # Basic opensuse packages
-sudo zypper in cmake patterns-devel-C-C++-devel_C_C++ patterns-devel-base-devel_basis go cargo thunar thunar-volman thunar-plugin-media-tags thunar-plugin-archive tumbler file-roller gvfs gvfs-backends udisks2 xdg-user-dirs xdg-user-dirs-gtk xdg-utils libxdg-basedir python312-pyxdg xdg-dbus-proxy xdg-desktop-portal xdg-desktop-portal-gtk neovim wl-clipboard ripgrep fd grep unzip zip unrar wget curl btrfsprogs dosfstools deluge git lazygit bat maim zsh zoxide fzf starship lsd papirus-icon-theme zathura zathura-plugin-pdf-poppler python312-pip python312-pipx python312-requests python312-python-pam python312-pillow lynis audit bluez blueman gtk2-engine-murrine gnome-themes-extras sassc gtk3-devel kvantum-qt6 kvantum-themes kvantum-manager qt5ct qt6ct gtk3 gtk4 fastfetch btop greetd tuigreet grim slurp swappy kitty alacritty openssl polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-jack wireplumber pavucontrol xorg-x11-fonts-core typescript npm meson gjs-devel gtk3-devel gtk-layer-shell-devel gnome-bluetooth upower NetworkManager NetworkManager-applet libpulse-devel libdbusmenu-gtk3-devel libsoup-devel pam-devel firefox clipit ImageMagick man-pages fwupd fontconfig cpio gtksourceviewmm cairomm gtkmm3 
-
-
-# Hyprland packages
-sudo zypper install hyprland hyprcursor hypridle hyprlang hyprpaper hyprpicker hyprlock hyprutils hyprwayland-scanner xdg-desktop-portal-hyprland swww libadwaita nwg-look brightnessctl gum python312-pywayland libdrm
+sudo zypper in cmake patterns-devel-C-C++-devel_C_C++ patterns-devel-base-devel_basis go cargo thunar thunar-volman thunar-plugin-media-tags thunar-plugin-archive tumbler file-roller gvfs gvfs-backends udisks2 xdg-user-dirs xdg-user-dirs-gtk xdg-utils libxdg-basedir python312-pyxdg xdg-dbus-proxy xdg-desktop-portal xdg-desktop-portal-gtk neovim wl-clipboard ripgrep fd grep unzip zip unrar wget curl btrfsprogs dosfstools deluge git lazygit bat maim zsh zoxide fzf starship lsd papirus-icon-theme zathura zathura-plugin-pdf-poppler python312-pip python312-pipx python312-requests python312-python-pam python312-pillow lynis audit bluez blueman gtk2-engine-murrine gnome-themes-extras sassc gtk3-devel kvantum-qt6 kvantum-themes kvantum-manager qt5ct qt6ct gtk3 gtk4 fastfetch btop greetd tuigreet grim slurp swappy kitty alacritty openssl polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-jack wireplumber pavucontrol xorg-x11-fonts-core typescript npm meson gjs-devel gtk3-devel gtk-layer-shell-devel gnome-bluetooth upower NetworkManager NetworkManager-applet libpulse-devel libdbusmenu-gtk3-devel libsoup-devel pam-devel firefox clipit ImageMagick man-pages fwupd fontconfig cpio gtksourceviewmm cairomm gtkmm3 hyprland hyprcursor hypridle hyprlang hyprpaper hyprpicker hyprlock hyprutils hyprwayland-scanner xdg-desktop-portal-hyprland swww libadwaita nwg-look brightnessctl gum python312-pywayland libdrm
 
 
 # Install ROG stuff
