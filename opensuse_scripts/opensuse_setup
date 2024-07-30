@@ -89,7 +89,7 @@ ln -sf $HOME/.dots/.zshrc $HOME/
 chsh -s $(which zsh)
 curl -fsSL https://fnm.vercel.app/install | bash
 
-pipx install hyprshade pyprland
+#pipx install hyprshade pyprland
 
 
 #-----------------------------------------
