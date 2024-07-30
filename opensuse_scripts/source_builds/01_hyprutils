@@ -1,6 +1,6 @@
 #!/bin/sh
 cd 
-sudo zypper si -d hyprutils
+echo "Installing Hyprutils"
 git clone https://github.com/hyprwm/hyprutils.git && cd hyprutils
 cd hyprutils/
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build

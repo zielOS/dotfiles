@@ -1,6 +1,6 @@
 #!/bin/sh
 cd 
-sudo zypper si -d hyprland
+echo "Installing Hyprland"
 sudo zypper install "pkgconfig(libliftoff)" "pkgconfig(xcb-util)"
 git clone --recursive https://github.com/hyprwm/Hyprland
 cd Hyprland

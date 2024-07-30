@@ -1,36 +1,30 @@
-#!/bin/sh
+#!/bin/bash
 
 # After installing opensuse
-sudo zypper ref && sudo zypper dup && sudo zypper -n install flatpak opi 
+sudo zypper ref && sudo zypper dup && sudo zypper install flatpak opi 
 opi codecs
 
 # Installing Nvidia drivers
-sudo zypper install dkms libvdpau1 libva-vdpau-driver libva-utils libglvnd libglvnd-devel Mesa-libva xf86-video-nv && sudo zypper install nvidia-video-G06 nvidia-driver-G06-kmp-default nvidia-gl-G06 nvidia-utils-G06
+sudo zypper install dkms libvdpau1 libva-vdpau-driver libva-utils libglvnd libglvnd-devel Mesa-libva xf86-video-nv nvidia-video-G06 nvidia-driver-G06-kmp-default nvidia-gl-G06 nvidia-utils-G06
 
 # Basic opensuse packages
-sudo zypper -n install cmake patterns-devel-C-C++-devel_C_C++ patterns-devel-base-devel_basis go npm cargo thunar thunar-volman thunar-plugin-media-tags thunar-plugin-archive tumbler file-roller gvfs gvfs-backends udisks2 xdg-user-dirs xdg-user-dirs-gtk xdg-utils libxdg-basedir python312-pyxdg xdg-dbus-proxy xdg-desktop-portal xdg-desktop-portal-gtk neovim wl-clipboard ripgrep fd grep unzip zip unrar wget curl btrfsprogs dosfstools deluge git lazygit bat maim zsh zoxide fzf starship lsd papirus-icon-theme zathura zathura-plugin-pdf-poppler python312-pip python312-pipx python312-requests python312-python-pam python312-pillow lynis audit bluez blueman gtk2-engine-murrine gnome-themes-extras sassc gtk3-devel kvantum-qt6 kvantum-themes kvantum-manager qt5ct qt6ct gtk3 gtk4 fastfetch btop greetd tuigreet grim slurp swappy kitty alacritty openssl polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-jack wireplumber pavucontrol xorg-x11-fonts-core  NetworkManager NetworkManager-applet libpulse-devel libdbusmenu-gtk3-devel libsoup-devel pam-devel firefox clipit ImageMagick man-pages fwupd fontconfig cpio swww libadwaita nwg-look brightnessctl upower
+sudo zypper install cmake patterns-devel-C-C++-devel_C_C++ patterns-devel-base-devel_basis go npm cargo thunar thunar-volman thunar-plugin-media-tags thunar-plugin-archive tumbler file-roller gvfs gvfs-backends udisks2 xdg-user-dirs xdg-user-dirs-gtk xdg-utils libxdg-basedir python311-pyxdg xdg-dbus-proxy xdg-desktop-portal xdg-desktop-portal-gtk neovim wl-clipboard ripgrep fd grep unzip zip unrar wget curl btrfsprogs dosfstools deluge git lazygit bat maim zsh zoxide fzf starship lsd papirus-icon-theme zathura zathura-plugin-pdf-poppler python311-pip python311-pipx python311-requests python311-python-pam python311-pillow lynis audit bluez blueman gtk2-engine-murrine gnome-themes-extras sassc gtk3-devel kvantum-qt6 kvantum-themes kvantum-manager qt5ct qt6ct gtk3 gtk4 fastfetch btop greetd tuigreet grim slurp swappy kitty alacritty openssl polkit-gnome pipewire pipewire-alsa pipewire-pulseaudio pipewire-jack wireplumber pavucontrol xorg-x11-fonts-core  NetworkManager NetworkManager-applet libpulse-devel libdbusmenu-gtk3-devel libsoup-devel pam-devel firefox clipit ImageMagick man-pages fwupd fontconfig cpio swww libadwaita nwg-look brightnessctl upower wayshot
 
 # Install ROG stuff
-sudo zypper ar --priority 50 --refresh https://download.opensuse.org/repositories/home:/luke_nukem:/asus/openSUSE_Tumbleweed/ asus-linux && sudo zypper rm tlp && sudo zypper in asusctl power-profiles-daemon && sudo systemctl enable --now power-profiles-daemon.service && sudo zypper in supergfxctl && sudo systemctl enable --now supergfxd && sudo zypper in asusctl-rog-gui
+sudo zypper ar --priority 50 --refresh https://download.opensuse.org/repositories/home:/luke_nukem:/asus/openSUSE_Tumbleweed/ asus-linux && sudo zypper install asusctl power-profiles-daemon && sudo systemctl enable --now power-profiles-daemon.service && sudo zypper install supergfxctl && sudo systemctl enable --now supergfxd && sudo zypper install asusctl-rog-gui
 
 echo "Installing Google Chrome"
-sudo zypper addrepo https://dl.google.com/linux/chrome/rpm/stable/x86_64 google-chrome
-sudo zypper repos
-sudo zypper modifyrepo --refresh 1
-wget https://dl.google.com/linux/linux_signing_key.pub
-sudo rpm --import linux_signing_key.pub
-sudo zypper -n install google-chrome-stable
+sudo zypper addrepo https://dl.google.com/linux/chrome/rpm/stable/x86_64 google-chrome && sudo zypper repos && sudo zypper modifyrepo --refresh 1 && wget https://dl.google.com/linux/linux_signing_key.pub && sudo rpm --import linux_signing_key.pub && sudo zypper -n install google-chrome-stable
 
 echo "Installing Brave" 
-sudo zypper install curl 
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc 
-sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo 
-sudo zypper -n install brave-browser
+sudo zypper install curl && sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc && sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo && sudo zypper -n install brave-browser
+
+sudo zypper si -d hyprutils hyprlang hyprcursor xdg-desktop-portal-hyprland hyprpaper hyprpicker hypridle hyprlock hyprwayland-scanner wayland-protocols hyprland
 
 echo "Installing From Source"
-bash ./source_builds/01_hyprlang
-bash ./source_builds/02_hyprcursor
-bash ./source_builds/03_hyprutils
+bash ./source_builds/01_hyprutils
+bash ./source_builds/02_hyprlang
+bash ./source_builds/03_hyprcursor
 bash ./source_builds/04_xdg-desktop-portal-hyprland
 bash ./source_builds/05_hyprpaper
 bash ./source_builds/06_hyprpicker
@@ -49,8 +43,13 @@ echo "Successfully Installed Source Packages"
 #echo "Installing packages using opi"
 #opi codecs 
 
+cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
+git clone https://github.com/NvChad/starter ~/.config/nvim 
+
+
 #use sth different than hyprnome
-#cargo install --git https://github.com/donovanglover/hyprnom
+cargo install matugen
+cargo install --git https://github.com/donovanglover/hyprnome
 npm install -g bun
 npm install -g sass
 
@@ -92,8 +91,6 @@ curl -fsSL https://fnm.vercel.app/install | bash
 
 pipx install hyprshade pyprland
 
-cd && mkdir ~/.npm-global && npm config set prefix '~/.npm-global'
-git clone https://github.com/NvChad/starter ~/.config/nvim 
 
 #-----------------------------------------
 #---- SETUP SYSTEMD ----------------------

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+sudo zypper si -d hyprutils hyprlang hyprcursor xdg-desktop-portal-hyprland hyprpaper hyprpicker hypridle hyprlock hyprwayland-scanner wayland-protocols hyprland
+
+echo "Installing From Source"
+bash ./source_builds/01_hyprutils && echo "Done 01"
+bash ./source_builds/02_hyprlang && echo "Done 02"
+bash ./source_builds/03_hyprcursor && echo "Done 03"
+bash ./source_builds/04_xdg-desktop-portal-hyprland && echo "Done 04"
+bash ./source_builds/05_hyprpaper && echo "Done 05"
+bash ./source_builds/06_hyprpicker && echo "Done 06"
+bash ./source_builds/07_hypridle && echo "Done 07"
+bash ./source_builds/08_hyprlock && echo "Done 08"
+bash ./source_builds/09_hyprshot && echo "Done 09"
+bash ./source_builds/10_hyprwayland-scanner && echo "Done 10" 
+bash ./source_builds/11_aquamarine && echo "Done 11"
+bash ./source_builds/12_wayland-protocols && echo "Done 12"
+bash ./source_builds/13_ags && echo "Done 13"
+bash ./source_builds/14_hyprland && echo "Done 14"
+

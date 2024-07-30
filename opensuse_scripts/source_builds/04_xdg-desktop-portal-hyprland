@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo zypper si -d xdg-desktop-portal-hyprland
+echo "Installing xdg-desktop-portal-hyprland"
 cd && git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland
 cd xdg-desktop-portal-hyprland/
 cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
