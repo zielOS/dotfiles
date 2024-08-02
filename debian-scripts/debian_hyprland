@@ -35,7 +35,7 @@ sudo apt install \
   pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pavucontrol alsa-utils libpulse-dev pamixer \
   xdg-desktop-portal \
   grim slurp swappy cliphist wl-clipboard \
-  greetd gtkgreet plymouth plymouth-themes \
+  greetd plymouth plymouth-themes \
   apt-listbugs apt-listchanges gettext gettext-base fontconfig hwdata \
   xwayland cpio gnome-keyring maim systemd-zram-generator \
   xserver-xorg-video-amdgpu nvidia-driver nvidia-vaapi-driver firmware-misc-nonfree firmware-linux-free firmware-linux-nonfree firmware-amd-graphics amd64-microcode fwupd \
@@ -79,26 +79,27 @@ flatpak install flathub org.ferdium.Ferdium
 flatpak install flathub com.ticktick.TickTick
 flatpak install flathub com.bitwarden.desktop
 
-cd && cd $HOME/.dots/debian-scripts 
+cd && cd $HOME/.dots/debian-scripts/source_builds/ 
 echo "Installing From Source"
-bash ./source_builds/Hyprutils
-bash ./source_builds/Hyprlang
-bash ./source_builds/Hyprcursor
-bash ./source_builds/Xdg-desktop-portal-hyprland
-bash ./source_builds/Hyprwayland-scanner
-bash ./source_builds/Hyprpaper
-bash ./source_builds/Hyprpicker
-bash ./source_builds/Hypridle
-bash ./source_builds/Hyprlock
-bash ./source_builds/Hyprshot
-bash ./source_builds/Aquamarine
-bash ./source_builds/Wayland-protocols
-bash ./source_builds/Hyprland
-bash ./source_builds/Lazygit
-bash ./source_builds/Insync
-bash ./source_builds/Ignis
-bash ./source_builds/Swaylock-effects
-bash ./source_builds/Materialyoucolor
+bash ./Hyprutils
+bash ./Hyprlang
+bash ./Hyprcursor
+bash ./Xdg-desktop-portal-hyprland
+bash ./Hyprwayland-scanner
+bash ./Hyprpaper
+bash ./Hyprpicker
+bash ./Hypridle
+bash ./Hyprlock
+bash ./Hyprshot
+bash ./Aquamarine
+bash ./Wayland-protocols
+bash ./Hyprland
+bash ./Lazygit
+bash ./Insync
+bash ./Ignis
+bash ./Swaylock-effects
+bash ./Materialyoucolor
+bash ./Regreeter
 
 echo "Install Brave"
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
