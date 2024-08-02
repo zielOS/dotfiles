@@ -1,6 +1,8 @@
 #!/bin/bash
-echo "Installing Eww"
+echo "Installing eww"
 cd && git clone https://github.com/elkowar/eww && cd eww
 cargo build --release --no-default-features --features=wayland
-sudo install -Dm755 target/release/eww "/usr/local/bin/eww"
+cd target/release
+chmod +x ./eww
+sudo install -Dm755 eww "/usr/local/bin/eww"
 cd && sudo rm -rf eww
