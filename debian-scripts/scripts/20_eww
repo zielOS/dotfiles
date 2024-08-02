@@ -1,8 +1,0 @@
-#!/bin/bash
-
-sudo nala install libgtk-layer-shell-dev libgdk3.0-cil-dev libpango1.0-dev librust-gdk-pixbuf-sys-dev libdbusmenu-gtk3-dev libcairo2-dev libcairo-gobject2 libgio3.0-cil-dev librust-glib-sys-dev librust-gobject-sys-dev
-
-cd && git clone https://github.com/elkowar/eww && cd eww
-cargo build --release --no-default-features --features=wayland
-sudo install -Dm755 target/release/eww "/usr/local/bin/eww"
-cd && sudo rm -rf eww

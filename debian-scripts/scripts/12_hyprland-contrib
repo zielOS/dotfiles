@@ -1,9 +1,0 @@
-#!/bin/sh
-cd && git clone https://github.com/hyprwm/contrib.git ~/hyprland-contrib && cd hyprland-contrib 
-cd grimblast && make && sudo make install && cd ../
-cd hdrop && make && sudo make install && cd ../
-cd hyprprop && make && sudo make install && cd ../
-cd scratchpad && sudo make && sudo make install && cd ../
-cd shellevents && sudo make && sudo make install && cd ../
-cd try_swap_workspace && sudo make && sudo make install && cd ../
-cd && sudo rm -rf hyprland-contrib

@@ -1,6 +1,0 @@
-#!/bin/sh
-cd && git clone --recursive https://gitlab.freedesktop.org/wayland/wayland-protocols.git && cd wayland-protocols
-meson _build
-ninja -C _build
-sudo ninja -C _build install
-cd && sudo rm -rf wayland-protocols
