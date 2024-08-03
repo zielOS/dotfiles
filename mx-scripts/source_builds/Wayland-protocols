@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "Installing wayland-protocols"
 cd && git clone --recursive https://gitlab.freedesktop.org/wayland/wayland-protocols.git && cd wayland-protocols
 meson _build
 ninja -C _build

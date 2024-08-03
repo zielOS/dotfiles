@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cd && git clone https://github.com/zefr0x/ianny.git
-cd ianny
-meson build
-meson compile -C build
-sudo meson uninstall -C build
-cd && sudo rm -rf ianny

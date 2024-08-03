@@ -1,8 +1,0 @@
-#!/bin/sh
-sudo apt install lz4 liblz4-dev
-cd && git clone https://github.com/LGFae/swww.git && cd swww
-cargo build --release
-cd target/release
-sudo install -Dm755 swww "/usr/local/bin/swww"
-sudo install -Dm755 swww-daemon "/usr/local/bin/swww-daemon"
-cd && sudo rm -rf swww

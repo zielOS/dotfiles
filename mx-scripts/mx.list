@@ -1,0 +1,9 @@
+# MX Community Main and Test Repos
+deb https://mirror.kku.ac.th/mx-packages/mx//repo/ bookworm main non-free
+deb-src https://mirror.kku.ac.th/mx-packages/mx//repo/ bookworm main non-free
+deb https://mirror.kku.ac.th/mx-packages/mx//testrepo/ bookworm test
+deb-src https://mirror.kku.ac.th/mx-packages/mx//testrepo/ bookworm test
+
+#ahs hardware stack repo
+deb https://mirror.kku.ac.th/mx-packages/mx//repo/ bookworm ahs
+deb-src https://mirror.kku.ac.th/mx-packages/mx//repo/ bookworm ahs

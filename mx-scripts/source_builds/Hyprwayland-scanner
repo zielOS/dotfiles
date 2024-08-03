@@ -1,7 +1,8 @@
 #!/bin/sh
-cd && git clone https://github.com/hyprwm/hyprwayland-scanner.git && cd hyprwayland-scanner
+echo "Installing hyprwayland-scanner"
+cd && git clone https://github.com/hyprwm/hyprwayland-scanner && cd hyprwayland-scanner
 cmake -B build
-cmake --build build -j$(nproc)
+cmake --build build -j`nproc`
 sudo cmake --install build
 cd build/
 sudo install -Dm755 hyprwayland-scanner "/usr/local/bin/hyprwayland-scanner"
