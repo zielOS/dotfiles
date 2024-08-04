@@ -36,6 +36,7 @@ npm install -g sass
 
 # install cargo pkgs
 cargo install --git https://github.com/donovanglover/hyprnome
+cargo install bottom
 
 # spotify
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg && \
@@ -46,6 +47,9 @@ sudo apt update && sudo apt install spotify-client
 sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
 sudo apt install python3-pynvim ripgrep tree-sitter-cli fd-find
 pacstall -I neovim
+pacstall -I onlyoffice-desktopeditors-deb
+pacstall -I ferdium-deb
+
 
 # flatpak setup & pkgs
 sudo apt install flatpak
