@@ -1,12 +1,12 @@
 #!/bin/bash
 
-cd && apt list --installed | cut -d/ -f1 > pre-cleaned.txt
+#cd && apt list --installed | cut -d/ -f1 > pre-cleaned.txt
 
 mkdir $HOME/.local/bin/
 
 echo "Copying Important Files"
 sudo rm -rf /etc/apt/sources.list
-sudo cp -R $HOME/.dots/debian-scripts/sources.list /etc/apt/
+sudo cp -R $HOME/.dots/debian-scripts/sources.list /etc/apt/sources.list.d/debian.list
 sudo cp -R $HOME/.dots/debian-scripts/preferences /etc/apt/
 sudo cp -R $HOME/.dots/debian-scripts/01norecommend /etc/apt/apt.conf.d/
 sudo cp -R $HOME/.dots/variables.sh /etc/profile.d/
@@ -46,7 +46,7 @@ sudo apt update && sudo apt install spotify-client
 # Installs pacstall & pkgs"
 sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
 sudo apt install python3-pynvim ripgrep tree-sitter-cli fd-find
-pacstall -I neovim
+#pacstall -I neovim
 pacstall -I onlyoffice-desktopeditors-deb
 pacstall -I ferdium-deb
 
@@ -138,7 +138,7 @@ zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) 
 curl -sS https://starship.rs/install.sh | sh
 curl -fsSL https://fnm.vercel.app/install | sh
 rm -R ~/.zshrc
-ln -s ~/.dots/.zshrc /
+ln -s ~/.dots/.zshrc ~/
 chsh -s $(which zsh)
 
 # git setup 
