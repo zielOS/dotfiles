@@ -7,7 +7,7 @@ mkdir $HOME/.local/bin/
 echo "Copying Important Files"
 sudo rm -rf /etc/apt/sources.list
 sudo cp -R $HOME/.dots/debian-scripts/sources.list /etc/apt/sources.list.d/debian.list
-sudo cp -R $HOME/.dots/debian-scripts/preferences /etc/apt/
+#sudo cp -R $HOME/.dots/debian-scripts/preferences /etc/apt/
 sudo cp -R $HOME/.dots/debian-scripts/01norecommend /etc/apt/apt.conf.d/
 sudo cp -R $HOME/.dots/variables.sh /etc/profile.d/
 
@@ -28,7 +28,8 @@ cd
 curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
 sudo apt update && sudo apt-get install nodejs
-mkdir ~/.npm-global && npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH
+mkdir ~/.npm-global 
+npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH
 
 # install npm pkgs
 npm install -g bun
@@ -46,18 +47,15 @@ sudo apt update && sudo apt install spotify-client
 # Installs pacstall & pkgs"
 sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
 sudo apt install python3-pynvim ripgrep tree-sitter-cli fd-find
-#pacstall -I neovim
-pacstall -I onlyoffice-desktopeditors-deb
-pacstall -I ferdium-deb
-
+pacstall -I neovim
 
 # flatpak setup & pkgs
 sudo apt install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-#flatpak install flathub org.ferdium.Ferdium 
-#flatpak install flathub com.ticktick.TickTick
-#flatpak install flathub com.bitwarden.desktop
-#flatpak install flathub org.onlyoffice.desktopeditors
+flatpak install flathub org.ferdium.Ferdium 
+flatpak install flathub com.ticktick.TickTick
+flatpak install flathub com.bitwarden.desktop
+flatpak install flathub org.onlyoffice.desktopeditors
 
  
 echo "Installing From Source"
@@ -102,31 +100,31 @@ pipx install hyprshade
 
 echo "Setting up Dotfiles"
 sudo rm -R ~/.config/
-cd && mkdir ~/.config
-ln -s ~/.dots/.fonts ~/
-ln -s ~/.dots/.themes ~/
-ln -s ~/.dots/gentoo_setup ~/
-ln -s ~/.dots/org ~/
-ln -s ~/.dots/.gtkrc-2.0 ~/
-ln -s ~/.dots/catppuccin.css ~/
-ln -s ~/.dots/.config/hypr ~/.config/
-ln -s ~/.dots/.config/starship.toml ~/.config
-ln -s ~/.dots/.config/Thunar ~/.config/
-ln -s ~/.dots/.config/alacritty ~/.config/
-ln -s ~/.dots/.config/btop ~/.config/
-ln -s ~/.dots/.config/gtk-3.0 ~/.config/
-ln -s ~/.dots/.config/gtk-4.0 ~/.config/
-ln -s ~/.dots/.config/Kvantum ~/.config/
-ln -s ~/.dots/.config/lazygit ~/.config/
-ln -s ~/.dots/.config/lsd ~/.config/
-ln -s ~/.dots/.config/qalculate ~/.config/
-ln -s ~/.dots/.config/qt5ct ~/.config/
-ln -s ~/.dots/.config/qt6ct ~/.config/
-ln -s ~/.dots/.config/ranger ~/.config/
-ln -s ~/.dots/.config/wallpapers ~/.config/
-ln -s ~/.dots/.config/zathura ~/.config/
-ln -s ~/.dots/.config/zsh ~/.config/
-ln -s ~/.dots/.local/bin/hypr ~/.local/bin/
+cd && mkdir $HOME/.config
+ln -s $HOME/.dots/.fonts $HOME/
+ln -s $HOME/.dots/.themes $HOME/
+ln -s $HOME/.dots/gentoo_setup  $HOME/
+ln -s $HOME/.dots/org $HOME/
+ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
+ln -s $HOME/.dots/catppuccin.css $HOME/
+ln -s $HOME/.dots/.config/hypr $HOME/.config/
+ln -s $HOME/.dots/.config/starship.toml $HOME/.config
+ln -s $HOME/.dots/.config/Thunar $HOME/.config/
+ln -s $HOME/.dots/.config/alacritty $HOME/.config/
+ln -s $HOME/.dots/.config/btop $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
+ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
+ln -s $HOME/.dots/.config/Kvantum $HOME/.config/
+ln -s $HOME/.dots/.config/lazygit $HOME/.config/
+ln -s $HOME/.dots/.config/lsd $HOME/.config/
+ln -s $HOME/.dots/.config/qalculate $HOME/.config/
+ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
+ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
+ln -s $HOME/.dots/.config/ranger $HOME/.config/
+ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
+ln -s $HOME/.dots/.config/zathura $HOME/.config/
+ln -s $HOME/.dots/.config/zsh $HOME/.config/
+ln -s $HOME/.dots/.local/bin/hypr $HOME/.local/bin/
 
 
 # Set Up Systemd
@@ -138,7 +136,7 @@ zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) 
 curl -sS https://starship.rs/install.sh | sh
 curl -fsSL https://fnm.vercel.app/install | sh
 rm -R ~/.zshrc
-ln -s ~/.dots/.zshrc ~/
+ln -s $HOME/.dots/.zshrc $HOME/
 chsh -s $(which zsh)
 
 # git setup 
