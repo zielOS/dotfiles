@@ -1,5 +1,0 @@
-edn
-hist
-juxt
-nd
-debbugs
