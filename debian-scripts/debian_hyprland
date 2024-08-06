@@ -52,10 +52,10 @@ pacstall -I neovim
 # flatpak setup & pkgs
 sudo apt install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.ferdium.Ferdium 
-flatpak install flathub com.ticktick.TickTick
-flatpak install flathub com.bitwarden.desktop
-flatpak install flathub org.onlyoffice.desktopeditors
+# flatpak install flathub org.ferdium.Ferdium 
+# flatpak install flathub com.ticktick.TickTick
+# flatpak install flathub com.bitwarden.desktop
+# flatpak install flathub org.onlyoffice.desktopeditors
 
  
 echo "Installing From Source"
@@ -89,10 +89,11 @@ sudo apt update
 sudo apt install brave-browser
 
 echo "Install Google CHrome"
-cd && cd Downloads
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
-cd 
+cd && curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >> /dev/null
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
+sudo apt install google-chrome-stable
+
 
 # pipx pkgs 
 pipx install pyprland
