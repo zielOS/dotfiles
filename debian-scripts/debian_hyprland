@@ -1,14 +1,4 @@
 #!/bin/bash
-echo "Copying Important Files"
-sudo rm -rf /etc/apt/sources.list
-sudo cp -R $HOME/.dots/debian-scripts/sid.list /etc/apt/sources.list.d/
-sudo cp -R $HOME/.dots/debian-scripts/trixie.list /etc/apt/sources.list.d/
-sudo cp -R $HOME/.dots/debian-scripts/preferences /etc/apt/
-sudo cp -R $HOME/.dots/debian-scripts/01norecommend /etc/apt/apt.conf.d/
-sudo cp -R $HOME/.dots/variables.sh /etc/profile.d/
-
-echo "Installing Main Pkgs"
-cd && sudo apt install zstd && sudo apt update && sudo apt upgrade && sudo apt install apt-listbugs apt-listchanges debian-goodies apt-show-versions debsums
 
 sudo apt install build-essential gcc cmake clang ubuntu-dev-tools devscripts libc6-dev-amd64-cross make meson wget curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git bat deluge ranger lsd gvfs xdg-user-dirs xdg-user-dirs-gtk file-roller alacritty kitty ncurses-term maim golang-go zsh zsh-autosuggestions zsh-syntax-highlighting zoxide fish fzf papirus-icon-theme policykit-1-gnome x11-xkb-utils x11-xserver-utils xserver-xorg-core xournalpp zathura zathura-pdf-poppler pymol libpam-tmpdir python3-pip pipx rng-tools-debian haveged lynis auditd sysstat fail2ban acct apparmor apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pavucontrol alsa-utils libpulse-dev pamixer xdg-desktop-portal grim slurp swappy cliphist wl-clipboard greetd gettext gettext-base fontconfig hwdata xwayland cpio gnome-keyring maim systemd-zram-generator xserver-xorg-video-amdgpu firmware-misc-nonfree firmware-linux-free firmware-linux-nonfree firmware-amd-graphics amd64-microcode fwupd bluez bluez-alsa-utils blueman binutils cron chrony debianutils logrotate psmisc power-profiles-daemon upower xz-utils zip 7zip unzip wayland-utils bash-completion fastfetch manpages-dev
 
@@ -41,11 +31,6 @@ cargo install bottom
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg && \
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && \
 sudo apt update && sudo apt install spotify-client
-
-# Installs pacstall & pkgs"
-sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
-sudo apt install python3-pynvim ripgrep tree-sitter-cli fd-find
-pacstall -I neovim
 
 # flatpak setup & pkgs
 sudo apt install flatpak

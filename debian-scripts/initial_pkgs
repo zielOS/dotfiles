@@ -1,0 +1,7 @@
+#!/bin/sh
+echo "Initial Setup"
+cd && sudo apt install zstd && sudo apt update && sudo apt dist-upgrade && sudo apt install apt-listbugs apt-listchanges debian-goodies apt-show-versions debsums
+
+sudo apt install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
