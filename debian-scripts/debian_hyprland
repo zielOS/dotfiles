@@ -1,7 +1,4 @@
 #!/bin/bash
-
-cd && apt list --installed | cut -d/ -f1 > pre-cleaned.txt
-
 mkdir $HOME/.local/bin/
 
 echo "Copying Important Files"
