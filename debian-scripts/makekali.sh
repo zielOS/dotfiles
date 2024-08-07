@@ -1,11 +1,11 @@
 #!/bin/sh
+sudo -i
 apt update
-apt -y install wget gnupg dirmngr
+apt dist-upgrade
+apt install gnupg dirmngr
 wget -q -O - https://archive.kali.org/archive-key.asc | gpg --import
-gpg --keyserver hkp://keys.gnupg.net --recv-key 44C6513A8E4FB3D30875F758ED444FF07D8D0BF6
-echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list
-gpg -a --export ED444FF07D8D0BF6 | sudo apt-key add -
+echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" > /etc/apt/sources.list.d/kali.list
+gpg --export ED444FF07D8D0BF6 > /etc/apt/trusted.gpg.d/kali-rolling.gpg
 apt update
 apt -y upgrade
 apt -y dist-upgrade
-apt -y autoremove --purge
