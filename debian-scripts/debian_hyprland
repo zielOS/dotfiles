@@ -59,7 +59,7 @@ bash $HOME/.dots/debian-scripts/source_builds/Swaylock-effects && cd
 bash $HOME/.dots/debian-scripts/source_builds/Materialyoucolor && cd
 #bash $HOME/.dots/debian-scripts/source_builds/Regreet && cd
 bash $HOME/.dots/debian-scripts/source_builds/Emacs && cd
-bash $HOME/.dots/debian-scripts/source_builds/Eww  && cd
+#bash $HOME/.dots/debian-scripts/source_builds/Eww  && cd
 
 echo "Install Brave"
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
