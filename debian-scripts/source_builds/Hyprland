@@ -2,7 +2,7 @@
 cd 
 echo "Installing Hyprland"
 git clone --recursive https://github.com/hyprwm/Hyprland
-cd Hyprland
+cd Hyprland && git checkout v0.42.0
 export CXXFLAGS="-w" # suppress all compiler warnings
 meson setup build \
   --wipe \
