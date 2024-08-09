@@ -30,11 +30,11 @@ alias pac-clone="pkgctl repo clone --protocol=https"
 alias pac-se="yay -Ss"
 alias pac-make="makepkg -si --skippgpcheck --skipchecksum"
 
-alias dnf-up="sudo dnf5 update"
-alias dnf-in="sudo dnf5 install"
+alias apt-up="sudo nala update && sudo nala upgrade"
+alias apt-in="sudo nala install"
 alias dnf-rm="sudo dnf5 remove"
-alias dnf-cl="sudo dnf5 clean all"
-alias dnf-se="dnf search"
+alias apt-cl="sudo apt clean"
+alias nala-se="nala search"
 
 # Misc-related aliases
 alias audit="sudo lynis audit system"

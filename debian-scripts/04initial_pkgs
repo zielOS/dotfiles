@@ -1,0 +1,7 @@
+#!/bin/sh
+echo "Initial Setup"
+cd && sudo apt install zstd linux-headers-$(uname -r) gcc make acpid dkms libglvnd-core-dev libglvnd0 libc-dev apt-listbugs apt-listchanges debian-goodies apt-show-versions debsums && sudo apt update && sudo apt upgrade && sudo apt install 
+
+sudo apt install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+

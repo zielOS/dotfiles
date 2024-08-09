@@ -1,9 +1,9 @@
 #!/bin/sh
 sudo apt update 
 sudo apt upgrade
-sudo apt purge --autoremove nvidia-driver nvidia-kernel-dkms nvidia-vaapi-driver
-sudo reboot
-#sudo apt install linux-headers-$(uname -r) gcc make acpid dkms libglvnd-core-dev libglvnd0 libc-dev
+sudo apt purge --autoremove $(dpkg -l nvidia-driver* | grep ii | awk '{print $2}') 
+sudo apt reinstall xserver-xorg-video-nouveau
+sudo apt install 
 # cd && sudo -s && cd Downloads && wget https://uk.download.nvidia.com/XFree86/Linux-x86_64/560.31.02/NVIDIA-Linux-x86_64-560.31.02.run
 # chmod +x NVIDIA-Linux-x86_64-560.31.02.run
-# sudo ./NVIDIA-Linux-x86_64-560.31.02.run
+# sudo ./NVIDIA-Linux-x86_64 |-560.31.02.run
