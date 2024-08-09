@@ -1,48 +1,34 @@
 #!/bin/sh
+[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="brave-browser"
-
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.local/bin/hypr
-export PATH=$PATH:$HOME/.config/emacs/bin
-export PATH=$PATH:$HOME/.npm-global/bin
-
-NVARCH=`uname -s`_`uname -m`; export NVARCH
-NVCOMPILERS=/opt/nvidia/hpc_sdk; export NVCOMPILERS
-MANPATH=$MANPATH:$NVCOMPILERS/$NVARCH/23.9/compilers/man; export MANPATH
-PATH=$NVCOMPILERS/$NVARCH/23.9/compilers/bin:$PATH; export PATH 
-export PATH=$NVCOMPILERS/$NVARCH/23.9/comm_libs/mpi/bin:$PATH
-export MANPATH=$MANPATH:$NVCOMPILERS/$NVARCH/23.9/comm_libs/mpi/man
-
 # source
-source $HOME/.config/zsh/aliases.zsh
-source $HOME/.config/zsh/syntax_highlighting/catppuccin_mocha-zsh-syntax-highlighting.zsh
+plug "$HOME/.config/zsh/aliases.zsh"
+plug "$HOME/.config/zsh/syntax_highlighting/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
-# ${ZDOTDIR:-~}/.zshrc
+# plugins
+plug "hlissner/zsh-autopair"
+plug "zap-zsh/supercharge"
+plug "zap-zsh/vim"
+plug "zap-zsh/zap-prompt"
+plug "Aloxaf/fzf-tab"
+plug "zsh-users/zsh-syntax-highlighting"
+plug "zsh-users/zsh-history-substring-search"
+plug "zsh-users/zsh-completions"
+plug "zsh-users/zsh-autosuggestions"
 
-# Set the root name of the plugins files (.txt and .zsh) antidote will use.
-zsh_plugins=$HOME/.config/zsh/.zsh_plugins
+# keybinds
+bindkey '^ ' autosuggest-accept
 
-# Ensure the .zsh_plugins.txt file exists so you can add plugins.
-[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
+export PATH="$HOME/.local/bin":$PATH
 
-# Lazy-load antidote from its functions directory.
-fpath=(/usr/share/zsh-antidote/functions $fpath)
-autoload -Uz antidote
 
-# Generate a new static file whenever .zsh_plugins.txt is updated.
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
-fi
+#eval "$(fnm env)"
+eval "$(zoxide init zsh)"
 
-# Source your static plugins file.
-source ${zsh_plugins}.zsh
+
 
