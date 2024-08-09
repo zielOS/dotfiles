@@ -9,8 +9,6 @@ hyprpm reload -n &
 # services
 nm-applet &
 thunar --daemon &
-distrobox-enter -T -n archbox -- "ags" &
-pypr &
 emacs --daemon &
 
 # theme
