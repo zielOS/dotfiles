@@ -70,7 +70,7 @@ sudo zypper install dkms libvdpau1 libva-utils libglvnd libglvnd-devel Mesa-libv
 
 echo "@apps"
 sleep 5
-sudo zypper install alacritty alacritty-zsh-completion kitty kitty-shell-integration kitty-terminfo thunar thunar-volman thunar-plugin-archive thunar-plugin-dropbox thunar-plugin-media-tags file-roller deluge xournalpp zathura zathura-plugin-pdf-poppler zathura-zsh-completion ranger
+sudo zypper install alacritty alacritty-zsh-completion kitty kitty-shell-integration kitty-terminfo thunar thunar-volman thunar-plugin-archive thunar-plugin-dropbox thunar-plugin-media-tags file-roller deluge xournalpp zathura zathura-plugin-pdf-poppler zathura-zsh-completion ranger bitwarden
 
 echo "@theming"
 sleep 5
