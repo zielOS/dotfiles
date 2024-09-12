@@ -41,8 +41,7 @@ echo "@npm"
 sleep 5
 cd && mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
-npm install -g bun
-npm install -g dart-sass
+npm install -g bun sass
 
 echo "@patterns-devel-base-devel_kernel"
 sleep 5
