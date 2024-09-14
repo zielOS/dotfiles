@@ -132,7 +132,7 @@ sudo dnf5 install \
 echo "@DRIVERS"
 sleep 5
 sudo dnf5 install \
-  akmod-nvidia \
+  akmod-nvidia-open \
   xorg-x11-drv-nvidia-cuda \
   xorg-x11-drv-nvidia-power \
   xorg-x11-drv-nvidia-cuda-libs \
@@ -146,7 +146,7 @@ sudo dnf5 install \
   mokutil \
   openssl
 
-sudo dnf mark install akmod-nvidia
+sudo dnf mark install akmod-nvidia-open
 #sudo kmodgenca -a
 #sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 #sudo systemctl enable nvidia-suspend.service nvidia-resume.service
@@ -350,5 +350,7 @@ sleep 5
 sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 git config --global user.name "zielOS"
 git config --global user.email "ahsanur041@gmail.com"
-#git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
+git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
 
+
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
