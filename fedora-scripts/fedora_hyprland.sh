@@ -4,6 +4,7 @@ echo "@REPOS"
 sleep 5
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf config-manager --enable fedora-cisco-openh264
+sudo dnf install rpmfusion-nonfree-release-tainted
 sudo dnf copr enable atim/lazygit
 sudo dnf copr enable atim/starship
 sudo dnf copr enable solopasha/hyprland
@@ -138,6 +139,7 @@ sudo dnf5 install \
   xorg-x11-drv-nvidia-cuda-libs \
   libva-devel \
   libva-utils \
+  mesa-dri-drivers \
   nvidia-vaapi-driver \
   vulkan \
   amd-ucode-firmware \
@@ -230,6 +232,7 @@ sudo dnf5 install \
   nwg-clipman \
   egl-wayland \
   greetd \
+  pam-devel \
   grim \
   hyprcursor \
   hypridle \

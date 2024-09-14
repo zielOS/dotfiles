@@ -1,7 +1,8 @@
 #+title: Emacs
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
-* Startup Performance
+* STUFF TO LOAD FIRST
+** Startup Performance
 
 #+begin_src emacs-lisp
 ;; The default is 800 kilobytes.  Measured in bytes.
@@ -17,7 +18,7 @@
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 #+end_src
 
-* Straight Package Management
+** Straight Package Management
 
 #+begin_src emacs-lisp
 (defvar bootstrap-version)
@@ -37,7 +38,7 @@
   (load bootstrap-file nil 'nomessage))
 #+end_src
 
-* Automatic Package Updates
+** Automatic Package Updates
 
 #+begin_src emacs-lisp
 (use-package auto-package-update
@@ -51,7 +52,7 @@
   (auto-package-update-at-time "09:00"))
 #+end_src
 
-* Keep Folders Clean
+** Keep Folders Clean
 
 #+begin_src emacs-lisp
 ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
@@ -66,7 +67,27 @@
       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 #+end_src
 
-* Basic UI Configuration
+** Disable nativecomp warnings
+
+#+begin_src emacs-lisp
+(setq native-comp-async-report-warnings-errors nil)
+#+end_src
+
+
+* ALL THE ICONS
+
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :straight t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :straight t
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+#+end_src
+
+* BETTER DEFAULTS
+
 
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
@@ -85,10 +106,19 @@
 (global-display-line-numbers-mode t)
 
 ;; Set frame transparency
+(defvar efs/frame-transparency '(96 . 96))
 (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(add-hook 'org-mode-hook (lambda ()
+           (setq-local electric-pair-inhibit-predicate
+                   `(lambda (c)
+                  (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+
+(delete-selection-mode 1)
+(electric-pair-mode 1)
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
@@ -97,6 +127,31 @@
                 treemacs-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+* CAPE
+
+#+begin_src emacs-lisp
+(use-package cape
+  :straight t
+  :init
+  (setq cape-dabbrev-min-length 2)
+  (setq cape-dabbrev-check-other-buffers 'some)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify)
+  (defun corfu-enable-always-in-minibuffer ()
+    "Enable Corfu in the minibuffer if Vertico/Mct are not active."
+    (unless (or (bound-and-true-p mct--active)
+                (bound-and-true-p vertico--input)
+                (eq (current-local-map) read-passwd-map))
+      ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
+      (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+                  corfu-popupinfo-delay nil)
+      (corfu-mode 1)))
+
+  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1))
 #+end_src
 
 * EVIL MODE
@@ -225,40 +280,6 @@
   :init (doom-modeline-mode 1))
 #+end_src
 
-* App Launcher
-
-#+begin_src emacs-lisp
-(use-package app-launcher
-  :straight '(app-launcher :host github :repo "SebastienWae/app-launcher"))
-
-;; emacsclient -cF "((visibility . nil))" -e "(emacs-run-launcher)"
-
-(defmacro bookmark-selector-launcher (NAME WIDTH HEIGHT FUNCTION)
-  "Define a launcher command.
-
-Bookmark-selector is a package revolving around using emacs
-outside of emacs to browse your bookmarks. Most of the commands
-defined, consist of opening an emacs frame with only a
-minibuffer, with a specified NAME, WIDTH and HEIGHT and inside it
-calling FUNCTION and deleting the frame after the function
-completes or is canceled."
-  `(with-selected-frame (make-frame '((name . ,NAME)
-                                      (minibuffer . only)
-                                      (width . ,WIDTH)
-                                      (height . ,HEIGHT)))
-     (unwind-protect
-         (funcall ,FUNCTION)
-       (delete-frame))))
-
-(defun emacs-run-launcher ()
-  "Create and select a frame called emacs-run-launcher which consists only of a minibuffer and has specific dimensions. Runs app-launcher-run-app on that frame, which is an emacs command that prompts you to select an app and open it in a dmenu like behaviour. Delete the frame after that command has exited"
-  (interactive)
-  (bookmark-selector-launcher "emacs-run-launcher" 59 14 'app-launcher-run-app)
-    (unwind-protect
-        (funcall ,FUNCTION)
-      (delete-frame)))
-#+end_src
-
 * Dired
 
 #+begin_src emacs-lisp
@@ -308,6 +329,20 @@ completes or is canceled."
   :straight t
   :mode "\\.nix\\'")
 #+end_src
+
+
+* DABBREV
+
+#+begin_src emacs-lisp
+(use-package dabbrev
+  :custom
+  (dabbrev-upcase-means-case-search t)
+  (dabbrev-check-all-buffers nil)
+  (dabbrev-check-other-buffers t)
+  (dabbrev-friend-buffer-function 'dabbrev--same-major-mode-p)
+  (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
+#+end_src
+
 
 * Runtime Performance
 
