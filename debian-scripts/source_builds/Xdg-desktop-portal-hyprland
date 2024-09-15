@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Installing xdg-desktop-portal-hyprland"
 cd && git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland
-cd xdg-desktop-portal-hyprland && git checkout v1.3.3
+cd xdg-desktop-portal-hyprland 
 cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
 cmake --build build
 sudo cmake --install build

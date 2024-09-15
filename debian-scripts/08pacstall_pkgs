@@ -1,6 +1,0 @@
-#!/bin/sh
-pacstall -I ferdium-deb 
-cd && cd Downloads && flatpak install flathub com.ticktick.TickTick
-flatpak install flathub com.bitwarden.desktop
-flatpak install flathub org.onlyoffice.desktopeditors
-
