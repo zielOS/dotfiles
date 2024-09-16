@@ -1,0 +1,3 @@
+#!/bin/sh
+sudo apt build-dep hyprland xdg-desktop-portal-hyprland
+sudo apt install scdoc libpugixml-dev libzip-dev librsvg2-dev libmagic-dev libsdbus-c++-dev libpam-dev libxcursor-dev

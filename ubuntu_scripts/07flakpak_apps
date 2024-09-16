@@ -1,0 +1,6 @@
+#!/bin/sh
+flatpak install flathub org.ferdium.Ferdium 
+flatpak install flathub com.ticktick.TickTick
+flatpak install flathub com.bitwarden.desktop
+flatpak install flathub org.onlyoffice.desktopeditors
+flatpak install flatseal

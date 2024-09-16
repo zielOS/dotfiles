@@ -1,0 +1,4 @@
+#!/bin/sh
+cd && cd $HOME/.dots/debian-scripts
+sudo install -Dm755 dpkg-pre-post-snapper "/usr/local/bin/dpkg-pre-post-snapper" && cd
+sudo cp -R $HOME/.dots/debian-scripts/80snapper /etc/apt/apt.conf.d/

@@ -1,0 +1,9 @@
+#!/bin/sh
+# sudo apt update 
+# sudo apt upgrade
+# sudo apt purge --autoremove $(dpkg -l nvidia-driver* | grep ii | awk '{print $2}') 
+# #sudo apt reinstall xserver-xorg-video-nouveau
+# sudo apt install
+wget https://uk.download.nvidia.com/XFree86/Linux-x86_64/555.58.02/NVIDIA-Linux-x86_64-555.58.02.run
+# chmod +x NVIDIA-Linux-x86_64-560.31.02.run
+# sudo ./NVIDIA-Linux-x86_64 |-560.31.02.run

@@ -1,0 +1,74 @@
+#!/bin/bash
+
+sudo apt install build-essential gcc cmake clang ubuntu-dev-tools devscripts libc6-dev-amd64-cross make meson wget curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git bat deluge ranger lsd gvfs xdg-user-dirs xdg-user-dirs-gtk file-roller alacritty kitty ncurses-term maim golang-go zsh zsh-autosuggestions zsh-syntax-highlighting zsh-antidote zoxide fish fzf papirus-icon-theme policykit-1-gnome x11-xkb-utils x11-xserver-utils xserver-xorg-core xournalpp zathura zathura-pdf-poppler pymol libpam-tmpdir python3-pip pipx rng-tools-debian haveged lynis auditd sysstat fail2ban acct apparmor apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pavucontrol alsa-utils libpulse-dev pamixer xdg-desktop-portal grim slurp swappy cliphist wl-clipboard greetd gettext gettext-base fontconfig hwdata xwayland cpio gnome-keyring maim systemd-zram-generator xserver-xorg-video-amdgpu firmware-misc-nonfree firmware-linux-free firmware-linux-nonfree firmware-amd-graphics amd64-microcode fwupd bluez bluez-alsa-utils blueman binutils cron chrony debianutils logrotate psmisc power-profiles-daemon upower xz-utils zip 7zip unzip wayland-utils bash-completion fastfetch manpages-dev gawk inotify-tools libbtrfsutil1t64 libinotifytools0 libsigsegv2 python3-btrfsutils bleachbit stacer
+
+#sudo apt install nvidia-driver nvidia-vaapi-driver --install-recommends
+
+echo "Installing Dev Pkgs"
+sudo apt install cmake-extras libcairo2-dev libzip-dev librsvg2-dev libtomlplusplus-dev libspa-0.2-dev libwayland-client++1 libdrm-dev pkg-config ninja-build scdoc libgbm-dev libinih-dev uuid-dev qt6-base-dev qt6-wayland-dev libpipewire-0.3-dev libsdbus-c++-bin libghc-cairo-dev libglvnd-dev libglvnd-core-dev libturbojpeg0-dev libwebp-dev libwlroots-dev libmagic-dev libpango1.0-dev libjpeg-dev libsdbus-c++-dev libegl1-mesa-dev libpam0g-dev libpugixml-dev libegl-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-xinput-dev libtomlplusplus3 libfontconfig-dev libffi-dev libxml2-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev libvkfft-dev libgulkan-dev libgles2 libxcb-res0-dev libliftoff-dev libdisplay-info-dev libsystemd-dev libwayland-dev vulkan-utility-libraries-dev libsecret-1-0 libsecret-1-dev libglib2.0-dev libwayland-client++1 libegl1-mesa-dev libxkbcommon-x11-dev libpam0g-dev libsecret-tools libgtk-layer-shell-dev libgdk3.0-cil-dev libpango1.0-dev librust-gdk-pixbuf-sys-dev libdbusmenu-gtk3-dev libcairo2-dev libcairo-gobject2 libgio3.0-cil-dev librust-glib-sys-dev librust-gobject-sys-dev libxcb-util-dev libgtk4-layer-shell-dev python-gi-dev python3-cairo-dev gobject-introspection libgtk-4-dev libxkbcommon-dev libxkbcommon-x11-dev libgdk-pixbuf-2.0-dev python3-pil python3-requests python3-build python3-dev python3-installer libxcb-errors-dev 
+
+echo "Setup Rust"
+sudo apt install rustup
+rustup default stable
+
+# node & npm setup
+cd 
+curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt update && sudo apt-get install nodejs
+mkdir ~/.npm-global 
+npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH
+
+# install npm pkgs
+npm install -g bun
+npm install -g sass
+
+# install cargo pkgs
+cargo install --git https://github.com/donovanglover/hyprnome
+cargo install bottom
+cargo install starship
+
+echo "Installing spotify"
+curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg && \
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list && \
+sudo apt update && sudo apt install spotify-client
+
+
+echo "Install Brave"
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser
+
+echo "Install Google CHrome"
+cd && curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >> /dev/null
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
+sudo apt install google-chrome-stable
+
+echo "Installing Mullvad Browser"
+sudo curl -fsSLo /usr/share/keyrings/mullvad-keyring.asc https://repository.mullvad.net/deb/mullvad-keyring.asc
+echo "deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=$( dpkg --print-architecture )] https://repository.mullvad.net/deb/stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/mullvad.list
+sudo apt update
+sudo apt install mullvad-browser
+
+# pipx pkgs 
+pipx install pyprland
+pipx install hyprshade
+
+
+
+# Set Up Systemd
+#sudo systemctl set-default graphical.target
+# systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
+
+# Setup zsh
+# zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+# curl -sS https://starship.rs/install.sh | sh
+# curl -fsSL https://fnm.vercel.app/install | sh
+
+echo "restore rustup"
+rustup default stable
+#sudo systemctl disable greeetd
+
+echo "End of Hyprland Setup"
