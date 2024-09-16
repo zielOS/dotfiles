@@ -1,38 +1,33 @@
 #!/bin/sh
 
-cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptroot && mkfs.btrfs -f /dev/mapper/cryptroot && mount /dev/mapper/cryptroot /mnt 
+cfdisk /dev/nvme0n1 && mkfs.vfat -F 32 /dev/nvme0n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme0n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptroot && mkfs.btrfs -f /dev/mapper/cryptroot && mount /dev/mapper/cryptroot /mnt
 
+btrfs su cr /mnt/@ &&
+  btrfs su cr /mnt/@home &&
+  btrfs su cr /mnt/@opt &&
+  btrfs su cr /mnt/@root &&
+  btrfs su cr /mnt/@srv &&
+  btrfs su cr /mnt/@usr@local &&
+  btrfs su cr /mnt/@var &&
+  btrfs su cr /mnt/@var@cache &&
+  btrfs su cr /mnt/@var@crash &&
+  btrfs su cr /mnt/@var@log &&
+  btrfs su cr /mnt/@var@log@audit &&
+  btrfs su cr /mnt/@var@tmp &&
+  btrfs su cr /mnt/@snapshots &&
+  umount /mnt
 
-btrfs su cr /mnt/@  && 
- btrfs su cr /mnt/@home &&
- btrfs su cr /mnt/@opt && 
- btrfs su cr /mnt/@root &&
- btrfs su cr /mnt/@srv && 
- btrfs su cr /mnt/@usr && 
- btrfs su cr /mnt/@usr@local &&
- btrfs su cr /mnt/@var &&
- btrfs su cr /mnt/@var@cache &&
- btrfs su cr /mnt/@var@crash &&
- btrfs su cr /mnt/@var@log &&
- btrfs su cr /mnt/@var@log@audit &&
- btrfs su cr /mnt/@var@tmp &&
- btrfs su cr /mnt/@snapshots && 
- umount /mnt 
-
-
- mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt &&
-  mkdir /mnt/home && 
-  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home &&  
-  mkdir /mnt/opt && 
+mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt &&
+  mkdir /mnt/home &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home &&
+  mkdir /mnt/opt &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/opt &&
   mkdir /mnt/root &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@root /dev/mapper/cryptroot /mnt/root &&
   mkdir /mnt/srv &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@srv /dev/mapper/cryptroot /mnt/srv &&
-  mkdir /mnt/usr &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@usr /dev/mapper/cryptroot /mnt/usr &&
-  mkdir /mnt/usr/local &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@usr@locall /dev/mapper/cryptroot /mnt/usr/local &&
+  mkdir -p /mnt/usr/local &&
+  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@usr@local /dev/mapper/cryptroot /mnt/usr/local &&
   mkdir /mnt/var &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/var &&
   mkdir /mnt/var/cache &&
@@ -43,59 +38,36 @@ btrfs su cr /mnt/@  &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log /dev/mapper/cryptroot /mnt/var/log &&
   mkdir /mnt/var/log/audit &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/cryptroot /mnt/var/log/audit &&
-  mkdir /mnt/var/tmp && 
+  mkdir /mnt/var/tmp &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/cryptroot /mnt/var/tmp &&
   mkdir /mnt/.snapshots &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots && 
-  mkdir /mnt/boot && 
+  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots &&
+  mkdir /mnt/boot &&
   mount /dev/nvme0n1p1 /mnt/boot
 
-pacstrap /mnt base base-devel git neovim arch-install-scripts reflector dracut yay 
+pacstrap /mnt base base-devel git neovim arch-install-scripts pacman-contrib reflector dracut yay
 
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >>/mnt/etc/fstab
 
 arch-chroot /mnt
 
 reflector --verbose --country 'BD' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
 
-## chaotic aur setup
-pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com && pacman-key --lsign-key 3056513887B78AEB && pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' &&  pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' 
-
-nvim /etc/pacman.conf
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist 
-
-ln -sf /usr/share/zoneinfo/Asia/Dhaka /etc/localtime && hwclock --systohc && nvim /etc/locale.gen && locale-gen && echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-
-
-pacman -S unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim  mesa rng-tools haveged upower greetd greetd-tuigreet lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac 
+ln -sf /usr/share/zoneinfo/Asia/Dhaka /etc/localtime && hwclock --systohc && nvim /etc/locale.gen && locale-gen && echo "LANG=en_US.UTF-8" >>/etc/locale.conf
 
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
-# systemd-boot
-bootctl install
+pacman -S unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim mesa rng-tools haveged upower greetd nwg-hello lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac
 
-# /efi/loader/loader.conf
-default b6904dd6eeec4fa18283f652d67f6859*
-timeout 5
-console-mode auto
-reboot-for-bitlocker 1
+nvim /etc/dracut.conf
+compress="zstd"
+add_dracutmodules+=" crypt dm rootfs-block "
+omit_dracutmodules+=" network cifs nfs nbd brltty "
+force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
 
-# entries/arch.conf (autogenerated)
-# Boot Loader Specification type#1 entry
-# File created by /etc/kernel/install.d/90-loaderentry.install (systemd 254.1-1-arch)
-title      EndeavourOS
-version    6.7.1-arch1-1
-machine-id b6904dd6eeec4fa18283f652d67f6859
-sort-key   endeavouros-6.7.1-arch1-1
-options    nvme_load=YES nowatchdog rw rootflags=subvol=/@ rd.luks.uuid=a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 root=/dev/mapper/luks-a5ec217c-fdcf-4061-ab0d-11fcb6bbd216 nvidia-drm.modeset=1 systemd.machine_id=b6904dd6eeec4fa18283f652d67f6859
-linux      /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/linux
-initrd     /b6904dd6eeec4fa18283f652d67f6859/6.7.1-arch1-1/initrd
-
-pacman -S linux-clear linux-clear-headers intel-ucode linux-firmware dracut-hook-uefi kernel-install-for-dracut  nvidia-dkms nvidia-utils
-
-
-nvim /etc/pacman.d/hooks/998-systemd-boot.hook
+#HOOKS
+# update-grub when grub pkg is changed
+nvim /etc/pacman.d/hooks/998-grub.hook
 
 [Trigger]
 Type = Package
@@ -106,72 +78,28 @@ Target = systemd
 [Action]
 Description = Updating systemd-boot
 When = PostTransaction
-Exec = /usr/bin/bootctl update
-
-blkid -s UUID -o value /dev/nvme0n1p2 
-c17227a9-5346-4b51-b9ae-7957beba2fc0
-
-# dracut setup
-nvim /etc/dracut.conf
-compress="zstd"
-hostonly="yes"
-dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
-add_dracutmodules+=" crypt dm rootfs-block "
-omit_dracutmodules+=" network cifs nfs nbd brltty "
-force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-kernel_cmdline="quiet loglevel=3 cryptdevice=UUID=295c526c-65a0-44c1-9c1e-48c3ac6f7a5f:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw root_trim=yes"
-install_items+=" /etc/crypttab "
-
-nvim /etc/crypttab
-cryptroot UUID=295c526c-65a0-44c1-9c1e-48c3ac6f7a5f     /crypto_keyfile.bin luks,initramfs
+Exec = /bin/sh -c "grub-mkconfig -o /boot/grub/grub.cfg"
 
 nvim /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 cryptdevice=UUID=295c526c-65a0-44c1-9c1e-48c3ac6f7a5f:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw root_trim=yes"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 nvidia-drm.modeset=1 lsm=landlock,lockdown,yama,integrity,apparmor,bpf rootfstype=btrfs rootflags=rw"
 GRUB_CMDLINE_LINUX=""
 
-nvim /etc/crypttab
-498c9752-3642-4121-b37f-b9a9b8204988
-
-pacman -S kernel-install-for-dracut 
+pacman -S kernel-install-for-dracut
 
 reinstall-kernels
 
-
 sudo grub-install --target=x86_64-efi --efi-directory=/boot && sudo grub-install --target=x86_64-efi --efi-directory=/boot --removable && sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-# refind
-sudo refind-install --usedefault /dev/nvme0n1p1 --alldrivers
 
 ** Systemd Setup
 systemctl enable NetworkManager fstrim.timer acpid sysstat apparmor auditd chronyd
 
-** Secure Boot Setup
-pacman -S sbctl sbsigntools
-sbctl status
-sbctl create-keys
-
-
-sbctl sign -s
-
-nvim /etc/dracut.conf.d/secureboot.conf
-uefi_secureboot_cert="/usr/share/secureboot/keys/db/db.pem"
-uefi_secureboot_key="/usr/share/secureboot/keys/db/db.key"
-
-sbctl enroll-keys
-
-sbctl status
-
-cryptroot
-
-
--- WARNING -- This system is for the use of authorized users only. Individuals 
-using this computer system without authority or in excess of their authority 
-are subject to having all their activities on this system monitored and 
-recorded by system personnel. Anyone using this system expressly consents to 
-such monitoring and is advised that if such monitoring reveals possible 
-evidence of criminal activity system personal may provide the evidence of such 
+-- WARNING -- This system is for the use of authorized users only. Individuals
+using this computer system without authority or in excess of their authority
+are subject to having all their activities on this system monitored and
+recorded by system personnel. Anyone using this system expressly consents to
+such monitoring and is advised that if such monitoring reveals possible
+evidence of criminal activity system personal may provide the evidence of such
 monitoring to law enforcement officials.
 
 #chroot into endeavoros
-cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme1n1p2 cryptroot && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/ && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/opt  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
-
+cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme1n1p2 cryptroot && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/ && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/var && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log && mount -o nmoatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
