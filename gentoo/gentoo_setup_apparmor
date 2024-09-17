@@ -79,7 +79,7 @@ eselect profile set 42
 ln -sf ../usr/share/zoneinfo/Asia/Dhaka /etc/localtime && nano /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" 
 
 ##.7
-linux-headers -> glibc -> binutils -> gcc -> glibc -> binutils -> rust -> python -> gcc -> nodejs -> go
+linux-headers -> glibc -> binutils -> gcc -> glibc -> binutils -> rust -> python -> go -> gcc -> nodejs
 
 emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge dev-build/libtool
 
@@ -93,7 +93,7 @@ systemd-machine-id-setup && hostnamectl set-hostname zephyrus && emerge app-admi
 
 ##.9
 * kernel setup
-emerge sys-kernel/cachyos-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/sof-firmware sys-fs/genfstab sys-kernel/installkernel sys-kernel/modprobed-db sys-fs/btrfs-progs sys-apps/rng-tools && eselect kernel set 1 && ls -l /usr/src/linux
+emerge sys-kernel/cachyos-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/sof-firmware sys-fs/genfstab sys-kernel/installkernel sys-kernel/modprobed-db sys-fs/btrfs-progs sys-apps/rng-tools networkmanager && eselect kernel set 1 && ls -l /usr/src/linux
 
 ##.10
 mount /dev/nvme0n1p1 /boot

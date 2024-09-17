@@ -35,7 +35,8 @@ cd apparmor && git checkout v4.0.3
 
 
 cd libraries/libapparmor/
-autoreconf -fiv 
+autoreconf -fiv && cd
+
 ## not needed in gentoo
 # export required perl executable locations
 # export MAKEFLAGS+=" POD2MAN=$_core_perl/pod2man"
@@ -57,14 +58,14 @@ make -C utils/vim
 
 # copy to test location as some tests render the resulting python bytecode
 # unreproducible: https://gitlab.com/apparmor/apparmor/-/issues/184
-cd 
-cp -av apparmor apparmor-test 
+cd ..
+cp -av $pkgname-$pkgver $pkgname-$pkgver-test
 
 ### END BUILD PHASE
 
 
 ### BEGIN CHECK PHASE
-cd apparmor-test 
+cd $pkgname-$pkgver-test
 echo "INFO: Running check: libraries/libapparmor" &&
 make -C libraries/libapparmor check && 
 echo "INFO: Running check binutils" &&
@@ -84,7 +85,6 @@ echo "INFO: Running check utils" &&
 # we do not care about linting when running tests
 # https://gitlab.com/apparmor/apparmor/-/issues/121
 make PYFLAKES='/usr/bin/true' -C utils check
-### END CHECK PHASE
 
 
 ### BEGIN INSTALL PHSASE
