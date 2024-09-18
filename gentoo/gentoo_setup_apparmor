@@ -51,7 +51,7 @@ mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@ /dev/mapp
   mkdir /mnt/gentoo/var/tmp  && 
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/root /mnt/gentoo/var/tmp &&
   mkdir /mnt/gentoo/var/spool  && 
-  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/root /mnt/gentoo/var/spool &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@spool /dev/mapper/root /mnt/gentoo/var/spool &&
   mkdir /mnt/gentoo/.snapshots && 
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/root /mnt/gentoo/.snapshots  
   
@@ -256,7 +256,8 @@ cryptsetup luksOpen /dev/nvme0n1p2 root  &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@crash /dev/mapper/root /mnt/gentoo/var/crash &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log /dev/mapper/root /mnt/gentoo/var/log && 
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/root /mnt/gentoo/var/log/audit && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/root /mnt/gentoo/var/tmp && 
+  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/root /mnt/gentoo/var/tmp &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@spool /dev/mapper/root /mnt/gentoo/var/spool &&
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/root /mnt/gentoo/.snapshots && 
   mkdir --parents /mnt/gentoo/etc/portage/repos.conf && 
   cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf &&
