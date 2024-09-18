@@ -22,38 +22,41 @@ btrfs su cr /mnt/gentoo/@ &&
   btrfs su cr /mnt/gentoo/@var@log && 
   btrfs su cr /mnt/gentoo/@var@log@audit &&
   btrfs su cr /mnt/gentoo/@var@tmp &&
+  btrfs su cr /mnt/gentoo/@var@spool &&
   btrfs su cr /mnt/gentoo/@snapshots && 
   umount /mnt/gentoo 
 
 
-mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/root /mnt/gentoo &&
+mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@ /dev/mapper/root /mnt/gentoo &&
   mkdir /mnt/gentoo/home &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/root /mnt/gentoo/home &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@home /dev/mapper/root /mnt/gentoo/home &&
   mkdir /mnt/gentoo/opt &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/root /mnt/gentoo/opt && 
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@opt /dev/mapper/root /mnt/gentoo/opt && 
   mkdir /mnt/gentoo/root &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@root /dev/mapper/root /mnt/gentoo/root &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@root /dev/mapper/root /mnt/gentoo/root &&
   mkdir /mnt/gentoo/srv &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@srv /dev/mapper/root /mnt/gentoo/srv &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@srv /dev/mapper/root /mnt/gentoo/srv &&
   mkdir -p /mnt/gentoo/usr/local &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@usr@local /dev/mapper/root /mnt/gentoo/usr/local &&    
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@usr@local /dev/mapper/root /mnt/gentoo/usr/local &&    
   mkdir /mnt/gentoo/var && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/root /mnt/gentoo/var &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var /dev/mapper/root /mnt/gentoo/var &&
   mkdir /mnt/gentoo/var/cache && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@cache /dev/mapper/root /mnt/gentoo/var/cache &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@cache /dev/mapper/root /mnt/gentoo/var/cache &&
   mkdir /mnt/gentoo/var/crash && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@crash /dev/mapper/root /mnt/gentoo/var/crash &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@crash /dev/mapper/root /mnt/gentoo/var/crash &&
   mkdir /mnt/gentoo/var/log && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log /dev/mapper/root /mnt/gentoo/var/log && 
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@log /dev/mapper/root /mnt/gentoo/var/log && 
   mkdir /mnt/gentoo/var/log/audit && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/root /mnt/gentoo/var/log/audit && 
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/root /mnt/gentoo/var/log/audit && 
   mkdir /mnt/gentoo/var/tmp  && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/root /mnt/gentoo/var/tmp && 
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/root /mnt/gentoo/var/tmp &&
+  mkdir /mnt/gentoo/var/spool  && 
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/root /mnt/gentoo/var/spool &&
   mkdir /mnt/gentoo/.snapshots && 
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/root /mnt/gentoo/.snapshots  
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/root /mnt/gentoo/.snapshots  
   
 
-cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240908T164942Z/stage3-amd64-desktop-systemd-20240908T164942Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner &&
+cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240915T163400Z/stage3-amd64-desktop-systemd-20240915T163400Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner &&
   rm -R /mnt/gentoo/etc/portage/make.conf &&
   cp -R /home/ahsan/.dots/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/ && 
   rm -R /mnt/gentoo/etc/portage/package.accept_keywords && 
@@ -81,7 +84,9 @@ ln -sf ../usr/share/zoneinfo/Asia/Dhaka /etc/localtime && nano /etc/locale.gen &
 ##.7
 linux-headers -> glibc -> binutils -> gcc -> glibc -> binutils -> rust -> python -> go -> gcc -> nodejs
 
-emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge dev-build/libtool
+emerge linux-headers && emerge glibc && emerge binutils && emerge python && emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge dev-build/libtool
+
+emerge glibc && emerge binutils && emerge python && emerge gcc
 
 emerge sys-devel/clang sys-devel/llvm sys-libs/compiler-rt sys-libs/llvm-libunwind sys-devel/lld && source /etc/profile && export PS1="(chroot) ${PS1}"
 

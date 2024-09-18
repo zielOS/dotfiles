@@ -37,7 +37,7 @@ app-admin/sysstat lto lm-sensors
 sys-libs/zlib minizip
 app-text/poppler cairo
 dev-lang/python lto pgo ensurepip tk hardened
-sys-devel/gcc lto pgo default-stack-clash-protection rust go
+sys-devel/gcc lto pgo default-stack-clash-protection rust go -fortran
 sys-apps/firejail apparmor private-home
 app-editors/emacs sound dynamic-loading xft gtk -X json harfbuzz imagemagick inotify jit threads tree-sitter
 app-text/ghostscript-gpl cups
