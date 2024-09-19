@@ -143,6 +143,10 @@ force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
 
 clear-sources-6.10.7_p1460.ebuild
 
+### Applyiing patches 
+* apply base-alll patch First
+* test :q
+:e
 
 LLVM=1 KCFLAGS="-O3 -march=native -pipe -flto=thin" make nconfig
 LLVM=1 KCFLAGS="-O3 -march=native -pipe -flto=thin" make -j14

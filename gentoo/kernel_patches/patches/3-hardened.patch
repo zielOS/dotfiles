@@ -882,10 +882,10 @@ index 1e05a0f3f..10bfd5d36 100644
  		path_put(&last->link);
  }
  
--static int sysctl_protected_symlinks __read_mostly;
--static int sysctl_protected_hardlinks __read_mostly;
--static int sysctl_protected_fifos __read_mostly;
--static int sysctl_protected_regular __read_mostly;
+-static int sysctl_protected_symlinks __read_mostly = 1;
+-static int sysctl_protected_hardlinks __read_mostly = 1;
+-int sysctl_protected_fifos __read_mostly = 1;
+-int sysctl_protected_regular __read_mostly = 1;
 +static int sysctl_protected_symlinks __read_mostly = 1;
 +static int sysctl_protected_hardlinks __read_mostly = 1;
 +static int sysctl_protected_fifos __read_mostly = 2;
@@ -1869,16 +1869,6 @@ index 8635b3b24..03c412b58 100644
  	help
  	  Randomizing heap placement makes heap exploits harder, but it
  	  also breaks ancient binaries (including anything libc5 based).
-@@ -708,7 +725,8 @@ config KSM
- config DEFAULT_MMAP_MIN_ADDR
- 	int "Low address space to protect from user allocation"
- 	depends on MMU
--	default 4096
-+	default 32768 if ARM || (ARM64 && COMPAT)
-+	default 65536
- 	help
- 	  This is the portion of low virtual memory which should be protected
- 	  from userspace allocation.  Keeping a user from writing to low pages
 diff --git a/mm/Kconfig.debug b/mm/Kconfig.debug
 index afc72fde0..ca56c683f 100644
 --- a/mm/Kconfig.debug

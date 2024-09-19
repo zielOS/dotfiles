@@ -20,9 +20,12 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 -- LazyVim automatically configures lazygit:
 --  * theme, based on the active colorscheme.
---  * editorPreset to nvim-remote
+--  * editPreset to nvim-remote
 --  * enables nerd font icons
 -- Set to false to disable.
+-- Set the options you want to override in `~/.config/lazygit/custom.yml`
+-- WARN: on Windows you might want to set `editPreset: "nvim"` due to
+-- this issue https://github.com/jesseduffield/lazygit/issues/3467
 vim.g.lazygit_config = true
 
 -- Options for the LazyVim statuscolumn
@@ -78,13 +81,13 @@ opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.jumpoptions = "view"
 opt.laststatus = 3 -- global statusline
-opt.linebreak = true -- Wrap lines at convenient points
+opt.linebreak = false -- Wrap lines at convenient points
 opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.relativenumber = false -- Relative line numbers
+opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 4 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.shiftround = true -- Round indent
@@ -111,8 +114,6 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = true -- Disable line wrap
-opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
@@ -125,3 +126,4 @@ else
 end
 
 -- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
