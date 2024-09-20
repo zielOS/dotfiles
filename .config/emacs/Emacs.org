@@ -87,7 +87,6 @@
 
 #+end_src
 
-
 * AUTO-TANGLE ORG
 
 #+begin_src emacs-lisp
@@ -206,13 +205,10 @@ Consult provides search and navigation commands based on the Emacs completion fu
 * COMMENTING
 
 #+begin_src emacs-lisp
-(straight-use-package 'evil-commentary)
-(require 'evil-commentary)
-(evil-commentary-mode)
+(use-package evil-nerd-commenter
+  :straight t
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 #+end_src
-
-#+RESULTS:
-: t
 
 * DABBREV
 
@@ -235,7 +231,6 @@ Consult provides search and navigation commands based on the Emacs completion fu
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
-
   (setq dashboard-startup-banner "~/.config/emacs/art/ascii.txt")    
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
@@ -251,10 +246,6 @@ Consult provides search and navigation commands based on the Emacs completion fu
 
 
 #+end_src
-
-
-
-
 
 * DIRED
 
@@ -410,7 +401,6 @@ Embark makes it easy to choose a command to run based on what is near point, bot
   (setq org-return-follows-link  t)
 #+end_src
 
-
 * ESHELL
 
 #+begin_src emacs-lisp
@@ -447,13 +437,22 @@ Embark makes it easy to choose a command to run based on what is near point, bot
 #+begin_src emacs-lisp
 (defun efs/set-font-faces ()
   (message "Setting faces!")
-  (set-face-attribute 'default nil :font "JetBrains Mono" :height 135)
+  (set-face-attribute 'default nil
+		      :font "JetBrainsMono Nerd Font"
+		      :height 135
+		      :weight 'medium)
 
   ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 135)
+  (set-face-attribute 'fixed-pitch nil
+		      :font "JetBrainsMono Nerd Font"
+		      :height 135
+		      :weight 'medium)
 
   ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Ubuntu" :height 135 :weight 'regular))
+  (set-face-attribute 'variable-pitch nil
+		      :font "Ubuntu Nerd Font"
+		      :height 135
+		      :weight 'medium))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
@@ -461,7 +460,16 @@ Embark makes it easy to choose a command to run based on what is near point, bot
                 (setq doom-modeline-icon t)
                 (with-selected-frame frame
                   (efs/set-font-faces))))
-  (efs/set-font-faces))
+  (efs/set-font-faces));; Makes commented text and keywords italics.
+;; This is working in emacsclient but not emacs.
+;; Your font must have an italic face available.
+(set-face-attribute 'font-lock-comment-face nil
+  :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+  :slant 'italic)
+
+;; Uncomment the following line if line spacing needs adjusting.
+(setq-default line-spacing 0.12)
 #+end_src
 
 * FLYCHECK
@@ -563,7 +571,6 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
   (add-hook mode (lambda () (display-line-numbers-mode t))))
 #+end_src
 
-
 * MAGIT
 
 [[https://magit.vc/manual/][Magit]] is a full-featured git client for Emacs.
@@ -625,7 +632,6 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
    '((file (styles basic partial-completion)))))
 #+end_src
 
-
 * ORG
 
 #+begin_src emacs-lisp
@@ -674,6 +680,78 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 #+end_src
 
+* ORG FANCY PRIORITIES
+
+#+begin_src emacs-lisp
+(use-package org-fancy-priorities
+  :straight t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '((?A . "❗")
+                                  (?B . "⬆")
+                                  (?C . "⬇")
+                                  (?D . "☕")
+                                  (?1 . "⚡")
+                                  (?2 . "⮬")
+                                  (?3 . "⮮")
+                                  (?4 . "☕")
+                                  (?I . "Important"))))
+#+end_src
+
+#+RESULTS:
+
+* ORG SUPERSTAR
+
+#+begin_src emacs-lisp
+(straight-use-package 'org-superstar)
+(require 'org-superstar)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+#+end_src
+
+#+begin_src emacs-lisp
+;; This is usually the default, but keep in mind it must be nil
+(setq org-hide-leading-stars nil)
+;; This line is necessary.
+(setq org-superstar-leading-bullet ?\s)
+;; If you use Org Indent you also need to add this, otherwise the
+;; above has no effect while Indent is enabled.
+(setq org-indent-mode-turns-on-hiding-stars nil)
+#+end_src
+
+#+begin_src emacs-lisp
+(defun my-auto-lightweight-mode ()
+  "Start Org Superstar differently depending on the number of lists items."
+  (let ((list-items
+         (count-matches "^[ \t]*?\\([+-]\\|[ \t]\\*\\)"
+                        (point-min) (point-max))))
+    (unless (< list-items 100)
+      (org-superstar-toggle-lightweight-lists)))
+  (org-superstar-mode))
+
+(add-hook 'org-mode-hook #'my-auto-lightweight-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+(setq inhibit-compacting-font-caches t)
+#+end_src
+
+#+begin_src emacs-lisp
+(require 'org-inlinetask)
+(setq org-inlinetask-show-first-star t)
+;; Less gray please.
+(set-face-attribute 'org-inlinetask nil
+                    :foreground nil
+		      :inherit 'bold)
+(with-eval-after-load 'org-superstar
+  (set-face-attribute 'org-superstar-first nil
+                     :foreground "#9000e1"))
+;; Stop cycling bullets to emphasize hierarchy of headlines.
+(setq org-superstar-cycle-headline-bullets nil)
+;; A simple period works fine, too.
+(setq org-superstar-leading-fallback ?.)
+#+end_src
+
 * ORG TEMPO
 
 #+begin_src emacs-lisp
@@ -684,36 +762,31 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 #+end_src
 
-* ORG BULLETS
-
-#+begin_src emacs-lisp
-;; (straight-use-package 'org-bullets)
-;; (require 'org-bullets)
-;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-#+end_src
-
-* ORG MODERN
-
-#+begin_src emacs-lisp
-(use-package org-modern
-  :after org
-  :straight t
-  :init
-  (global-org-modern-mode))
-  #+end_src
-  
-
-#+RESULTS:
-
 * THEME
 
+
 #+begin_src emacs-lisp
-(straight-use-package 'catppuccin-theme)
-(load-theme 'catppuccin :no-confirm)
-(catppuccin-set-color 'base "#1E1E2E") ;; change base to #000000 for the currently active flavor
-(catppuccin-set-color 'crust "#11111B" 'mocha) ;; change crust to #222222 for frappe
-(catppuccin-reload)
+(use-package doom-themes
+  :straight t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-dracula t)
+  
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 #+end_src
+
+#+RESULTS:
+: t
 
 * TODO Indent Lines
 * TODO Format-on-save
@@ -816,7 +889,6 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
 (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
 (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 #+end_src
-
 
 * Runtime Performance
 
