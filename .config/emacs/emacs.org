@@ -85,11 +85,25 @@
   :straight t
   :if (display-graphic-p))
 
-(use-package all-the-icons-dired
-  :straight t
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 #+end_src
 
+
+* AUTO-TANGLE ORG
+
+#+begin_src emacs-lisp
+;; Automatically tangle our Emacs.org config file when we save it
+(defun efs/org-babel-tangle-config ()
+  (when (string-equal (file-name-directory (buffer-file-name))
+                      (expand-file-name user-emacs-directory))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+#+end_src
+
+#+RESULTS:
+| org-tempo-setup | (lambda nil (add-hook 'after-save-hook #'efs/org-babel-tangle-config)) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | hl-todo-mode | (lambda nil (display-line-numbers-mode 0)) | (lambda nil (set (make-local-variable 'electric-pair-inhibit-predicate) (list 'lambda '(c) (list 'if '(char-equal c 60) t (cons electric-pair-inhibit-predicate '(c)))))) |
 
 * BETTER DEFAULTS
 
@@ -99,22 +113,15 @@
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
+(set-fringe-mode 15)        ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
 
-;; Set up the visible bell
-(setq visible-bell t)
+(setq fast-but-imprecise-scrolling 1)
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
-
-;; Set frame transparency
-(defvar efs/frame-transparency '(96 . 96))
-(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (add-hook 'org-mode-hook (lambda ()
            (setq-local electric-pair-inhibit-predicate
@@ -132,6 +139,8 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
+
+#+RESULTS:
 
 * CAPE
 
@@ -194,6 +203,17 @@ Consult provides search and navigation commands based on the Emacs completion fu
   (global-corfu-mode))
 #+end_src
 
+* COMMENTING
+
+#+begin_src emacs-lisp
+(straight-use-package 'evil-commentary)
+(require 'evil-commentary)
+(evil-commentary-mode)
+#+end_src
+
+#+RESULTS:
+: t
+
 * DABBREV
 
 #+begin_src emacs-lisp
@@ -233,6 +253,9 @@ Consult provides search and navigation commands based on the Emacs completion fu
 #+end_src
 
 
+
+
+
 * DIRED
 
 #+begin_src emacs-lisp
@@ -255,23 +278,32 @@ Consult provides search and navigation commands based on the Emacs completion fu
     (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file)
     (evil-define-key 'normal peep-dired-mode-map (kbd "k") 'peep-dired-prev-file))
 
- (use-package dired-sidebar
-  :straight t
-  :commands (dired-sidebar-toggle-sidebar)
-  :init
-  (add-hook 'dired-sidebar-mode-hook
-            (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
-  :config
-  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
-  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
-
-  (setq dired-sidebar-subtree-line-prefix " ")
-  (setq dired-sidebar-theme 'all-the-icons)
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t))
 #+end_src
+
+* DIRVISH
+
+#+begin_src emacs-lisp
+(use-package dirvish
+  :straight t
+  :init
+  (dirvish-override-dired-mode)
+  :custom
+  (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
+   '(("h" "~/"                          "Home")
+     ("d" "~/Downloads/"                "Downloads")
+     ("m" "/mnt/"                       "Drives")
+     ("t" "~/.local/share/Trash/files/" "TrashCan")))
+  :config
+  ;; (dirvish-peek-mode) ; Preview files in minibuffer
+  ;; (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
+  (setq dirvish-mode-line-format
+        '(:left (sort symlink) :right (omit yank index)))
+  (setq dirvish-attributes
+        '(all-the-icons file-time file-size collapse subtree-state vc-state git-msg))
+  (setq delete-by-moving-to-trash t)
+  (setq dired-listing-switches
+        "-l --almost-all --human-readable --group-directories-first --no-group"))
+   #+end_src
 
 * DRAG-STUFF
 [[https://github.com/rejeep/drag-stuff.el][Drag Stuff]] is a minor mode for Emacs that makes it possible to drag stuff (words, region, lines) around in Emacs.  When 'drag-stuff-define-keys' is enabled, then the following keybindings are set: M-up, M-down, M-left, and M-right.
@@ -642,16 +674,6 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 #+end_src
 
-* ORG MODERN
-
-#+begin_src emacs-lisp
-(use-package org-modern
-  :after org
-  :straight t
-  :init
-  (global-org-modern-mode))
-#+end_src
-
 * ORG TEMPO
 
 #+begin_src emacs-lisp
@@ -662,27 +684,26 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 #+end_src
 
-
-* RANGER
+* ORG BULLETS
 
 #+begin_src emacs-lisp
-(use-package ranger
-  :straight t
-  :after dired
-  :init
-  (ranger-override-dired-mode t)
-  :config
-  (setq ranger-cleanup-eagerly t
-        ranger-show-hidden t
-        ranger-modify-header t
-        ranger-footer-delay 0.2
-        ranger-preview-delay 0.040
-        ranger-parent-depth 2
-        ranger-width-parents 0.12
-        ranger-max-parent-width 0.12
-        ranger-preview-file t
-        ranger-max-preview-size 300))
+;; (straight-use-package 'org-bullets)
+;; (require 'org-bullets)
+;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+end_src
+
+* ORG MODERN
+
+#+begin_src emacs-lisp
+(use-package org-modern
+  :after org
+  :straight t
+  :init
+  (global-org-modern-mode))
+  #+end_src
+  
+
+#+RESULTS:
 
 * THEME
 
@@ -803,3 +824,11 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 #+end_src
+
+
+
+
+
+
+
+

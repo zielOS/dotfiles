@@ -14,6 +14,7 @@ btrfs su cr /mnt/@ &&
   btrfs su cr /mnt/@var@log &&
   btrfs su cr /mnt/@var@log@audit &&
   btrfs su cr /mnt/@var@tmp &&
+  btrfs su cr /mnt/@var@spool &&
   btrfs su cr /mnt/@snapshots &&
   umount /mnt
 
@@ -21,27 +22,29 @@ mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@ /dev/mapp
   mkdir /mnt/home &&
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home &&
   mkdir /mnt/opt &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/opt &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/opt &&
   mkdir /mnt/root &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@root /dev/mapper/cryptroot /mnt/root &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@root /dev/mapper/cryptroot /mnt/root &&
   mkdir /mnt/srv &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@srv /dev/mapper/cryptroot /mnt/srv &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@srv /dev/mapper/cryptroot /mnt/srv &&
   mkdir -p /mnt/usr/local &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@usr@local /dev/mapper/cryptroot /mnt/usr/local &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@usr@local /dev/mapper/cryptroot /mnt/usr/local &&
   mkdir /mnt/var &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/var &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/var &&
   mkdir /mnt/var/cache &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@cache /dev/mapper/cryptroot /mnt/var/cache &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@cache /dev/mapper/cryptroot /mnt/var/cache &&
   mkdir /mnt/var/crash &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@crash /dev/mapper/cryptroot /mnt/var/crash &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@crash /dev/mapper/cryptroot /mnt/var/crash &&
   mkdir /mnt/var/log &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log /dev/mapper/cryptroot /mnt/var/log &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@log /dev/mapper/cryptroot /mnt/var/log &&
   mkdir /mnt/var/log/audit &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/cryptroot /mnt/var/log/audit &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/cryptroot /mnt/var/log/audit &&
   mkdir /mnt/var/tmp &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/cryptroot /mnt/var/tmp &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/cryptroot /mnt/var/tmp &&
+  mkdir /mnt/var/spool &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@spool /dev/mapper/cryptroot /mnt/var/spool &&
   mkdir /mnt/.snapshots &&
-  mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots &&
   mkdir /mnt/boot &&
   mount /dev/nvme0n1p1 /mnt/boot
 
@@ -51,15 +54,16 @@ genfstab -U /mnt >>/mnt/etc/fstab
 
 arch-chroot /mnt
 
-reflector --verbose --country 'BD' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --country 'BD,IN' -l 25 --sort rate --save /etc/pacman.d/mirrorlist
 
 ln -sf /usr/share/zoneinfo/Asia/Dhaka /etc/localtime && hwclock --systohc && nvim /etc/locale.gen && locale-gen && echo "LANG=en_US.UTF-8" >>/etc/locale.conf
 
 passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
 
-pacman -S unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs python-pynvim mesa rng-tools haveged upower greetd nwg-hello lazygit lynis firejail audit sysstat apparmor networkmanager acpid fzf flatpak fdupes ranger steam swayidle wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm rustup transmission-gtk cmake boost polkit-gnome tldr emacs-wayland snapper snap-pac
+pacman -S unzip zip unrar btrfs-progs chrony dosfstools thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler zathura zathura-pdf-poppler papirus-icon-theme wget curl ripgrep fd python-pip zsh zsh-completions neofetch xdg-user-dirs xdg-user-dirs-gtk python-pynvim mesa rng-tools haveged upower greetd nwg-hello lazygit lynis firejail audit sysstat networkmanager acpid fzf flatpak fdupes ranger steam wl-clipboard kitty grim slurp wf-recorder vulkan-tools vulkan-headers vulkan-validation-layers nodejs npm deluge cmake boost mate-polkit tldr emacs-wayland
 
 nvim /etc/dracut.conf
+hostonly="yes"
 compress="zstd"
 add_dracutmodules+=" crypt dm rootfs-block "
 omit_dracutmodules+=" network cifs nfs nbd brltty "
