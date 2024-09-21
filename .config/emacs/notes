@@ -2,6 +2,7 @@ set keybindings for dirvish
 set keybindings for denote, consult-denote, denote-explorer
 keep embark-consult use-package inside embark
 You will need to install GraphViz and/or the R language to visualise Denote graphs in arch linux
+add keybindings for denote-menu for the commands from the readme
 
 ## dentor-explore bindings, add to general keybindings
   (;; Statistics
