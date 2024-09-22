@@ -50,7 +50,6 @@
 (require 'vc-use-package)
 #+end_src
 
-
 ** Automatic Package Updates
 
 #+begin_src emacs-lisp
@@ -940,7 +939,6 @@ installed."
 
 (with-eval-after-load 'eglot
   (setq completion-category-defaults nil))
-
 #+end_src
 
 * INDENT
