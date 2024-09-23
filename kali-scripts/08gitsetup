@@ -1,0 +1,6 @@
+#!/bin/sh
+# git setup 
+sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+git config --global user.name "zielOS"
+git config --global user.email "ahsanur041@gmail.com"

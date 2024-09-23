@@ -28,19 +28,3 @@ ln -s $HOME/.dots/.config/zsh $HOME/.config/
 ln -s $HOME/.dots/.config/chromium-flags.conf $HOME/.config/
 ln -s $HOME/.dots/.local/bin/hypr $HOME/.local/bin/
 
-cd && rm -rf ~/.zshrc
-ln -s $HOME/.dots/.zshrc $HOME/
-#chsh -s $(which zsh)
-
-# git setup 
-sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
-git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
-git config --global user.name "zielOS"
-git config --global user.email "ahsanur041@gmail.com"
-
-echo "neovim setup"
-cd && git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-
-echo "restore rustup"
-rustup default stable

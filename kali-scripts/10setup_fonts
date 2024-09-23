@@ -1,3 +1,4 @@
+#!bin/sh
 echo "@fonts"
 sudo mkdir -p /usr/local/share/fonts/nerd
 sudo cp $HOME/.dots/.fonts/* /usr/local/share/fonts/nerd/
