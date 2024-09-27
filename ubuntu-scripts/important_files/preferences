@@ -1,0 +1,12 @@
+Package: * 
+Pin: release a=noble-updates
+Pin-Priority: 1000
+
+Package: linux-generic nvidia-dkms-560-open
+Pin: release a=oracular
+Pin-Priority: 100
+
+Package: *
+Pin: release a=kali-rolling
+Pin-Priority: 10
+

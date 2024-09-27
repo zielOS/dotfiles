@@ -22,5 +22,5 @@ bash $HOME/.dots/kali-scripts/source_builds/Ignis && cd
 #bash $HOME/.dots/kali-scripts/source_builds/Swaylock-effects && cd
 bash $HOME/.dots/kali-scripts/source_builds/Materialyoucolor && cd
 #bash $HOME/.dots/kali-scripts/source_builds/Regreet && cd
-#bash $HOME/.dots/kali-scripts/source_builds/Emacs && cd
-#bash $HOME/.dots/kali-scripts/source_builds/Eww  && cd
+bash $HOME/.dots/kali-scripts/source_builds/Emacs && cd
+bash $HOME/.dots/kali-scripts/source_builds/Neovim  && cd

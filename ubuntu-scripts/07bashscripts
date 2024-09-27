@@ -1,0 +1,26 @@
+#!/bin/bash
+echo "Installing From Source"
+sudo apt build-dep hyprland xdg-desktop-portal-hyprland
+sudo apt install scdoc libtool-bin libpugixml-dev libzip-dev librsvg2-dev libmagic-dev libsdbus-c++-dev libpam-dev libxcursor-dev
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprutils && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprlang && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprcursor && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprwayland-scanner && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprpaper && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprpicker && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hypridle && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprlock && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprshot && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Aquamarine && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Wayland-protocols && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Xdg-desktop-portal-hyprland && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprland && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprland-contrib && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Lazygit && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-drawer && cd
+#bash $HOME/.dots/ubuntu-scripts/source_builds/Ignis && cd
+#bash $HOME/.dots/ubuntu-scripts/source_builds/Swaylock-effects && cd
+#bash $HOME/.dots/ubuntu-scripts/source_builds/Materialyoucolor && cd
+#bash $HOME/.dots/ubuntu-scripts/source_builds/Regreet && cd
+#bash $HOME/.dots/ubuntu-scripts/source_builds/Emacs && cd
+#bash $HOME/.dots/ubuntu-scripts/source_builds/Neovim  && cd

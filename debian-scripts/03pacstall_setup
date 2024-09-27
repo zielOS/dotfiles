@@ -1,0 +1,5 @@
+#!/bin/sh
+# Installs pacstall & pkgs"
+sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
+sudo apt install python3-pynvim ripgrep tree-sitter-cli fd-find
+pacstall -I neovim

@@ -1,0 +1,7 @@
+#!/bin/bash
+# install cargo pkgs
+cargo install --git https://github.com/donovanglover/hyprnome
+cargo install bottom
+cargo install starship
+sudo ln -sv $HOME/.cargo/bin/* /usr/local/bin/
+

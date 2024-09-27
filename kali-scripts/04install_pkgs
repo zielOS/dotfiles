@@ -9,16 +9,16 @@ sudo apt install --no-install-recommends cmake-extras libcairo2-dev libzip-dev l
 
 # node & npm setup
 cd 
-curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-sudo apt update && sudo apt-get install nodejs
+sudo apt update 
+sudo apt-get install nodejs npm
 mkdir ~/.npm-global 
 npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH
 
 # install cargo pkgs
-cargo install --git https://github.com/donovanglover/hyprnome
-cargo install bottom
-cargo install starship
+#cargo install --git https://github.com/donovanglover/hyprnome
+#cargo install bottom
+#cargo install starship
+#sudo ln -sv ~/.cargo/bin/* ~/usr/local/bin/
 
 echo "Installing spotify"
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg && \

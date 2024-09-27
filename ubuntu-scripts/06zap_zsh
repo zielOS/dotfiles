@@ -1,0 +1,6 @@
+#!/bin/sh
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) 
+curl -fsSL https://fnm.vercel.app/install | bash
+cd && rm -rf ~/.zshrc
+ln -s $HOME/.dots/.zshrc $HOME/
+chsh -s $(which zsh)

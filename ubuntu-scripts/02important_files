@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "Copying Important Files"
+sudo cp -R $HOME/.dots/ubuntu-scripts/important_files/ubuntu.sources /etc/apt/sources.list.d
+sudo cp -R $HOME/.dots/ubuntu-scripts/important_files/01norecommend /etc/apt/apt.conf.d/
+sudo cp -R $HOME/.dots/ubuntu-scripts/important_files/variables.sh /etc/profile.d/
+sudo cp -R $HOME/.dots/ubuntu-scripts/important_files/preferences /etc/apt/
+sudo cp -R $HOME/.dots/ubuntu-scripts/important_files/dracut.conf /etc/

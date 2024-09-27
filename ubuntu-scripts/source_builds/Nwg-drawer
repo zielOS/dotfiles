@@ -1,0 +1,7 @@
+#!/bin/bash
+cd && git clone https://github.com/nwg-piotr/nwg-drawer.git
+cd nwg-drawer
+make get
+make build 
+sudo make install
+cd && sudo rm -R nwg-drawer

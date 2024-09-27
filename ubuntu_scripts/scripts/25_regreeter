@@ -1,3 +1,0 @@
-#!/bin/bash
-cd && git clone https://github.com/rharish101/ReGreet.git && cd ReGreet
-cargo build --all-features --release && cd && sudo rm -rf ReGreet
