@@ -1,11 +1,12 @@
-import options from "options";
-import { module } from "../module"
+import options from 'options';
+import { module } from '../module';
 
-import { inputHandler } from "customModules/utils";
-import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
-import Button from "types/widgets/button";
-import { Variable as VariableType } from "types/variable";
-import { pollVariableBash } from "customModules/PollVar";
+import { inputHandler } from 'customModules/utils';
+import Button from 'types/widgets/button';
+import { Variable as VariableType } from 'types/variable';
+import { pollVariableBash } from 'customModules/PollVar';
+import { Attribute, Child } from 'lib/types/widget';
+import { BarBoxChild } from 'lib/types/bar';
 
 const {
     updateCommand,
@@ -20,12 +21,12 @@ const {
     scrollDown,
 } = options.bar.customModules.updates;
 
-const pendingUpdates: VariableType<string> = Variable(" 0");
+const pendingUpdates: VariableType<string> = Variable(' 0');
 
-const processUpdateCount = (updateCount: string) => {
+const processUpdateCount = (updateCount: string): string => {
     if (!padZero.value) return updateCount;
     return `${updateCount.padStart(2, '0')}`;
-}
+};
 
 pollVariableBash(
     pendingUpdates,
@@ -35,15 +36,15 @@ pollVariableBash(
     processUpdateCount,
 );
 
-export const Updates = () => {
+export const Updates = (): BarBoxChild => {
     const updatesModule = module({
-        textIcon: icon.bind("value"),
-        tooltipText: pendingUpdates.bind("value").as(v => `${v} updates available`),
-        boxClass: "updates",
-        label: pendingUpdates.bind("value"),
-        showLabelBinding: label.bind("value"),
+        textIcon: icon.bind('value'),
+        tooltipText: pendingUpdates.bind('value').as((v) => `${v} updates available`),
+        boxClass: 'updates',
+        label: pendingUpdates.bind('value'),
+        showLabelBinding: label.bind('value'),
         props: {
-            setup: (self: Button<Gtk.Widget, Gtk.Widget>) => {
+            setup: (self: Button<Child, Attribute>) => {
                 inputHandler(self, {
                     onPrimaryClick: {
                         cmd: leftClick,
@@ -66,7 +67,4 @@ export const Updates = () => {
     });
 
     return updatesModule;
-}
-
-
-
+};

@@ -6,8 +6,9 @@
 # services
 #nm-applet &
 thunar --daemon &
-#emacs --daemon &
-ags &
+emacs --daemon &
+GDK_DPI_SCALE=1.2 ags &
+pypr &
 
 # theme
 hyprtheme &

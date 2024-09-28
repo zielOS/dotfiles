@@ -10,6 +10,9 @@ sudo dnf copr enable atim/starship
 sudo dnf copr enable solopasha/hyprland
 sudo dnf copr enable mecattaf/wl-gammarelay-rs
 sudo dnf copr enable lukenukem/asus-linux
+sudo dnf copr enable heus-sueh/packages
+sudo dnf config-manager --save --setopt=copr:copr.fedorainfracloud.org:heus-sueh:packages.priority=200
+
 
 echo "@DNF5$"
 sleep 5
@@ -260,6 +263,8 @@ sudo dnf5 install \
   xorg-x11-server-Xwayland-devel \
   wf-recorder
 
+sudo dnf install pipewire libgtop2 bluez bluez-tools grimblast hyprpicker btop NetworkManager  wl-clipboard swww brightnessctl gnome-bluetooth aylurs-gtk-shell power-profiles-daemon gvfs matugen
+
 echo "@ASUS"
 sleep 5
 sudo dnf5 update
@@ -336,7 +341,14 @@ cd && mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
 ln -s $HOME/.dots/.config/nvim $HOME/.config/
 
-npm install -g sass bun
+npm install -g sass 
+
+curl -fsSL https://bun.sh/install | bash && \
+  sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
+
+flatpak install flathub --system com.dec05eba.gpu_screen_recorder
+
+pipx install gpustat pywal
 
 echo "@ZSH"
 sleep 5

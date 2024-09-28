@@ -1,9 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/ahsan/.dots
-    - /home/ahsan/.config/doom
 startuppopupversion: 5
-lastversion: 0.44.0
+lastversion: 0.44.1
 customcommandshistory:
     - q
 hidecommandlog: false

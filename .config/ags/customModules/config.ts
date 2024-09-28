@@ -2,8 +2,10 @@ import { Option } from 'widget/settings/shared/Option';
 import { Header } from 'widget/settings/shared/Header';
 
 import options from 'options';
+import Scrollable from 'types/widgets/scrollable';
+import { Attribute, GtkWidget } from 'lib/types/widget';
 
-export const CustomModuleSettings = () =>
+export const CustomModuleSettings = (): Scrollable<GtkWidget, Attribute> =>
     Widget.Scrollable({
         vscroll: 'automatic',
         hscroll: 'automatic',
@@ -12,11 +14,11 @@ export const CustomModuleSettings = () =>
             class_name: 'menu-theme-page paged-container',
             vertical: true,
             children: [
-                /* 
-                ************************************
-                *            GENERAL               *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *            GENERAL               *
+                 ************************************
+                 */
                 Header('General'),
                 Option({
                     opt: options.bar.customModules.scrollSpeed,
@@ -24,12 +26,17 @@ export const CustomModuleSettings = () =>
                     type: 'number',
                 }),
 
-                /* 
-                ************************************
-                *              RAM                 *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *              RAM                 *
+                 ************************************
+                 */
                 Header('RAM'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.ram.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.bar.customModules.ram.label,
                     title: 'Show Label',
@@ -75,12 +82,17 @@ export const CustomModuleSettings = () =>
                     type: 'string',
                 }),
 
-                /* 
-                ************************************
-                *             CPU                  *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *             CPU                  *
+                 ************************************
+                 */
                 Header('CPU'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.cpu.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.bar.customModules.cpu.label,
                     title: 'Show Label',
@@ -130,12 +142,17 @@ export const CustomModuleSettings = () =>
                     type: 'string',
                 }),
 
-                /* 
-                ************************************
-                *           STORAGE                *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *           STORAGE                *
+                 ************************************
+                 */
                 Header('Storage'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.storage.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.bar.customModules.storage.icon,
                     title: 'Storage Icon',
@@ -187,12 +204,17 @@ export const CustomModuleSettings = () =>
                     type: 'string',
                 }),
 
-                /* 
-                ************************************
-                *           NETSTAT                *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *           NETSTAT                *
+                 ************************************
+                 */
                 Header('Netstat'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.netstat.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.bar.customModules.netstat.networkInterface,
                     title: 'Network Interface',
@@ -204,17 +226,7 @@ export const CustomModuleSettings = () =>
                     opt: options.bar.customModules.netstat.icon,
                     title: 'Netstat Icon',
                     type: 'enum',
-                    enums: [
-                        '󰖟',
-                        '󰇚',
-                        '󰕒',
-                        '󰛳',
-                        '',
-                        '󰣺',
-                        '󰖩',
-                        '',
-                        '󰈀',
-                    ],
+                    enums: ['󰖟', '󰇚', '󰕒', '󰛳', '', '󰣺', '󰖩', '', '󰈀'],
                 }),
                 Option({
                     opt: options.bar.customModules.netstat.label,
@@ -267,12 +279,17 @@ export const CustomModuleSettings = () =>
                     type: 'string',
                 }),
 
-                /* 
-                ************************************
-                *       KEYBOARD LAYOUT            *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *       KEYBOARD LAYOUT            *
+                 ************************************
+                 */
                 Header('Keyboard Layout'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.kbLayout.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.bar.customModules.kbLayout.icon,
                     title: 'kbLayout Icon',
@@ -321,12 +338,17 @@ export const CustomModuleSettings = () =>
                     type: 'string',
                 }),
 
-                /* 
-                ************************************
-                *            UPDATES               *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *            UPDATES               *
+                 ************************************
+                 */
                 Header('Updates'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.updates.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.bar.customModules.updates.updateCommand,
                     title: 'Check Updates Command',
@@ -336,17 +358,7 @@ export const CustomModuleSettings = () =>
                     opt: options.bar.customModules.updates.icon,
                     title: 'Updates Icon',
                     type: 'enum',
-                    enums: [
-                        '󰚰',
-                        '󰇚',
-                        '',
-                        '󱑢',
-                        '󱑣',
-                        '󰏖',
-                        '',
-                        '󰏔',
-                        '󰏗',
-                    ],
+                    enums: ['󰚰', '󰇚', '', '󱑢', '󱑣', '󰏖', '', '󰏔', '󰏗'],
                 }),
                 Option({
                     opt: options.bar.customModules.updates.label,
@@ -367,7 +379,7 @@ export const CustomModuleSettings = () =>
                     opt: options.bar.customModules.updates.pollingInterval,
                     title: 'Polling Interval',
                     type: 'number',
-                    subtitle: "WARNING: Be careful of your package manager\'s rate limit.",
+                    subtitle: "WARNING: Be careful of your package manager's rate limit.",
                     min: 100,
                     max: 60 * 24 * 1000,
                     increment: 1000,
@@ -398,12 +410,84 @@ export const CustomModuleSettings = () =>
                     type: 'string',
                 }),
 
-                /* 
-                ************************************
-                *            WEATHER               *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *            SUBMAP                *
+                 ************************************
+                 */
+                Header('Submap'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.submap.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.enabledIcon,
+                    title: 'Enabled Icon',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.disabledIcon,
+                    title: 'Disabled Icon',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.enabledText,
+                    title: 'Enabled Text',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.disabledText,
+                    title: 'Disabled Text',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.label,
+                    title: 'Show Label',
+                    type: 'boolean',
+                }),
+                Option({
+                    opt: options.theme.bar.buttons.modules.submap.spacing,
+                    title: 'Spacing',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.leftClick,
+                    title: 'Left Click',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.rightClick,
+                    title: 'Right Click',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.middleClick,
+                    title: 'Middle Click',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.scrollUp,
+                    title: 'Scroll Up',
+                    type: 'string',
+                }),
+                Option({
+                    opt: options.bar.customModules.submap.scrollDown,
+                    title: 'Scroll Down',
+                    type: 'string',
+                }),
+
+                /*
+                 ************************************
+                 *            WEATHER               *
+                 ************************************
+                 */
                 Header('Weather'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.weather.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.bar.customModules.weather.label,
                     title: 'Show Label',
@@ -446,12 +530,17 @@ export const CustomModuleSettings = () =>
                     type: 'string',
                 }),
 
-                /* 
-                ************************************
-                *            POWER                 *
-                ************************************
-                */
+                /*
+                 ************************************
+                 *            POWER                 *
+                 ************************************
+                 */
                 Header('Power'),
+                Option({
+                    opt: options.theme.bar.buttons.modules.power.enableBorder,
+                    title: 'Button Border',
+                    type: 'boolean',
+                }),
                 Option({
                     opt: options.theme.bar.buttons.modules.power.spacing,
                     title: 'Spacing',
@@ -491,4 +580,3 @@ export const CustomModuleSettings = () =>
             ],
         }),
     });
-

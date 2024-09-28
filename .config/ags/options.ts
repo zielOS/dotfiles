@@ -1,91 +1,109 @@
-import { opt, mkOptions } from "lib/option"
-import { NetstatIcon, NetstatLabelType, PowerIcon, RateUnit, ResourceLabelType, StorageIcon, UpdatesIcon } from "lib/types/bar";
-import { KbIcon, KbLabelType } from "lib/types/customModules/kbLayout";
-import { BarButtonStyles, NotificationAnchor, OSDAnchor, OSDOrientation } from "lib/types/options";
-import { MatugenScheme, MatugenTheme, MatugenVariation } from "lib/types/options";
-import { UnitType } from "lib/types/weather";
+import { opt, mkOptions } from 'lib/option';
+import {
+    NetstatIcon,
+    NetstatLabelType,
+    PowerIcon,
+    RateUnit,
+    ResourceLabelType,
+    StorageIcon,
+    UpdatesIcon,
+} from 'lib/types/bar';
+import { KbIcon, KbLabelType } from 'lib/types/customModules/kbLayout';
+import {
+    ActiveWsIndicator,
+    BarButtonStyles,
+    BarLocation,
+    NotificationAnchor,
+    OSDAnchor,
+    OSDOrientation,
+    ScalingPriority,
+    WindowLayer,
+} from 'lib/types/options';
+import { MatugenScheme, MatugenTheme, MatugenVariations } from 'lib/types/options';
+import { UnitType } from 'lib/types/weather';
+import { WorkspaceIcons, WorkspaceIconsColored } from 'lib/types/workspace';
 
 // WARN: CHANGING THESE VALUES WILL PREVENT MATUGEN COLOR GENERATION FOR THE CHANGED VALUE
 export const colors = {
-    rosewater: "#f5e0dc",
-    flamingo: "#f2cdcd",
-    pink: "#f5c2e7",
-    mauve: "#cba6f7",
-    red: "#f38ba8",
-    maroon: "#eba0ac",
-    peach: "#fab387",
-    yellow: "#f9e2af",
-    green: "#a6e3a1",
-    teal: "#94e2d5",
-    sky: "#89dceb",
-    sapphire: "#74c7ec",
-    blue: "#89b4fa",
-    lavender: "#b4befe",
-    text: "#cdd6f4",
-    subtext1: "#bac2de",
-    subtext2: "#a6adc8",
-    overlay2: "#9399b2",
-    overlay1: "#7f849c",
-    overlay0: "#6c7086",
-    surface2: "#585b70",
-    surface1: "#45475a",
-    surface0: "#313244",
-    base2: "#242438",
-    base: "#1e1e2e",
-    mantle: "#181825",
-    crust: "#11111b"
+    rosewater: '#f5e0dc',
+    flamingo: '#f2cdcd',
+    pink: '#f5c2e7',
+    mauve: '#cba6f7',
+    red: '#f38ba8',
+    maroon: '#eba0ac',
+    peach: '#fab387',
+    yellow: '#f9e2af',
+    green: '#a6e3a1',
+    teal: '#94e2d5',
+    sky: '#89dceb',
+    sapphire: '#74c7ec',
+    blue: '#89b4fa',
+    lavender: '#b4befe',
+    text: '#cdd6f4',
+    subtext1: '#bac2de',
+    subtext2: '#a6adc8',
+    overlay2: '#9399b2',
+    overlay1: '#7f849c',
+    overlay0: '#6c7086',
+    surface2: '#585b70',
+    surface1: '#45475a',
+    surface0: '#313244',
+    base2: '#242438',
+    base: '#1e1e2e',
+    mantle: '#181825',
+    crust: '#11111b',
 };
 
 // WARN: CHANGING THESE VALUES WILL PREVENT MATUGEN COLOR GENERATION FOR THE CHANGED VALUE
 const secondary_colors = {
-    text: "#cdd6f3",
-    pink: "#f5c2e6",
-    red: "#f38ba7",
-    peach: "#fab386",
-    mantle: "#181824",
-    surface1: "#454759",
-    surface0: "#313243",
-    overlay1: "#7f849b",
-    lavender: "#b4befd",
-    mauve: "#cba6f6",
-    green: "#a6e3a0",
-    sky: "#89dcea",
-    teal: "#94e2d4",
-    yellow: "#f9e2ad",
-    maroon: "#eba0ab",
-    crust: "#11111a",
-    surface2: "#585b69",
-}
+    text: '#cdd6f3',
+    pink: '#f5c2e6',
+    red: '#f38ba7',
+    peach: '#fab386',
+    mantle: '#181824',
+    surface1: '#454759',
+    surface0: '#313243',
+    overlay1: '#7f849b',
+    lavender: '#b4befd',
+    mauve: '#cba6f6',
+    green: '#a6e3a0',
+    sky: '#89dcea',
+    teal: '#94e2d4',
+    yellow: '#f9e2ad',
+    maroon: '#eba0ab',
+    crust: '#11111a',
+    surface2: '#585b69',
+};
 
 const tertiary_colors = {
-    pink: "#f5c2e8",
-    red: "#f38ba9",
-    mantle: "#181826",
-    surface0: "#313245",
-    overlay1: "#7f849d",
-    lavender: "#b4beff",
-    mauve: "#cba6f8",
-    green: "#a6e3a2",
-    sky: "#89dcec",
-    teal: "#94e2d6",
-    yellow: "#f9e2ae",
-    maroon: "#eba0ad",
-    crust: "#11111c",
-    surface2: "#585b71",
-}
+    pink: '#f5c2e8',
+    red: '#f38ba9',
+    mantle: '#181826',
+    surface0: '#313245',
+    overlay1: '#7f849d',
+    lavender: '#b4beff',
+    mauve: '#cba6f8',
+    green: '#a6e3a2',
+    sky: '#89dcec',
+    teal: '#94e2d6',
+    yellow: '#f9e2ae',
+    maroon: '#eba0ad',
+    crust: '#11111c',
+    surface2: '#585b71',
+};
 
 const options = mkOptions(OPTIONS, {
     theme: {
         matugen: opt(false),
         matugen_settings: {
-            mode: opt<MatugenTheme>("dark"),
-            scheme_type: opt<MatugenScheme>("tonal-spot"),
-            variation: opt<MatugenVariation>("standard_1"),
+            mode: opt<MatugenTheme>('dark'),
+            scheme_type: opt<MatugenScheme>('tonal-spot'),
+            variation: opt<MatugenVariations>('standard_1'),
             contrast: opt(0.0),
         },
         font: {
-            size: opt("1.2rem"),
-            name: opt("JetBrainsMono Nerd Font"),
+            size: opt('1.2rem'),
+            name: opt('JetBrainsMono Nerd Font'),
             weight: opt(600),
         },
         notification: {
@@ -98,19 +116,20 @@ const options = mkOptions(OPTIONS, {
             },
             label: opt(colors.lavender),
             border: opt(secondary_colors.surface0),
-            border_radius: opt("0.6em"),
+            border_radius: opt('0.6em'),
             time: opt(secondary_colors.overlay1),
             text: opt(colors.text),
             labelicon: opt(colors.lavender),
             close_button: {
                 background: opt(secondary_colors.red),
-                label: opt(colors.crust)
-            }
+                label: opt(colors.crust),
+            },
         },
         osd: {
             scaling: opt(100),
+            duration: opt(2500),
             enable: opt(true),
-            orientation: opt<OSDOrientation>("vertical"),
+            orientation: opt<OSDOrientation>('vertical'),
             opacity: opt(100),
             bar_container: opt(colors.crust),
             icon_container: opt(tertiary_colors.lavender),
@@ -121,32 +140,36 @@ const options = mkOptions(OPTIONS, {
             label: opt(tertiary_colors.lavender),
             monitor: opt(0),
             active_monitor: opt(true),
-            radius: opt("0.4em"),
-            margins: opt("0px 5px 0px 0px"),
-            location: opt<OSDAnchor>("right"),
+            radius: opt('0.4em'),
+            margins: opt('0px 5px 0px 0px'),
+            location: opt<OSDAnchor>('right'),
             muted_zero: opt(false),
         },
         bar: {
             scaling: opt(100),
             floating: opt(false),
-            layer: opt<"top" | "bottom" | "overlay" | "background">("top"),
-            margin_top: opt("0.5em"),
+            location: opt<BarLocation>('top'),
+            layer: opt<WindowLayer>('top'),
+            margin_top: opt('0em'),
             opacity: opt(100),
-            margin_bottom: opt("0em"),
-            margin_sides: opt("0.5em"),
-            border_radius: opt("0.4em"),
-            outer_spacing: opt("1.6em"),
-            label_spacing: opt("0.5em"),
+            margin_bottom: opt('0em'),
+            margin_sides: opt('0em'),
+            border_radius: opt('0.5em'),
+            outer_spacing: opt('0em'),
+            label_spacing: opt('0.5em'),
             transparent: opt(false),
+            dropdownGap: opt('2.9em'),
             background: opt(colors.crust),
             buttons: {
-                style: opt<BarButtonStyles>("default"),
+                style: opt<BarButtonStyles>('default'),
+                enableBorders: opt(false),
+                borderSize: opt('0.1em'),
                 monochrome: opt(false),
-                spacing: opt("0.25em"),
-                padding_x: opt("0.7rem"),
-                padding_y: opt("0.2rem"),
-                y_margins: opt("0.4em"),
-                radius: opt("0.3em"),
+                spacing: opt('0.25em'),
+                padding_x: opt('0.7rem'),
+                padding_y: opt('0.2rem'),
+                y_margins: opt('0.4em'),
+                radius: opt('0.3em'),
                 opacity: opt(100),
                 background_opacity: opt(100),
                 background_hover_opacity: opt(100),
@@ -157,147 +180,185 @@ const options = mkOptions(OPTIONS, {
                 icon: opt(colors.lavender),
                 dashboard: {
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
+                    enableBorder: opt(false),
+                    border: opt(colors.yellow),
                     icon: opt(colors.yellow),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 workspaces: {
                     background: opt(colors.base2),
-                    hover: opt(colors.pink),
+                    enableBorder: opt(false),
+                    border: opt(colors.pink),
                     available: opt(colors.sky),
                     occupied: opt(colors.flamingo),
                     active: opt(colors.pink),
-                    numbered_active_highlight_border: opt("0.2em"),
-                    numbered_active_highlight_padding: opt("0.2em"),
+                    hover: opt(colors.pink),
+                    numbered_active_highlight_border: opt('0.2em'),
+                    numbered_active_highlight_padding: opt('0.2em'),
                     numbered_active_highlighted_text_color: opt(colors.mantle),
                     numbered_active_underline_color: opt(colors.pink),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
+                    fontSize: opt('1.2em'),
                 },
                 windowtitle: {
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
+                    enableBorder: opt(false),
+                    border: opt(colors.pink),
                     text: opt(colors.pink),
                     icon: opt(colors.pink),
                     icon_background: opt(colors.base2),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 media: {
+                    enableBorder: opt(false),
+                    border: opt(colors.lavender),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
                     text: opt(colors.lavender),
                     icon: opt(colors.lavender),
                     icon_background: opt(colors.base2),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 volume: {
+                    enableBorder: opt(false),
+                    border: opt(colors.maroon),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
                     text: opt(colors.maroon),
                     icon: opt(colors.maroon),
                     icon_background: opt(colors.base2),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 network: {
+                    enableBorder: opt(false),
+                    border: opt(colors.mauve),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
                     text: opt(colors.mauve),
                     icon: opt(colors.mauve),
                     icon_background: opt(colors.base2),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 bluetooth: {
+                    enableBorder: opt(false),
+                    border: opt(colors.sky),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
                     text: opt(colors.sky),
                     icon: opt(colors.sky),
                     icon_background: opt(colors.base2),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 systray: {
+                    enableBorder: opt(false),
+                    border: opt(colors.lavender),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 battery: {
+                    enableBorder: opt(false),
+                    border: opt(colors.yellow),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
                     text: opt(colors.yellow),
                     icon: opt(colors.yellow),
                     icon_background: opt(colors.base2),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 clock: {
+                    enableBorder: opt(false),
+                    border: opt(colors.pink),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
                     text: opt(colors.pink),
                     icon: opt(colors.pink),
                     icon_background: opt(colors.base2),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 notifications: {
+                    enableBorder: opt(false),
+                    border: opt(colors.lavender),
                     background: opt(colors.base2),
-                    hover: opt(colors.surface1),
                     icon: opt(colors.lavender),
                     icon_background: opt(colors.base2),
                     total: opt(colors.lavender),
-                    spacing: opt("0.5em"),
+                    spacing: opt('0.5em'),
                 },
                 modules: {
                     ram: {
+                        enableBorder: opt(false),
+                        border: opt(colors.yellow),
                         background: opt(colors.base2),
                         text: opt(colors.yellow),
                         icon: opt(colors.yellow),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.45em"),
+                        spacing: opt('0.45em'),
                     },
                     cpu: {
+                        enableBorder: opt(false),
+                        border: opt(colors.red),
                         background: opt(colors.base2),
                         text: opt(colors.red),
                         icon: opt(colors.red),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.5em"),
+                        spacing: opt('0.5em'),
                     },
                     storage: {
+                        enableBorder: opt(false),
+                        border: opt(colors.pink),
                         background: opt(colors.base2),
                         text: opt(colors.pink),
                         icon: opt(colors.pink),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.45em"),
+                        spacing: opt('0.45em'),
                     },
                     netstat: {
+                        enableBorder: opt(false),
+                        border: opt(colors.green),
                         background: opt(colors.base2),
                         text: opt(colors.green),
                         icon: opt(colors.green),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.45em"),
+                        spacing: opt('0.45em'),
                     },
                     kbLayout: {
+                        enableBorder: opt(false),
+                        border: opt(colors.sky),
                         background: opt(colors.base2),
                         text: opt(colors.sky),
                         icon: opt(colors.sky),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.45em"),
+                        spacing: opt('0.45em'),
                     },
                     updates: {
+                        enableBorder: opt(false),
+                        border: opt(colors.mauve),
                         background: opt(colors.base2),
                         text: opt(colors.mauve),
                         icon: opt(colors.mauve),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.45em"),
+                        spacing: opt('0.45em'),
                     },
                     weather: {
+                        enableBorder: opt(false),
+                        border: opt(colors.lavender),
                         background: opt(colors.base2),
                         text: opt(colors.lavender),
                         icon: opt(colors.lavender),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.45em"),
+                        spacing: opt('0.45em'),
                     },
                     power: {
+                        enableBorder: opt(false),
+                        border: opt(colors.red),
                         background: opt(colors.base2),
                         icon: opt(colors.red),
                         icon_background: opt(colors.base2),
-                        spacing: opt("0.45em"),
-                    }
+                        spacing: opt('0.45em'),
+                    },
+                    submap: {
+                        enableBorder: opt(false),
+                        border: opt(colors.teal),
+                        background: opt(colors.base2),
+                        text: opt(colors.teal),
+                        icon: opt(colors.teal),
+                        icon_background: opt(colors.base2),
+                        spacing: opt('0.45em'),
+                    },
                 },
             },
             menus: {
@@ -305,11 +366,11 @@ const options = mkOptions(OPTIONS, {
                 background: opt(colors.crust),
                 opacity: opt(100),
                 cards: opt(colors.base),
-                card_radius: opt("0.4em"),
+                card_radius: opt('0.4em'),
                 border: {
-                    size: opt("0.13em"),
-                    radius: opt("0.7em"),
-                    color: opt(colors.surface0)
+                    size: opt('0.13em'),
+                    radius: opt('0.7em'),
+                    color: opt(colors.surface0),
                 },
                 text: opt(colors.text),
                 dimtext: opt(colors.surface2),
@@ -318,11 +379,11 @@ const options = mkOptions(OPTIONS, {
                 popover: {
                     text: opt(colors.lavender),
                     background: opt(secondary_colors.mantle),
-                    border: opt(secondary_colors.mantle)
+                    border: opt(secondary_colors.mantle),
                 },
                 listitems: {
                     passive: opt(colors.text),
-                    active: opt(secondary_colors.lavender)
+                    active: opt(secondary_colors.lavender),
                 },
                 icons: {
                     passive: opt(colors.surface2),
@@ -331,21 +392,21 @@ const options = mkOptions(OPTIONS, {
                 switch: {
                     enabled: opt(colors.lavender),
                     disabled: opt(tertiary_colors.surface0),
-                    puck: opt(secondary_colors.surface1)
+                    puck: opt(secondary_colors.surface1),
                 },
                 check_radio_button: {
                     background: opt(colors.surface1),
-                    active: opt(tertiary_colors.lavender)
+                    active: opt(tertiary_colors.lavender),
                 },
                 buttons: {
                     default: opt(colors.lavender),
                     active: opt(secondary_colors.pink),
                     disabled: opt(tertiary_colors.surface2),
-                    text: opt(secondary_colors.mantle)
+                    text: opt(secondary_colors.mantle),
                 },
                 iconbuttons: {
                     passive: opt(secondary_colors.text),
-                    active: opt(tertiary_colors.lavender)
+                    active: opt(tertiary_colors.lavender),
                 },
                 progressbar: {
                     foreground: opt(colors.lavender),
@@ -355,16 +416,16 @@ const options = mkOptions(OPTIONS, {
                     primary: opt(colors.lavender),
                     background: opt(tertiary_colors.surface2),
                     backgroundhover: opt(colors.surface1),
-                    puck: opt(colors.overlay0)
+                    puck: opt(colors.overlay0),
                 },
                 dropdownmenu: {
                     background: opt(colors.crust),
                     text: opt(colors.text),
-                    divider: opt(colors.base)
+                    divider: opt(colors.base),
                 },
                 tooltip: {
                     background: opt(colors.crust),
-                    text: opt(tertiary_colors.lavender)
+                    text: opt(tertiary_colors.lavender),
                 },
                 menu: {
                     media: {
@@ -392,11 +453,11 @@ const options = mkOptions(OPTIONS, {
                             primary: opt(colors.pink),
                             background: opt(tertiary_colors.surface2),
                             backgroundhover: opt(colors.surface1),
-                            puck: opt(colors.overlay0)
-                        }
+                            puck: opt(colors.overlay0),
+                        },
                     },
                     volume: {
-                        scaling: opt(100),
+                        scaling: opt(98),
                         card: {
                             color: opt(colors.base),
                         },
@@ -412,7 +473,7 @@ const options = mkOptions(OPTIONS, {
                         text: opt(colors.text),
                         listitems: {
                             passive: opt(colors.text),
-                            active: opt(secondary_colors.maroon)
+                            active: opt(secondary_colors.maroon),
                         },
                         iconbutton: {
                             passive: opt(colors.text),
@@ -426,14 +487,14 @@ const options = mkOptions(OPTIONS, {
                             primary: opt(colors.maroon),
                             background: opt(tertiary_colors.surface2),
                             backgroundhover: opt(colors.surface1),
-                            puck: opt(colors.surface2)
+                            puck: opt(colors.surface2),
                         },
                         input_slider: {
                             primary: opt(colors.maroon),
                             background: opt(tertiary_colors.surface2),
                             backgroundhover: opt(colors.surface1),
-                            puck: opt(colors.surface2)
-                        }
+                            puck: opt(colors.surface2),
+                        },
                     },
                     network: {
                         scaling: opt(100),
@@ -455,7 +516,7 @@ const options = mkOptions(OPTIONS, {
                         },
                         listitems: {
                             passive: opt(colors.text),
-                            active: opt(secondary_colors.mauve)
+                            active: opt(secondary_colors.mauve),
                         },
                         icons: {
                             passive: opt(colors.overlay2),
@@ -463,7 +524,7 @@ const options = mkOptions(OPTIONS, {
                         },
                         iconbuttons: {
                             passive: opt(colors.text),
-                            active: opt(colors.mauve)
+                            active: opt(colors.mauve),
                         },
                     },
                     bluetooth: {
@@ -486,11 +547,11 @@ const options = mkOptions(OPTIONS, {
                         switch: {
                             enabled: opt(colors.sky),
                             disabled: opt(tertiary_colors.surface0),
-                            puck: opt(secondary_colors.surface1)
+                            puck: opt(secondary_colors.surface1),
                         },
                         listitems: {
                             passive: opt(colors.text),
-                            active: opt(secondary_colors.sky)
+                            active: opt(secondary_colors.sky),
                         },
                         icons: {
                             passive: opt(colors.overlay2),
@@ -498,14 +559,14 @@ const options = mkOptions(OPTIONS, {
                         },
                         iconbutton: {
                             passive: opt(colors.text),
-                            active: opt(colors.sky)
+                            active: opt(colors.sky),
                         },
                     },
                     systray: {
                         dropdownmenu: {
                             background: opt(colors.crust),
                             text: opt(colors.text),
-                            divider: opt(colors.base)
+                            divider: opt(colors.base),
                         },
                     },
                     battery: {
@@ -525,7 +586,7 @@ const options = mkOptions(OPTIONS, {
                         text: opt(colors.text),
                         listitems: {
                             passive: opt(secondary_colors.text),
-                            active: opt(colors.yellow)
+                            active: opt(colors.yellow),
                         },
                         icons: {
                             passive: opt(colors.overlay2),
@@ -535,7 +596,7 @@ const options = mkOptions(OPTIONS, {
                             primary: opt(colors.yellow),
                             background: opt(tertiary_colors.surface2),
                             backgroundhover: opt(colors.surface1),
-                            puck: opt(colors.overlay0)
+                            puck: opt(colors.overlay0),
                         },
                     },
                     clock: {
@@ -577,13 +638,13 @@ const options = mkOptions(OPTIONS, {
                             hourly: {
                                 time: opt(colors.pink),
                                 icon: opt(colors.pink),
-                                temperature: opt(colors.pink)
-                            }
+                                temperature: opt(colors.pink),
+                            },
                         },
                     },
                     dashboard: {
-                        scaling: opt(100),
-                        confirmation_scaling: opt(100),
+                        scaling: opt(95),
+                        confirmation_scaling: opt(95),
                         card: {
                             color: opt(colors.base),
                         },
@@ -595,8 +656,8 @@ const options = mkOptions(OPTIONS, {
                         },
                         profile: {
                             name: opt(colors.pink),
-                            size: opt("8.5em"),
-                            radius: opt("0.4em"),
+                            size: opt('8.5em'),
+                            radius: opt('0.4em'),
                         },
                         powermenu: {
                             shutdown: opt(colors.red),
@@ -612,12 +673,12 @@ const options = mkOptions(OPTIONS, {
                                 confirm: opt(colors.green),
                                 deny: opt(colors.red),
                                 button_text: opt(secondary_colors.crust),
-                            }
+                            },
                         },
                         shortcuts: {
                             background: opt(colors.lavender),
                             text: opt(secondary_colors.mantle),
-                            recording: opt(colors.green)
+                            recording: opt(colors.green),
                         },
                         controls: {
                             disabled: opt(colors.surface2),
@@ -664,7 +725,7 @@ const options = mkOptions(OPTIONS, {
                                 bottom: {
                                     color: opt(colors.lavender),
                                 },
-                            }
+                            },
                         },
                         monitors: {
                             bar_background: opt(colors.surface1),
@@ -692,7 +753,7 @@ const options = mkOptions(OPTIONS, {
                     },
                     power: {
                         scaling: opt(90),
-                        radius: opt("0.4em"),
+                        radius: opt('0.4em'),
                         background: {
                             color: opt(colors.crust),
                         },
@@ -724,11 +785,11 @@ const options = mkOptions(OPTIONS, {
                                 text: opt(colors.sky),
                                 icon: opt(secondary_colors.mantle),
                             },
-                        }
+                        },
                     },
                     notifications: {
                         scaling: opt(100),
-                        height: opt("58em"),
+                        height: opt('58em'),
                         label: opt(colors.lavender),
                         no_notifications_label: opt(colors.surface0),
                         background: opt(colors.crust),
@@ -739,7 +800,7 @@ const options = mkOptions(OPTIONS, {
                         switch: {
                             enabled: opt(colors.lavender),
                             disabled: opt(tertiary_colors.surface0),
-                            puck: opt(secondary_colors.surface1)
+                            puck: opt(secondary_colors.surface1),
                         },
                         pager: {
                             show: opt(true),
@@ -749,83 +810,67 @@ const options = mkOptions(OPTIONS, {
                         },
                         scrollbar: {
                             color: opt(colors.lavender),
-                            width: opt("0.35em"),
-                            radius: opt("0.2em")
-                        }
-                    }
-                }
-            }
-        }
+                            width: opt('0.35em'),
+                            radius: opt('0.2em'),
+                        },
+                    },
+                },
+            },
+        },
     },
 
     bar: {
+        scrollSpeed: opt(5),
         layouts: opt({
-            "1": {
-                left: [
-                    "dashboard",
-                    "workspaces",
-                    "windowtitle"
-                ],
-                middle: [
-                    "media"
-                ],
-                right: [
-                    "volume",
-                    "clock",
-                    "notifications"
-                ]
+            '1': {
+                left: ['dashboard', 'workspaces', 'windowtitle'],
+                middle: ['media'],
+                right: ['volume', 'clock', 'notifications'],
             },
-            "2": {
-                left: [
-                    "dashboard",
-                    "workspaces",
-                    "windowtitle"
-                ],
-                middle: [
-                    "media"
-                ],
-                right: [
-                    "volume",
-                    "clock",
-                    "notifications"
-                ]
+            '2': {
+                left: ['dashboard', 'workspaces', 'windowtitle'],
+                middle: ['media'],
+                right: ['volume', 'clock', 'notifications'],
             },
-            "0": {
-                left: [
-                    "dashboard",
-                    "workspaces",
-                    "windowtitle"
-                ],
-                middle: [
-                    "media"
-                ],
-                right: [
-                    "volume",
-                    "network",
-                    "bluetooth",
-                    "battery",
-                    "systray",
-                    "clock",
-                    "notifications"
-                ]
-            }
+            '0': {
+                left: ['dashboard', 'workspaces', 'windowtitle'],
+                middle: ['media'],
+                right: ['volume', 'network', 'bluetooth', 'battery', 'systray', 'clock', 'notifications'],
+            },
         }),
         launcher: {
-            icon: opt("󰣇"),
+            icon: opt('󰣇'),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt(''),
+            scrollDown: opt(''),
         },
         windowtitle: {
+            custom_title: opt(true),
             title_map: opt([]),
+            class_name: opt(true),
             label: opt(true),
+            icon: opt(true),
+            truncation: opt(true),
+            truncation_size: opt(50),
+            leftClick: opt(''),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt(''),
+            scrollDown: opt(''),
         },
         workspaces: {
             show_icons: opt(false),
+            ignored: opt(''),
             show_numbered: opt(false),
-            numbered_active_indicator: opt<"underline" | "highlight">("underline"),
+            showWsIcons: opt(false),
+            numbered_active_indicator: opt<ActiveWsIndicator>('underline'),
             icons: {
-                available: opt(""),
-                active: opt(""),
-                occupied: opt(""),
+                available: opt(''),
+                active: opt(''),
+                occupied: opt(''),
             },
+            workspaceIconMap: opt<WorkspaceIcons | WorkspaceIconsColored>({}),
             workspaces: opt(10),
             spacing: opt(1),
             monitorSpecific: opt(true),
@@ -836,212 +881,250 @@ const options = mkOptions(OPTIONS, {
         },
         volume: {
             label: opt(true),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt('pactl set-sink-volume @DEFAULT_SINK@ +5%'),
+            scrollDown: opt('pactl set-sink-volume @DEFAULT_SINK@ -5%'),
         },
         network: {
             truncation: opt(true),
             truncation_size: opt(7),
             label: opt(true),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt(''),
+            scrollDown: opt(''),
         },
         bluetooth: {
             label: opt(true),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt(''),
+            scrollDown: opt(''),
         },
         battery: {
             label: opt(true),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt(''),
+            scrollDown: opt(''),
         },
         systray: {
             ignore: opt<string[]>([]),
         },
         clock: {
-            icon: opt("󰸗"),
+            icon: opt('󰸗'),
             showIcon: opt(true),
             showTime: opt(true),
-            format: opt("%a %b %d  %I:%M:%S %p"),
+            format: opt('%a %b %d  %I:%M:%S %p'),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt(''),
+            scrollDown: opt(''),
         },
         media: {
             show_artist: opt(false),
             truncation: opt(true),
             show_label: opt(true),
             truncation_size: opt(30),
-            show_active_only: opt(false)
+            show_active_only: opt(false),
+            rightClick: opt(''),
+            middleClick: opt(''),
         },
         notifications: {
             show_total: opt(false),
+            rightClick: opt(''),
+            middleClick: opt(''),
+            scrollUp: opt(''),
+            scrollDown: opt(''),
         },
         customModules: {
             scrollSpeed: opt(5),
             ram: {
                 label: opt(true),
-                labelType: opt<ResourceLabelType>("percentage"),
+                labelType: opt<ResourceLabelType>('percentage'),
                 round: opt(true),
                 pollingInterval: opt(2000),
-                leftClick: opt(""),
-                rightClick: opt(""),
-                middleClick: opt(""),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
             },
             cpu: {
                 label: opt(true),
                 round: opt(true),
                 pollingInterval: opt(2000),
-                leftClick: opt(""),
-                rightClick: opt(""),
-                middleClick: opt(""),
-                scrollUp: opt(""),
-                scrollDown: opt(""),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
+                scrollUp: opt(''),
+                scrollDown: opt(''),
             },
             storage: {
                 label: opt(true),
-                icon: opt<StorageIcon>("󰋊"),
+                icon: opt<StorageIcon>('󰋊'),
                 round: opt(false),
-                labelType: opt<ResourceLabelType>("percentage"),
+                labelType: opt<ResourceLabelType>('percentage'),
                 pollingInterval: opt(2000),
-                leftClick: opt(""),
-                rightClick: opt(""),
-                middleClick: opt(""),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
             },
             netstat: {
                 label: opt(true),
-                networkInterface: opt(""),
-                icon: opt<NetstatIcon>("󰖟"),
+                networkInterface: opt(''),
+                icon: opt<NetstatIcon>('󰖟'),
                 round: opt(true),
-                labelType: opt<NetstatLabelType>("full"),
-                rateUnit: opt<RateUnit>("auto"),
+                labelType: opt<NetstatLabelType>('full'),
+                rateUnit: opt<RateUnit>('auto'),
                 pollingInterval: opt(2000),
-                leftClick: opt(""),
-                rightClick: opt(""),
-                middleClick: opt(""),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
             },
             kbLayout: {
                 label: opt(true),
-                labelType: opt<KbLabelType>("code"),
-                icon: opt<KbIcon>("󰌌"),
-                leftClick: opt(""),
-                rightClick: opt(""),
-                middleClick: opt(""),
-                scrollUp: opt(""),
-                scrollDown: opt(""),
+                labelType: opt<KbLabelType>('code'),
+                icon: opt<KbIcon>('󰌌'),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
+                scrollUp: opt(''),
+                scrollDown: opt(''),
             },
             updates: {
-                updateCommand: opt("$HOME/.config/ags/scripts/checkUpdates.sh -arch"),
+                updateCommand: opt('$HOME/.config/ags/scripts/checkUpdates.sh -arch'),
                 label: opt(true),
                 padZero: opt(true),
-                icon: opt<UpdatesIcon>("󰏖"),
+                icon: opt<UpdatesIcon>('󰏖'),
                 pollingInterval: opt(1000 * 60 * 60 * 6),
-                leftClick: opt(""),
-                rightClick: opt(""),
-                middleClick: opt(""),
-                scrollUp: opt(""),
-                scrollDown: opt(""),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
+                scrollUp: opt(''),
+                scrollDown: opt(''),
+            },
+            submap: {
+                label: opt(true),
+                enabledIcon: opt('󰌐'),
+                disabledIcon: opt('󰌌'),
+                enabledText: opt('Submap On'),
+                disabledText: opt('Submap off'),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
+                scrollUp: opt(''),
+                scrollDown: opt(''),
             },
             weather: {
                 label: opt(true),
-                unit: opt<UnitType>("imperial"),
-                leftClick: opt(""),
-                rightClick: opt(""),
-                middleClick: opt(""),
-                scrollUp: opt(""),
-                scrollDown: opt(""),
+                unit: opt<UnitType>('imperial'),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
+                scrollUp: opt(''),
+                scrollDown: opt(''),
             },
             power: {
-                icon: opt<PowerIcon>(""),
+                icon: opt<PowerIcon>(''),
                 showLabel: opt(true),
-                leftClick: opt("menu:powerdropdown"),
-                rightClick: opt(""),
-                middleClick: opt(""),
-                scrollUp: opt(""),
-                scrollDown: opt(""),
+                leftClick: opt('menu:powerdropdown'),
+                rightClick: opt(''),
+                middleClick: opt(''),
+                scrollUp: opt(''),
+                scrollDown: opt(''),
             },
-        }
+        },
     },
 
     menus: {
         power: {
             showLabel: opt(true),
             confirmation: opt(true),
-            sleep: opt("systemctl suspend"),
-            reboot: opt("systemctl reboot"),
-            logout: opt("pkill Hyprland"),
-            shutdown: opt("shutdown now"),
+            sleep: opt('systemctl suspend'),
+            reboot: opt('systemctl reboot'),
+            logout: opt('pkill Hyprland'),
+            shutdown: opt('shutdown now'),
         },
         dashboard: {
             powermenu: {
                 confirmation: opt(true),
-                sleep: opt("systemctl suspend"),
-                reboot: opt("systemctl reboot"),
-                logout: opt("pkill Hyprland"),
-                shutdown: opt("shutdown now"),
+                sleep: opt('systemctl suspend'),
+                reboot: opt('systemctl reboot'),
+                logout: opt('pkill Hyprland'),
+                shutdown: opt('shutdown now'),
                 avatar: {
-                    image: opt("avatar-default-symbolic"),
-                    name: opt<"system" | string>("system"),
+                    image: opt('avatar-default-symbolic'),
+                    name: opt<'system' | string>('system'),
                 },
             },
             stats: {
-                enable_gpu: opt(false),
+                enable_gpu: opt(true),
             },
             shortcuts: {
                 left: {
                     shortcut1: {
-                        icon: opt("󰇩"),
-                        tooltip: opt("Microsoft Edge"),
-                        command: opt("microsoft-edge-stable")
+                        icon: opt('󰇩'),
+                        tooltip: opt('Microsoft Edge'),
+                        command: opt('microsoft-edge-stable'),
                     },
                     shortcut2: {
-                        icon: opt(""),
-                        tooltip: opt("Spotify"),
-                        command: opt("spotify-launcher")
+                        icon: opt(''),
+                        tooltip: opt('Spotify'),
+                        command: opt('spotify-launcher'),
                     },
                     shortcut3: {
-                        icon: opt(""),
-                        tooltip: opt("Discord"),
-                        command: opt("discord")
+                        icon: opt(''),
+                        tooltip: opt('Discord'),
+                        command: opt('discord'),
                     },
                     shortcut4: {
-                        icon: opt(""),
-                        tooltip: opt("Search Apps"),
-                        command: opt("rofi -show drun")
+                        icon: opt(''),
+                        tooltip: opt('Search Apps'),
+                        command: opt('rofi -show drun'),
                     },
                 },
                 right: {
                     shortcut1: {
-                        icon: opt(""),
-                        tooltip: opt("Color Picker"),
-                        command: opt("hyprpicker -a")
+                        icon: opt(''),
+                        tooltip: opt('Color Picker'),
+                        command: opt('hyprpicker -a'),
                     },
                     shortcut3: {
-                        icon: opt("󰄀"),
-                        tooltip: opt("Screenshot"),
-                        command: opt("bash -c \"$HOME/.config/ags/services/snapshot.sh\"")
+                        icon: opt('󰄀'),
+                        tooltip: opt('Screenshot'),
+                        command: opt('bash -c "$HOME/.config/ags/services/snapshot.sh"'),
                     },
-                }
+                },
             },
             directories: {
                 left: {
                     directory1: {
-                        label: opt("󰉍 Downloads"),
-                        command: opt("bash -c \"dolphin $HOME/Downloads/\"")
+                        label: opt('󰉍 Downloads'),
+                        command: opt('bash -c "thunar $HOME/Downloads/"'),
                     },
                     directory2: {
-                        label: opt("󰉏 Videos"),
-                        command: opt("bash -c \"dolphin $HOME/Videos/\"")
+                        label: opt('󰉏 Videos'),
+                        command: opt('bash -c "dolphin $HOME/Videos/"'),
                     },
                     directory3: {
-                        label: opt("󰚝 Projects"),
-                        command: opt("bash -c \"dolphin $HOME/Projects/\"")
+                        label: opt('󰚝 Projects'),
+                        command: opt('bash -c "thunar $HOME/Projects/"'),
                     },
                 },
                 right: {
                     directory1: {
-                        label: opt("󱧶 Documents"),
-                        command: opt("bash -c \"dolphin $HOME/Documents/\"")
+                        label: opt('󱧶 Documents'),
+                        command: opt('bash -c "thunar $HOME/Documents/"'),
                     },
                     directory2: {
-                        label: opt("󰉏 Pictures"),
-                        command: opt("bash -c \"dolphin $HOME/Pictures/\"")
+                        label: opt('󰉏 Pictures'),
+                        command: opt('bash -c "thunar $HOME/Pictures/"'),
                     },
                     directory3: {
-                        label: opt("󱂵 Home"),
-                        command: opt("bash -c \"dolphin $HOME/\"")
+                        label: opt('󱂵 Home'),
+                        command: opt('bash -c "thunar $HOME/"'),
                     },
-                }
+                },
             },
         },
         clock: {
@@ -1050,24 +1133,29 @@ const options = mkOptions(OPTIONS, {
             },
             weather: {
                 interval: opt(60000),
-                unit: opt<UnitType>("imperial"),
-                location: opt("Los Angeles"),
+                unit: opt<UnitType>('imperial'),
+                location: opt('Dhaka'),
                 key: opt<string>(
-                    JSON.parse(Utils.readFile(`${App.configDir}/.weather.json`) || "{}")?.weather_api_key || "",
+                    JSON.parse(Utils.readFile(`${App.configDir}/.weather.json`) || '{}')?.weather_api_key || '',
                 ),
-            }
-        }
+            },
+        },
     },
 
-    terminal: opt("kitty"),
+    scalingPriority: opt<ScalingPriority>('gdk'),
+
+    terminal: opt('alacritty'),
+
+    tear: opt(false),
 
     wallpaper: {
         enable: opt(true),
-        image: opt("")
+        image: opt(''),
+        pywal: opt(false),
     },
 
     notifications: {
-        position: opt<NotificationAnchor>("top right"),
+        position: opt<NotificationAnchor>('top right'),
         ignore: opt<string[]>([]),
         displayedTotal: opt(10),
         monitor: opt(0),
@@ -1077,7 +1165,7 @@ const options = mkOptions(OPTIONS, {
     },
 
     dummy: opt(true),
-})
+});
 
-globalThis["options"] = options
-export default options
+globalThis['options'] = options;
+export default options;
