@@ -41,7 +41,7 @@ echo "@npm"
 sleep 5
 cd && mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
-npm install -g bun sass
+npm install -g sass
 
 echo "@patterns-devel-base-devel_kernel"
 sleep 5
@@ -54,7 +54,6 @@ sudo zypper install libnss_usrfiles2 netcfg rpm-build
 echo "@patterns-devel-C-C++-devel_C_C++"
 sleep 5
 sudo zypper install boost-devel boost-jam ltrace posix_cc swig valgrind
-
 echo "@patterns-devel-osc-devel_osc_build"
 sleep 5
 sudo zypper install osc quilt spec-cleaner
@@ -108,6 +107,9 @@ wget https://dl.google.com/linux/linux_signing_key.pub
 sudo rpm --import linux_signing_key.pub
 sudo rm -rf linux_signing_key.pub
 sudo zypper install google-chrome-stable
+
+curl -fsSL https://bun.sh/install | bash &&
+  sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
 
 echo "@dots"
 sleep 5
