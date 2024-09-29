@@ -42,6 +42,7 @@ sleep 5
 cd && mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
 npm install -g sass
+cargo install matugen
 
 echo "@patterns-devel-base-devel_kernel"
 sleep 5
