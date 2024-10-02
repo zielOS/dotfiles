@@ -34,6 +34,8 @@ eval "$(starship init zsh)"
 # bun completions
 [ -s "/home/ahsan/.bun/_bun" ] && source "/home/ahsan/.bun/_bun"
 
+export PATH=$HOME/.config/rofi/scripts:$PATH
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
