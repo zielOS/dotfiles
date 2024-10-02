@@ -1,6 +1,6 @@
 #!/bin/bash
 yay -S \
-	acpid alacritty acct arch-audit audit \
+	acpid alacritty arch-audit audit \
 	btrfs-progs boost brave-bin btrfs-progs bleachbit brightnessctl \
 	chrony curl cmake chkrootkit cups cliphist celluloid \
 	dosfstools dbus-python devtools deluge \
@@ -13,7 +13,7 @@ yay -S \
 	kitty kvantum kvantum-qt5 kvantum-theme-catppuccin-git \
 	lazygit lynis libdbusmenu-gtk3 libsoup3 logrotate libva libva-nvidia-driver lsd \
 	mesa mate-polkit mpv meson \
-	networkmanager nwg-hello nodejs npm nvidia-open-dkms nvidia-utils nodejs-neovim \
+	networkmanager nwg-hello nwg-look nwg-drawer nodejs npm nvidia-open-dkms nvidia-utils nodejs-neovim \
 	org.freedesktop.secrets \
 	papirus-icon-theme python-pip python-pipx python-pynvim pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol pyprland python-pam \
 	qt5-wayland qt6-wayland qt5ct qt6ct \

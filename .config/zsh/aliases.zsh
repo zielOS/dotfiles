@@ -8,7 +8,7 @@ alias g='lazygit'
 alias zsh-update="find "$HOME/.config/zsh/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 alias f='zi'
 
-alias pac-clean="sudo pacman -Scc && yay -Scc && yay -Yc && sudo pacman -Qtdq | sudo pacman -Rns -"
+alias pac-clean="sudo pacman -Qtdq | sudo pacman -Rns -"
 alias pac-in="yay -S"
 alias pac-rm="yay -R"
 alias pac-up="yay -Syyuu"

@@ -822,7 +822,7 @@ const options = mkOptions(OPTIONS, {
     bar: {
         scrollSpeed: opt(5),
         layouts: opt({
-            '1': {
+            '0': {
                 left: ['dashboard', 'workspaces', 'windowtitle'],
                 middle: ['media'],
                 right: ['volume', 'clock', 'notifications'],
@@ -832,7 +832,7 @@ const options = mkOptions(OPTIONS, {
                 middle: ['media'],
                 right: ['volume', 'clock', 'notifications'],
             },
-            '0': {
+            '1': {
                 left: ['dashboard', 'workspaces', 'windowtitle'],
                 middle: ['media'],
                 right: ['volume', 'network', 'bluetooth', 'battery', 'systray', 'clock', 'notifications'],

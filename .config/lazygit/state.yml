@@ -1,9 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/ahsan/.dots
-    - /home/ahsan/doom-config
+    - /home/ahsan/.config/emacs
 startuppopupversion: 5
-lastversion: 0.44.0
+lastversion: 0.44.1
 customcommandshistory:
     - q
 hidecommandlog: false
