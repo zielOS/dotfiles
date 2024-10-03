@@ -1,30 +1,41 @@
 #!/bin/bash
+
+##Install yay
+cd && git clone https://aur.archlinux.org/yay-bin
+cd yay-bin && makepkg -si
+cd && sudo rm -R yay-bin
+
+##Install BlackArch Repo
+curl -O https://blackarch.org/strap.sh
+chmod +x strap.sh
+sudo ./strap.sh
+
 yay -S \
-	acpid alacritty arch-audit audit \
-	btrfs-progs boost brave-bin btrfs-progs bleachbit brightnessctl \
-	chrony curl cmake chkrootkit cups cliphist celluloid \
-	dosfstools dbus-python devtools deluge \
-	emacs-wayland \
-	fd fzf flatpak fdupes fastfetch fnm fwupd \
-	grim greetd gnome-keyring gjs gtk3 gtk4 gnome-bluetooth-3.0 gobject-introspection gtk-layer-shell gtk4-layer-shell grub grub-btrfs grub-customizer \
-	haveged hyprlang hyprcursor hyprwayland-scanner hypridle hyprlock hyprnome hyprdim hyprpaper hyprpicker hyprland hyprshade \
-	insync \
-	jq jitterentropy-rngd \
-	kitty kvantum kvantum-qt5 kvantum-theme-catppuccin-git \
-	lazygit lynis libdbusmenu-gtk3 libsoup3 logrotate libva libva-nvidia-driver lsd \
-	mesa mate-polkit mpv meson \
-	networkmanager nwg-hello nwg-look nwg-drawer nodejs npm nvidia-open-dkms nvidia-utils nodejs-neovim \
-	org.freedesktop.secrets \
-	papirus-icon-theme python-pip python-pipx python-pynvim pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol pyprland python-pam \
-	qt5-wayland qt6-wayland qt5ct qt6ct \
-	rng-tools rust ripgrep ranger rkhunter \
-	swappy sysstat slurp swww sassc snapper snap-pac snap-pac-grub spotify-launcher starship \
-	tealdeer thunderbird thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler tree-sitter-cli ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-ubuntu-font-family typescript \
-	unzip unrar upower \
-	vulkan-tools vulkan-headers vulkan-validation-layers \
-	wl-clipboard wf-recorder wget wireplumber \
-	xorg-xwayland xournalpp xarchiver xdg-user-dirs xdg-user-dirs-gtk xdg-desktop-portal-hyprland \
-	zsh zsh-completions zathura zathura-pdf-poppler zoxide zip
+  acpid alacritty arch-audit audit \
+  btrfs-progs boost brave-bin btrfs-progs bleachbit brightnessctl \
+  chrony curl cmake chkrootkit cups cliphist celluloid \
+  dosfstools dbus-python devtools deluge \
+  emacs-wayland \
+  fd fzf flatpak fdupes fastfetch fnm fwupd \
+  grim greetd gnome-keyring gjs gtk3 gtk4 gnome-bluetooth-3.0 gobject-introspection gtk-layer-shell gtk4-layer-shell grub grub-btrfs grub-customizer \
+  haveged hyprlang hyprcursor hyprwayland-scanner hypridle hyprlock hyprnome hyprdim hyprpaper hyprpicker hyprland hyprshade \
+  insync \
+  jq jitterentropy-rngd \
+  kitty kvantum kvantum-qt5 kvantum-theme-catppuccin-git \
+  lazygit lynis libdbusmenu-gtk3 libsoup3 logrotate libva libva-nvidia-driver lsd \
+  mesa mate-polkit mpv meson \
+  networkmanager nwg-hello nwg-look nwg-drawer nodejs npm nvidia-open-dkms nvidia-utils nodejs-neovim \
+  org.freedesktop.secrets \
+  papirus-icon-theme python-pip python-pipx python-pynvim pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol pyprland python-pam \
+  qt5-wayland qt6-wayland qt5ct qt6ct \
+  rng-tools rust ripgrep ranger rkhunter \
+  swappy sysstat slurp swww sassc snapper snap-pac snap-pac-grub spotify-launcher starship \
+  tealdeer thunderbird thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler tree-sitter-cli ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-ubuntu-font-family typescript \
+  unzip unrar upower \
+  vulkan-tools vulkan-headers vulkan-validation-layers \
+  wl-clipboard wf-recorder wget wireplumber \
+  xorg-xwayland xournalpp xarchiver xdg-user-dirs xdg-user-dirs-gtk xdg-desktop-portal-hyprland \
+  zsh zsh-completions zathura zathura-pdf-poppler zoxide zip
 
 echo "Installing Dot files"
 cd
@@ -83,4 +94,4 @@ git config --global credential.helper /usr/lib/git-core/git-credential-libsecret
 
 cd && sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 
-sudo systemctl enable --now jitterentropy sysstat acct rngd haveged cups avahi-daemon NetworkManager
+sudo systemctl enable --now jitterentropy sysstat rngd haveged cups avahi-daemon NetworkManager
