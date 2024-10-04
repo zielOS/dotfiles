@@ -396,3 +396,9 @@ Use --utf-force argument to force start if you're sure your terminal can handle 
 2024/10/03 (16:01:07) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
 2024/10/03 (16:01:14) | WARNING: Failed to join _runner thread on exit!
 2024/10/03 (16:01:14) | ERROR: No response from Runner thread, quitting!
+
+2024/10/04 (07:28:04) | ===> btop++ v.1.4.0
+2024/10/04 (07:28:04) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/10/04 (07:55:02) | ===> btop++ v.1.4.0
+2024/10/04 (07:55:02) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
