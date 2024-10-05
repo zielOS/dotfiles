@@ -9,6 +9,7 @@ thunar --daemon &
 emacs --daemon &
 GDK_DPI_SCALE=1.2 ags &
 pypr &
+dropbox &
 
 # theme
 hyprtheme &
