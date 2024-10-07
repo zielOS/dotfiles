@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo shred -vzu -n1 /dev/nvme0n1

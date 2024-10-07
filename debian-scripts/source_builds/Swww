@@ -1,0 +1,6 @@
+#!/bin/bash
+cd && git clone https://github.com/LGFae/swww.git && cd swww
+cargo build --release
+cd target/release
+sudo install -Dm755 swww "/usr/local/bin/swww"
+cd && sudo rm -R swww
