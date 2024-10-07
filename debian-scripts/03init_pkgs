@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "Initial Setup"
+cd && sudo apt update && sudo apt full-upgrade && sudo apt reinstall zstd curl linux-headers-amd64 gcc make acpid dkms libglvnd-core-dev libglvnd0 libc-dev apt-listbugs apt-listchanges needrestart apt-show-versions debsums flatpak
+
+sudo apt install flatpak
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

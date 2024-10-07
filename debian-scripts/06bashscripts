@@ -1,5 +1,7 @@
 #!/bin/bash
 echo "Installing From Source"
+sudo apt -y build-dep hyprland xdg-desktop-portal-hyprland
+sudo apt -y install scdoc libpugixml-dev libzip-dev librsvg2-dev libmagic-dev libsdbus-c++-dev libpam-dev libxcursor-dev
 bash $HOME/.dots/debian-scripts/source_builds/Hyprutils && cd
 bash $HOME/.dots/debian-scripts/source_builds/Hyprlang && cd
 bash $HOME/.dots/debian-scripts/source_builds/Hyprcursor && cd
@@ -14,7 +16,7 @@ bash $HOME/.dots/debian-scripts/source_builds/Wayland-protocols && cd
 bash $HOME/.dots/debian-scripts/source_builds/Xdg-desktop-portal-hyprland && cd
 bash $HOME/.dots/debian-scripts/source_builds/Hyprland && cd
 bash $HOME/.dots/debian-scripts/source_builds/Hyprland-contrib && cd
-#bash $HOME/.dots/debian-scripts/source_builds/Lazygit && cd
+bash $HOME/.dots/debian-scripts/source_builds/Lazygit && cd
 #bash $HOME/.dots/debian-scripts/source_builds/Insync && cd
 #bash $HOME/.dots/debian-scripts/source_builds/Ignis && cd
 #bash $HOME/.dots/debian-scripts/source_builds/Swaylock-effects && cd
