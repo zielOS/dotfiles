@@ -1,8 +1,4 @@
-#!/bin/sh
-# Installs pacstall & pkgs"
-sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install || wget -q https://pacstall.dev/q/install -O -)"
-sudo apt install 
-pacstall -I neovim
+#!/bin/bash
 
 echo "Installing Onlyoffice-desktopeditos"
 mkdir -p -m 700 ~/.gnupg
