@@ -7,7 +7,7 @@ customcommandshistory:
     - q
 hidecommandlog: false
 ignorewhitespaceindiffview: false
-diffcontextsize: 2
+diffcontextsize: 1
 renamesimilaritythreshold: 50
 localbranchsortorder: recency
 remotebranchsortorder: alphabetical
