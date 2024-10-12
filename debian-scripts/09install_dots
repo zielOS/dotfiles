@@ -37,3 +37,4 @@ git config --global credential.helper /usr/share/doc/git/contrib/credential/libs
 git config --global user.name "zielOS"
 git config --global user.email "ahsanur041@gmail.com"
 
+xdg-user-dirs-update -f
