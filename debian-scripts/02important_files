@@ -2,7 +2,7 @@
 
 echo "Copying Important Files"
 sudo rm -rf /etc/apt/sources.list
-#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/sid.sources /etc/apt/sources.list.d/
+sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/sid.sources /etc/apt/sources.list.d/
 sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/trixie.sources /etc/apt/sources.list.d/
 sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/bookworm.sources /etc/apt/sources.list.d/
 sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/preferences /etc/apt/

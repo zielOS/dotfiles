@@ -1,6 +1,0 @@
-#!/bin/sh
-flatpak install flathub org.ferdium.Ferdium -y
-flatpak install flathub com.bitwarden.desktop -y
-flatpak install flathub com.ticktick.TickTick -y
-flatpak install flathub com.github.tchx84.Flatseal -y
-#flatpak install flathub --system com.dec05eba.gpu_screen_recorder -y

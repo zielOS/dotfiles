@@ -12,6 +12,7 @@ ln -sv $HOME/.dots/.config/hypr $HOME/.config/
 ln -sv $HOME/.dots/.config/starship.toml $HOME/.config
 ln -sv $HOME/.dots/.config/Thunar $HOME/.config/
 ln -sv $HOME/.dots/.config/rofi $HOME/.config/
+ln -sv $HOME/.dots/.config/alacritty $HOME/.config/
 ln -sv $HOME/.dots/.config/kitty $HOME/.config/
 ln -sv $HOME/.dots/.config/btop $HOME/.config/
 ln -sv $HOME/.dots/.config/gtk-3.0 $HOME/.config/
@@ -29,11 +30,6 @@ ln -sv $HOME/.dots/.config/zathura $HOME/.config/
 ln -sv $HOME/.dots/.config/zsh $HOME/.config/
 ln -sv $HOME/.dots/.config/chromium-flags.conf $HOME/.config/
 ln -sv $HOME/.dots/.local/bin/hypr $HOME/.local/bin/
-
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
-cd && rm -rf ~/.zshrc
-ln -s $HOME/.dots/.zshrc $HOME/
-chsh -s $(which zsh)
 
 # git setup
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
