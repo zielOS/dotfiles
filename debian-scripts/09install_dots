@@ -21,6 +21,7 @@ ln -sv $HOME/.dots/.config/Kvantum $HOME/.config/
 ln -sv $HOME/.dots/.config/lazygit $HOME/.config/
 ln -sv $HOME/.dots/.config/lsd $HOME/.config/
 ln -sv $HOME/.dots/.config/nvim $HOME/.config/
+ln -sv $HOME/.dots/.config/nix $HOME/.config/
 ln -sv $HOME/.dots/.config/qalculate $HOME/.config/
 ln -sv $HOME/.dots/.config/qt5ct $HOME/.config/
 ln -sv $HOME/.dots/.config/qt6ct $HOME/.config/
