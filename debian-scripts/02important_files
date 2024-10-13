@@ -7,5 +7,5 @@ sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/trixie.sources /etc/apt/so
 sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/bookworm.sources /etc/apt/sources.list.d/
 sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/preferences /etc/apt/
 sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/01norecommend /etc/apt/apt.conf.d/
-sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/profile /etc/
+#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/profile /etc/
 sudo cp -R $HOME/.dots/variables.sh /etc/profile.d/

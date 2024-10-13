@@ -15,7 +15,7 @@ npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH
 
 
 # Set Up Systemd
-#sudo systemctl set-default graphical.target
+sudo systemctl set-default graphical.target
 systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
 
 echo "restore rustup"
