@@ -14,3 +14,4 @@
 .config/emacs/.last-package-update-day
 .config/emacs/init.el
 .config/emacs/.Emacs.org.~undo-tree~
+.config/home-manager/flake.lock
