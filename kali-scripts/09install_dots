@@ -4,29 +4,39 @@ sudo rm -R ~/.config/
 cd && mkdir $HOME/.config
 ln -sv $HOME/.dots/.fonts $HOME/
 ln -sv $HOME/.dots/.themes $HOME/
-ln -sv $HOME/.dots/gentoo_setup  $HOME/
+ln -sv $HOME/.dots/gentoo_setup $HOME/
 ln -sv $HOME/.dots/org $HOME/
 ln -sv $HOME/.dots/.gtkrc-2.0 $HOME/
 ln -sv $HOME/.dots/catppuccin.css $HOME/
 ln -sv $HOME/.dots/.config/hypr $HOME/.config/
 ln -sv $HOME/.dots/.config/starship.toml $HOME/.config
 ln -sv $HOME/.dots/.config/Thunar $HOME/.config/
+ln -sv $HOME/.dots/.config/rofi $HOME/.config/
 ln -sv $HOME/.dots/.config/alacritty $HOME/.config/
+ln -sv $HOME/.dots/.config/kitty $HOME/.config/
 ln -sv $HOME/.dots/.config/btop $HOME/.config/
 ln -sv $HOME/.dots/.config/gtk-3.0 $HOME/.config/
 ln -sv $HOME/.dots/.config/gtk-4.0 $HOME/.config/
 ln -sv $HOME/.dots/.config/Kvantum $HOME/.config/
 ln -sv $HOME/.dots/.config/lazygit $HOME/.config/
 ln -sv $HOME/.dots/.config/lsd $HOME/.config/
+ln -sv $HOME/.dots/.config/home-manager $HOME/.config/
+ln -sv $HOME/.dots/.config/nvim $HOME/.config/
+ln -sv $HOME/.dots/.config/nix $HOME/.config/
 ln -sv $HOME/.dots/.config/qalculate $HOME/.config/
 ln -sv $HOME/.dots/.config/qt5ct $HOME/.config/
 ln -sv $HOME/.dots/.config/qt6ct $HOME/.config/
 ln -sv $HOME/.dots/.config/ranger $HOME/.config/
-ln -sv $HOME/.dots/.config/nvim $HOME/.config/
-ln -sv $HOME/.dots/.config/emacs $HOME/.config/
 ln -sv $HOME/.dots/.config/wallpapers $HOME/.config/
 ln -sv $HOME/.dots/.config/zathura $HOME/.config/
 ln -sv $HOME/.dots/.config/zsh $HOME/.config/
 ln -sv $HOME/.dots/.config/chromium-flags.conf $HOME/.config/
 ln -sv $HOME/.dots/.local/bin/hypr $HOME/.local/bin/
 
+# git setup
+sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+git config --global user.name "zielOS"
+git config --global user.email "ahsanur041@gmail.com"
+
+xdg-user-dirs-update -f

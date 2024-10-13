@@ -1,11 +1,11 @@
 #!/bin/sh
 
 echo "Copying Important Files"
-sudo cp -R /etc/apt/sources.list /etc/apt/sources.list.d/kali.list
-sudo rm -rf /etc/apt/sources.list
-sudo cp -R $HOME/.dots/kali-scripts/important_files/sid.list /etc/apt/sources.list.d/
-sudo cp -R $HOME/.dots/kali-scripts/important_files/55kali /etc/apt/apt.conf.d/
-sudo cp -R $HOME/.dots/kali-scripts/important_files/preferences /etc/apt/
-sudo cp -R $HOME/.dots/kali-scripts/important_files/01norecommend /etc/apt/apt.conf.d/
-sudo cp -R $HOME/.dots/kali-scripts/important_files/profile /etc/
-sudo cp -R $HOME/.dots/kali-scripts/important_files/variables.sh /etc/profile.d/
+#sudo rm -rf /etc/apt/sources.list
+#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/sid.sources /etc/apt/sources.list.d/
+#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/trixie.sources /etc/apt/sources.list.d/
+#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/bookworm.sources /etc/apt/sources.list.d/
+#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/preferences /etc/apt/
+#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/01norecommend /etc/apt/apt.conf.d/
+#sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/profile /etc/
+sudo cp -R $HOME/.dots/variables.sh /etc/profile.d/

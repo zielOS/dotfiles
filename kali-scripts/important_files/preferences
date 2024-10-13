@@ -1,7 +1,0 @@
-Package: *
-Pin: release a=kali-rolling
-Pin-Priority: 10000
- 
-Package: cmake
-Pin: release a=sid
-Pin-Priority: 100

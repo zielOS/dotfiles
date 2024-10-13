@@ -58,3 +58,13 @@ Then you can do :
 
 sudo apt-build world
 
+Contribute updated pacstrips for the following apps:
+
+dropbox
+lazygit
+bitwarden
+thorium 
+
+
+and make pacscripts for all hyprland pkgs
+

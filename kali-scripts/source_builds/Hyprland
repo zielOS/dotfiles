@@ -1,5 +1,5 @@
 #!/bin/sh
-cd
+cd 
 echo "Installing Hyprland"
 git clone --recursive https://github.com/hyprwm/Hyprland
 cd Hyprland 
@@ -19,5 +19,5 @@ meson setup build \
 
 meson compile -C build
 
-sudo meson install -C build
-cd && sudo rm -rf Hyprland
+sudo meson install -C build 
+cd && sudo rm -rf Hyprland 
