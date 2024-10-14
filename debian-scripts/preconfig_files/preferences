@@ -7,5 +7,5 @@ Pin: release a=trixie
 Pin-Priority: 900
 
 Package: *
-Pin: release a=bookworm
+Pin: release a=kali-rolling
 Pin-Priority: 100
