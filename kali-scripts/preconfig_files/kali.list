@@ -1,0 +1,5 @@
+deb https://http.kali.org/kali kali-bleeding-edge main contrib non-free non-free-firmware
+deb-src https://http.kali.org/kali kali-bleeding-edge main contrib non-free non-free-firmware
+
+deb https://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware
+deb-src https://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware

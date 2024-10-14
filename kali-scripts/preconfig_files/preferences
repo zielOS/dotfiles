@@ -1,7 +1,15 @@
 Package: *
-Pin: release a=unstable
+Pin: release a=kali-bleeding-edge
 Pin-Priority: 10000
  
-Package: *
-Pin: release a=testing
-Pin-Priority: 100
+package: *
+pin: release a=kali-rolling
+pin-priority: 900
+
+package: *
+pin: release a=sid
+pin-priority: 100
+
+package: *
+pin: release a=bookworm
+pin-priority: 25
