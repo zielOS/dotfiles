@@ -1,0 +1,36 @@
+Package: linux-image-amd64 linux-headers-amd64
+Pin: release a=lory
+Pin-Priority: 602
+
+Package: linux-image-amd64 linux-headers-amd64
+Pin: release a=lory-backports
+Pin-Priority: 602
+
+Package: linux-image-amd64 linux-headers-amd64
+Pin: release a=lory-updates
+Pin-Priority: 602
+
+Package: linux-image-amd64 linux-headers-amd64
+Pin: release a=lory-security
+Pin-Priority: 602
+
+Package: *
+Pin: release o=kali-rolling
+Pin-Priority: 602
+
+Package: *
+Pin: release a=lory
+Pin-Priority: 598
+
+Package: *
+Pin: release a=lory-backports
+Pin-Priority: 590
+
+Package: *
+Pin: release a=lory-updates
+Pin-Priority: 598
+
+Package: *
+Pin: release a=lory-security
+Pin-Priority: 598
+

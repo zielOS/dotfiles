@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sudo apt install build-essential gcci software-properties-common cmake clang ubuntu-dev-tools devscripts make meson wget curl thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git bat deluge ranger lsd gvfs xdg-user-dirs xdg-user-dirs-gtk file-roller alacritty kitty ncurses-term maim golang-go zoxide fish fzf papirus-icon-theme mate-polkit libgtop2-dev x11-xkb-utils fonts-terminus x11-xserver-utils xserver-xorg-core xournalpp zathura zathura-pdf-poppler pymol libpam-tmpdir python3-pip pipx rng-tools-debian haveged lynis auditd sysstat fail2ban acct apparmor apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct lz4 liblz4-dev pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pavucontrol alsa-utils libpulse-dev pamixer swappy cliphist wl-clipboard gettext gettext-base fontconfig hwdata xwayland cpio gnome-keyring maim systemd-zram-generator xserver-xorg-video-amdgpu firmware-misc-nonfree firmware-linux-free firmware-linux-nonfree firmware-amd-graphics amd64-microcode fwupd bluez bluez-alsa-utils bluez-tools blueman binutils cronie chrony debianutils logrotate psmisc power-profiles-daemon upower xz-utils zip 7zip unzip wayland-utils bash-completion fastfetch gawk inotify-tools bleachbit rustup cmake-extras pkg-config ninja-build scdoc uuid-dev libinput-bin vulkan-utility-libraries-dev libsecret-tools gobject-introspection python3-pil python3-requests python3-build python3-dev python3-installer
+
+rustup default stable
+
+# node & npm setup
+cd
+curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt update && sudo apt-get install nodejs
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PA
+
+# Set Up Systemd
+sudo systemctl set-default graphical.target
+systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
+
+echo "restore rustup"
+rustup default stable
+sudo systemctl disable greeetd
+
+echo "End of Hyprland Setup"

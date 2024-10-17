@@ -1,0 +1,16 @@
+#!/bin/bash
+## Install Astal First
+cd && git clone https://github.com/aylur/astal.git
+cd astal/core
+sudo apt install meson valac libgtk-3-dev libgtk-layer-shell-dev gobject-introspection
+meson setup --prefix /usr build
+sudo meson install -C build
+cd && sudo rm -rf astal
+
+## Then Install Ags
+sudo apt install golang-go gjs
+cd && git clone https://github.com/aylur/ags.git
+cd ags/src
+git checkout v2
+go install
+cd && sudo rm -rf ags
